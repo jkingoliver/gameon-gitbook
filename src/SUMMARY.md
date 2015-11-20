@@ -1,3 +1,7 @@
 # Summary
 
-[Play Game On!](https://game-on.org/)
+* About
+  * [Technology Used](about/technology-used.md)
+  * [Architecture](about/architecture.md)
+* Getting Started
+  * [Initial Setup](getting-started/initial-setup.md)
