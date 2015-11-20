@@ -7,7 +7,7 @@ ADD https://admin:PLACEHOLDER_ADMIN_PASSWORD@game-on.org:8443/logstashneeds.tar 
 
 ADD ./src/ /opt/docs/
 
-RUN cd /opt ; npm install gitbook-cli ; node_modules/.bin/gitbook init
+RUN cd /opt/docs/ ; npm install gitbook-cli ; node_modules/.bin/gitbook init
 
 #RUN cd /opt ; chmod +x ./forwarder ; tar xvzf logstashneeds.tar ; rm logstashneeds.tar ; \
 #	echo "Installing Node modules..." ; cd /opt/room ; npm install 
