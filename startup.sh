@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$LOGGING_DOCKER_HOST" != "" ]; then
+if [ "$LOGSTASH_ENDPOINT" != "" ]; then
   echo Starting the logstash forwarder...
   sed -i s/PLACEHOLDER_LOGHOST/$LOGSTASH_ENDPOINT/g /opt/forwarder.conf
   cd /opt
