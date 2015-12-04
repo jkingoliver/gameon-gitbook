@@ -20,4 +20,4 @@ sed -i s/PLACEHOLDER_ADMIN_PASSWORD/$ADMIN_PASSWORD/g ./Dockerfile
 ./docker build -t gameon-docs .
 ./docker stop -t 0 gameon-docs
 ./docker rm gameon-docs
-./docker run -d -p 4000:4000 -e LOGSTASH_ENDPOINT=$LOGSTASH_ENDPOINT -e LOGSTASH_CERT="$LOGSTASH_CERT" -e LOGSTASH_KEY="$LOGSTASH_KEY" --name gameon-docs gameon-docs
+./docker run -d -p 4000:8080 -e LOGSTASH_ENDPOINT=$LOGSTASH_ENDPOINT -e LOGSTASH_CERT="$LOGSTASH_CERT" -e LOGSTASH_KEY="$LOGSTASH_KEY" --name gameon-docs gameon-docs
