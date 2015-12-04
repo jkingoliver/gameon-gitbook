@@ -6,7 +6,7 @@ ADD https://download.elastic.co/logstash-forwarder/binaries/logstash-forwarder_l
 
 ADD ./src/ /opt/docs/
 
-RUN cd /opt/docs/ ; npm install gitbook-cli
+RUN cd /opt/docs/ ; npm install gitbook-cli ; node_modules/.bin/gitbook install
 
 COPY ./startup.sh /opt/startup.sh
 COPY ./forwarder.conf /opt/forwarder.conf
