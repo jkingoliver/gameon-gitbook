@@ -4,7 +4,7 @@
 . link:about/README.adoc[Application Overview]
 .. link:about/technology-used.adoc[Technology Used]
 .. link:about/architecture.adoc[Architecture]
-. link:getting-started/README.adoc[Getting Started]
+. link:getting-started/README[Getting Started]
 .. link:getting-started/git.adoc[Git and submodules]
 .. link:getting-started/java.adoc[Java requirements]
 .. link:getting-started/javascript.adoc[JavaScript requirements]
