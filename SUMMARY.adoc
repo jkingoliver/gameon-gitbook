@@ -8,7 +8,7 @@
 .. link:getting-started/git.adoc[Git and submodules]
 .. link:getting-started/java.adoc[Java requirements]
 .. link:getting-started/javascript.adoc[JavaScript requirements]
-.. link:getting-started/local-docker[Docker Requirements]
+.. link:getting-started/local-docker.adoc[Docker Requirements]
 . link:microservices/README.adoc[Game On! Microservices]
 .. link:microservices/proxy.adoc[Proxy]
 .. link:microservices/player.adoc[Player]
