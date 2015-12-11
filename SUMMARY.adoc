@@ -17,5 +17,5 @@
 .. link:microservices/room-nodejs.adoc[Room Node.js]
 .. link:microservices/webapp.adoc[Webapp]
 .. link:microservices/swagger.adoc[Swagger]
-.. Mediator
+.. link:microservices/mediator.adoc[Mediator]
 
