@@ -10,7 +10,8 @@ Download Docker Toolbox for your operating system and run through the installer.
 When the installation completes, select `Docker QuickStart Terminal` in the window that pops up 
 to get started using your local VM that  will function as your Docker host.  
 
-![image](http://docs.docker.com/mac/images/mac-page-quickstart.png)
+image:http://docs.docker.com/mac/images/mac-page-quickstart.png[install docker toolbox page]
+
 
 You should see something like the following in the terminal that comes up:
 
