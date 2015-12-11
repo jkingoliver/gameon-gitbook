@@ -1,5 +1,6 @@
 = Summary
 
+. link:README.adoc[Introduction]
 . link:about/README.adoc[Application Overview]
 .. link:about/technology-used.adoc[Technology Used]
 .. link:about/architecture.adoc[Architecture]
@@ -8,6 +9,7 @@
 .. link:getting-started/java.adoc[Java requirements]
 .. link:getting-started/javascript.adoc[JavaScript requirements]
 .. link:getting-started/compose.adoc[Using docker-compose for local development]
+... wet
 . link:microservices/README.adoc[Game On! Microservices]
 .. link:microservices/proxy.adoc[Proxy]
 .. link:microservices/player.adoc[Player]
@@ -16,4 +18,4 @@
 .. link:microservices/room-nodejs.adoc[Room Node.js]
 .. link:microservices/webapp.adoc[Webapp]
 .. link:microservices/swagger.adoc[Swagger]
-  
+
