@@ -1,15 +1,22 @@
-# Game On!
+= Game On!
 
-https://game-on.org[Play now!]
+_You are in a maze of little interconnected rooms, none alike._
 
-  You are in a maze of little interconnected rooms, none alike.
+Game On! is a both a sample microservices application, and throwback text adventure. For more information, see http://game-on.org/docs, or you might prefer to skip all that business and just [Go Play!](http://game-on.org/).
+
+Game On! is a text-based throwback adventure brought to you by the https://wasdev.net[wasdev] team at IBM. It aims to do a few things: 
+
+* Provide a sample microservices-based application
+* Demonstrate how microservice architectures work from two points of view
+** Interact with and navigate through the system as a player: each room is a unique service, "leaderboards" are maintained via service logging and metrics, etc.
+** Interact with the system as a developer: Developers can create and contribute their own services to the system, allowing them to provide and interact with a microservices architecture in a direct way without having to stand one up themselves.
+
+
+*https://game-on.org[Play Now!]*
+
 
 
 ## About Game On!
-
-Game On! is a text-based throwback adventure that was built by the https://wasdev.net[wasdev] team to help
-illustrate the usage and importance of microservices architecture and how that architecture can be used in a
-scalable, production-ready application.
 
 Game On! was built to mimic a chat service with the ability to interact with various objects as well as other
 players inside a virtual world, much in the same light as many https://en.wikipedia.org/wiki/Massively_multiplayer_online_role-playing_game[MMORPGs] in the same vein as the

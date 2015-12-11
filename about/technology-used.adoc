@@ -1,4 +1,4 @@
-## Technologies Used
+= Technologies Used
 
 * Java
 * Node.js

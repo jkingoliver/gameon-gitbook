@@ -1,9 +1,14 @@
-# Docker Requirements
+= Docker Requirements
+:toc:
+:toc-placement: preamble
+:toclevels: 1
+:icon: font
 
 https://www.docker.com/docker-toolbox[Docker Toolbox] allows you to run a Docker host in a 
 virtual machine that will run inside your laptop/desktop.
 
-*NOTE:* These instructions only apply to Windows and Mac users.
+[NOTE] 
+These instructions only apply to Windows and Mac users.
 
 Download Docker Toolbox for your operating system and run through the installer.
 
@@ -25,7 +30,8 @@ Starting VirtualBox VM...
 Starting VM...
 ----
 
-**NOTE**: The first time you run this process, it can take some time to start the VM.  Be patient.
+[CAUTION]
+The first time you run this process, it can take some time to start the VM.  Be patient.
 
 When the installer is finished, you should see something like this:
 
@@ -43,8 +49,9 @@ When the installer is finished, you should see something like this:
   For help getting started, check out the docs at https://docs.docker.com
 ----
 
-Take special note of the IP address that is similar to my example of `192.168.99.100`.  This is your
-Docker host, and any containers you run on Docker will be accessible from this IP if you have mapped their ports.
+Take special note of the IP address that is similar to my example of `192.168.99.100`.  
+This is your Docker host, and any containers you run on Docker will be accessible from 
+this IP if you have mapped their ports.
 
 At the prompt, type
 

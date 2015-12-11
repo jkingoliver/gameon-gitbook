@@ -1,2 +1,40 @@
-# Getting Started
+= Getting Started: From zero to Game On! in no time.. 
+:toc:
+:toc-placement: preamble
+:toclevels: 1
+:icon: font
 
+We'll cheat a little bit here: to do this mad dash from nothing to everything, you have to have Java 1.8, Node.js, Git, and Docker already set up. If you don't, then visit the link:requirements.adoc[list of prerequisites], and the link:local-docker.adoc[docker requirements] pages to make sure you're good to go.
+
+== Start from the root
+
+Recursively grab all the source for our core modules, and change to the new shiny cloned directory: 
+----
+git clone --recursive git@github.com:gameontext/gameon.git
+cd gameon
+----
+
+== Build the applications
+
+Build the submodules that contain gradle.
+----
+./build.sh
+----
+
+== Docker compose: Game On!
+
+To start up the whole collection using `docker-compose`, run the following:
+
+----
+docker-compose build
+docker-compose up
+----
+
+The game is now running locally, you can access it at http://127.0.0.1/
+
+[NOTE]
+====
+`docker-compose.override.yml` maps subrepository paths into the docker containers to support live development. 
+
+If you prefer a top-down-republish approach, rename `docker-compose.override.yml` to `docker-compose.override.yml.backup` to skip mounting volumes. Re-run `build.sh` and the docker-compose build steps to publish the updates.
+====
