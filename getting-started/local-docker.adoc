@@ -1,12 +1,9 @@
-Docker Requirements
-=================
+# Docker Requirements
 
-
-= Docker Requirements
-
-
-[IMPORTANT] 
-These instructions apply to Windows and OSX users only.
+.Optional Title
+[NOTE] 
+  These instructions apply to Windows and OSX users    
+  only.
 
 https://www.docker.com/docker-toolbox[Docker Toolbox] allows you to run a Docker host in a 
 virtual machine that will run inside your laptop/desktop.
