@@ -1,7 +1,7 @@
 # Game On! Room Service
 
 [[img-github]]
-image::github.png[alt="github", width="30", height="30", link="https://github.com/gameontext/gameon-room-nodejs"]
+image::github.png[alt="github", width="30", height="30", link="https://github.com/gameontext/gameon-room"]
 Code
 
 The Room service is both an implementation of two Game On! rooms in Java, and a template/starting point for implementing
