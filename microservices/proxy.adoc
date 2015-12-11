@@ -1,10 +1,8 @@
 # Game On! Proxy Service
 
-[[img-sunset]]
-image::images/github.png[alt="github", width="300", height="200", link="https://github.com/gameontext/gameon-proxy"]
+[[img-github]]
+image::images/github.png[alt="github", width="30", height="30", link="https://github.com/gameontext/gameon-proxy"]
+Code
 
-
-[:image(/images/github.png)]
-<a href=''><img src="/images/github.png" width="30px" /></a> Code
 
 The proxy service allows for load balancing and highly available deployment of the Game On! services.
