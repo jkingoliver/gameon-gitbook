@@ -1,4 +1,5 @@
 = Technologies Used
+:icons: font
 
 * Java
 * Node.js

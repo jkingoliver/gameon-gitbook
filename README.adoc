@@ -1,4 +1,6 @@
 = Game On!
+:icons: font
+
 
 _You are in a maze of little interconnected rooms, none alike._
 

@@ -1,8 +1,8 @@
 = Pre-requisites / System Requirements
+:icons: font
 :toc:
 :toc-placement: preamble
 :toclevels: 1
-:icon: font
 :oracledownload: http://www.oracle.com/technetwork/java/javase/downloads/index.html
 :nodejsdownload: https://nodejs.org/en/download/
 :submodules: https://git-scm.com/book/en/v2/Git-Tools-Submodules

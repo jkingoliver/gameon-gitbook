@@ -1,4 +1,5 @@
-# Game On! Proxy Service
+= Game On! Proxy Service
+:icons: font
 
 [[img-github]]
 image::github.png[alt="github", width="30", height="30", link="https://github.com/gameontext/gameon-proxy"]

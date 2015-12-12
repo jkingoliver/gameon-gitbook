@@ -1,8 +1,8 @@
-= Getting Started: From zero to Game On! in no time.. 
+= Getting Started
+:icons: font
 :toc:
 :toc-placement: preamble
 :toclevels: 1
-:icon: font
 
 We'll cheat a little bit here: to do this mad dash from nothing to everything, you have to have Java 1.8, Node.js, Git, and Docker already set up. If you don't, then visit the link:requirements.adoc[list of prerequisites], and the link:local-docker.adoc[docker requirements] pages to make sure you're good to go.
 

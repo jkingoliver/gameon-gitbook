@@ -1,8 +1,8 @@
 = Docker Requirements
+:icons: font
 :toc:
 :toc-placement: preamble
 :toclevels: 1
-:icon: font
 
 https://www.docker.com/docker-toolbox[Docker Toolbox] allows you to run a Docker host in a 
 virtual machine that will run inside your laptop/desktop.
