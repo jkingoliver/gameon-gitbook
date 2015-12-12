@@ -1,0 +1,28 @@
+= Eclipse and WDT
+:icons: font
+:toc:
+:toc-placement: preamble
+:toclevels: 1
+
+We are using Liberty as the server runtime and Eclipse as the IDE
+with WebSphere development tools (WDT) to enable iterative development
+with incremental publish. We are big fans of these tools because they're very efficient: no build, repackage, or restart steps are required before your changes are live in the server.
+
+Getting this setup to work with our Docker images does require some set up (one time), but then after that, it's smooth sailing for development.
+
+This approach requires the mounted volumes provided by `docker-compose.override.yml`.
+
+== Build and import eclipse projects
+
+Begin by building the eclipse projects in the submodules:
+
+----
+./eclipse.sh
+----
+
+Fire up eclipse, and use *File* -> *Import*, and in the resulting dialog, start typing the word `Existing` and select *Existing Projects into Workspace* as soon as it appears.
+
+Select the `gameon` directory created by the git clone operation.
+Tick the *Search for nested projects* box and press *Finish*.
+
+This should result in a collection of projects being imported to the workspace.

@@ -17,6 +17,7 @@ cd gameon
 == Build the applications
 
 Build the submodules that contain gradle.
+
 ----
 ./build.sh
 ----
