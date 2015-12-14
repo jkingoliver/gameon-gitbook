@@ -3,6 +3,9 @@
   font-weight: bold;
   vertical-align: top;
 }
+.admonitionblock td.content div.title {
+  font-weight: bold;
+}
 .admonitionblock td.icon div.title:before {
   font-family: "FontAwesome";
 }
@@ -36,4 +39,7 @@
 }
 .caution td.icon div.title:before {
   content: "\f0e7\00a0\00a0 ";
+}
+.imageblock {
+    padding: 0 10px 10px 10px;
 }

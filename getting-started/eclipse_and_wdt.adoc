@@ -8,11 +8,19 @@ We are using Liberty as the server runtime and Eclipse as the IDE
 with WebSphere development tools (WDT) to enable iterative development
 with incremental publish. We are big fans of these tools because they're very efficient: no build, repackage, or restart steps are required before your changes are live in the server.
 
-Getting this setup to work with our Docker images does require some set up (one time), but then after that, it's smooth sailing for development.
+Getting this setup to work with our Docker images does require some first-time set up, but after that, it's smooth sailing for development.
 
 This approach requires the mounted volumes provided by `docker-compose.override.yml`.
 
-== Build and import eclipse projects
+== Getting Eclipse and WDT
+
+The easiest way to get both Eclipse and WDT is via  https://developer.ibm.com/wasdev/downloads/liberty-profile-using-eclipse[wasdev.net]. 
+
+* Step 1 contains the link for the latest Eclipse for Java EE developers
+* Step 2 contains a drag-and-drop link to install the latest copy of WDT.
+
+
+== Build and import Eclipse projects
 
 Begin by building the eclipse projects in the submodules:
 
@@ -26,3 +34,4 @@ Select the `gameon` directory created by the git clone operation.
 Tick the *Search for nested projects* box and press *Finish*.
 
 This should result in a collection of projects being imported to the workspace.
+

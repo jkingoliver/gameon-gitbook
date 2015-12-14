@@ -10,6 +10,7 @@
 :notanswer: http://somethingsinistral.net/blog/git-submodules-are-probably-not-the-answer/
 :yukmodules: https://codingkilledthecat.wordpress.com/2012/04/28/why-your-company-shouldnt-use-git-submodules/
 :installgit: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+:gameontext: https://githubhttps://github.com/gameontext.com/gameontext
 
 {empty}
 
@@ -23,7 +24,9 @@ Both front and backend services that use JavaScript will {nodejsdownload}[requir
 
 == Git
 
-All of the services and code are kept in {installgit}[Git].  
+image::http://imgs.xkcd.com/comics/git.png[caption="", title="xkcd: Git",float="right",align="center",link="http://xkcd.com/1597/", width=250]
+
+The code for all of our services is stored in the {gameontext}[gameontext] repositories on http://github.com[GitHub]. {installgit}[Installing git] will vary by platform.
 
 We use submodules to facilitate grabbing all the core servies in one fell swoop. 
 
@@ -36,13 +39,19 @@ Yes, yes we know, Git Submodules {notanswer}[are not] a {yukmodules}[cake walk].
 * {mastery}[Mastering Git Submodules]
 
 
+
 === Safety precautions for using git with submodules
 
 If you end up using submodules in anger, consider the following:
 
-* Make `status` submodule aware: `git config --global status.submoduleSummary true`
-* Make `diff` submodule aware: `git config --global diff.submodule log`
+* Make `status` submodule aware: +
+`git config --global status.submoduleSummary true`
+* Make `diff` submodule aware: +
+`git config --global diff.submodule log`
 * From the parent repository (gameon):
-** Use `rebase` instead of merge: `git config alias.srebase 'submodule update --remote --rebase'`
-** Recursive diff. `git config alias.sdiff '!'"git diff && git submodule foreach 'git diff'"`
-** Safe(r) push: `git config alias.spush 'push --recurse-submodules=check'`
+** Use `rebase` instead of merge: +
+`git config alias.srebase 'submodule update --remote --rebase'`
+** Recursive diff. +
+`git config alias.sdiff '!'"git diff && git submodule foreach 'git diff'"`
+** Safe(r) push: +
+`git config alias.spush 'push --recurse-submodules=check'`
