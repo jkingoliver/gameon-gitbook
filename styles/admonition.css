@@ -9,30 +9,30 @@
   background-color: #c0e6ff;
 }
 .note td.icon div.title:before {
-  content: "\f129\00a0 ";
+  content: "\f05a\00a0\00a0 ";
 }
 .tip td.icon {
   background-color: #c8f08f;
 }
 .tip td.icon div.title:before {
-  content: "\f08d\00a0 ";
+  content: "\f08d\00a0\00a0 ";
 }
 .important td.icon {
   background-color: #ff7832;
 }
 .important td.icon div.title:before {
-  content: "\f12a\00a0 ";
+  content: "\f12a\00a0\00a0 ";
 }
 .warning td.icon {
   background-color: #fdd600;
 }
 .warning td.icon div.title:before {
-  content: "\f071\00a0 ";
+  content: "\f071\00a0\00a0 ";
 }
 .caution td.icon {
   background-color: #e71d32;
   color: white;
 }
 .caution td.icon div.title:before {
-  content: "\f0e7\00a0 ";
+  content: "\f0e7\00a0\00a0 ";
 }
