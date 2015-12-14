@@ -1,0 +1,10 @@
+{
+    "gitbook": "2.x.x",
+    "styles": {
+        "website": "styles/admonition.css",
+        "ebook": "styles/admonition.css",
+        "pdf": "styles/admonition.css",
+        "mobi": "styles/admonition.css",
+        "epub": "styles/admonition.css"
+    }
+}
