@@ -1,6 +1,7 @@
 .admonitionblock td.icon {
   width: 10em;
   font-weight: bold;
+  vertical-align: top;
 }
 .admonitionblock td.icon div.title:before {
   font-family: "FontAwesome";
