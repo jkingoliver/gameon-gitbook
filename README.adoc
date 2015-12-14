@@ -4,9 +4,7 @@
 
 _You are in a maze of little interconnected rooms, none alike._
 
-Game On! is a both a sample microservices application, and throwback text adventure. For more information, see http://game-on.org/docs, or you might prefer to skip all that business and just [Go Play!](http://game-on.org/).
-
-Game On! is a text-based throwback adventure brought to you by the https://wasdev.net[wasdev] team at IBM. It aims to do a few things: 
+Game On! is a both a sample microservices application, and throwback text adventure brought to you by the https://wasdev.net[wasdev] team at IBM. It aims to do a few things: 
 
 * Provide a sample microservices-based application
 * Demonstrate how microservice architectures work from two points of view
