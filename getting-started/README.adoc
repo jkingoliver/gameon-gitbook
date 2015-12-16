@@ -6,7 +6,7 @@
 
 We'll cheat a little bit here: to do this mad dash from nothing to everything, you have to have Java 1.8, Node.js, Git, and Docker already set up. If you don't, then visit the link:requirements.adoc[list of prerequisites], and the link:local-docker.adoc[docker requirements] pages to make sure you're good to go.
 
-== Start from the root
+== Get the source
 
 Recursively grab all the source for our core modules, and change to the new shiny cloned directory: 
 
@@ -37,7 +37,7 @@ The game is now running locally, you can access it at http://127.0.0.1/ or at yo
 .Use the right IP address
 [NOTE]
 =========
-If you run on an operating system that uses a host VM for docker images (e.g. Windows or Mac), then you need to update the value for `PROXY_DOCKER_HOST` to match the IP address of your host. The host IP address is returned by `docker-machine ip <machine-name>`.
+If you run on an operating system that uses a host VM for docker images (e.g. Windows or Mac), then you need to update some values in `gameon.env` to match the IP address of your host. The host IP address is returned by `docker-machine ip <machine-name>`.
 
 `build.sh` will create a customized copy of `gameon.env` for the active DOCKER_MACHINE_NAME, that will perform the substitution to the associated IP address.
 =========

@@ -35,3 +35,4 @@ Tick the *Search for nested projects* box and press *Finish*.
 
 This should result in a collection of projects being imported to the workspace.
 
+== Making WDT happy 

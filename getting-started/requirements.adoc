@@ -1,4 +1,4 @@
-= Pre-requisites / System Requirements
+= Pre-requisites (Java, JavaScript, Git)
 :icons: font
 :toc:
 :toc-placement: preamble

@@ -1,0 +1,4 @@
+# Files that should not be read by gitbook
+
+runGitBookServer.sh
+Dockerfile
