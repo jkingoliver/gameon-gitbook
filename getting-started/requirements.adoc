@@ -1,16 +1,10 @@
-= Pre-requisites (Java, JavaScript, Git)
+= Pre-requisites (Java, JavaScript)
 :icons: font
 :toc:
 :toc-placement: preamble
 :toclevels: 1
 :oracledownload: http://www.oracle.com/technetwork/java/javase/downloads/index.html
 :nodejsdownload: https://nodejs.org/en/download/
-:submodules: https://git-scm.com/book/en/v2/Git-Tools-Submodules
-:mastery: https://medium.com/@porteneuve/mastering-git-submodules-34c65e940407#.fdmpndvh6
-:notanswer: http://somethingsinistral.net/blog/git-submodules-are-probably-not-the-answer/
-:yukmodules: https://codingkilledthecat.wordpress.com/2012/04/28/why-your-company-shouldnt-use-git-submodules/
-:installgit: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
-:gameontext: https://githubhttps://github.com/gameontext.com/gameontext
 
 {empty}
 
@@ -22,36 +16,4 @@ The java-based services require Java 1.8, and are built on the Liberty runtime. 
 
 Both front and backend services that use JavaScript will {nodejsdownload}[require node.js]. Use the latest from the long term service (LTS) stream.
 
-== Git
 
-image::http://imgs.xkcd.com/comics/git.png[caption="", title="xkcd: Git",float="right",align="center",link="http://xkcd.com/1597/", width=250]
-
-The code for all of our services is stored in the {gameontext}[gameontext] repositories on http://github.com[GitHub]. {installgit}[Installing git] will vary by platform.
-
-We use submodules to facilitate grabbing all the core servies in one fell swoop. 
-
-Yes, yes we know, Git Submodules {notanswer}[are not] a {yukmodules}[cake walk]. But we believe the convenience of being able to grab the set of core services as a whole is worth it. If you plan to contribute back (as we hope you will), {submodules}[some reading] may be {mastery}[required].
-
-=== References for using Git
-
-* https://git-scm.com/doc[Git Reference, Book, Cheat sheets]
-* {submodules}[GitBook: Submodules]
-* {mastery}[Mastering Git Submodules]
-
-
-
-=== Safety precautions for using git with submodules
-
-If you end up using submodules in anger, consider the following:
-
-* Make `status` submodule aware: +
-`git config --global status.submoduleSummary true`
-* Make `diff` submodule aware: +
-`git config --global diff.submodule log`
-* From the parent repository (gameon):
-** Use `rebase` instead of merge: +
-`git config alias.srebase 'submodule update --remote --rebase'`
-** Recursive diff. +
-`git config alias.sdiff '!'"git diff && git submodule foreach 'git diff'"`
-** Safe(r) push: +
-`git config alias.spush 'push --recurse-submodules=check'`
