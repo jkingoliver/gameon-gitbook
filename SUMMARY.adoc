@@ -18,5 +18,4 @@
 .. link:microservices/webapp.adoc[Webapp]
 .. link:microservices/swagger.adoc[Swagger]
 .. link:microservices/mediator.adoc[Mediator]
-. link:chronicles[Appendix: The Chronicles]
-
+. link:chronicles/README.adoc[Appendix: The Chronicles]

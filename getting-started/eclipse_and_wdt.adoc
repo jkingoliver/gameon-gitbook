@@ -3,6 +3,7 @@
 :toc:
 :toc-placement: preamble
 :toclevels: 1
+:imagesdir: /images
 
 We are using Liberty as the server runtime and Eclipse as the IDE
 with WebSphere development tools (WDT) to enable iterative development
@@ -33,7 +34,12 @@ Fire up eclipse, and use *File* -> *Import*, and in the resulting dialog, start 
 Select the `gameon` directory created by the git clone operation.
 Tick the *Search for nested projects* box and press *Finish*.
 
-This should result in a collection of projects being imported to the workspace.
+This should result in a collection of projects being imported to the workspace as shown in <<projectImport,Figure 1>>.
+
+[[projectImport]]
+.Example of the projects created by the import action
+image::projectImport.png[Eclipse projects, width=350]
+
 
 == Integration with Liberty and WDT
 
@@ -60,7 +66,12 @@ You now have WDT installed and ready (per earlier steps), and a runtime installe
    .. Click the `Advanced Options...` link
    .. For each `*-wlpcfg` project (e.g. `player-wlpcfg`): Click *New*, and select it
    .. Click *OK* when all `*-wlpcfg` projects are shown in the list of user directories
-6. Click *Finish* to create the Runtime Environment
+6. Click *Finish* to create the Runtime Environment. The Runtime Environment view should look something like <<runtimeEnvironment, Figure 2>>.
+
+[[runtimeEnvironment]]
+.Example of the Runtime Explorer for Liberty in WDT with associated user directories
+image::runtimeExplorer.png[Runtime Explorer for Liberty in WDT, width=600]
+
 
 === Create WDT Servers
 
@@ -72,6 +83,14 @@ WDT has its own representation of the server, which show up in the Servers view:
     * The resulting dialog should be pre-populated. The "Liberty profile server" drop-down box will contain an entry for every configured server for that runtime environment.
 2. For each `gameon-*` entry in the drop-down, select it, and click *Finish* to create an Eclipse/WDT Server.
 
+[[serversView]]
+.The Servers view listing Liberty servers in WDT
+image::defaultServers.png[Liberty Servers in WDT, width=600]
+
+[[renamedServers]]
+.Servers can be renamed for clarity (right click)
+image::renamedServers.png[Renamed Liberty Servers in WDT, width=600]
+
 === Deploy the application to the server
 
 WDT defines a very handy stand-in for the packaged war: a loose configuration file. We're going to deploy our applications to the liberty servers, and WDT will replace our built wars with xml files that act like wars, but that serve the contents directly from our eclipse project.
@@ -79,18 +98,26 @@ WDT defines a very handy stand-in for the packaged war: a loose configuration fi
 *For each server*: 
 
 1. *Right-click* on the server in the Servers view, and select *Add and Remove...*
-2. In the dialog that opens, *Remove* the app on the right that is already configured (gray), and *Add* back the same app (not gray) from the left. 
+2. In the dialog that opens, you will see an application with the same name in both the left and right-hand side of the dialog. Select the application in the left-hand panel as shown in <<img-appWarning,Figure 5>>, and click *Add >* to add it to the application as shown in <<img-appReplace, Figure 6>>. 
 3. Click *Finish*.
 4. *Right-click* on the server again, and select *Publish*. 
     * You may see warnings that the publish failed. These can be ignored.
-5. Open the corresponding `*-wlpcfg` project. Verify that the `servers/gameon-*/apps` folder now contains a `*-app.war.xml` file. 
+5. Open the corresponding `*-wlpcfg` project. Verify that the `servers/gameon-*/apps` folder now contains a `*-app.war.xml` file as shown in <<img-looseConfig, Figure 7>>. 
     * You may need to refresh the view to see the updated application
     * If the `*.war` file created by the `build.sh` step is still present, you may remove it to avoid problems later. 
+6. Discard any `server.xml` changes made by WDT for the project.
 
+[[img-appWarning]]
+.A warning appears when selecting the application in the left pane
+image::addApplicationWarning.png[Add and Remove... with a warning for the existing application, width=600]
 
-*Finally*: 
+[[img-appReplace]]
+.Add the application to the server to replace the built war file
+image::addApplication.png[Add and Remove... replacing the application, width=600]
 
-Discard any `server.xml` changes made by WDT for the project.
+[[img-looseConfig]]
+.The loose config file in the mediator-wlpcfg project
+image::looseConfig.png[The mediator's loose config file, width=300]
 
 == All done!
 

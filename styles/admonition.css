@@ -41,5 +41,9 @@
   content: "\f0e7\00a0\00a0 ";
 }
 .imageblock {
-    padding: 0 10px 10px 10px;
+  padding: 0 10px 10px 10px;
+}
+.imageblock.title {
+  font-size: 0.8em !important;
+  padding-bottom: 10px;
 }
