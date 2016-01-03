@@ -1,11 +1,15 @@
 = Appendix: The Chronicles
+:icons: font
 :toc:
+:toc-placement: preamble
+:toclevels: 1
+:imagesdir: /images
 
 The following sections are more like a blog than a book. Creating a new application from scratch using microservices is a messy business: documenting the process is, in some respects, as important as showing the end result.
 
 == The first pass
 
-
+Recap coming...
 
 
 
@@ -14,8 +18,15 @@ The following sections are more like a blog than a book. Creating a new applicat
 
 Over time, it became pretty apparent that our first pass at a map building service (the Concierge) was both misleading in purpose and insufficient in function. It served its purpose, filling in for service discovery in a way, but we were growing beyond what the service could do. 
 
-As mentioned earlier, I'm more familiar with Java than anything else: so I built the new API using JAX-RS and Liberty, but I also tried something new. In the beta drivers released in late 2015, Liberty added an API Discovery feature, which allows automatic generation of Swagger documentation from JAX-RS and Swagger annotations.
+As mentioned earlier, I'm more familiar with Java than anything else: so I built the new API using JAX-RS and Liberty, but I also tried something new. In the beta drivers released in late 2015, Liberty added an API Discovery feature, which allows automatic generation of Swagger documentation from JAX-RS and Swagger annotations in the application.
 
-I set up the new Map service using the beta driver and this beta feature, and started creating the skeleton elements that would form the API in Eclipse with WDT. As I made changes to the application files, all I had to do was refresh the browser to see an updated view of my API. I really liked working this way: I could get a better feel of the usability of the API because I could see the whole view in onep place.
+I set up the new Map service using the beta driver and this beta feature, and started creating the skeleton elements that would form the API in Eclipse with WDT. As I made changes to the application files, all I had to do was refresh the browser to see an updated view of my API. I really liked working this way: I could get a better feel of the usability of the API because I could see the whole view in one place, as shown in <<apiDiscovery>>.
+
+[[apiDiscovery,Figure 1]]
+.Viewing generated Swagger documentation for discovered JAX-RS endpoints in Eclipse/WDT 
+image::swaggerDiscovery.png[Generated Swagger docs for discovered APIs, width=600]
+
+
+
 
 January 2016 / Erin Schnabel

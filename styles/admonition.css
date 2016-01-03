@@ -43,7 +43,7 @@
 .imageblock {
   padding: 0 10px 10px 10px;
 }
-.imageblock.title {
+.imageblock .title {
   font-size: 0.8em !important;
   padding-bottom: 10px;
 }
