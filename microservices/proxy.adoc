@@ -14,4 +14,4 @@ The typical method of controlling runtime configuration of Docker-based services
 The proxy service utilizes the following environment variables:
 
  * *ADMIN_PASSWORD*: The password for `admin` that allows access to the HAProxy statistics page.
- * *ETCDCTL_ENDPOINT* (optional): See link:./using-etcd.md[using etcd] for more information.
+ * *ETCDCTL_ENDPOINT* (optional): See link:./using-etcd.html[using etcd] for more information.
