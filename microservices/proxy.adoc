@@ -5,6 +5,8 @@
 image::github.png[alt="github", width="30", height="30", link="https://github.com/gameontext/gameon-proxy"]
 Code
 
+*Written In/Based On*: HAProxy
+
 The proxy service allows for load balancing and highly available deployment of the Game On! services.
 
 == Environment Variables
