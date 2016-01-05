@@ -17,3 +17,24 @@ The proxy service utilizes the following environment variables:
 
  * *ADMIN_PASSWORD*: The password for `admin` that allows access to the HAProxy statistics page.
  * *ETCDCTL_ENDPOINT* (optional): The http-accessible endpoint for an etcd member with configuration for Game On! services. See link:./using_etcd.adoc[using etcd] for more information.
+
+## Useful Docker Examples
+
+*Build*:
+```
+docker build -t gameon-proxy .
+```
+*Stop*
+```
+docker stop -t 0 gameon-proxy ; docker rm gameon-proxy
+```
+
+*Daemon*
+```
+docker run -d -p 80:80 -p 443:443 -p 1936:1936 -e ADMIN_PASSWORD=admin --name=gameon-proxy gameon-proxy
+```
+
+*Restart*
+```
+docker stop -t 0 gameon-proxy ; docker rm gameon-proxy ; docker run -d -p 80:80 -p 443:443 -p 1936:1936 -e ADMIN_PASSWORD=admin --name=gameon-proxy gameon-proxy
+```
