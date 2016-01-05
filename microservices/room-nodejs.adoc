@@ -13,3 +13,4 @@ to allow polyglot within a microservices environment.
 The Room Node.js service utilizes the following environment variables:
 
 * *CONCIERGE_KEY*:  A secret key shared between link:./concierge.adoc[Concierge] and services who are allowed to register rooms (such as link:./room.adoc[Room Service], and Room Node.js Service). Set this value in concierge and then use it in other services.
+* *ETCDCTL_ENDPOINT* (optional): The http-accessible endpoint for an etcd member with configuration for Game On! services. See link:./using_etcd.adoc[using etcd] for more information.
