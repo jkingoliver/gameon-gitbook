@@ -5,6 +5,7 @@
 image::github.png[alt="github", width="30", height="30", link="https://github.com/gameontext/gameon-room-nodejs"]
 Code
 
+*Written In/Based On*: Node.js `;)`
 
 The Room Node.js Service is an example of an Game On! room implemented in Node.js, as a demonstration of how to use API contracts 
 to allow polyglot within a microservices environment.
