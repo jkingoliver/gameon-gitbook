@@ -9,3 +9,8 @@ Code
 
 The Swagger service provides a hosted Swagger UI endpoint that shows the API contracts for Game On! services, allowing developers
 to interact with those services individually to see how to augment or integrate with the Game On! system.
+
+== Environment Variables
+
+The typical method of controlling runtime configuration of Docker-based services is through specification of environment variables.  Either set through a startup script reading from https://coreos.com/etcd/docs/latest/[etcd], from https://docs.docker.com/engine/reference/run/#env-environment-variables[command-line] settings, or from our https://github.com/gameontext/gameon/blob/master/docker-compose.yml[docker-compose] example, environment variables allow customization of a specific deployment of Game On!
+
