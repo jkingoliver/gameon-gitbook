@@ -5,5 +5,7 @@
 image::github.png[alt="github", width="30", height="30", link="https://github.com/gameontext/gameon-swagger"]
 Code
 
+*Written In/Based On*: swagger and nginx
+
 The Swagger service provides a hosted Swagger UI endpoint that shows the API contracts for Game On! services, allowing developers
 to interact with those services individually to see how to augment or integrate with the Game On! system.
