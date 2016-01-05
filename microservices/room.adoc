@@ -18,6 +18,6 @@ The typical method of controlling runtime configuration of Docker-based services
 The concierge service utilizes the following environment variables:
 
 * *service_concierge*: The full URL at which the room service can register its rooms (e.g. `https://game-on.org/concierge/registerRoom`). See the https://game-on.org/swagger/[Swagger APIs] for more information about how to register rooms.
-* *service_room*: VALUE
-* *REGISTRATION_SECRET*: VALUE
+* *service_room*: The full URL to register this suite of rooms with concierge (e.g. `wss://game-on.org/rooms`) such that concierge can relay this information to mediator or player service as a player desires.
+* *REGISTRATION_SECRET*: 
 
