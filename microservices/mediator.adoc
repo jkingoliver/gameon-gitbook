@@ -16,7 +16,7 @@ The typical method of controlling runtime configuration of Docker-based services
 The mediator service utilizes the following environment variables:
 
  * *CONCIERGE_URL*: The full URL to the concierge microservice (e.g. `https://game-on.org/concierge`).
-* *CONCIERGE_KEY*: VALUE
+* *CONCIERGE_KEY*: A secret key, shared between player service and concierge that authenticates player to query concierge about room information.
 * *PLAYER_URL*: VALUE
 
 * *ETCDCTL_ENDPOINT* (optional): The http-accessible endpoint for an etcd member with configuration for Game On! services. See link:./using_etcd.adoc[using etcd] for more information.
