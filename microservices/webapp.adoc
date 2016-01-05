@@ -5,6 +5,6 @@
 image::github.png[alt="github", width="30", height="30", link="https://github.com/gameontext/gameon-webapp"]
 Code
 
+*Written In/Based On*: nginx
 
-The Webapp service provides the single-page Angular web application that provides the user interface for authentication and
-user information, as well as the WebSocket client implementation for interacting with the rooms in the Game On! world. 
+The Webapp service provides the single-page Angular web application that provides the user interface for authentication and user information, as well as the WebSocket client implementation for interacting with the rooms in the Game On! world. 
