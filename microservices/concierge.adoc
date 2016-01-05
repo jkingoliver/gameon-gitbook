@@ -14,6 +14,6 @@ The typical method of controlling runtime configuration of Docker-based services
 
 The concierge service utilizes the following environment variables:
 
-* *REGISTRATION_SECRET*: A secret key shared between concierge and services who are allowed to register rooms (such as link:./room.adoc[Room Service], and link:./room-nodejs.adoc[Room Node.js Service]).
-* *QUERY_SECRET*: VALUE
+* *REGISTRATION_SECRET*: A secret key shared between concierge and services who are allowed to register rooms (such as link:./room.adoc[Room Service], and link:./room-nodejs.adoc[Room Node.js Service]). Set this value in concierge and then use it in other services.
+* *QUERY_SECRET*: A secret key shared between concierge and services who query concierge for information about rooms (such as link:./player.adoc[Player Service]).
 
