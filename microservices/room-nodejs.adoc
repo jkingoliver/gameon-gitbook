@@ -10,6 +10,10 @@ Code
 The Room Node.js Service is an example of an Game On! room implemented in Node.js, as a demonstration of how to use API contracts 
 to allow polyglot within a microservices environment.
 
+== Environment Variables
+
+The typical method of controlling runtime configuration of Docker-based services is through specification of environment variables.  Either set through a startup script reading from https://coreos.com/etcd/docs/latest/[etcd], from https://docs.docker.com/engine/reference/run/#env-environment-variables[command-line] settings, or from our https://github.com/gameontext/gameon/blob/master/docker-compose.yml[docker-compose] example, environment variables allow customization of a specific deployment of Game On!
+
 The Room Node.js service utilizes the following environment variables:
 
 * *CONCIERGE_KEY*:  A secret key shared between link:./concierge.adoc[Concierge] and services who are allowed to register rooms (such as link:./room.adoc[Room Service], and Room Node.js Service). Set this value in concierge and then use it in other services.
