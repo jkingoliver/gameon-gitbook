@@ -9,6 +9,10 @@ Code
 
 The Webapp service provides the single-page Angular web application that provides the user interface for authentication and user information, as well as the WebSocket client implementation for interacting with the rooms in the Game On! world. 
 
+== Environment Variables
+
+The typical method of controlling runtime configuration of Docker-based services is through specification of environment variables.  Either set through a startup script reading from https://coreos.com/etcd/docs/latest/[etcd], from https://docs.docker.com/engine/reference/run/#env-environment-variables[command-line] settings, or from our https://github.com/gameontext/gameon/blob/master/docker-compose.yml[docker-compose] example, environment variables allow customization of a specific deployment of Game On!
+
 The webapp service utilizes the following environment variables:
 
 * *ETCDCTL_ENDPOINT* (optional): The http-accessible endpoint for an etcd member with configuration for Game On! services. See link:./using_etcd.adoc[using etcd] for more information.
