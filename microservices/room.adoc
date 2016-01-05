@@ -17,7 +17,7 @@ The typical method of controlling runtime configuration of Docker-based services
 
 The concierge service utilizes the following environment variables:
 
-* *NAME*: VALUE
-* *NAME*: VALUE
-* *NAME*: VALUE
-* *NAME*: VALUE
+* *service_concierge*: VALUE
+* *service_room*: VALUE
+* *REGISTRATION_SECRET*: VALUE
+
