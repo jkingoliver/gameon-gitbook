@@ -5,6 +5,8 @@
 image::github.png[alt="github", width="30", height="30", link="https://github.com/gameontext/gameon-player"]
 Code
 
+*Written In/Based On*: IBM WebSphere Liberty
+
 The Player service is responsible for authenticating and registering players, and identifying those players to other
 services within Game On!
 
