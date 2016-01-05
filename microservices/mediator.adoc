@@ -15,6 +15,7 @@ The typical method of controlling runtime configuration of Docker-based services
 
 The mediator service utilizes the following environment variables:
 
+* *LICENSE*: Required by the https://hub.docker.com/_/websphere-liberty/[IBM WebSphere Liberty Docker Image], set this environment variable to `accept` to demonstrate that you accept the Liberty and IBM JDK licenses.
 * *CONCIERGE_URL*: The full URL to the concierge microservice (e.g. `https://game-on.org/concierge`).
 * *CONCIERGE_KEY*: A secret key, shared between player service and concierge that authenticates player to query concierge about room information.
 * *PLAYER_URL*: The full URL to the player microservice (e.g. `https://game-on.org/play/players`).
