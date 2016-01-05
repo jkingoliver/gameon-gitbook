@@ -5,4 +5,6 @@
 image::github.png[alt="github", width="30", height="30", link="https://github.com/gameontext/gameon-mediator"]
 Code
 
+*Written In/Based On*: IBM WebSphere Liberty
+
 The mediator service allows multiplex communication over secure WebSockets between the Game On! Web app and the Game On! Rooms.
