@@ -15,4 +15,8 @@ The typical method of controlling runtime configuration of Docker-based services
 
 The mediator service utilizes the following environment variables:
 
+* *CONCIERGE_URL*: VALUE
+* *CONCIERGE_KEY*: VALUE
+* *PLAYER_URL*: VALUE
+
 * *ETCDCTL_ENDPOINT* (optional): The http-accessible endpoint for an etcd member with configuration for Game On! services. See link:./using_etcd.adoc[using etcd] for more information.
