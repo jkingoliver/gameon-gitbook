@@ -1,2 +1,3 @@
 # Using etcd
 
+This article will contain information on how we utilize etcd in our production deployment of Game On! to control common environment settings between microservices.
