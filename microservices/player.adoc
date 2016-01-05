@@ -7,3 +7,24 @@ Code
 
 The Player service is responsible for authenticating and registering players, and identifying those players to other
 services within Game On!
+
+== Environment Variables
+
+The typical method of controlling runtime configuration of Docker-based services is through specification of environment variables.  Either set through a startup script reading from https://coreos.com/etcd/docs/latest/[etcd], from https://docs.docker.com/engine/reference/run/#env-environment-variables[command-line] settings, or from our https://github.com/gameontext/gameon/blob/master/docker-compose.yml[docker-compose] example, environment variables allow customization of a specific deployment of Game On!
+
+The player service utilizes the following environment variables:
+
+ * *CONCIERGE_URL*: The password for `admin` that allows access to the HAProxy statistics page.
+ * *SUCCESS_CALLBACK*: DESCRIPTION
+ * *PLAYER_URL*: DESCRIPTION
+ * *CONCIERGE_KEY*: DESCRIPTION
+ * *MONGO_HOST*: DESCRIPTION
+ * *MONGO_PORT*: DESCRIPTION
+ * *TWITTER_CONSUMER_KEY*: DESCRIPTION
+ * *TWITTER_CONSUMER_SECRET*: DESCRIPTION
+ * *FACEBOOK_APP_ID*: DESCRIPTION
+ * *FACEBOOK_APPP_SECRET*: DESCRIPTION
+ * *GOOGLE_APP_ID*: DESCRIPTION
+ * *GOOGLE_APP_SECRET*: DESCRIPTION
+ 
+ * *ETCDCTL_ENDPOINT* (optional): The http-accessible endpoint for an etcd member with configuration for Game On! services. See link:./using_etcd.adoc[using etcd] for more information.
