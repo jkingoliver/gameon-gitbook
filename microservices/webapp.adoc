@@ -11,3 +11,4 @@ The Webapp service provides the single-page Angular web application that provide
 
 The webapp service utilizes the following environment variables:
 
+* *ETCDCTL_ENDPOINT* (optional): The http-accessible endpoint for an etcd member with configuration for Game On! services. See link:./using_etcd.adoc[using etcd] for more information.
