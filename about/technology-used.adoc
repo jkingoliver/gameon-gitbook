@@ -12,3 +12,4 @@
 * Logstash
 * nginx
 * GitBook
+* Angular
