@@ -20,7 +20,7 @@ The player service utilizes the following environment variables:
  * *CONCIERGE_KEY*: A secret key, shared between player service and concierge that authenticates player to query concierge about room information.
  * *MONGO_HOST*: IP Address or Hostname of a mongoDB host that player service can use to persist its information about players who have logged in to Game On!
  * *MONGO_PORT*: Same as above, only this is the port number that mongoDB listens on.
- * *TWITTER_CONSUMER_KEY*: Application ID/key for consuming OAuth2 authentication for twitter.
+ * *TWITTER_CONSUMER_KEY*: Application ID/key for consuming OAuth2 authentication for twitter. See link:https://apps.twitter.com/[Twitter's Developer Pages] for more information.
  * *TWITTER_CONSUMER_SECRET*: Secret from Twitter for utilizing the above ID to authenticate users in Game On!
  * *FACEBOOK_APP_ID*: Application ID/key for consuming OAuth2 authentication for Facebook.  See link:https://developers.facebook.com/products/login[Facebook's Developer Page] for more information.
  * *FACEBOOK_APPP_SECRET*: Secret from Facebook for utilizing the above ID to authenticate users in Game On!
