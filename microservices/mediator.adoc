@@ -15,7 +15,7 @@ The typical method of controlling runtime configuration of Docker-based services
 
 The mediator service utilizes the following environment variables:
 
-* *CONCIERGE_URL*: VALUE
+ * *CONCIERGE_URL*: The full URL to the concierge microservice (e.g. `https://game-on.org/concierge`).
 * *CONCIERGE_KEY*: VALUE
 * *PLAYER_URL*: VALUE
 
