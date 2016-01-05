@@ -21,9 +21,6 @@ This project contains just the JavaScript web application (no services).
 
 ## Docker
 
-### Environment Variables
-
-* `LOGSTASH_ENDPOINT`: The Logstash Lumberjack endpoint to forward logs to. 
 
 ### Building
 
