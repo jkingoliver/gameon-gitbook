@@ -11,6 +11,10 @@ The Room service is both an implementation of two Game On! rooms in Java, and a 
 your own room in Java.  The Room service provides an example of how to register with the concierge and how to provide the
 WebSocket implementation that the web application expects. 
 
+This is a service to manage the various rooms available in a game. The primary entry point for a player will be the concierge, who manages connecting you between rooms. After that each room has a room service (heh) and players connect to each service and disconnect from the previous one to move between rooms.
+
+A room is assumed to have a number of labeled exits, but it is up to each concierge instance to decide which room will be on the other side of an exit. This might mean one way doors, warp holes, etc. As the wiring is up the concierge it could be dynamic.
+
 == Environment Variables
 
 The typical method of controlling runtime configuration of Docker-based services is through specification of environment variables.  Either set through a startup script reading from https://coreos.com/etcd/docs/latest/[etcd], from https://docs.docker.com/engine/reference/run/#env-environment-variables[command-line] settings, or from our https://github.com/gameontext/gameon/blob/master/docker-compose.yml[docker-compose] example, environment variables allow customization of a specific deployment of Game On!
@@ -22,3 +26,46 @@ The concierge service utilizes the following environment variables:
 * *service_room*: The full URL to register this suite of rooms with concierge (e.g. `wss://game-on.org/rooms`) such that concierge can relay this information to mediator or player service as a player desires.
 * *REGISTRATION_SECRET*:  A secret key shared between link:./concierge.adoc[Concierge] and services who are allowed to register rooms (such as Room Service, and link:./room-nodejs.adoc[Room Node.js Service]). Set this value in concierge and then use it in other services.
 * *ETCDCTL_ENDPOINT* (optional): The http-accessible endpoint for an etcd member with configuration for Game On! services. See link:./using_etcd.adoc[using etcd] for more information.
+
+## Docker for Room App
+
+To build a Docker image for this app/service, execute the following:
+
+```
+gradle buildImage
+```
+
+Or, if you don't have gradle, then:
+
+```
+./gradlew buildImage
+```
+
+### Interactive Run
+
+```
+docker run -it -p 9080:9080 --env-file=dockerrc gameon-room bash
+```
+
+Then, you can start the server with 
+```
+/opt/ibm/wlp/bin/server run defaultServer
+```
+
+### Daemon Run
+
+```
+docker run -d -p 9080:9080 --env-file=dockerrc --name gameon-room gameon-room
+```
+
+### Stop
+
+```
+docker stop gameon-room ; docker rm gameon-room
+```
+
+### Restart Daemon
+
+```
+docker stop gameon-room ; docker rm gameon-room ; docker run -d -p 9080:9080 --env-file=dockerrc --name gameon-room gameon-room 
+```
