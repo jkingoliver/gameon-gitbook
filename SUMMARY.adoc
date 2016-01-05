@@ -18,6 +18,6 @@
 .. link:microservices/webapp.adoc[Webapp]
 .. link:microservices/swagger.adoc[Swagger]
 .. link:microservices/mediator.adoc[Mediator]
-.. Using etcd
+.. link:microservices/using_etcd.adoc[Using etcd]
 . link:chronicles/README.adoc[Appendix: The Chronicles]
 
