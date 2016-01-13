@@ -9,6 +9,8 @@
 
 == Using Docker
 
+We require docker-compose version 1.5.0 or greater.
+
 https://docs.docker.com/engine/installation/[Installing Docker] varies by platform. For https://docs.docker.com/engine/installation/mac/[Mac] and https://docs.docker.com/engine/installation/windows/[Windows], Docker Toolbox (referenced below) has superceded Boot2Docker.
 
 There is a conceptual difference between what happens on linux vs. on Windows or Mac that could use some explaining: 

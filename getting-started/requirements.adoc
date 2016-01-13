@@ -4,13 +4,19 @@
 :toc-placement: preamble
 :toclevels: 1
 :oracledownload: http://www.oracle.com/technetwork/java/javase/downloads/index.html
+:ibmdownload: http://www.ibm.com/developerworks/java/jdk/
+:liberty: https://developer.ibm.com/assets/wasdev/#filter/assetTypeFilters=PRODUCT
 :nodejsdownload: https://nodejs.org/en/download/
 
 {empty}
 
 == Java
 
-The java-based services require Java 1.8, and are built on the Liberty runtime. {oracledownload}[Download] an appropriate version of the JDK from Oracle. Be sure to accept the license agreement.
+The java-based services require Java 1.8, and are built on the Liberty runtime. Any compliant JVM should work. We use both IBM and Oracle JVMs.
+
+* {oracledownload}[Download] the JDK from Oracle. Be sure to accept the license agreement.
+
+* {ibmdownload}[Download] the JDK from IBM (AIX, Linux, z/OS, IBM i), or {liberty}[Download] a Liberty package that contains the IBM JDK (Windows, Linux)
 
 == JavaScript 
 
