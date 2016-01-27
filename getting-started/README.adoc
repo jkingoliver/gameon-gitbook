@@ -3,6 +3,7 @@
 :toc:
 :toc-placement: preamble
 :toclevels: 1
+:sectanchors:
 
 We'll cheat a little bit here: to do this mad dash from nothing to everything, you have to have Java 1.8, Node.js, Git, and Docker already set up. If you don't, then visit the link:git.adoc[Git], link:requirements.adoc[prerequisites], and the link:local-docker.adoc[docker requirements] pages to make sure you're good to go.
 
@@ -23,6 +24,23 @@ Build the submodules that contain gradle.
 ./build.sh
 ----
 
+If you intend to make updates outside the container (see <<incrementalPublish>>), make sure you have node installed, and then build the webapp project:
+
+----
+cd webapp
+npm install
+./node_modules/.bin/grunt build
+----
+
+
+[[incrementalPublish]]
+== Top-down vs. incremental updates
+
+`docker-compose.override.yml` maps subrepository paths into the docker containers to support live development. 
+
+If you prefer a top-down-republish approach, rename `docker-compose.override.yml` to `docker-compose.override.yml.backup` to skip mounting volumes. Re-run `build.sh` and the docker-compose build steps to publish the updates.
+
+
 == Docker compose: Game On!
 
 To start up the whole collection using `docker-compose`, run the following:
@@ -42,9 +60,4 @@ If you run on an operating system that uses a host VM for docker images (e.g. Wi
 `build.sh` will create a customized copy of `gameon.env` for the active DOCKER_MACHINE_NAME, that will perform the substitution to the associated IP address.
 =========
 
-=== Top-down vs. incremental updates
-
-`docker-compose.override.yml` maps subrepository paths into the docker containers to support live development. 
-
-If you prefer a top-down-republish approach, rename `docker-compose.override.yml` to `docker-compose.override.yml.backup` to skip mounting volumes. Re-run `build.sh` and the docker-compose build steps to publish the updates.
 
