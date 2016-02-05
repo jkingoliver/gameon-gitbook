@@ -27,25 +27,25 @@ In order for GameOn to validate any supplied signature, the following steps need
 
 Note : unless otherwise stated, GameOn uses the SHA-256 algorithm to generate or validate hashes.
 
-1 Create the **gameon-sig-headers** value (if required)
-  1 For each HTTP header that is to be part of the signature
-    1 Add the name to the list of headers (entries are delimited by semi-colons)
-    1 Append the value to a hash (typically this is done by repeatedly calling a hash function)
-  1 Calculate the hash from all the appended values and add it to the end of the **gameon-sig-headers** value as a lower case hex string.
-1 Create the **gameon-sig**-parameters value (if required)
-  1 Follow the same procedure as for headers detailed in step 1.
-1 Create the **gameon-sig-body** value (if required) by hashing the contents of the request body.
-  1 Convert the current time and date to UTC and store in **gameon-date**
-1 Put your public API key in **gameon-id**.
-1 Create the **gameon-signature** value
-  1 Initialise a HMAC-SHA256 function
-  1 The secret for the HMAC is your API secret.
-  1 Add the value of **gameon-id**
-  1 Add the value of **gameon-date**
-  1 Add the value of **gameon-sig-headers** (if present)
-  1 Add the value of **gameon-sig-parameters** (if present)
-  1 Add the value of **gameon-sig-body** (if present)
-  1 Generate the HMAC, convert it to lowercase hex, and store in **gameon-signature**.
+1. Create the **gameon-sig-headers** value (if required)
+  1. For each HTTP header that is to be part of the signature
+    1. Add the name to the list of headers (entries are delimited by semi-colons)
+    1. Append the value to a hash (typically this is done by repeatedly calling a hash function)
+  1. Calculate the hash from all the appended values and add it to the end of the **gameon-sig-headers** value as a lower case hex string.
+1. Create the **gameon-sig**-parameters value (if required)
+  1. Follow the same procedure as for headers detailed in step 1.
+1. Create the **gameon-sig-body** value (if required) by hashing the contents of the request body.
+  1. Convert the current time and date to UTC and store in **gameon-date**
+1. Put your public API key in **gameon-id**.
+1. Create the **gameon-signature** value
+  1. Initialise a HMAC-SHA256 function
+  1. The secret for the HMAC is your API secret.
+  1. Add the value of **gameon-id**
+  1. Add the value of **gameon-date**
+  1. Add the value of **gameon-sig-headers** (if present)
+  1. Add the value of **gameon-sig-parameters** (if present)
+  1. Add the value of **gameon-sig-body** (if present)
+  1. Generate the HMAC, convert it to lowercase hex, and store in **gameon-signature**.
 
 == Examples
 
@@ -86,24 +86,24 @@ When GameOn receives a signed request, it carries out a series of validation and
 
 The process that Game On! performs is as follows
 
-1 Examines the value of **gameon-id** and ensures that
-  1 It is valid i.e. issued to a registered room developer
-  1 Has not been revoked
-1 Generates the value of **gameon-signature** using the steps described in 'How to construct the gameon-signature'
-  1 It uses the secret that is paired with the supplied **gameon-id**
-  1 Checks that the signatures match - the shared secret confirms the identity of the sender.
-1 Examines the value of **gameon-date** and ensures that
-  1 The request is not older than 5 minutes
-  1 If the request is less than 5 minutes old, then the signature does not match a previously received request
-1 Examines the value **gameon-sig-headers** (if present)
-  1 Generates a hash from the specified header values
-  1 Checks that the hash matches the request.
-1 Examines the value **gameon-sig-params** (if present)
-  1 Generates a hash from the specified parameter values
-  1 Checks that the hash matches the request.
-1 Examines the value **gameon-sig-body** (if present)
-  1 Generates a hash from the request body
-  1 Checks that the hash matches the request.
+1. Examines the value of **gameon-id** and ensures that
+  1. It is valid i.e. issued to a registered room developer
+  1. Has not been revoked
+1. Generates the value of **gameon-signature** using the steps described in 'How to construct the gameon-signature'
+  1. It uses the secret that is paired with the supplied **gameon-id**
+  1. Checks that the signatures match - the shared secret confirms the identity of the sender.
+1. Examines the value of **gameon-date** and ensures that
+  1. The request is not older than 5 minutes
+  1. If the request is less than 5 minutes old, then the signature does not match a previously received request
+1. Examines the value **gameon-sig-headers** (if present)
+  1. Generates a hash from the specified header values
+  1. Checks that the hash matches the request.
+1. Examines the value **gameon-sig-params** (if present)
+  1. Generates a hash from the specified parameter values
+  1. Checks that the hash matches the request.
+1. Examines the value **gameon-sig-body** (if present)
+  1. Generates a hash from the request body
+  1. Checks that the hash matches the request.
 
 == When to use signed requests
 TBD : Details of which APIs require signed requests.
