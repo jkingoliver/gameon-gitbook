@@ -1,0 +1,8 @@
+= Getting Started
+:icons: font
+:toc:
+:toc-placement: preamble
+:toclevels: 1
+:sectanchors:
+
+This section describes the various security mechanisms used by Game On!.
