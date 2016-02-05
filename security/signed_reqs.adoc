@@ -115,8 +115,8 @@ TBD : Details of which APIs require signed requests.
 TBD : this needs it's own GitBook entry
 
 == References
-List of standard HTTP headers and well known non-standard ones :  https://tools.ietf.org/html/rfc7235
-How to define custom HTTP headers : http://tools.ietf.org/html/rfc6648
+1. List of standard HTTP headers and well known non-standard ones :  https://tools.ietf.org/html/rfc7235
+1. How to define custom HTTP headers : http://tools.ietf.org/html/rfc6648
 
 A quick note about custom HTTP headers. Originally it was recommended that custom headers start with x-, so this is why you see headers such as x-api-key and x-amz-date. However in the latest RFC, this has been changed to say that you should use something meaningful, and it no longer needs to be prefixed with x-. If you want to avoid potential name space clashes then try and use something unique to your application or organisation. So, this is why the GameOn custom HTTP headers do not start with x- (in case anyone asks).
 
