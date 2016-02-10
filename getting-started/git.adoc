@@ -42,3 +42,16 @@ If you end up using submodules in anger, consider the following:
 ** Safe(r) push: +
 `git config alias.spush 'push --recurse-submodules=check'`
 
+
+=== Other useful aliases
+
+Note global vs. project-specific, make up your own mind which to use.
+
+* Undo staged changes: +
+`git config --global alias.unstage 'reset HEAD --'`
+* See last commit: +
+`git config --global alias.last 'log -1 HEAD'`
+* Signed commits: +
+`git config alias.cs 'commit -s'` +
+If you're going to contribute code to Game On!, then you need to certify that you agree to the Developer's Certificate of Origin, as documented in our https://github.com/gameontext/gameon/blob/master/CONTRIBUTING.md#sign-your-work[Contribution guidelines]
+
