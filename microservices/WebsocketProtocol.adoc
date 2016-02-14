@@ -1,0 +1,33 @@
+# Asynchronous communication
+:icons: font
+:toc:
+:toc-placement: preamble
+:toclevels: 1
+:imagesdir: /images
+
+Game play messages require an asychronous transport. Any given message can contain a command, chat, or event, and must be able to flow in either direction. Some interactions (like `/go N`) have a request/response feel, but will be interspersed with other room- or player-generated events.
+
+
+## Websockets
+
+WebSockets are currently used for two communication links: between the Client (the player's web browser) and the Mediator, and between the Mediator and a Room. The two links are described separately below, but a characteristic of the protocol as a whole is to (as much as possible) allow the Mediator to pass messages along to the other link without having to inspect the contents.
+
+
+### Client <--> Mediator
+
+The websocket connection between the client and the mediator is made after the player has authenticated. As part of the authentication step, the client (WebUI) obtains a signed JWT and retrieves the user's id.
+
+. The client includes the user's id in the endpoint URI, and sends the signed JWT as a query parameter: 
+`wss://game-on.org/mediator/ws/:userid?jwt=:authToken`.
+
+. Mediator.`onOpen`: validates the signed JWT
+
+. Client.`onOpen` sends a `ready` message indicating it is ready to receive messages from the server. The ready message contains information about what the client knew last: 
+
+
+
+
+
+### Mediator <--> Room
+
+### Interaction Diagrams
