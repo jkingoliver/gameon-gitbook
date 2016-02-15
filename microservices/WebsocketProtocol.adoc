@@ -104,10 +104,11 @@ player,<playerId>,{
     "commands": { 
         "/custom" : "Description of what command does"
     },
+    "roomInventory": ["itemA","itemB"]
 }
 ----
 
-Note: "exits" and "commands" attributes can also be included with general room-sent events. This would allow you to change the description of doors or the text of commands based on room state, for example.
+Note: Some attributes, like "exits", "commands", and "roomInventory" can also be sent with other room events as a pseudo push notification
 
 
 #### Room -> Mediator -> Client, chat messages
