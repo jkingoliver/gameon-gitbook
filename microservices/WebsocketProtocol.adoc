@@ -67,10 +67,13 @@ The commands included in the `ack` are the common commands that are always suppo
 roomHello,<roomId>,{
     "username": "username",
     "userId": "<userId>",
+    "version": 1
 }
 ----
 
 Sent when a player joins or reconnects to a room.
+Version is the version of this websocket protocol selected by the mediator to use when communicating with the room. 
+Currently the only supported version is '1'
 
 #### Mediator -> Room, roomGoodbye message
 
@@ -86,6 +89,18 @@ Sent when a player leaves the room to go to another room, e.g. after a `/go *` o
 ### Messages sent by the Room
 
 Rooms can always broadcast everything to everyone. These messages have a place for the player id in the routing information. A specific player id or `*` can be used. The Mediator will filter based on the supplied player id when relaying events to clients.
+
+#### Room -> Mediator
+
+This packet should be sent when the websocket is opened, and indicates the possible versions of this websocket communication protocol supported by the indicated room implementation. 
+The version field is a list of number, and the only version supported by the mediator currently is '1' 
+
+----
+ack,{
+    "roomId": "current-room-id",
+    "version": [1]
+  }
+----
 
 #### Room --> Mediator --> Client, location message
 
