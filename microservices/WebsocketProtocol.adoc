@@ -92,12 +92,11 @@ Rooms can always broadcast everything to everyone. These messages have a place f
 
 #### Room -> Mediator
 
-This packet should be sent when the websocket is opened, and indicates the possible versions of this websocket communication protocol supported by the indicated room implementation. 
+This packet should be sent when the websocket is opened, and indicates the possible versions of this websocket communication protocol supported by the room (or rooms) behind this websocket endpoint.
 The version field is a list of number, and the only version supported by the mediator currently is '1' 
 
 ----
 ack,{
-    "roomId": "current-room-id",
     "version": [1]
   }
 ----
