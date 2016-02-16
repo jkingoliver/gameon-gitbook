@@ -11,6 +11,8 @@ While many of these characteristics are possible to achieve with traditional mon
 
 The digital business requires a new approach to developing and delivering applications, an approach that enables us to develop and continuously run complex applications, while ensuring they are easy to change with minimum risk and maximum frequency.  Digital business applications are also the face of the business so we must strive to make them highly resilient; we have entered the era of the agile anti fragile application and microservices.
 
+== Microservices in theory
+
 Microservices initially gained attention as the development approach being used by the large Internet companies such as Netflix, Google, Facebook and Twitter. We could say that microservices grew from solving the real world problems this type of digital only company faced making their key business asset, which are their applications highly resilient, scaling for global demand and being agile to change fast and frequently to keep them engaging.
 
 Now with wider adoption the approach has been refined through experience and the demands of different types of business. As a result microservices is now ready for prime time adoption, the challenges introduced with the microservices approach are well understood, the technology enabling the critical automation needed for microservices delivery has matured making success an attainable goal.
