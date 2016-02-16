@@ -48,7 +48,7 @@ The framework is really a collection of networking services, infrastructure serv
 
 With this basic understanding of microservices and the microservices framework lets take a look key services in more detail
 
- image::microservices-architecture.png[Microservices Architecture Framework]
+image::microservices-architecture.png[Microservices Architecture Framework]
 
 == Deployment run times
 With microservices the code, which makes up the service and the deployment run time are treated as one unit and are managed together through the full lifecycle of the service.  The microservice framework provides the provisioning of the run times and the deployment options which can place multiple instances of the service across different servers, regions, data centres.
