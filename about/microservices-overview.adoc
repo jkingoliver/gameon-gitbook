@@ -64,7 +64,7 @@ Fully-managed, hosted Docker container service.  Build the container with the ru
 ==== Virtual machines
 When you want complete control or customization of the environment, you can use the VM service to bring up any runtime configuration you like.
 
-=== Highly Available Cloud Data Services
+=== Highly-available cloud data services
 One of the challenges with microservices comes with how to store and manage state data, when multiple instances of the services may be running across the framework.
 
 Cloud data services provide highly available distributed data stores, configured with a primary and multiple secondary stores, which enable very high availability with a minimal impact on data consistency.  With IBM Cloud, you currently have the choice of the following highly-available, managed cloud data stores.
@@ -74,7 +74,7 @@ Cloud data services provide highly available distributed data stores, configured
 *	Mongo
 *	Etcd
 
-=== Developer Services
+=== Developer services
 Developer services provide the common capabilities needed to work in a microservices environment.  With IBM Cloud, the framework for microservices is built in and you have the following common services available as highly available managed services:
 
 ==== Service Discovery
@@ -120,7 +120,7 @@ Open Source container management products, such as Kubernetes and Docker Swarm, 
 
 With IBM Cloud, the Container service provides both a managed container runtime service and the associated management services allowing you to deploy and manage microservices, as Docker containers in highly available clusters.
 
-=== Integration Services
+=== Integration services
 IBM cloud provides a set of integration services, which can be used with microservices applications.   These services provide easy ways for a microservices-based application to securely connect back to the enterprise to access data and services, or to manage how our microservices application is exposed as an API to external parties.
 
 ==== The Secure Gateway Service
