@@ -1,0 +1,126 @@
+== Microservices architecture and the microservices framework
+With the rise of the digital business, the demand for new applications has never been greater.  New applications which engage users, which become the digital channel, which need to be always on, ready to receive business at any time, from any user, from any place.  The digital business is itself continuously evolving as it strives to be the disrupter rather than the disrupted in its market, which means the new digital channel applications, must thrive in these dynamic business environments where fast and frequent change is the norm.
+
+While many of these characteristics are possible to achieve with traditional monolithic architectures, doing so and achieving the balance of all of them together tends to be difficult to accomplish consistently
+
+The digital business requires a new approach to developing and delivering applications, an approach that enables us to develop and continuously run complex applications, while ensuring they are easy to change with minimum risk and maximum frequency.  Digital business applications are also the face of the business so we must strive to make them highly resilient; we have entered the era of the agile anti fragile application and microservices.
+
+Microservices initially gained attention as the development approach being used by the large Internet companies such as Netflix, Google, Facebook and Twitter. We could say that microservices grew from solving the real world problems this type of digital only company faced making their key business asset, which are their applications highly resilient, scaling for global demand and being agile to change fast and frequently to keep them engaging.
+
+Now with wider adoption the approach has been refined through experience and the demands of different types of business. As a result microservices is now ready for prime time adoption, the challenges introduced with the microservices approach are well understood, the technology enabling the critical automation needed for microservices delivery has matured making success an attainable goal.
+
+While there is no formal standards body definition for microservices we can describe it in a nutshell as an application architecture where a single application is composed of suite of a small services or microservices, which have the following characteristics:
+
+* Services are autonomous, enabling independent update and deployment
+*	Services are defined by business capabilities
+*	Services run in their own process
+*	Services communicate over the light weight network protocols
+*	Services are choreographed or orchestrated together to form the application
+*	Polyglot run times enable use of the best language for the service task
+*	Polyglot persistence use the best data storage for the service task
+
+It is also useful to keep in mind the three key factors of the outcome of microservices, where decomposition into microservices makes our application
+
+*	Resilient – Will survive component failure with minimum end user impact
+*	Agile– Enables fast and frequent change with minimum risk
+*	Scalable –Will automatically scale up to meet global demands
+
+=== Microservices in action
+As we have seen the microservices architecture decomposes applications into smaller autonomous or loosely coupled services with potentially large numbers of services needing to be deployed and managed to make up a single complete business application.
+
+While the microservices architecture gives us the potential to develop applications with the Resilience, Agility and Cloud scale characteristics required, it is only possible to realise this potential by having the right environment to deploy, operate and manage these services, throughout their complete lifecycle.
+
+These needs have lead to the creation and adoption of frameworks for microservices.  The frameworks provide a complete deployment and management environment with very high levels of automation making the microservices approach a viable proposition.
+
+Frameworks can be assembled from Open Source Components, such as Docker for container run times, Kubernetes, for container management The ELK stack for logging and monitoring, etc.  or alternatively PaaS offerings like Cloud Foundry can provide the essential elements of a framework for microservices in a single package.
+
+_But what makes up the framework?_
+
+The framework is really a collection of networking services, infrastructure services and automation tools, which have been integrated and made available with the same concerns for resilience and scale that we have with our microservices applications.
+
+With this basic understanding of microservices and the microservices framework lets take a look key services in more detail
+
+ image::microservices-architecture.png[Alt text]
+
+=== Deployment run times
+With microservices the code, which makes up the service and the deployment run time are treated as one unit and are managed together through the full lifecycle of the service.  The microservice framework provides the provisioning of the run times and the deployment options which can place multiple instances of the service across different servers, regions, data centres.
+
+IBM cloud enables you to choose the best type of run time to match the need, your skills and existing capabilities.  This includes
+
+==== Cloud Foundry instant runtimes:
+Fully automatic build, deploy and scaling of polyglot run times, e.g. Java, Node.JS, Go. Just add your microservices code
+
+==== Containers:
+Fully managed Docker container service.  Build the container with the run time required and add your microservices code.  Deploy and manage the container through the container service.
+
+==== Virtual machines:
+Where you want complete control or customisation of the environment you can use the VM service to bring up any runtime configuration you like.
+
+=== Highly Available Cloud Data Services
+One of the challenges with Microservices comes with how to store and manage state data, when multiple instances of the services may be running across the framework.
+
+Cloud Data Services provide highly available distributed data stores, configured with a primary and multiple secondary stores, which enable very high availability with a minimal impact on data consistency.  With IBM cloud you currently have the choice of the following highly available managed cloud data stores.
+
+*	Cloudant
+*	Redis
+*	Mongo
+*	Etcd
+
+=== Developer Services
+Developer services provide the common capabilities needed to work in a microservices environment.  With IBM cloud the framework for microservices is built in and you have the following common services available as highly available managed services:
+
+==== Service Discovery
+As microservices startup they register themselves with the Service discovery service advertising themselves as available.   Routers/load balancers can then distribute calls to the services instances, which are available, based on load balancing profiles.
+
+==== Configuration Store / Configuration Management
+With the distributed nature of micro services configuration information needs to be externalised into highly available data stores. This allows service instances to start up and read their configuration information where ever and when ever they are started.
+With IBM cloud the highly available cloud data stores such as etcd, Redis and Cloudant are available to be used as configuration stores.
+
+==== Continuous Integration / Continuous Delivery
+To be truly agile with microservices requires that we automate as much of the process for the development, testing and deployment of microservices.  This requires us to build our tooling for Continuous Integration/Continuous delivery into the framework.
+
+==== Automated Testing
+With microservices the best practise approach is to test our applications and environments while forcing failures of underlying components and services.  Testing in this way ensures that we have automatic recovery and resilience built into our microservices.
+
+=== Infrastructure services
+
+==== Logging and Monitoring
+With the distributed nature of microservices we need to be able to collect and collate log and monitoring information from all the instances of all the microservices, which make up our systems  By bringing them together in a central place we can trace activities passing through the system and monitor the performance of the overall system.
+
+The ELK stack - Elastisearch, LogStash and Kibana - has become the default solution for logging and monitoring microservices solutions.
+
+With IBM cloud, the LogMet service provides a fully-managed logging and monitoring service based implementing a highly available ELK stack architecture as a service.
+
+==== Router and Load balancer
+To make microservices resilient and scalable requires us to run multiple instances of a service, with services deployed across servers and or regions if we want to provide the highest resilience by coping with component failure.
+
+==== Asynchronous communication with a Message Bus
+Latency can be come a significantly challenge with the microservices approach, if every inter service call is blocking waiting for a response the additive delays can be significant.
+
+This challenge leads to many people following an asynchronous or messaging based protocol for inter microservice communication.
+
+Messaging also opens up the opportunity for event driven microservices with publish subscribe capabilities.
+
+The Message Bus must also have the resilience and agility characteristics of microservices; this frequently leads to the adoption of Kafka as a highly available and scalable open source message bus.
+
+With IBM cloud the MessageHub service provides a fully managed message bus based on Kafka.
+
+==== Container management
+While containers provide an easy to assemble environment of run times, with the logic for a microservice there is also a need to be able to manage and orchestrate the deployed containers running as highly available clusters.
+
+Open Source container management products such as Kubernetes, and Docker Swarm, are often used to provide these management functions when building a microservices framework from scratch.
+
+With IBM cloud the Container service provides both a managed container run time service and the associated management services allowing you to deploy and manage microservices as Docker containers in highly available clusters.
+
+=== Integration Services
+IBM cloud provides a set of integration services, which can be used with microservices applications.   These services provide easy ways for a microservices based application to securely connect back to the enterprise to access data and services,  or to manage  how our microservices application is exposed as an API to external parties.
+
+==== The Secure Gateway Service
+The Secure Gateway Service brings Hybrid Integration capability to your microservice applications. It provides secure connectivity to applications and data sources running on-premise or in other clouds.
+
+==== Cloud Integration Services
+Cloud Integration services enable you to rapidly interact with data sources and which are outside of the IBM cloud microservices environment. Connecting to the data sources over the Secure Gateway service, cloud integration enables rapid creation of Rest API’s, which can be called to access the data
+
+==== The API Management Service
+The API Management service enables developers and organizations to manage and enforce policies around the consumption of their business services.  In many cases the function behind our business API’s will be implemented as microservices, we don’t however want to directly expose the microservices outside of our business.
+Instead we use the API management service to apply security controls, set rate limits, test APIs in place, and finally publish these "managed APIs” with documentation and support forums to the relevant communities.
