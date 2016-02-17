@@ -1,16 +1,11 @@
-# Asynchronous communication
+# Websockets
 :icons: font
 :toc:
 :toc-placement: preamble
 :toclevels: 3
 :imagesdir: /images
 
-Game play messages require an asychronous transport. Any given message can contain a command, chat, or event, and must be able to flow in either direction. Some interactions (like `/go N`) have a request/response feel, but will be interspersed with other room- or player-generated events.
-
-
-## Websockets
-
-WebSockets are currently used for two communication links: between the Client (the player's web browser) and the Mediator, and between the Mediator and a Room. 
+Websockets are currently used for two communication links: between the Client (the player's web browser) and the Mediator, and between the Mediator and a Room. 
 
 The protocol used by Game On! is text (rather than binary), and uses a simple comma-delimeted header followed by a JSON payload, `just,like,{"this": "ok?"}`. 
 The Mediator is playing man-in-the-middle, and the goal is to allow as much message routing as possible to happen without requiring the Mediator to look at the JSON data.
@@ -90,16 +85,17 @@ Sent when a player leaves the room to go to another room, e.g. after a `/go *` o
 
 Rooms can always broadcast everything to everyone. These messages have a place for the player id in the routing information. A specific player id or `*` can be used. The Mediator will filter based on the supplied player id when relaying events to clients.
 
-#### Room -> Mediator
+#### Room -> Mediator, acknowledgement (ack) with version
 
-This packet should be sent when the websocket is opened, and indicates the possible versions of this websocket communication protocol supported by the room (or rooms) behind this websocket endpoint.
-The version field is a list of number, and the only version supported by the mediator currently is '1' 
+This packet should be sent when the websocket is opened, and indicates the possible versions of this websocket communication protocol supported by the room (or rooms) behind this websocket endpoint. 
 
 ----
 ack,{
     "version": [1]
   }
 ----
+
+The version field is a list of number, and the only version supported by the mediator currently is '1'.
 
 #### Room --> Mediator --> Client, location message
 
@@ -122,7 +118,7 @@ player,<playerId>,{
 }
 ----
 
-Note: Some attributes, like "exits", "commands", and "roomInventory" can also be sent with other room events as a pseudo push notification
+Note: Some attributes, like "exits", "commands", and "roomInventory" can also be sent with other room events as a pseudo-push notification
 
 
 #### Room -> Mediator -> Client, chat messages
