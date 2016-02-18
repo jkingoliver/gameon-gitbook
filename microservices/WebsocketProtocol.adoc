@@ -10,6 +10,9 @@ Websockets are currently used for two communication links: between the Client (t
 The protocol used by Game On! is text (rather than binary), and uses a simple comma-delimeted header followed by a JSON payload, `just,like,{"this": "ok?"}`. 
 The Mediator is playing man-in-the-middle, and the goal is to allow as much message routing as possible to happen without requiring the Mediator to look at the JSON data.
 
+Events (chat and otherwise) will need to be sent to all of the connected websocket sessions for people to see they are all in the same room. *To simplify the room logic, the room can always broadcast to all connected sockets*. The mediator will filter what is sent to the client based on player id in the outer envelope. 
+
+
 ### Messages sent by the client
 
 #### Client -> Mediator, ready message
