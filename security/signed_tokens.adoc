@@ -10,8 +10,8 @@ This is the definition of how signed tokens are used by GameOn. It details how t
 
 == Signed tokens using HTTP/REST
 GameOn uses signed JSON web tokens (JWT) to transfer data between entities.
-Server code is processed using (Java JWT: JSON Web Token for Java)[https://github.com/jwtk/jjwt]
-Browser uses (jsrsasign)[http://kjur.github.io/jsrsasign/] to validate JWT's that it receives.
+Server code is processed using [Java JWT: JSON Web Token for Java](https://github.com/jwtk/jjwt)
+Browser uses [jsrsasign](http://kjur.github.io/jsrsasign/) to validate JWT's that it receives.
 
 == How GameOn parses signed tokens
 When a GameOn component requires a signed token it performs the following validation and verification.
@@ -27,7 +27,11 @@ Signed tokens are passed as a query string parameter.
 The query parameter is base 64 encoded :
 
 ```
-eyJraWQiOiJwbGF5ZXJzc2wiLCJhbGciOiJSUzI1NiJ9.eyJuYW1lIjoiZmlzaCIsImlkIjoiZHVtbXkuZmlzaCIsInN1YiI6ImR1bW15LmZpc2giLCJhdWQiOiJjbGllbnQiLCJpYXQiOjE0NTU3Mjc0NjEsImV4cCI6MTQ1NTkwMDI2MX0.OM6jOpx0xnj_Hfojttlz2fWmztkS7EY2pHVttHaQuSPW-b0zwn9G3XN5b1rleavRSpQ-CPOfYhfyQuO2JaSfzkoEZbOaqRSEGEKZo3DE4jG8cOciEsgldd487j4AoY1_NnjAYMH5yDI9jtMAiiYjMty1dq5YP3UIt4mac1GOx5FPE8Lr35e9uMKT8eqWQUXRl3feJIz26kTsF2HL6guSK1AumUTMpLQFGH0MENIJQtL_5SOHKbMnPmk6gNkZcSb6LN_sVCf1KilqyIm1OCTylV8yq8YN5AT9vOQP3lwrFvyKYlOulTI4Gs_-inO5y3VbWzsvvcIlhecaEcCYqb6E6Q
+eyJraWQiOiJwbGF5ZXJzc2wiLCJhbGciOiJSUzI1NiJ9.eyJuYW1lIjoiZmlzaCIsImlkIjoiZHVtbXkuZmlzaCIsInN1YiI6ImR1bW15LmZpc2giLCJhdWQiOi
+JjbGllbnQiLCJpYXQiOjE0NTU3Mjc0NjEsImV4cCI6MTQ1NTkwMDI2MX0.OM6jOpx0xnj_Hfojttlz2fWmztkS7EY2pHVttHaQuSPW-b0zwn9G3XN5b1rleavRS
+pQ-CPOfYhfyQuO2JaSfzkoEZbOaqRSEGEKZo3DE4jG8cOciEsgldd487j4AoY1_NnjAYMH5yDI9jtMAiiYjMty1dq5YP3UIt4mac1GOx5FPE8Lr35e9uMKT8eqW
+QUXRl3feJIz26kTsF2HL6guSK1AumUTMpLQFGH0MENIJQtL_5SOHKbMnPmk6gNkZcSb6LN_sVCf1KilqyIm1OCTylV8yq8YN5AT9vOQP3lwrFvyKYlOulTI4Gs_
+-inO5y3VbWzsvvcIlhecaEcCYqb6E6Q
 ```
 
 When decoded, this gives a header of 
@@ -56,12 +60,12 @@ and a payload of
 GameOn JWTs are created and signed according to the method described at http://jwt.io/introduction/ : 'Which is the JSON Web Token Structure'.
 The claims used as those specified by https://tools.ietf.org/html/rfc7519#section-4.1.
 
-Note : unless otherwise staties, GameOn uses RS256 as the signature algorithm.
+Note : unless otherwise staties, GameOn uses *RS256* as the signature algorithm.
 
 == Useful links
 
-Testing your JWT : http://jwt.io/#debugger-io
-Browser JS for working with JWT's, jsrsasign : http://kjur.github.io/jsrsasign/
-Server side JTW processing with JJWT : https://github.com/jwtk/jjwt
-JSON Web Token RFC : https://tools.ietf.org/html/rfc7519
+* Testing your JWT : http://jwt.io/#debugger-io
+* Browser JS for working with JWT's, jsrsasign : http://kjur.github.io/jsrsasign/
+* Server side JTW processing with JJWT : https://github.com/jwtk/jjwt
+* JSON Web Token RFC : https://tools.ietf.org/html/rfc7519
 
