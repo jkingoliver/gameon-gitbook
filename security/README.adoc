@@ -5,4 +5,46 @@
 :toclevels: 1
 :sectanchors:
 
-This section describes the various security mechanisms used by Game On!.
+GameOn has a number of general security requirements
+
+* Security requirement A : Identify the user.
+* Security requirement B : Prevent data alteration in transit.
+* Security requirement C : Prevent replay attacks.
+
+These are satisfied by the use of 
+
+* Encrypting data with shared secrets
+* Digital signatures
+
+The implementation within GameOn is via
+
+* JSON Web Tokens (JWT)
+* API keys
+
+== JSON Web Tokens (JWT)
+
+Taken from https://tools.ietf.org/html/rfc7519
+
+```
+   JSON Web Token (JWT) is a compact, URL-safe means of representing
+   claims to be transferred between two parties.  The claims in a JWT
+   are encoded as a JSON object that is used as the payload of a JSON
+   Web Signature (JWS) structure or as the plaintext of a JSON Web
+   Encryption (JWE) structure, enabling the claims to be digitally
+   signed or integrity protected with a Message Authentication Code
+   (MAC) and/or encrypted.
+ ```
+
+GameOn typically uses JWTs to authorise actions on behalf of the user. In a microservices architecture, service to service
+communication i.e. API invocation, will be performed by a service acting as a user. The JWT standard contains headers for
+identifying the user and the actions they are entitled to perform e.g. delete a resource or register a new end point. The
+use of signed JWTs allows GameOn to be sure that the token has not been modified as it is passed between services.
+
+== Signed requests
+
+Signed requests are used to validate and authorise service to service API invocation. This ensures that a given service
+cannot arbitrarily call another service i.e. the room service cannot directly call or interact with the player service.
+Trust is achieved through the use of a shared secret, which in the case of GameOn is the developers API key, to create
+a HMAC (https://en.wikipedia.org/wiki/Hmac) signature. It makes no assertions about the data being passed, only that it 
+hasn't changed in transit.
+ 
