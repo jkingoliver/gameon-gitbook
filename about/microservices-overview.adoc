@@ -1,4 +1,4 @@
-= Microservices architecture and the microservices framework
+= Microservices in theory
 :icons: font
 :toc:
 :toc-placement: preamble
