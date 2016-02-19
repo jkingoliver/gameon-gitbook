@@ -7,8 +7,8 @@ _You are in a maze of little interconnected rooms, none alike._
 
 Game On! is a both a sample microservices application and throwback text adventure brought to you by the https://wasdev.net[wasdev] team at IBM.
 
-It aims to enable exploration of microservice architectures from two points of view:
+*It aims to enable exploration of microservice architectures from two points of view*:
 
-* As a Player: Naviagate through a network/maze of rooms, where each room is a unique implementation of a common API. Each room will do different things depending on the whim of the room developer. 
+* *As a Player*: On one hand, you can be entertained by the creativity of other peer developers, on the other hand, you can navigate a distributed system exit by exit. 
 
-* As a Developer: Learn about microservice architectures and supporting infrastructure by extending the game with your own services. Write additional rooms to see how they interact with the rest of the system and to experiment with different strategies for building resilient distributed systems.
+* *As a Developer*: Learn about microservice architectures and supporting infrastructure by extending the game with your own services. Write additional rooms to see how they interact with the rest of the system and to experiment with different strategies for building resilient distributed systems.
