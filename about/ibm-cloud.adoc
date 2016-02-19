@@ -1,2 +1,94 @@
-# Microservices in practice at IBM
+= Microservices in practice at IBM
+:icons: font
+:toc:
+:toc-placement: preamble
+:toclevels: 2
+:imagesdir: /images
 
+{empty}
+
+{toc}
+
+
+=== Deployment runtimes
+With microservices, the code which makes up the service and the deployment runtime are treated as one unit and are managed together through the full lifecycle of the service.  The microservice framework provides the provisioning of the runtimes and the deployment options which can place multiple instances of the service across different servers, regions, and datacenters.
+
+IBM Cloud enables you to choose the best type of run time to match the need, your skills and existing capabilities.  This includes the following:
+
+==== Cloud Foundry instant runtimes
+Fully automatic build, deploy and scaling of polyglot runtimes, e.g. Java, Node.JS, Go. Just add your microservices code.
+
+==== Containers
+Fully-managed, hosted Docker container service.  Build the container with the runtime required and add your microservices code.  Deploy and manage the container through the container service.
+
+==== Virtual machines
+When you want complete control or customization of the environment, you can use the VM service to bring up any runtime configuration you like.
+
+=== Highly-available cloud data services
+One of the challenges with microservices comes with how to store and manage state data, when multiple instances of the services may be running across the framework.
+
+Cloud data services provide highly available distributed data stores, configured with a primary and multiple secondary stores, which enable very high availability with a minimal impact on data consistency.  With IBM Cloud, you currently have the choice of the following highly-available, managed cloud data stores.
+
+*	Cloudant
+*	Redis
+*	Mongo
+*	Etcd
+
+=== Developer services
+Developer services provide the common capabilities needed to work in a microservices environment.  With IBM Cloud, the framework for microservices is built in and you have the following common services available as highly available managed services:
+
+==== Service Discovery
+As microservices startup they register themselves with the Service Discovery service advertising themselves as available.   Routers & load balancers can then distribute calls to the services instances, which are available, based on load balancing profiles.
+
+==== Configuration Store / Configuration Management
+With the distributed nature of microservices, configuration information needs to be externalized into highly-available data stores. This allows service instances to start up and read their configuration information where ever and when ever they are started.
+With IBM Cloud, the highly available cloud data stores such as etcd, Redis and Cloudant are available to be used as configuration stores.
+
+==== Continuous Integration / Continuous Delivery
+To be truly agile with microservices requires that we automate as much of the process for the development, testing and deployment of microservices.  This requires us to build our tooling for Continuous Integration and Continuous Delivery into the framework.
+
+==== Automated Testing
+With microservices the best practice approach is to test our applications and environments while forcing failures of underlying components and services.  Testing in this way ensures that we have automatic recovery and resilience built into our microservices.
+
+=== Infrastructure services
+
+==== Logging and Monitoring
+With the distributed nature of microservices, we need to be able to collect and collate log and monitoring information from all the instances of all the microservices, which make up our systems  By bringing them together in a central place we can trace activities passing through the system and monitor the performance of the overall system.
+
+The ELK stack - Elasticsearch, LogStash and Kibana - has become the default solution for logging and monitoring microservices solutions.
+
+With IBM Cloud, the LogMet service provides a fully-managed logging and monitoring service, based on implementing a highly-available ELK stack as a service.
+
+==== Router and Load balancer
+To make microservices resilient and scalable requires us to run multiple instances of a service, with services deployed across servers and/or regions if we want to provide the highest resilience by coping with component failure.
+
+==== Asynchronous communication with a Message Bus
+Latency can become a significant challenge with the microservices approach, if every inter-service call is blocking waiting for a response, then the additive delays can be significant.
+
+This challenge leads to many people following an asynchronous or messaging-based protocol for inter-microservice communication.
+
+Messaging also opens up the opportunity for event-driven microservices with publish/subscribe capabilities.
+
+The Message Bus must also have the resilience and agility characteristics of microservices; this frequently leads to the adoption of Kafka as a highly available and scalable open source message bus.
+
+With IBM Cloud, the MessageHub service provides a fully-managed message bus, based on Kafka.
+
+==== Container management
+While containers provide an easy to assemble environment of runtimes, with the logic for a microservice there is also a need to be able to manage and orchestrate the deployed containers running as highly available clusters.
+
+Open Source container management products, such as Kubernetes and Docker Swarm, are often used to provide these management functions when building a microservices framework from scratch.
+
+With IBM Cloud, the Container service provides both a managed container runtime service and the associated management services allowing you to deploy and manage microservices, as Docker containers in highly available clusters.
+
+=== Integration services
+IBM cloud provides a set of integration services, which can be used with microservices applications.   These services provide easy ways for a microservices-based application to securely connect back to the enterprise to access data and services, or to manage how our microservices application is exposed as an API to external parties.
+
+==== The Secure Gateway Service
+The Secure Gateway Service brings Hybrid Integration capability to your microservice applications. It provides secure connectivity to applications and data sources running on-premises or in other clouds.
+
+==== Cloud Integration Services
+Cloud Integration services enable you to rapidly interact with data sources and which are outside of IBM Cloud's microservices environment. Connecting to the data sources over the Secure Gateway service, cloud integration enables rapid creation of REST API’s, which can be called to access the data
+
+==== The API Management Service
+The API Management service enables developers and organizations to manage and enforce policies around the consumption of their business services.  In many cases, the function behind our business API’s will be implemented as microservices, we don’t however want to directly expose the microservices outside of our business.
+Instead we use an API management service to apply security controls, set rate limits, test APIs in place, and finally publish these "managed APIs” with documentation and support forums to the relevant communities.

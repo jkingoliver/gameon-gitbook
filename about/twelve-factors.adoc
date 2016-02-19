@@ -5,13 +5,11 @@
 :toclevels: 2
 :imagesdir: /images
 
-{empty}
-
 {toc}
 
 == Overview
 
-
+The microservices approach for building (or decomposing) complex applications has received a lot of attention because it can bring so many benefits. Small teams work independently on different parts of the application, moving their standalone piece from development to production at their own pace via a devOps/self-service deployment infrastructure.
 
 Given all of this, are there best practices for creating microservices? The 12-factor application methodology is one frequently referenced approach. It defines 12 factors that services should follow to build portable, resilient applications for cloud environments (SaaS). To quote, 12-factor applications:
 
