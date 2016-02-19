@@ -10,7 +10,7 @@
 
 ## Objective (for a player)
 
-The only objective is to be intertained. Roam from room to room, see what other developers have created. There may be puzzles to solve, riddles to answer, cryptic speech to decipher, whatever!
+The only objective is to be entertained. Roam from room to room, see what other developers have created. There may be puzzles to solve, riddles to answer, cryptic speech to decipher, whatever!
 
 You should be able to chat with other people in the room with you, though there may be limitations based on how the room is implemented. For what it is worth, this variability is very much part of the game.
 

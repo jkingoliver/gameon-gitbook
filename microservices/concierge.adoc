@@ -17,10 +17,10 @@ The typical method of controlling runtime configuration of Docker-based services
 The concierge service utilizes the following environment variables:
 
 * *LICENSE*: Required by the https://hub.docker.com/_/websphere-liberty/[IBM WebSphere Liberty Docker Image], set this environment variable to `accept` to demonstrate that you accept the Liberty and IBM JDK licenses.
-* *REGISTRATION_SECRET*: A secret key shared between concierge and services who are allowed to register rooms (such as link:./room.adoc[Room Service], and link:./room-nodejs.adoc[Room Node.js Service]). Set this value in concierge and then use it in other services.
-* *QUERY_SECRET*: A secret key shared between concierge and services who query concierge for information about rooms (such as link:./player.adoc[Player Service]).
+* *REGISTRATION_SECRET*: A secret key shared between concierge and services who are allowed to register rooms (such as link:../microservices/room.adoc[Room Service], and link:../microservices/room-nodejs.adoc[Room Node.js Service]). Set this value in concierge and then use it in other services.
+* *QUERY_SECRET*: A secret key shared between concierge and services who query concierge for information about rooms (such as link:../microservices/player.adoc[Player Service]).
 
-* *ETCDCTL_ENDPOINT* (optional): The http-accessible endpoint for an etcd member with configuration for Game On! services. See link:./using_etcd.adoc[using etcd] for more information.
+* *ETCDCTL_ENDPOINT* (optional): The http-accessible endpoint for an etcd member with configuration for Game On! services. See link:../about/using_etcd.adoc[using etcd] for more information.
 
 This is a service to manage the various rooms available in a game.  
 
