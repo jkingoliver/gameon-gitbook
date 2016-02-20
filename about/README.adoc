@@ -1,0 +1,13 @@
+
+= Microservces Application Architecture
+:icons: font
+:toc:
+:toc-placement: preamble
+:toclevels: 2
+:imagesdir: /images
+
+With the rise of the digital business, the demand for new applications has never been greater.  New applications which engage users, which become the digital channel, which need to be always on, ready to receive business at any time, from any user, from any place.  The digital business is itself continuously evolving as it strives to be the disrupter rather than the disrupted in its market, which means the new digital channel applications, must thrive in these dynamic business environments where fast and frequent change is the norm.
+
+While many of these characteristics are possible to achieve with traditional monolithic architectures, doing so and achieving the balance of all of them together tends to be difficult to accomplish consistently.
+
+The digital business requires a new approach to developing and delivering applications, an approach that enables us to develop and continuously run complex applications, while ensuring they are easy to change with minimum risk and maximum frequency.  Digital business applications are also the face of the business so we must strive to make them highly resilient; we have entered the era of the agile, anti-fragile application and microservices.
