@@ -1,0 +1,22 @@
+# Core Architectural Elements
+:icons: font
+:toc:
+:toc-placement: preamble
+:toclevels: 2
+:imagesdir: /images
+
+As we have seen, a microservices architecture decomposes applications into loosely-coupled, autonomous units, with a potentially large numbers of services needing to be deployed and managed to make up a single complete business application.
+
+While this architecture gives us the potential to develop applications with the resilience, agility and cloud scale characteristics required, it is only possible to realize this potential by having the right environment to deploy, operate, and manage these services throughout their complete lifecycle.
+
+These needs have lead to the creation and adoption of frameworks for microservices.  The frameworks provide a complete deployment and management environment with very high levels of automation, making the microservices approach a viable proposition.
+
+Frameworks can be assembled from Open Source components, such as Docker for container runtimes, Kubernetes for container management, the ELK stack for logging and monitoring; or alternatively PaaS offerings like Cloud Foundry can provide the essential elements of a framework for microservices in a single package.
+
+_But what makes up the framework?_
+
+The framework is really a collection of networking services, infrastructure services and automation tools, which have been integrated and made available with the same concerns for resilience and scale that we have with our microservices applications.
+
+With this basic understanding of microservices and the microservices framework lets take a look key services in more detail below:
+
+image::microservices-architecture.png[Microservices Architecture Framework]
