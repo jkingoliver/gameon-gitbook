@@ -1,15 +1,19 @@
 {
-	"gitbook": "2.x.x",
-	"plugins": [
-		"addcssjs",
-		"github"
-	],
-	"pluginsConfig": {
-		"github": {
-			"url": "https://github.com/gameontext"
-		},
-		"addcssjs": {
-			"css": ["styles/admonition.css"]
-		}
-	}
+    "gitbook": "2.x.x",
+    "plugins": [
+        "addcssjs",
+        "github",
+        "heading-anchors",
+        "include"
+    ],
+    "pluginsConfig": {
+        "addcssjs": {
+            "css": [
+                "styles/admonition.css"
+            ]
+        },
+        "github": {
+            "url": "https://github.com/gameontext"
+        }
+    }
 }
