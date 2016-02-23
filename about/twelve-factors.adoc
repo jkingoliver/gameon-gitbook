@@ -6,6 +6,7 @@
 :imagesdir: /images
 :chronicles: link:../chronicles/README.adoc
 :monorepo: http://danluu.com/monorepo/
+:wasliberty: http://wasdev.net/
 
 
 {toc}
@@ -48,6 +49,17 @@ If you set up your repository or repositories and build/deployment pipelines to 
 == Factor 2 – Dependencies
 
 “Explicitly declare and isolate dependencies”
+
+All of the services that comprise Game On! have dependencies: 
+
+* The Java-based services use {wasliberty}[WebSphere Liberty], and several require a unique subset of additional features to perform their functions.
+* The front-end JavaScript application has its set of dependencies, from build-time things like npm and grunt, to runtime things like Angular.
+
+For this factor, it is about making sure that these dependencies are explicit rather than implicit, right down to the Operating System.
+
+
+Rebelling from what often happened in traditional environments, where an app would be developed, and then run in another environment managed separately that wouldn't have the right version of perl, or the ,.. 
+
 
 In our sample application we have dependencies on certain Liberty features, more specifically servlet-3.1, jsonp-1.0 and jaxrs-2.0. Our application must pull down all of the dependencies it requires during the build process. To build this sample we have provided two options: Maven and Gradle. In both cases you declare the dependencies in the build file (pom.xml for Maven or build.gradle for Gradle) and the required packages are downloaded from Maven Central Repository at build time to compile the code. The packaging step uses the Maven or Gradle Liberty plug-ins to pull down a Liberty runtime from the Liberty Repository and produces a packaged Liberty server containing the server configuration and a WAR file with the compiled application code. As a result the application does not have any dependencies that it assumes will already exist on the system.
 
