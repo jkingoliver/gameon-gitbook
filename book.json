@@ -4,7 +4,10 @@
         "addcssjs",
         "github",
         "heading-anchors",
-        "include"
+        "include",
+        "edit-link",
+        "youtube",
+        "js-sequence-hand-diagram"
     ],
     "structure": {
         "readme": "README.adoc"
