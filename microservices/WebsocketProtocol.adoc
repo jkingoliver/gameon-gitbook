@@ -1,21 +1,21 @@
-# Websockets
+= Websockets
 :icons: font
-:toc:
-:toc-placement: preamble
+:toc: preamble
 :toclevels: 3
 :imagesdir: /images
 
 Websockets are currently used for two communication links: between the Client (the player's web browser) and the Mediator, and between the Mediator and a Room. 
+
+== The WebSocket Protocol
 
 The protocol used by Game On! is text (rather than binary), and uses a simple comma-delimeted header followed by a JSON payload, `just,like,{"this": "ok?"}`. 
 The Mediator is playing man-in-the-middle, and the goal is to allow as much message routing as possible to happen without requiring the Mediator to look at the JSON data.
 
 Events (chat and otherwise) will need to be sent to all of the connected websocket sessions for people to see they are all in the same room. *To simplify the room logic, the room can always broadcast to all connected sockets*. The mediator will filter what is sent to the client based on player id in the outer envelope. 
 
+== Messages sent by the client
 
-### Messages sent by the client
-
-#### Client -> Mediator, ready message
+=== Client -> Mediator, ready message
 
 ----
 ready,{
@@ -27,7 +27,7 @@ ready,{
 Note that the data in the ready message is what the client had cached. It is used to determine whether or not history replay applies.
 
 
-#### Client -> Mediator -> Room, chat/command message
+==== Client -> Mediator -> Room, chat/command message
 
 ----
 room,<roomId>,{
@@ -40,9 +40,9 @@ The target room id is sent as part of the comma-delimited header so that the med
 
 The content sent from the client is a single text line (just as the player entered it). If it begins with `/`, it is a command; if it doesn't, it's just chatter.
 
-### Messages sent by the Mediator
+== Messages sent by the Mediator
 
-#### Mediator -> Client, acknowledgement (ack) message
+=== Mediator -> Client, acknowledgement (ack) message
 
 ----
 ack,{
@@ -59,7 +59,7 @@ Sent when the connection between the client and the mediator is first establishe
 
 The commands included in the `ack` are the common commands that are always supported.
 
-#### Mediator -> Room, roomHello message
+=== Mediator -> Room, roomHello message
 
 ----
 roomHello,<roomId>,{
@@ -73,7 +73,7 @@ Sent when a player joins or reconnects to a room.
 Version is the version of this websocket protocol selected by the mediator to use when communicating with the room. 
 Currently the only supported version is '1'
 
-#### Mediator -> Room, roomGoodbye message
+=== Mediator -> Room, roomGoodbye message
 
 ----
 roomHello,<roomId>,{
@@ -84,11 +84,11 @@ roomHello,<roomId>,{
 
 Sent when a player leaves the room to go to another room, e.g. after a `/go *` or `/sos` command.
 
-### Messages sent by the Room
+== Messages sent by the Room
 
 Rooms can always broadcast everything to everyone. These messages have a place for the player id in the routing information. A specific player id or `*` can be used. The Mediator will filter based on the supplied player id when relaying events to clients.
 
-#### Room -> Mediator, acknowledgement (ack) with version
+=== Room -> Mediator, acknowledgement (ack) with version
 
 This packet should be sent when the websocket is opened, and indicates the possible versions of this websocket communication protocol supported by the room (or rooms) behind this websocket endpoint. 
 
@@ -100,7 +100,7 @@ ack,{
 
 The version field is a list of number, and the only version supported by the mediator currently is '1'.
 
-#### Room --> Mediator --> Client, location message
+=== Room --> Mediator --> Client, location message
 
 Send information about the room to the client. This message is sent after receiving a `roomHello`.
 
@@ -124,7 +124,7 @@ player,<playerId>,{
 Note: Some attributes, like "exits", "commands", and "roomInventory" can also be sent with other room events as a pseudo-push notification
 
 
-#### Room -> Mediator -> Client, chat messages
+=== Room -> Mediator -> Client, chat messages
 
 ----
 player,*,{...}
@@ -138,7 +138,7 @@ player,*,{...}
 
 Content is a simple string containing the chat message.
 
-#### Room -> Mediator -> Client, Event message
+=== Room -> Mediator -> Client, Event message
 
 ----
 player,<playerId>,{
@@ -178,7 +178,7 @@ player,*,{
 }
 ----
 
-#### Room -> Mediator -> Client, playerLocation message
+=== Room -> Mediator -> Client, playerLocation message
 
 Indicates that a player can leave by the requested exit (`exitId`). The `exit` attribute, if present, should return the exit details as returned by the map API. The `exit` attribute is not required, but must be present if the details to be used are not present in the map.
 

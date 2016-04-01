@@ -1,7 +1,6 @@
-# Asynchronous communication
+= Asynchronous communication
 :icons: font
-:toc:
-:toc-placement: preamble
+:toc: preamble
 :toclevels: 3
 :imagesdir: /images
 

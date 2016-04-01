@@ -1,7 +1,6 @@
 = Summary
 
 . link:README.adoc[Introduction]
-. link:gameplay/README.adoc[Game Play]
 . link:about/README.adoc[Microservices Application Architecture]
 .. link:about/microservices-overview.adoc[Overview of Microservices]
 .. link:about/twelve-factors.adoc[The 12-Factor Application]
