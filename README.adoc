@@ -1,14 +1,30 @@
 = Game On!
 :icons: font
 
-*https://game-on.org[Try Game On! Now]*
-
-_You are in a maze of little interconnected rooms, none alike._
-
-Game On! is a both a sample microservices application and throwback text adventure brought to you by the https://wasdev.net[wasdev] team at IBM.
+Game On! is both a sample microservices application and throwback text adventure brought to you by the https://wasdev.net[wasdev] team at IBM.
 
 *It aims to enable exploration of microservice architectures from two points of view*:
 
 * *As a Player*: On one hand, you can be entertained by the creativity of other peer developers, on the other hand, you can navigate a distributed system exit by exit. 
 
 * *As a Developer*: Learn about microservice architectures and supporting infrastructure by extending the game with your own services. Write additional rooms to see how they interact with the rest of the system and to experiment with different strategies for building resilient distributed systems.
+
+
+[NOTE]
+.*Itching to jump right in?* 
+=====================================================================
+Use one of the following walk-throughs to help get you started building your own room in the game.
+
+* Create a new room based on Cloud Foundry buildpacks : 
+** https://github.com/cfsworkload/gameon-room-nodejs[JavaScript / IBM Bluemix]
+** https://github.com/cfsworkload/gameon-room-java[Java / IBM Bluemix]
+* Create a new room using Docker Containers
+** link:getting-started/README.adoc[Developing locally with docker-compose]
+** link:getting-started/README.adoc[Java]
+** https://github.com/cfsworkload/gameon-room-go[Go]
+
+// TODO: Need walkthrough for building a Java room locally that is separate from local dev env.
+=====================================================================
+
+
+
