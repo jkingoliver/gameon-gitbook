@@ -1,7 +1,6 @@
 = Appendix: The Chronicles
 :icons: font
-:toc:
-:toc-placement: preamble
+:toc: preamble
 :toclevels: 1
 :imagesdir: /images
 

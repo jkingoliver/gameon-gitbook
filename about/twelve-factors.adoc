@@ -1,7 +1,6 @@
 = The Twelve-Factor Application
 :icons: font
-:toc:
-:toc-placement: preamble
+:toc: preamble
 :toclevels: 2
 :imagesdir: /images
 :chronicles: link:../chronicles/README.adoc

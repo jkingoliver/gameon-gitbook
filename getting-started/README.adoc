@@ -1,7 +1,6 @@
 = Getting Started: Build your own room
 :icons: font
-:toc:
-:toc-placement: preamble
+:toc: preamble
 :toclevels: 1
 :sectanchors:
 

@@ -1,7 +1,6 @@
 # Core Architectural Elements
 :icons: font
-:toc:
-:toc-placement: preamble
+:toc: preamble
 :toclevels: 2
 :imagesdir: /images
 

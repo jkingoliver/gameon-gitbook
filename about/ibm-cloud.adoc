@@ -1,7 +1,6 @@
 = Microservices in practice at IBM
 :icons: font
-:toc:
-:toc-placement: preamble
+:toc: preamble
 :toclevels: 2
 :imagesdir: /images
 
