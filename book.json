@@ -6,6 +6,9 @@
         "heading-anchors",
         "include"
     ],
+    "structure": {
+        "readme": "README.adoc"
+    },
     "pluginsConfig": {
         "addcssjs": {
             "css": [
