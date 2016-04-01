@@ -1,6 +1,6 @@
 = Game On!
 :icons: font
-:toc:
+:toc: preamble
 :toc-title: Game Play
 :toclevels: 2
 :imagesdir: /images

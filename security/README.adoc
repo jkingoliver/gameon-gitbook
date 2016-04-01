@@ -1,7 +1,6 @@
 = Getting Started
 :icons: font
-:toc:
-:toc-placement: preamble
+:toc: preamble
 :toclevels: 1
 :sectanchors:
 
