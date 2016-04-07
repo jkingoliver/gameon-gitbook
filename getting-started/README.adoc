@@ -23,23 +23,6 @@ Build the submodules that contain gradle.
 ./build.sh
 ----
 
-If you intend to make updates outside the container (see <<incrementalPublish>>), make sure you have node installed, and then build the webapp project:
-
-----
-cd webapp
-npm install
-./node_modules/.bin/grunt build
-----
-
-
-[[incrementalPublish]]
-== Top-down vs. incremental updates
-
-`docker-compose.override.yml` maps subrepository paths into the docker containers to support live development. 
-
-If you prefer a top-down-republish approach, rename `docker-compose.override.yml` to `docker-compose.override.yml.backup` to skip mounting volumes. Re-run `build.sh` and the docker-compose build steps to publish the updates.
-
-
 == Docker compose: Game On!
 
 To start up the whole collection using `docker-compose`, run the following:
@@ -58,5 +41,25 @@ If you run on an operating system that uses a host VM for docker images (e.g. Wi
 
 `build.sh` will create a customized copy of `gameon.env` for the active DOCKER_MACHINE_NAME, that will perform the substitution to the associated IP address.
 =========
+
+
+[[incrementalPublish]]
+== Top-down vs. incremental updates
+
+It is possible to make application updates outside of the container during development: we do this with the overlay function supported by docker compose.
+
+`docker-compose.override.yml.example` maps subrepository paths into the docker containers to support live development. Rename the file to `docker-compose.override.yml`, or copy it and edit as you see fit.
+
+If you intend to make updates to the web front end (in webapp), make sure you have node installed, and then build the webapp project:
+
+----
+cd webapp
+npm install
+./node_modules/.bin/grunt build
+----
+
+
+
+
 
 
