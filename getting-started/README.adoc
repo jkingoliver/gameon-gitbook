@@ -11,7 +11,7 @@ We'll cheat a little bit here: to do this mad dash from nothing to everything, y
 Recursively grab all the source for our core modules, and change to the new shiny cloned directory: 
 
 ----
-git clone --recursive git://github.com:gameontext/gameon.git
+git clone --recursive https://github.com:gameontext/gameon.git
 cd gameon
 ----
 
