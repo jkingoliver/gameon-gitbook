@@ -1,0 +1,16 @@
+= Exploring Microservices -- Game On!
+:icons: font
+:toc: preamble
+:toc-title: Game Play
+:toclevels: 2
+:imagesdir: /images
+
+Microservices: the buzz is everywhere. Given the breadth of technologies related to the term, it can be difficult to get a full picture of what a Microservices architecture should look like, or to understand why it is said that microservices architectures both remove and introduce complexity at the same time. 
+
+https://game-on.org/[Game On!] is a throwback text-based adventure built to help you explore microservices concepts. 
+
+
+* link:game_play.adoc[Game play]
+* link:microservices/README.adoc[Application architecture]
+* link:chronicles/README.adoc[Appendix: The Chronicles]
+
