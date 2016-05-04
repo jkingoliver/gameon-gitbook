@@ -1,0 +1,20 @@
+= Extending the Game
+:icons: font
+:toc: preamble
+:toc-title: 
+:toclevels: 2
+:imagesdir: /images
+
+
+Rooms are registered as entities with the Map, and are where the good stuff is. The silly, the crazy, the odd, the boring: this is where you can let your creativity loose. But, what do rooms have to do with microservices? 
+
+Let's say you want to make the most popular room ever (an admirable goal), which means your room will need to scale to more than one instance. How do you want that to appear to your players? You have choices. You could treat it as old-school game sharding, where players can only see or talk to or interact with people in the same shard they are in. You could also look at using a message queue, a shared cache, or something like the pubsub function in redis to allow all of the rooms to act like one big room. How does it work? What does it do to your code?
+
+You might also explore creating several rooms that relate to each other. Do you have these rooms all provided by the same service, or would you rather have each room as its own service? How would they communicate? In a microservices architecture, independent services should not share a datastore, so would you use some kind of event bus instead?
+
+Choose your own adventure, play around, figure out how to get the room to have the characteristics you want.
+
+== Creating Rooms
+
+
+== Creating Non-player Characters

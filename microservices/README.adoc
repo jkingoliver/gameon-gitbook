@@ -1,24 +1,83 @@
-= Game Architecture and Technology
+= Application architecture
 :icons: font
 :toc: preamble
-:toclevels: 1
+:toc-title: 
+:toclevels: 2
+:imagesdir: /images
 
-This section contains information on each of the microservices.  Note that the components here aren't always _strictly_ microservices, but are deployed as individual Dockerized components and broken into separate git projects accordingly.
+Game On! is an application composed of several microservices. The set services has changed over time: the best practice with microservice architectures is still to start with a monolith or (at least) very large chunks. We started with two large blobs, and refined the granularity of services as the application evolved. link:../chronicles/README.adoc[The Chronicles] describe this evolution, if you're curious.
 
-Read each of the subsections for more information on why we have this component and what it does.
+== Core Services
+
+image:CoreServices.png["Core services",align="center"]
+
+=== webapp
+
+The webapp service is a simple nginx process that serves the static files that comprise the front-end of the UI. The front-end is a single page application written in JavaScript that makes requests using standard/published APIs to interact with backend microservices via the proxy/gateway. 
+
+Having this as a separate entity allows our front-end to be changed and updated independently from other services. Some suggest that UI components should be provided by each backend service, which can be true with a UI built from distinct sections. The game, however, uses a more integrated UI: the application running in the client device is invoking public APIs directly, to render the responses appropriately. 
+
+The webapp process has fairly simple scaling requirements, as it serving only cachable static files.
+
+=== Player
+
+The Player service 
+
+=== Mediator
+
+Once upon a time, the mediator was part of the player service. It was split into its own microservice for two reasons: a) the function it performs is not strictly related to the notion of a "player", and b) it has drastically different scaling requirements because of what it does.
+
+After a user has logged in, a websocket is established between the user's device and the mediator. The mediator then maintains a second websocket connection to whatever room the player is in. 
+
+To provide the best user experience it can, the mediator retains cached information about rooms it has visited, to ensure that players can move between rooms if the map service can't be reached. It also provides a few special rooms itself (First Room, Empty Room, and Sick Room) to ensure that a user is not ever presented with an empty screen. As long as instances of the mediator are healthy, rooms will be available to navigate between.
+
+==== First Room
+
+First Room is the starting place for every player joining the game, and is also where players return when things go terribly wrong, or when they call for a rescue (`/sos`). It also provides a few special commands that room implementors can use to teleport to rooms that they own. 
+
+==== Empty Room
+
+Empty rooms act as placeholders: they do nothing interesting, but are navigable to allow players to navigate the map even when there are holes in it.
+
+==== Sick Room
+
+Sick rooms are also placeholders, but they specifically stand in for rooms that exist, but are not responsive. They are a game-appropriate implementation of the circuit breaker pattern: detecting failures and unresponsive rooms, and preventing repeated access to those rooms until they have been restored.
+
+=== Map
+
+=== Sweep
+
+=== Proxy/Gateway
+
+== Other Services
+
+image:SecondaryServices.png["Secondary services",align="center"]
+
+=== etcd
+
+Etcd was added to simplify configuration management. There are many ways to slice this particular onion, but the important for us was being able to see the configuration attributes used, and in some cases shared, by our core services in a central place. 
+
+The configuration attributes stored in etcd are environment-specific: different values are provided for different deployment stages using isolated etcd clusters. Etcd is not used when developing locally, we instead rely on local env files managed by Docker.
+
+=== Swagger
 
 
 
-* Java
-* Node.js
-* Gradle
-* IBM WebSphere Liberty
-* IBM DevOps Services Pipeline
-* IBM Logging and Analytics Service
-* MongoDB
-* HAProxy
-* Logstash
-* nginx
-* GitBook
-* Angular
-* etcd
+=== Room implementations
+
+We have a few room implementations defined within our repositories.
+
+* SimpleRoom -- foundation for the Java-based walkthrough
+* Node.js room -- foundation for the JavaScript walkthrough
+* Go room -- foundation for the Go walkthrough
+* The RecRoom and Basement
+* The Map room
+
+For most of them, a single service is providing a single room. The notable exception is the RecRoom and Basement, where a single service is providing two related rooms. 
+
+Each service is responsible for managing its own data (if any), and satisfying the published APIs for a room to the satisfaction of the Sweep. As mentioned in link:../walkthroughs/README.adoc[Extending the game], rooms are what allow you to experiment with microservices concepts and approaches
+
+
+
+
+

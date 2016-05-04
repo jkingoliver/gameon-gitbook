@@ -1,0 +1,24 @@
+= Game Architecture and Technology
+:icons: font
+:toc: preamble
+:toclevels: 1
+
+This section contains information on each of the microservices.  Note that the components here aren't always _strictly_ microservices, but are deployed as individual Dockerized components and broken into separate git projects accordingly.
+
+Read each of the subsections for more information on why we have this component and what it does.
+
+
+
+* Java
+* Node.js
+* Gradle
+* IBM WebSphere Liberty
+* IBM DevOps Services Pipeline
+* IBM Logging and Analytics Service
+* MongoDB
+* HAProxy
+* Logstash
+* nginx
+* GitBook
+* Angular
+* etcd

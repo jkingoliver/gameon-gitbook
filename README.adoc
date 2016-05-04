@@ -1,110 +1,16 @@
-= Game On!
+= Exploring Microservices -- Game On!
 :icons: font
 :toc: preamble
 :toc-title: Game Play
 :toclevels: 2
 :imagesdir: /images
 
-Game On! is both a sample microservices application and throwback text adventure brought to you by the https://wasdev.net[wasdev] team at IBM.
+Microservices: the buzz is everywhere. Given the breadth of technologies related to the term, it can be difficult to get a full picture of what a Microservices architecture should look like, or to understand why it is said that microservices architectures both remove and introduce complexity at the same time. 
 
-*It aims to enable exploration of microservice architectures from two points of view*:
-
-* *As a Player*: On one hand, you can be entertained by the creativity of other peer developers, on the other hand, you can navigate a distributed system exit by exit. 
-
-* *As a Developer*: Learn about microservice architectures and supporting infrastructure by extending the game with your own services. Write your own rooms to see how they interact with the rest of the system and to experiment with different strategies for building resilient distributed systems.
-
-== Objective (for a player)
-
-The only objective is to be entertained. Roam from room to room, see what other developers have created. There may be puzzles to solve, riddles to answer, cryptic speech to decipher, whatever!
-
-You should be able to chat with other people in the room with you, though there may be limitations based on how the room is implemented. For what it is worth, this variability is very much part of the game.
-
-== Navigation and common commands
-
-Some commands will always be available. Those that are implemented by core game services (namely the Mediator) will also always behave the same.
-
-.Common commands provided by the game
-[cols=".<m,.<2",options="header,footer"]
-|==========================
-|Commands |Description  
-|/help    |List available commands (will vary by room)  
-|/exits   |List room exits  
-|/sos     |Emergency rescue: will return you to First Room  
-|==========================
-
-.Common commands implemented by rooms: implementations will vary
-[cols=".<m,.<2",options="header"]
-|==========================
-|Commands   | Description  
-|/look      | Look at the room
-|/examine   | Examine an item, e.g. `/examine` or `/examine item`  
-|/go        | Exit the room using the specified door, e.g. `/go N`
-|/inventory | List your inventory  
-|==========================
-
-== The Map
-
-The link:../microservices/map.adoc[Map service] maintains a 2-dimensional grid containing all known (registered and empty) rooms. Rooms are assigned to a coordinate location in the map when they are registered, but they likely won't stay there.
-
-The Map will make sure that rooms have neighbors to the North, South, East and West. The behavior of Up or Down (the other two possible room choices) are left to the creativity of the room developer to sort out.
-
-== Rooms
-
-Rooms are where the good stuff is. The silly, the crazy, the odd, the boring: this is where you can let your creativity loose.
-
-Now, why would you do this? What does this have to do with microservices? Well, I'll ask you some leading questions, and maybe that will get you thinking.
-
-Let's say you want to make the most popular room ever (an admirable goal), and that means your room will need to scale to more than one instance. How do you want that to appear to your players? You have choices. You could treat it as old-school game sharding, where players can only see or talk to or interact with people in the same shard they are in. You could also look at using a message queue, a shared cache, or something like the pubsub function in redis to allow all of the rooms to act like one big room. Which one works best? Well, you now have a reason to find out! 
-
-You can also play around to see how those choices impact how you build your room: Can you keep this choice outside of your room's code or does it end up all gorped in there so that you're stuck with what you picked?
-
-Choose your own adventure, play around, figure out how to get the room to have the characteristics you want.
-
-=== First Room
-
-First Room is a special room: it is located (and fixed with a permanent sticking charm) at the origin of the map. It is the starting place for every player joining the game, and is also where players return when things go terribly wrong, or when they call for a rescue (`/sos`).
-
-First room also provides some useful custom commands for room developers.
-
-.Custom commands for First Room to support room developers
-[cols=".<m,.<2",options="header"]
-|==========================
-|Commands   | Description  
-| /listmyrooms | List all of your rooms
-| /teleport    | Teleport to the specified room, e.g. `/teleport room-id`
-| /deleteroom | Delete the specified room, e.g. `/deleteroom room-id`
-|==========================
+https://game-on.org/[Game On!] is a throwback text-based adventure built to help you explore microservices concepts. 
 
 
-=== Empty (or Sick) Rooms
-
-Empty rooms act as placeholders or glue. They fill the empty spaces and are navigable, to allow players to navigate the map even when there are holes in it.
-
-== The Sweep
-
-The Sweep performs a key game function: it maintains the health of the map. The Sweep will perform a series of checks against each room: is it up, does it allow a player to join, does it respond correctly to the required commands. It will award points (or demerits) to the room based on the results of these tests.
-
-Once the Sweep has finished its round, it will work with the map service to relocate rooms in the map, moving rooms with lower scores to the outside of the map, and rooms with higher scores towards the middle.
-
-== Objective (for room creators)
-
-Given the behavior of the Sweep, you might now have a guess. The objective is to make a room that satisfies the Sweep's health and API checks the most often so that your room moves closest to the origin of the map.
-
-[NOTE]
-.*Itching to jump right in?* 
-=====================================================================
-Use one of the following walk-throughs to help get you started building your own room in the game.
-
-* Create a new room based on Cloud Foundry buildpacks : 
-** https://github.com/cfsworkload/gameon-room-nodejs[JavaScript / IBM Bluemix]
-** https://github.com/cfsworkload/gameon-room-java[Java / IBM Bluemix]
-* Create a new room using Docker Containers
-** link:getting-started/README.adoc[Developing locally with docker-compose]
-** link:getting-started/README.adoc[Java]
-** https://github.com/cfsworkload/gameon-room-go[Go]
-
-// TODO: Need walkthrough for building a Java room locally that is separate from local dev env.
-=====================================================================
-
-
+* link:game_play.adoc[Game play]
+* link:microservices/README.adoc[Application architecture]
+* link:chronicles/README.adoc[Appendix: The Chronicles]
 

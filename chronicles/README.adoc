@@ -1,6 +1,7 @@
 = Appendix: The Chronicles
 :icons: font
 :toc: preamble
+:toc-title: 
 :toclevels: 1
 :imagesdir: /images
 
@@ -9,9 +10,11 @@
 
 The following sections are more like a blog than a book. Creating a new application from scratch using microservices is a messy business: documenting the process is, in some respects, as important as showing the end result.
 
+Given this is an opensource book, we invite you to contribute your own experiences to this section.
+
 == The first pass
 
-image::Progression.001.jpeg[Progression, width=600]
+image:Progression.001.jpeg[Progression, width=600]
 
 Our first attempt was typical stand-things-up-in-a hurry hacking. This was a bit of a hybrid: we did start this as separate runtime services, but they were built in more monolithic chunks. 
 
@@ -24,7 +27,7 @@ The Player service in this pass is also multifunction: it is serving the web fro
 
 == Automation and Cloud
 
-image::Progression.002.jpeg[Progression, width=600]
+image:Progression.002.jpeg[Progression, width=600]
 
 Automated build pipelines arrived! and Docker containers out in the cloud! 
 Thankfully for those of us doing most of the dev work, the creation, testing of the delivery pipeline was pretty transparent. The build pipeline is triggered by a commit to the master branches of our repositories, which means no change to our usual workflow.
@@ -33,7 +36,7 @@ A proxy was added to help route requests between the services and docker contain
 
 == Splitting out the web front-end
 
-image::Progression.003.jpeg[Progression, width=600]
+image:Progression.003.jpeg[Progression, width=600]
 
 There is no good reason (and many not-good reasons) to have your web front end packed in with a Java application. Freeing your front-end developers to be able to develop and test without worrying about the Java gorp is a good thing. 
 
@@ -45,7 +48,7 @@ We added CORS filters to the app for the time being and moved on.
 
 == Something other than Java!
 
-image::Progression.004.jpeg[Progression, width=600]
+image:Progression.004.jpeg[Progression, width=600]
 
 Our team has nothing against JavaScript, but Java is what we know. When attempting something big and new, we felt it usually good idea to constrain the number of moving parts in the air at once. In this case, we stuck with a language we were familiar with for the core services. 
 
@@ -53,7 +56,7 @@ The Node.js room brought JS to the backend. More will follow.
 
 == Explain it with pinache
 
-image::Progression.005.jpeg[Progression, width=600]
+image:Progression.005.jpeg[Progression, width=600]
 
 Swagger documentation!
 
@@ -63,7 +66,7 @@ The bulk of the traffic flowing around in the game is over WebSockets, and that 
 
 == Splitting up the Player service
 
-image::Progression.006.jpeg[Progression, width=600]
+image:Progression.006.jpeg[Progression, width=600]
 
 Over time, the Player service, which was filling multiple roles, felt more and more out of place. It was already cut down once, when we moved the webapp out, but the mediator function was very complex, and will have different load/scaling requirements at the end of the day. 
 
@@ -76,7 +79,7 @@ We did finally split the two functions apart, which was not difficult. They were
 
 ==  Bringing in etcd
 
-image::Progression.007.jpeg[Progression, width=600]
+image:Progression.007.jpeg[Progression, width=600]
 
 So, at this point, we had a good fistful of services going through deployment pipelines, and we were fresh from the effort of adding a new one (for mediator). Managing environment variables across several build pipelines is a pain: lots of clicking lots of boxes to get to lots of little perfect UI views. 
 
@@ -84,7 +87,7 @@ We moved runtime environment variables particular to our production docker envir
 
 == Buh-bye to Concierge!
 
-image::Progression.008.jpeg[Progression, width=600]
+image:Progression.008.jpeg[Progression, width=600]
 
 Concierge was such a cute service! It was supposed to help players find their way from room to room. But it's name was confusing (was it a map or a traffic director?). It's interaction pattern with mediator also introduced a single point of failure: if the Concierge was down, the Players were pretty much stuck wherever they were, with a fallback to First Room. 
 
@@ -92,13 +95,13 @@ We designed a new Map service, with a much better API for adding and removing ro
 
 == Map Auth
 
-image::Progression.009.jpeg[Progression, width=600]
+image:Progression.009.jpeg[Progression, width=600]
 
 We added {signedHeaders}[signed header-based security] to the Map service APIs.
 
 == More Rooms!
 
-image::Progression.010.jpeg[Progression, width=600]
+image:Progression.010.jpeg[Progression, width=600]
 
 Rooms written in Go, another room in JavaScript, and two more in Java. We learned lots as other people were able to try adding their own rooms, especially as some of them were trying to build their rooms while the Map/Concierge switch was in flight. Ouch.
 
@@ -108,6 +111,6 @@ ____
 
 == Enter: The Sweep
 
-image::Progression.011.jpeg[Progression, width=600]
+image:Progression.011.jpeg[Progression, width=600]
 
 Our first non-player character! The Sweep is in early days, so we don't know in what directions it will grow, but it will serve an important function: keeping the map alive and vital by pruning sick rooms.
