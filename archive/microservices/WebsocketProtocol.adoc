@@ -76,7 +76,7 @@ Currently the only supported version is '1'
 === Mediator -> Room, roomGoodbye message
 
 ----
-roomHello,<roomId>,{
+roomGoodbye,<roomId>,{
     "username": "username",
     "userId": "<userId>",
 }
