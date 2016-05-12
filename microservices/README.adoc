@@ -15,11 +15,13 @@
 :websocket: link:WebsocketProtocol.adoc
 :walkthroughs: link:../walkthroughs/README.adoc
 
-Game On! is an application composed of several microservices. The set services h
-as changed over time: the best practice with microservice architectures is still
+Game On! is an application composed of several microservices. The set services
+has changed over time: the best practice with microservice architectures is still
 to start with a monolith or (at least) very large chunks. We started with two
 large blobs, and refined the granularity of services as the application evolved.
 {chronicles}[The Chronicles] describe this evolution, if you're curious.
+
+
 
 == Core Services
 
@@ -85,7 +87,7 @@ Room, Empty Room, and Sick Room) to provide a good user experience in the face
 of badly behaved or failing rooms.
 
 The Mediator service is implemented in Java using WebSphere Liberty, it does not
-use an external data store. As noted abouve, its API is a {websocket}[websocket
+use an external data store. As noted above, its API is a {websocket}[websocket
 endpoint with a custom protocol].
 
 ==== First Room
@@ -117,7 +119,7 @@ The Map will make sure that registered rooms have neighbors to the North, South,
 East and West. The behavior of Up or Down (the other two possible room choices)
 are left to the creativity of the room developer to sort out.
 
-The Map service is implemented in Java and run on WAS Liberty. It stores data in
+The Map service is implemented in Java using WebSphere Liberty. It stores data in
 either couchdb or Cloudant. The {swagger}[public API] was developed in a
 Swagger-first manner, using annotations on JAX-RS resources and POJOs that are
 shared between API requests and DB interactions.
@@ -125,14 +127,14 @@ shared between API requests and DB interactions.
 === Sweep
 
 The Sweep performs periodic rounds of all the registered rooms, checking to see
-if they are still reachable, and that they behave properly according to the 
+if they are still reachable, and that they behave properly according to the
 documented {websocket}[WebSocket protocol].
 
 === Proxy/Gateway
 
-We have a single proxy/gateway that is haproxy based, and is responsible 
-for surfacing the {swagger}[collection of APIs] as a single facade for 
-the entire application. 
+We have a single proxy/gateway that is haproxy based, and is responsible
+for surfacing the {swagger}[collection of APIs] as a single facade for
+the entire application.
 
 == Other Services
 
@@ -141,14 +143,14 @@ image:SecondaryServices.png["Secondary services",align="center"]
 === etcd
 
 Etcd was added to simplify configuration management. There are many ways to
-slice this particular onion, but the important for us was being able to see the
+slice this particular onion, but the important thing for us was being able to see the
 configuration attributes used, and in some cases shared, by our core services
 in a central place.
 
 The configuration attributes stored in etcd are environment-specific: different
 values are provided for different deployment stages using isolated etcd clusters.
 Etcd is not used when developing locally, we instead rely on local env files
-managed by Docker.
+injected via Docker Compose.
 
 === Swagger
 
