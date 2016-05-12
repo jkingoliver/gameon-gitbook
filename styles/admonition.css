@@ -47,3 +47,10 @@
   font-size: 0.8em !important;
   padding-bottom: 10px;
 }
+.page-inner section h1 {
+    background-image: url("https://game-on.org/images/go-logo.png");
+    background-size: 1.5em; 
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 1.5em;
+}

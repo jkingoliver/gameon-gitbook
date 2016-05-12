@@ -1,11 +1,25 @@
 = Application architecture
 :icons: font
 :toc: preamble
-:toc-title: 
+:toc-title:
 :toclevels: 2
 :imagesdir: /images
+:chronicles: link:../chronicles/README.adoc
+:jwts: https://game-on.org/swagger/
+:goroom: https://github.com/gameontext/gameon-room-go
+:maproom: https://game-on.org/swagger/
+:nodejsroom: https://github.com/gameontext/gameon-room-nodejs
+:recroom: https://github.com/gameontext/gameon-room
+:simpleroom: https://github.com/gameontext/simple-java-room
+:swagger: https://game-on.org/swagger/
+:websocket: link:WebsocketProtocol.adoc
+:walkthroughs: link:../walkthroughs/README.adoc
 
-Game On! is an application composed of several microservices. The set services has changed over time: the best practice with microservice architectures is still to start with a monolith or (at least) very large chunks. We started with two large blobs, and refined the granularity of services as the application evolved. link:../chronicles/README.adoc[The Chronicles] describe this evolution, if you're curious.
+Game On! is an application composed of several microservices. The set services h
+as changed over time: the best practice with microservice architectures is still
+to start with a monolith or (at least) very large chunks. We started with two
+large blobs, and refined the granularity of services as the application evolved.
+{chronicles}[The Chronicles] describe this evolution, if you're curious.
 
 == Core Services
 
@@ -13,41 +27,112 @@ image:CoreServices.png["Core services",align="center"]
 
 === webapp
 
-The webapp service is a simple nginx process that serves the static files that comprise the front-end of the UI. The front-end is a single page application written in JavaScript that makes requests using standard/published APIs to interact with backend microservices via the proxy/gateway. 
+Webapp is a simple nginx process that serves the static files that comprise the
+front-end of the UI. The front-end is a single page application written in
+JavaScript that makes requests using standard/published APIs to interact with
+backend microservices via the proxy/gateway.
 
-Having this as a separate entity allows our front-end to be changed and updated independently from other services. Some suggest that UI components should be provided by each backend service, which can be true with a UI built from distinct sections. The game, however, uses a more integrated UI: the application running in the client device is invoking public APIs directly, to render the responses appropriately. 
+Having this as a separate entity allows our front-end to be changed and updated
+independently from other services. Some suggest that UI components should be
+provided by each backend service, which can be true with a UI built from distinct
+sections. The game, however, uses a more integrated UI, with much of the rendered
+data coming from a long-lived {websocket}[websocket connection using a custom
+protocol].
 
-The webapp process has fairly simple scaling requirements, as it serving only cachable static files.
+The webapp process has fairly simple scaling requirements, as it serves cachable
+static files.
 
 === Player
 
-The Player service 
+Players are represented by the player service, which provides a
+{swagger}[public API] for CRUD operations, and for managing API tokens.
+
+The Player service was one of the first to exist, and is implemented in Java
+using WebSphere Liberty. It stores data in either couchdb (local) or Cloudant.
+
+==== Player Authentication
+
+Authentication is also handled by the Player (for now). We assume that the client
+(JavaScript running on a device outside of our environment) is not secure, so
+player authentication using OAuth is initiated by the Player service, rather
+than by the client/webapp.
+
+The flow goes something like this: the user (that's you), pushes a button in the
+web UI to select an OAuth provider (Facebook, Google, GitHub, or Twitter). This
+button press sends an async REST request to the Player to initiate the
+authentication process. The Player sends a REST request to the selected OAuth
+provider using the proper credentials. Many redirects later, we get a callback
+from the OAuth provider letting us know that you authenticated properly. We then
+{jwts}[sign a JWT], which is passed back to the client/webapp.
 
 === Mediator
 
-Once upon a time, the mediator was part of the player service. It was split into its own microservice for two reasons: a) the function it performs is not strictly related to the notion of a "player", and b) it has drastically different scaling requirements because of what it does.
+Once upon a time, the mediator was part of the player service. It was split into
+its own microservice for two reasons: 1) the function it performs is not strictly
+related to the notion of a "player", and 2) it has drastically different scaling
+requirements.
 
-After a user has logged in, a websocket is established between the user's device and the mediator. The mediator then maintains a second websocket connection to whatever room the player is in. 
+After a user has logged in, a websocket is established between the user's device
+and the mediator. The mediator then maintains a second websocket connection to
+whatever room the player is in. Maintaining two long-lived connections (even with
+asychronous processing going on) will use resources differently than other kinds
+of REST or HTTP request processing.
 
-To provide the best user experience it can, the mediator retains cached information about rooms it has visited, to ensure that players can move between rooms if the map service can't be reached. It also provides a few special rooms itself (First Room, Empty Room, and Sick Room) to ensure that a user is not ever presented with an empty screen. As long as instances of the mediator are healthy, rooms will be available to navigate between.
+To provide the best user experience it can, the mediator retains cached information
+about rooms it has visited, to ensure that players can move between rooms if the
+map service can't be reached. It also provides a few special rooms itself (First
+Room, Empty Room, and Sick Room) to provide a good user experience in the face
+of badly behaved or failing rooms.
+
+The Mediator service is implemented in Java using WebSphere Liberty, it does not
+use an external data store. As noted abouve, its API is a {websocket}[websocket
+endpoint with a custom protocol].
 
 ==== First Room
 
-First Room is the starting place for every player joining the game, and is also where players return when things go terribly wrong, or when they call for a rescue (`/sos`). It also provides a few special commands that room implementors can use to teleport to rooms that they own. 
+First Room is the starting place for every player joining the game, and is also
+where players return when things go terribly wrong, or when they call for a rescue
+(`/sos`). It also provides a few special commands that room implementors can use
+to teleport to rooms that they own.
 
 ==== Empty Room
 
-Empty rooms act as placeholders: they do nothing interesting, but are navigable to allow players to navigate the map even when there are holes in it.
+Empty rooms act as placeholders: they do nothing interesting, but are navigable
+to allow players to navigate the map even when there are holes in it.
 
 ==== Sick Room
 
-Sick rooms are also placeholders, but they specifically stand in for rooms that exist, but are not responsive. They are a game-appropriate implementation of the circuit breaker pattern: detecting failures and unresponsive rooms, and preventing repeated access to those rooms until they have been restored.
+Sick rooms are also placeholders, but they specifically stand in for rooms that
+exist, but are not responsive. They are a game-appropriate implementation of the
+circuit breaker pattern: detecting failures and unresponsive rooms, and
+preventing repeated access to those rooms until they have been restored.
 
 === Map
 
+The Map maintains a 2-dimensional grid containing all known (registered and
+empty) rooms. Rooms are initially assigned to a coordinate location in the map
+when they are registered, but their location in the map may change over time.
+
+The Map will make sure that registered rooms have neighbors to the North, South,
+East and West. The behavior of Up or Down (the other two possible room choices)
+are left to the creativity of the room developer to sort out.
+
+The Map service is implemented in Java and run on WAS Liberty. It stores data in
+either couchdb or Cloudant. The {swagger}[public API] was developed in a
+Swagger-first manner, using annotations on JAX-RS resources and POJOs that are
+shared between API requests and DB interactions.
+
 === Sweep
 
+The Sweep performs periodic rounds of all the registered rooms, checking to see
+if they are still reachable, and that they behave properly according to the 
+documented {websocket}[WebSocket protocol].
+
 === Proxy/Gateway
+
+We have a single proxy/gateway that is haproxy based, and is responsible 
+for surfacing the {swagger}[collection of APIs] as a single facade for 
+the entire application. 
 
 == Other Services
 
@@ -55,29 +140,38 @@ image:SecondaryServices.png["Secondary services",align="center"]
 
 === etcd
 
-Etcd was added to simplify configuration management. There are many ways to slice this particular onion, but the important for us was being able to see the configuration attributes used, and in some cases shared, by our core services in a central place. 
+Etcd was added to simplify configuration management. There are many ways to
+slice this particular onion, but the important for us was being able to see the
+configuration attributes used, and in some cases shared, by our core services
+in a central place.
 
-The configuration attributes stored in etcd are environment-specific: different values are provided for different deployment stages using isolated etcd clusters. Etcd is not used when developing locally, we instead rely on local env files managed by Docker.
+The configuration attributes stored in etcd are environment-specific: different
+values are provided for different deployment stages using isolated etcd clusters.
+Etcd is not used when developing locally, we instead rely on local env files
+managed by Docker.
 
 === Swagger
 
-
+A simple process that serves the swagger UI with our {swagger}[swagger API documents].
 
 === Room implementations
 
 We have a few room implementations defined within our repositories.
 
-* SimpleRoom -- foundation for the Java-based walkthrough
-* Node.js room -- foundation for the JavaScript walkthrough
-* Go room -- foundation for the Go walkthrough
-* The RecRoom and Basement
-* The Map room
+* {simpleroom}[SimpleRoom] -- foundation for the Java-based walkthrough
+* {nodejsroom}[Node.js room] -- foundation for the JavaScript walkthrough
+* {goroom}[Go room] -- foundation for the Go walkthrough
+* {recroom}[The RecRoom and Basement] -- two related rooms, one of which has items
+* {maproom}[The Map room] -- uses the Map's API to display a map of all registered rooms
 
-For most of them, a single service is providing a single room. The notable exception is the RecRoom and Basement, where a single service is providing two related rooms. 
+For most of them, a single service is providing a single room. The notable
+exception is the RecRoom and Basement, where a single service is providing two
+related rooms.
 
-Each service is responsible for managing its own data (if any), and satisfying the published APIs for a room to the satisfaction of the Sweep. As mentioned in link:../walkthroughs/README.adoc[Extending the game], rooms are what allow you to experiment with microservices concepts and approaches
-
-
-
-
-
+Each service is responsible for managing its own data (if any), and satisfying the
+published APIs for a room to the satisfaction of the Sweep. As mentioned in
+{walkthroughs}[Extending the game], rooms are what allow you to
+experiment with microservices concepts and approaches. In effect you are building
+one microservice (or a subsystem composed of microservices) that becomes one element
+of a larger system of services. You can play in and with a microservices
+architecture without having to build all of the pieces yourself.
