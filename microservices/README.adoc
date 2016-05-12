@@ -21,7 +21,8 @@ to start with a monolith or (at least) very large chunks. We started with two
 large blobs, and refined the granularity of services as the application evolved.
 {chronicles}[The Chronicles] describe this evolution, if you're curious.
 
-
+The core and secondary services are described below, with attention paid to the
+characteristics that made each into a standalone, autonomous microservice.
 
 == Core Services
 
