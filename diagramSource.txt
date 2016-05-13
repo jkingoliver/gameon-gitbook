@@ -1,0 +1,86 @@
+http://plantuml.com/plantuml
+
+http://plantuml.com/plantuml/png/lLLDRzim3BtxLn2vR2kyxXuq1OO2tWOiNU0STbPa9jRYY8Qa9WkA_VTHYYtR-Mgxmtom8VD3ZuzFL2sCKrBLGZjug1JoHrYO9NNl_sYAXHAEpCZRfaDRJhI1ns39XvPC6Ul0suCrovDaCcataQGrIcTXCacI6NoyX-cu_Ga_SJ4dkKQN2EdKLZZaNRrJy38eYdtwV7jx-oUPXf-pCTILsAD9xmxVRyLz-kpsDOvXz8kKzhX6QOZGnDbeYyQdQWk3fTA51IVC2XqOXlmFcGyH-TKoyYHlon1otHGH85MuT0dm4p55YXo15Lii0h0qEAbbM80K-fs31NfIP8b52dCbru7quBTJLSN5yKlf17K1VY-Fj2dk28HHgzADuO6q4qfRJk-JSkoIG2peoO4hyS2Fx-LdkzUoDAJfoOxRpZBQ0CqtraFe-kRHt_bt837i6WfkURla4FdfDupCJXZksGQj5IkCs_9p1bjGARiq65jiFJ64zO1_WnBL5YtWbcCiB0tdC2sp_X5CQ0JYIh8CenHyWkgwslljcAteVD0Fl6zr1Bp5pOTWZeq9gwYGHdatKN2IauzIE69krlUCjkCiP_GRwhgMhnyJd4w9dV-OdtRQaXrWkKhpXZp7NbSDGynRDpg6_9p8vGjHiTZZETL40cJb6zCTHcyii7SakwnPa_OhLXMTIngZiaDOzWgQAvB2ATAlPVf2s91xxRdVAIVB0DY-UDnucZXkDoV-j28Us2TWilmjCSU5Vs_G3Yg1LcY_rK1dRzR3ZeMFtZ-SOsNXaOmhBsaZUraSlVvd-L1MpTWTjZiVIgeRcoUAl2YT_wkKzfhrshTjJUp3Ee6akqkFpqR7mf7Xt0mkb8rtL3SS1qUhjvZ-1G00
+@startuml
+participant Client as P
+participant "Mediator" as M
+participant "Room N" as R
+participant "First Room" as FR
+
+== Client connects ==
+
+P -> M: connect WebSocket
+activate M
+P ->> M: ready,{...}
+M ->> P: player,<playerId>,{type: "joinpart",...}
+note over M: Mediator finds target room
+M ->> P: player,<playerId>,{type: "joinpart",...}
+M ->> R: connect WebSocket
+activate R
+R ->> M: ack,{...}
+note left
+    Mediator connects to saved room,
+    if room can't be reached, Sick Room
+    will fill in
+end note
+M -->> P: ack,{...}
+note right: Contains cached info about the room
+
+== Asynchronous: Client to room ==
+
+    P ->> M: room,<roomId>,{...}
+    M ->> R: room,<roomId>,{...}
+    note left: Mediator forwards message to room
+
+== Asynchronous: Room to Client ==
+
+    note over M
+        Mediator receives events from room
+        and forwards those that apply to the
+        player (playerId or *)
+    end note
+
+    R ->> M: player,*,{type: "chat", ...}
+    M ->> P: player,*,{...}
+    R ->> M: player,<playerId>,{type: "event", ...}
+    M ->> P: player,<playerId>,{...}
+
+== Asynchronous: SOS ==
+
+    P ->> M: sos,*,{...}
+    note over M
+        Mediator moves the player to First Room
+    end note
+    M ->> R: roomGoodbye,<roomId>,{...}
+    R ->> M: close WebSocket
+    deactivate R
+    M ->> FR: roomHello,<roomId>,{...}
+    activate FR
+    FR ->> M: player,<playerId>,{type: "location", ...}
+    M ->> P: player,<playerId>,{type: "location", ...}
+
+== Asynchronons: Switch rooms ==
+
+    P ->> M: room,<roomId>,{content: "/go N", ...}
+    M ->> FR: room,<roomId>,{content: "/go N", ...}
+    FR ->> M: playerLocation,<playerId>,{ type: "exit", ...}
+    note over M
+        Mediator moves the player to whatever Room is North
+    end note
+    M ->> FR: roomGoodbye,<roomId>,{...}
+    deactivate FR
+    M ->> R: connect
+    activate R
+    R ->> M: ack,{...}
+    M ->> R: roomHello,<roomId>,{...}
+    R ->> M: player,<playerId>,{type: "location", ...}
+    M ->> P: player,<playerId>,{type: "location", ...}
+
+== Client closes connection ==
+
+P ->> M: close WebSocket
+M ->> R: close WebSocket
+note left: Mediator disconnects from room
+deactivate R
+deactivate M
+@enduml
