@@ -6,22 +6,15 @@
 :imagesdir: /images
 :swagger: https://game-on.org/swagger/
 
-Websockets are currently used for two communication links: between the Client
+WebSockets are currently used for two-way asynchronous communication between the Client
 (the player's web browser) and the Mediator, and between the Mediator and a Room.
 
-== The WebSocket Protocol
-
 The protocol used by Game On! is text (rather than binary), and uses a simple
-comma-delimeted header followed by a JSON payload, `just,like,{"this": "ok?"}`.
+comma-delimited header followed by a JSON payload, `just,like,{"this": "ok?"}`.
 The Mediator is playing man-in-the-middle, and the goal is to allow as much message
 routing as possible to happen without requiring the Mediator to look at the JSON data.
 
-Events (chat and otherwise) will need to be sent to all of the connected websocket
-sessions for people to see they are all in the same room. *To simplify the room
-logic, the room can always broadcast to all connected sockets*. The mediator will
-filter what is sent to the client based on player id in the outer envelope.
-
-== Messages sent by the client
+== Messages sent by the Client
 
 === Client -> Mediator, ready message
 
@@ -36,7 +29,7 @@ Note that the data in the ready message is what the client had cached. It is
 used to determine whether or not history replay applies.
 
 
-==== Client -> Mediator -> Room, chat/command message
+=== Client -> Mediator -> Room, chat/command message
 
 ----
 room,<roomId>,{
@@ -52,7 +45,31 @@ The content sent from the client is a single text line (just as the player
 entered it). If it begins with `/`, it is a command; if it doesn't, it's just
 chatter.
 
+=== Client -> Mediator, sos message
+
+----
+sos,*,{
+    "username": "username",
+    "userId": "<userId>"
+    "content": "<message>"
+}
+----
+Help! The SOS message is sent to the mediator by the client on behalf of a
+player who is either stuck or bored and just wants a fast-track back to
+First Room.
+
 == Messages sent by the Mediator
+
+=== Mediator -> Client, progress messages
+
+----
+player,<playerId>,{
+    "type": "joinpart",
+    "content": "text update"
+}
+----
+
+These are short messages that the Mediator sends while managing room connections.
 
 === Mediator -> Client, acknowledgement (ack) message
 
@@ -72,6 +89,7 @@ and again whenever the player's location changes, as an assist for cache-refresh
 
 The commands included in the `ack` are the common commands that are always supported.
 
+
 === Mediator -> Room, roomHello message
 
 ----
@@ -83,7 +101,7 @@ roomHello,<roomId>,{
 ----
 
 Sent when a player joins or reconnects to a room.
-Version is the version of this websocket protocol selected by the mediator to
+Version is the version of this WebSocket protocol selected by the mediator to
 use when communicating with the room.
 Currently the only supported version is '1'
 
@@ -108,9 +126,9 @@ events to clients.
 
 === Room -> Mediator, acknowledgement (ack) with version
 
-This packet should be sent when the websocket is opened, and indicates the
-possible versions of this websocket communication protocol supported by the
-room (or rooms) behind this websocket endpoint.
+This packet should be sent when the WebSocket is opened, and indicates the
+possible versions of this WebSocket communication protocol supported by the
+room (or rooms) behind this WebSocket endpoint.
 
 ----
 ack,{
@@ -221,3 +239,7 @@ playerLocation,<playerId>,{
 ----
 
 This must be directed to a specific player.
+
+== Sequence diagram
+
+image:sequences.svg["Sequence diagram",align="center"]
