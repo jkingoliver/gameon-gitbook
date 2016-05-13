@@ -3,7 +3,7 @@
 . link:README.adoc[Introduction]
 . link:game_play.adoc[Game play]
 . link:microservices/README.adoc[Application architecture]
-.. link:microservices/WebsocketProtocol.adoc[WebSocket Protocol]
+.. link:microservices/WebSocketProtocol.adoc[WebSocket Protocol]
 . link:walkthroughs/README.adoc[Extending the game]
 . link:chronicles/README.adoc[Appendix: The Chronicles]
 
