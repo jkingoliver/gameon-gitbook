@@ -1,4 +1,4 @@
-= Application architecture
+= Application Architecture
 :icons: font
 :toc: preamble
 :toc-title:
@@ -12,7 +12,7 @@
 :recroom: https://github.com/gameontext/gameon-room
 :simpleroom: https://github.com/gameontext/simple-java-room
 :swagger: https://game-on.org/swagger/
-:websocket: link:WebsocketProtocol.adoc
+:websocket: link:WebSocketProtocol.adoc
 :walkthroughs: link:../walkthroughs/README.adoc
 
 Game On! is an application composed of several microservices. The set services
@@ -39,7 +39,7 @@ Having this as a separate entity allows our front-end to be changed and updated
 independently from other services. Some suggest that UI components should be
 provided by each backend service, which can be true with a UI built from distinct
 sections. The game, however, uses a more integrated UI, with much of the rendered
-data coming from a long-lived {websocket}[websocket connection using a custom
+data coming from a long-lived {websocket}[WebSocket connection using a custom
 protocol].
 
 The webapp process has fairly simple scaling requirements, as it serves cachable
@@ -75,10 +75,10 @@ its own microservice for two reasons: 1) the function it performs is not strictl
 related to the notion of a "player", and 2) it has drastically different scaling
 requirements.
 
-After a user has logged in, a websocket is established between the user's device
-and the mediator. The mediator then maintains a second websocket connection to
+After a user has logged in, a WebSocket is established between the user's device
+and the mediator. The mediator then maintains a second WebSocket connection to
 whatever room the player is in. Maintaining two long-lived connections (even with
-asychronous processing going on) will use resources differently than other kinds
+asynchronous processing going on) will use resources differently than other kinds
 of REST or HTTP request processing.
 
 To provide the best user experience it can, the mediator retains cached information
@@ -88,7 +88,7 @@ Room, Empty Room, and Sick Room) to provide a good user experience in the face
 of badly behaved or failing rooms.
 
 The Mediator service is implemented in Java using WebSphere Liberty, it does not
-use an external data store. As noted above, its API is a {websocket}[websocket
+use an external data store. As noted above, its API is a {websocket}[WebSocket
 endpoint with a custom protocol].
 
 ==== First Room
