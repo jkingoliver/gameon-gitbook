@@ -5,8 +5,7 @@
         "github",
         "heading-anchors",
         "include",
-        "youtube",
-        "js-sequence-hand-diagram"
+        "youtube"
     ],
     "structure": {
         "readme": "README.adoc"
