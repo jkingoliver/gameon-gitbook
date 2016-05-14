@@ -15,11 +15,11 @@
 :websocket: link:WebSocketProtocol.adoc
 :walkthroughs: link:../walkthroughs/README.adoc
 
-Game On! is an application composed of several microservices. The set services
-has changed over time: the best practice with microservice architectures is still
-to start with a monolith or (at least) very large chunks. We started with two
-large blobs, and refined the granularity of services as the application evolved.
-{chronicles}[The Chronicles] describe this evolution, if you're curious.
+Game On! is an application composed of several microservices. The set of services
+has changed over time. The best practice with microservice architectures is still
+to start with a monolith or (at least) with very large chunks. We started with two
+large blobs, and {chronicles}[refined the granularity of services as the application
+evolved].
 
 The core and secondary services are described below, with attention paid to the
 characteristics that made each into a standalone, autonomous microservice.
