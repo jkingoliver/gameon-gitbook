@@ -1,0 +1,233 @@
+= Application Security
+:icons: font
+:toc: preamble
+:toc-title:
+:toclevels: 3
+:imagesdir: /images
+:swagger: https://game-on.org/swagger/
+:jwt-java: https://github.com/jwtk/jjwt
+:jsrsasign: http://kjur.github.io/jsrsasign/
+:jwt-struct: http://jwt.io/introduction/
+
+Game On! has the following general security requirements
+
+. Identify the user.
+. Prevent data alteration in transit.
+. Prevent replay attacks.
+
+We satisfy these requirements using a combination of OAuth protocols, JSON Web
+Tokens (JWTs) and API keys.
+
+== OAuth and OpenID Connect for Player Identification
+
+While the game has a notion of a Player, we decided to opt-out of the password
+management business. Game On! relies on third-parties for user identification.
+When you play the game, you authenticate with an OAuth provider (Facebook,
+GitHub, Google, Twitter). After you have authenticated with the third party,
+we create a signed JWT that we then use to identify you.
+
+image:oauth2.svg["OAuth2 Sequence diagram",align="center"]
+
+== JSON Web Tokens (JWT)
+
+Taken from https://tools.ietf.org/html/rfc7519
+
+```
+   JSON Web Token (JWT) is a compact, URL-safe means of representing
+   claims to be transferred between two parties.  The claims in a JWT
+   are encoded as a JSON object that is used as the payload of a JSON
+   Web Signature (JWS) structure or as the plaintext of a JSON Web
+   Encryption (JWE) structure, enabling the claims to be digitally
+   signed or integrity protected with a Message Authentication Code
+   (MAC) and/or encrypted.
+```
+
+Game On! typically uses JWTs to authorize actions on behalf of the user. The JWT
+standard contains headers for identifying the user and the actions they are
+entitled to perform e.g. delete a resource or register a new end point. The use
+of signed JWTs allows services to be sure that the token has not been modified
+as it is passed from service to service.
+
+JWTs are created and signed according to the method described in the "Which is
+the JSON Web Token Structure" section of the {jwt-struct}[introduction to JWTs]
+at http://jwt.io.
+
+The claims used as those specified by https://tools.ietf.org/html/rfc7519#section-4.1.
+
+Note: Unless otherwise stated, Game On! uses *RS256* as the signature algorithm.
+
+=== References
+
+* Testing your JWT : http://jwt.io/#debugger-io
+* Browser JS for working with JWT's, {jsrsasign}[{jsrsasign}]
+* Server side JTW processing with JJWT : {jwt-java}[{jwt-java}]
+* JSON Web Token RFC : https://tools.ietf.org/html/rfc7519
+
+== Signed Requests
+
+Signed requests are used to validate and authorize service-to-service API
+invocation. Trust is achieved through the use of a shared secret to create a
+HMAC (https://en.wikipedia.org/wiki/Hmac) signature that can be used to verify
+that request data did not change in transit.
+
+A signed request can be sent to Game On! using HTTP headers, as part of the
+query string or a combination of both. Duplicate entries will be treated as an
+invalid request. The following table lists the values that need to be supplied
+when signing your request.
+
+Note : unless otherwise stated, Game On! uses the *SHA-256* algorithm to
+generate or validate hashes.
+
+
+[cols="4*"]
+|===
+|Name
+|Description
+|Required
+|Notes
+
+|*gameon-id*
+|Your room public API key.
+|Required
+|When you obtain a room API key from Game On! you are given a public key and a
+ secret. The public key identifies the room instance and the developer that created it.
+
+|*gameon-date*
+|The time and date when the request was created in UTC
+|Required
+|The time must be in UTC!
+
+|*gameon-signature*
+|Signature to be validated
+|Required
+|The signature is a case insensitive hex string.
+
+|*gameon-sig-headers*
+|The list of headers which are part of the signature, followed by a hash of
+  the header list.
+|Optional
+|Headers are a semi-colon delimited list. This must not include any of
+  the ** gameon-* ** names. Each API may define a slightly different set.
+
+|*gameon-sig-params*
+|The list of query parameters which are part of the signature, followed by a
+  hash of the parameter list.
+|Optional
+|Parameters are a semi-colon delimited list. This must not include any of
+  the ** gameon-* ** names even if you are passing them as parameters.
+
+|*gameon-sig-body*
+|Hash of the contents of the body of any request.
+|Optional
+|Typically used to ensure that JSON sent to the server has not been modified
+  in transit.
+
+|===
+
+=== Constructing a Signed Request
+
+These steps work against the set of headers being constructed for the
+request message:
+
+. Create the **gameon-sig-headers** value (if required)
+.. For each HTTP header that is to be part of the signature
+... Add the name to the list of headers (entries are delimited by semi-colons)
+... Append the value to a hash (typically this is done by repeatedly calling a
+    hash function)
+.. Calculate the hash from all the appended values and add it to the end of the
+   **gameon-sig-headers** value as a lower case hex string.
+. Create the **gameon-sig-params** value (if required)
+.. Follow the same procedure as for headers detailed in step 1.
+. Create the **gameon-sig-body** value (if required) by hashing the contents of
+  the request body.
+. Convert the current time and date to UTC and store in **gameon-date**
+. Put your public API key in **gameon-id**.
+. Create the **gameon-signature** value
+.. Initialise a HMAC-SHA256 function
+.. The secret for the HMAC is your API secret.
+.. Add the value of **gameon-id**
+.. Add the value of **gameon-date**
+.. Add the value of **gameon-sig-headers** (if present)
+.. Add the value of **gameon-sig-parameters** (if present)
+.. Add the value of **gameon-sig-body** (if present)
+.. Generate the HMAC, convert it to lowercase hex, and store in **gameon-signature**.
+
+==== Examples of Signed Requests
+
+The following are examples only of how headers and query strings are combined
+to create signed requests. API Documentation will describe which operations
+must be signed, and how.
+
+1) A signed GET request which includes the Content-Type HTTP header in the signature.
+
+----
+GET /map HTTP/1.1
+Content-Type: application/json
+gameon-id: MyPublicRoomID
+gameon-date: 20160212T114600Z
+gameon-sig-headers: Content-Type;56a65fb554ccc3
+gameon-signature: 879bca12f2314cd
+----
+
+2)  A signed POST request which signs the JSON body content
+
+----
+POST http://gameon.org/..... HTTP/1.1
+Content-Type: application/json
+gameon-id: MyPublicRoomID
+gameon-date: 20160212T114600Z
+gameon-sig-body: fe272346cadd
+gameon-signature: 834534aaa314cd
+
+{id='test'}
+----
+
+3) A signed request that mixes headers and parameters, **gameon-date** is not included in the **gameon-sig-params** field as it is already used elsewhere in the signature process.
+
+----
+GET /map?gameon-date=20160212T114600Z&type=all&format=json HTTP/1.1
+Content-Type: application/json
+gameon-id: MyPublicRoomID
+gameon-sig-headers: Content-Type;56a65fb554ccc3
+gameon-sig-params: type;format;45fadd33
+gameon-signature: 879bca12f2314cd
+----
+
+=== Parsing Signed Requests
+
+Signed requests should be validated as followed. A 404 should be returned if
+any of the following checks fail.
+
+. Examine the value of **gameon-id** and ensure that it is valid and has
+  not been revoked.
+. Construct a signature value using the steps described above and shared secret
+  that is paired with the supplied (and valid) **gameon-id**. This signature
+  value must match the value of the **gameon-signature** header.
+  +
+  The shared secret confirms the identity of the sender.
+. Examine the value of **gameon-date** to ensures that the request is not
+  older than 5 minutes.
+.. For non-idempotent requests that are less than 5 minutes old, the signature
+   should be compared to recently seen requests to prevent replays
+. Examine the value **gameon-sig-headers** (if present)
+.. Generate a hash from the specified header values
+.. Verify that the hash matches the request.
+. Examine the value **gameon-sig-params** (if present)
+.. Generate a hash from the specified parameter values
+.. Verify that the hash matches the request.
+. Examine the value **gameon-sig-body** (if present)
+.. Generates a hash from the request body
+.. Verify that the hash matches the request.
+
+
+=== References
+
+. Standard HTTP headers and well known non-standard ones :  https://tools.ietf.org/html/rfc7235
+. How to define custom HTTP headers : http://tools.ietf.org/html/rfc6648
++
+A quick note about custom HTTP headers. Originally it was recommended that custom
+headers start with x-, so this is why you see headers such as x-api-key and x-amz-date.
+However in the latest RFC, this has been changed to say that you should use
+something meaningful, and it no longer needs to be prefixed with x-. If you want
+to avoid potential name space clashes then try and use something unique to your
+application or organization (like gameon-, in our case).

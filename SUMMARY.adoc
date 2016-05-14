@@ -1,8 +1,9 @@
 = Summary
 
 . link:README.adoc[Introduction]
-. link:game_play.adoc[Game play]
+. link:game_play.adoc[Game Play]
 . link:microservices/README.adoc[Application Architecture]
 .. link:microservices/WebSocketProtocol.adoc[WebSocket Protocol]
-. link:walkthroughs/README.adoc[Extending the game]
+.. link:microservices/ApplicationSecurity.adoc[Application Security]
+. link:walkthroughs/README.adoc[Extending the Game]
 . link:chronicles/README.adoc[Appendix: The Chronicles]

@@ -1,5 +1,8 @@
 http://plantuml.com/plantuml
 
+====================
+WebSocket Protocol
+
 http://plantuml.com/plantuml/png/lLPDRnen4BtlhnZHGzk8ffMg81M5I8HasqeXHSkXP-CTM9V5fhQ1eYZ_lVQmdopGV4ZT0sWzuvatRzxOQ-P2Bfbc2v3AuZNZyvbMAnaFLAeql0df2KpDArJIPlRRVYUyw5Ji1d-lK7A4Xm3SCsBQ2YwMJDf6x1jw6cvAnwWpbyyN5vtEDRdSYIdU2Od7x7sjrIPR_XJsFmrkwzlsitSk1k7Db-0nM9QvOP0AT7_CmAYstXfYB9XLkkLjmxejKce1zsI9wfPGQ6F1syaQHa7Gw-L9k98IkJNGwmN123vSmR2RBy9Fd8mLdwCD6BTYpIowhDw9l3IoUDj-E3y_Vmo6j3ZgmZ9bMzJjozt_z_Yg_M2tI-n2wvUYxjXMctRu5e9Qe_QXyi9WAcHim38zGmlQGNv1vDsEw6GPKH3bPRYMP4KGf1IdbdfMO2eeiWeCMsDCmDha9ARq0fp9jnOcw4dX2SPj60i-9zB9RoFIr1NdVeGCKCQaO8yqAsuFX1Qpn7PXu2JEX3Gkl0_gzauLi8bQMR09xlZnlUoRhUI9LbAjJ3Vlh4DBq7nZITr5tppwI_zB959MAZZdxPX3mK-rOKflc7OzMw0nR8P5MlSSm4OgTIuPnXnRHGpqNkDV8qUnHWEuTdiCJBMBeNDc_SCSeGKGcoZZO2JCJT1ocMvzEiTMuRpJ3xpBTGGknTbxCXUDeRT28PdopWh1SHUyrOOzvaPLpyAs7-M0VgckK_6gUyYfIUpunxZPQQDC3Sj9cXVAS-nrbJ7aU2kFZZe_3RbyLIgURF6GQWe2UEeRKmwZDyPO6SbQwUL4bCjXbkqRfgawbAi85kwYXKzWFrMSMQ7aKnjmP5kz9TAtP2CiJmYm-USKkaF6EXMum1zdoftZ3J1Xz9mz-uNVPMXhbK2klp_2FhFwlIFtHUBQk2b2xq-7WZ1mhxHDZWdjkN3gh9tGPqM2OVJgXEMrKnVawoCtPkB03TQOowEJydy78__Oy2U0oGboFcui82Y_AFPFY9BIFSEXcoWMfhYfookYTi1KNeP_0G00
 @startuml
 skinparam noteBackgroundColor #FFFFFF
@@ -98,4 +101,48 @@ M ->> R: close WebSocket
 note left: Mediator disconnects from room
 deactivate R
 deactivate M
+@enduml
+
+==================================
+Oauth2
+
+http://plantuml.com/plantuml/png/TP9HQy8m58NVyolktBCWZ1RcWr1ZAmp1iIfxZkcr1clYabJ7nlxxagZOw9Qda7FkkT-zhTaAkMUQxK0gYsF6jxLMhQoeQfI6no8SOY9NeQGzwtcM5adQqGr-j2WvmZS1TrwPjeABFPFsBdiIpfrDwGhrsVAK96aw3fQPMEDCIFnFpxHMn_FpeCW6D8_BRhkd2Iqcp-I74CQjU-Wj3UeUC0DBih_YG8ys0gKD2esLATiXpEL3qARpMCnQkr5QV34hb8GIzU4SdvM4KEYFNCKGtl9o0Thlp5Ym2XfL2-c9n85PzA7JEVJxen5GPyPAQEGMreutoYSLTcjE-LavZ5r0LOKk9NIxDd50oulVBo4KkP45TweXMNaFS1Hs0-ngy-7SXNSveZcxaHLmrZGhzq6YGSEa9uhyas-OhF4F_0ZxWXOwS8x6m49jKTvW-7yMbDj_C5AD_js8MZgKb_S5h9XnDzU0dJ9ioEWiNgDjjVJUUD6_
+
+@startuml
+skinparam noteBackgroundColor #FFFFFF
+skinparam noteFontColor #EA6F56
+skinparam sequence {
+    ParticipantBackgroundColor #DDDDDD
+    ParticipantBorderColor #35566B
+    LifeLineBorderColor #35566B
+    ArrowColor #0FA0CE
+    LifeLineBackgroundColor #65CFD9
+}
+
+actor "User" as U
+participant "Client" as C
+participant "Game On!" as GO
+participant "Authorization Server" as AS
+
+C -> GO: REST request to login
+activate GO
+GO -->> C: Redirect for Authorization
+deactivate GO
+
+C -> AS: Authorization Code Request
+activate AS
+U -> AS: User Authenticates
+AS -->> C: Redirect with authentication code
+deactivate AS
+
+C -> GO: Authenticated callback
+activate GO
+
+GO -> AS: Exchange Authorization Code
+activate AS
+AS -->> GO: Access Token
+deactivate AS
+note over GO: Create signed JWT based on access token
+GO -->> C: return JWT
+deactivate GO
 @enduml

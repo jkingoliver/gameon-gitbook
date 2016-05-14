@@ -5,7 +5,7 @@
 :toclevels: 2
 :imagesdir: /images
 :chronicles: link:../chronicles/README.adoc
-:jwts: https://game-on.org/swagger/
+:jwts: link:ApplicationSecurity.adoc
 :goroom: https://github.com/gameontext/gameon-room-go
 :maproom: https://game-on.org/swagger/
 :nodejsroom: https://github.com/gameontext/gameon-room-nodejs

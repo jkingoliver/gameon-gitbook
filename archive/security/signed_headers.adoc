@@ -1,6 +1,0 @@
-= Signed headers
-:icons: font
-:toc:
-:toc-placement: preamble
-:toclevels: 2
-:imagesdir: /images

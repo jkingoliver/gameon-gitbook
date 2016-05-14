@@ -5,7 +5,7 @@
 :toclevels: 1
 :imagesdir: /images
 
-:signedHeaders: link:../security/signed_headers.adoc
+:signedHeaders: link:../microservices/ApplicationSecurity.adoc
 :websocketProtocol: link:../microservices/WebSocketProtocol.adoc
 :game-on: https://game-on.org/
 
