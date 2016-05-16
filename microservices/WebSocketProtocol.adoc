@@ -8,11 +8,32 @@
 
 WebSockets are currently used for two-way asynchronous communication between the Client
 (the player's web browser) and the Mediator, and between the Mediator and a Room.
+The Mediator is playing man-in-the-middle, and the goal is to allow as much message
+routing as possible to happen without requiring the Mediator to look at the JSON data.
 
 The protocol used by Game On! is text (rather than binary), and uses a simple
 comma-delimited header followed by a JSON payload, `just,like,{"this": "ok?"}`.
-The Mediator is playing man-in-the-middle, and the goal is to allow as much message
-routing as possible to happen without requiring the Mediator to look at the JSON data.
+
+* The first section, e.g. `just` in the example above, indicates the direction
+  of the message.
+** `player` is used for messages destined for the player/client.
+** `playerLocation` is interpreted by the Mediator and also sent to the
+    player/client.
+** `room*` is used for messages destined for the room.
+* The middle section, e.g. `like` in the example above, indicates the recipient
+  of the message. This element is not present in all messages.
+** For player-directed messages, it is either the specific player's ID, or `*`
+   for messages intended for all players.
+** For room-directed messages, it is the specific room's ID.
+* The last section is a JSON payload, e.g. `{"this": "ok?"}`. The contents
+  vary by message type.
+
+All message formats are documented below, grouped by the sender. Note that
+implementations of a client/front-end or a room need to understand both how to
+send required messages, but also how to receive and process messages of different
+types that will be sent in their direction. A sequence diagram follows to help
+explain the flow of messages.
+
 
 == Messages sent by the Client
 
@@ -25,6 +46,7 @@ ready,{
     "bookmark": id
 }
 ----
+
 Note that the data in the ready message is what the client had cached. It is
 used to determine whether or not history replay applies.
 
@@ -37,6 +59,7 @@ sos,*,{
     "content": "<message>"
 }
 ----
+
 Help! The SOS message is sent to the mediator by the client on behalf of a
 player who is either stuck or bored and just wants a fast-track back to
 First Room.
@@ -50,6 +73,7 @@ room,<roomId>,{
     "content": "<message>"
 }
 ----
+
 The target room id is sent as part of the comma-delimited header so that the
 mediator can discard the message if it arrives after the player has switched rooms.
 
