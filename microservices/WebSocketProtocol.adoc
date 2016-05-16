@@ -28,6 +28,18 @@ ready,{
 Note that the data in the ready message is what the client had cached. It is
 used to determine whether or not history replay applies.
 
+=== Client -> Mediator, sos message
+
+----
+sos,*,{
+    "username": "username",
+    "userId": "<userId>"
+    "content": "<message>"
+}
+----
+Help! The SOS message is sent to the mediator by the client on behalf of a
+player who is either stuck or bored and just wants a fast-track back to
+First Room.
 
 === Client -> Mediator -> Room, chat/command message
 
@@ -44,19 +56,6 @@ mediator can discard the message if it arrives after the player has switched roo
 The content sent from the client is a single text line (just as the player
 entered it). If it begins with `/`, it is a command; if it doesn't, it's just
 chatter.
-
-=== Client -> Mediator, sos message
-
-----
-sos,*,{
-    "username": "username",
-    "userId": "<userId>"
-    "content": "<message>"
-}
-----
-Help! The SOS message is sent to the mediator by the client on behalf of a
-player who is either stuck or bored and just wants a fast-track back to
-First Room.
 
 <<<
 
