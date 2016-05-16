@@ -54,7 +54,7 @@ at http://jwt.io.
 
 The claims used as those specified by https://tools.ietf.org/html/rfc7519#section-4.1.
 
-Note: Unless otherwise stated, Game On! uses *RS256* as the signature algorithm.
+Note: Unless otherwise stated, Game On! uses *RSA-256* as the signature algorithm.
 
 === References
 
@@ -106,14 +106,14 @@ generate or validate hashes.
 |The list of headers which are part of the signature, followed by a hash of
   the header list.
 |Optional
-|Headers are a semi-colon delimited list. This must not include any of
+|Headers are a semi-colon delimited list. Do not include any of
   the ** gameon-* ** names. Each API may define a slightly different set.
 
 |*gameon-sig-params*
 |The list of query parameters which are part of the signature, followed by a
   hash of the parameter list.
 |Optional
-|Parameters are a semi-colon delimited list. This must not include any of
+|Parameters are a semi-colon delimited list. Do not include any of
   the ** gameon-* ** names even if you are passing them as parameters.
 
 |*gameon-sig-body*
@@ -143,7 +143,7 @@ request message:
 . Convert the current time and date to UTC and store in **gameon-date**
 . Put your public API key in **gameon-id**.
 . Create the **gameon-signature** value
-.. Initialise a HMAC-SHA256 function
+.. Initialize a HMAC-SHA256 function
 .. The secret for the HMAC is your API secret.
 .. Add the value of **gameon-id**
 .. Add the value of **gameon-date**
@@ -182,7 +182,9 @@ gameon-signature: 834534aaa314cd
 {id='test'}
 ----
 
-3) A signed request that mixes headers and parameters, **gameon-date** is not included in the **gameon-sig-params** field as it is already used elsewhere in the signature process.
+3) A signed request that mixes headers and parameters. Note that **gameon-date**
+is not included in the **gameon-sig-params** field as it is included explicitly
+in the signature.
 
 ----
 GET /map?gameon-date=20160212T114600Z&type=all&format=json HTTP/1.1
@@ -195,8 +197,8 @@ gameon-signature: 879bca12f2314cd
 
 === Parsing Signed Requests
 
-Signed requests should be validated as followed. A 404 should be returned if
-any of the following checks fail.
+Signed requests should be validated as followed. A response with a 404 return
+code should be returned if any of the following checks fail.
 
 . Examine the value of **gameon-id** and ensure that it is valid and has
   not been revoked.
@@ -230,4 +232,4 @@ headers start with x-, so this is why you see headers such as x-api-key and x-am
 However in the latest RFC, this has been changed to say that you should use
 something meaningful, and it no longer needs to be prefixed with x-. If you want
 to avoid potential name space clashes then try and use something unique to your
-application or organization (like gameon-, in our case).
+application or organization (e.g. gameon-, in our case).
