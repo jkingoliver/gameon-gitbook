@@ -3,11 +3,11 @@
 :toc: preamble
 :toc-title:
 :toclevels: 3
-:imagesdir: /images
 :swagger: https://game-on.org/swagger/
 :jwt-java: https://github.com/jwtk/jjwt
 :jsrsasign: http://kjur.github.io/jsrsasign/
 :jwt-struct: http://jwt.io/introduction/
+:jwt-rfc: https://tools.ietf.org/html/rfc7519
 
 Game On! has the following general security requirements
 
@@ -26,21 +26,22 @@ When you play the game, you authenticate with an OAuth provider (Facebook,
 GitHub, Google, Twitter). After you have authenticated with the third party,
 we create a signed JWT that we then use to identify you.
 
-image:oauth2.svg["OAuth2 Sequence diagram",align="center"]
+image:../images/oauth2.svg["OAuth2 Sequence diagram",align="center"]
 
 == JSON Web Tokens (JWT)
 
-Taken from https://tools.ietf.org/html/rfc7519
+[quote, "IETF RFC 7519", {jwt-rfc}]
+____
+JSON Web Token (JWT) is a compact, URL-safe means of representing
+claims to be transferred between two parties.  The claims in a JWT
+are encoded as a JSON object that is used as the payload of a JSON
+Web Signature (JWS) structure or as the plaintext of a JSON Web
+Encryption (JWE) structure, enabling the claims to be digitally
+signed or integrity protected with a Message Authentication Code
+(MAC) and/or encrypted.
+____
 
-```
-   JSON Web Token (JWT) is a compact, URL-safe means of representing
-   claims to be transferred between two parties.  The claims in a JWT
-   are encoded as a JSON object that is used as the payload of a JSON
-   Web Signature (JWS) structure or as the plaintext of a JSON Web
-   Encryption (JWE) structure, enabling the claims to be digitally
-   signed or integrity protected with a Message Authentication Code
-   (MAC) and/or encrypted.
-```
+Phew! That was dense, but hopefully understandable.
 
 Game On! typically uses JWTs to authorize actions on behalf of the user. The JWT
 standard contains headers for identifying the user and the actions they are
@@ -52,7 +53,8 @@ JWTs are created and signed according to the method described in the "Which is
 the JSON Web Token Structure" section of the {jwt-struct}[introduction to JWTs]
 at http://jwt.io.
 
-The claims used as those specified by https://tools.ietf.org/html/rfc7519#section-4.1.
+The claims used as those specified by {jwt-rfc}#section-4.1[Section 4.1 of
+RFC 7519, Registered Claim Names].
 
 Note: Unless otherwise stated, Game On! uses *RSA-256* as the signature algorithm.
 
@@ -61,7 +63,7 @@ Note: Unless otherwise stated, Game On! uses *RSA-256* as the signature algorith
 * Testing your JWT : http://jwt.io/#debugger-io
 * Browser JS for working with JWT's, {jsrsasign}[{jsrsasign}]
 * Server side JTW processing with JJWT : {jwt-java}[{jwt-java}]
-* JSON Web Token RFC : https://tools.ietf.org/html/rfc7519
+* JSON Web Token RFC : {jwt-rfc}
 
 == Signed Requests
 
@@ -70,6 +72,8 @@ invocation. Trust is achieved through the use of a shared secret to create a
 HMAC (https://en.wikipedia.org/wiki/Hmac) signature that can be used to verify
 that request data did not change in transit.
 
+=== HTTP Elements used to Sign a Request
+
 A signed request can be sent to Game On! using HTTP headers, as part of the
 query string or a combination of both. Duplicate entries will be treated as an
 invalid request. The following table lists the values that need to be supplied
@@ -77,7 +81,6 @@ when signing your request.
 
 Note : unless otherwise stated, Game On! uses the *SHA-256* algorithm to
 generate or validate hashes.
-
 
 [cols="4*"]
 |===

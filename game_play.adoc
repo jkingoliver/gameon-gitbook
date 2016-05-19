@@ -3,7 +3,6 @@
 :toc: preamble
 :toc-title:
 :toclevels: 2
-:imagesdir: /images
 :services: link:microservices/README.adoc
 :charm: https://en.wikibooks.org/wiki/Muggles%27_Guide_to_Harry_Potter/Magic/Permanent_Sticking_Charm
 
