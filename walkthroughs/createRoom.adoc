@@ -1,0 +1,77 @@
+= Creating Rooms
+:icons: font
+:toc: preamble
+:toc-title:
+:toclevels: 2
+:12-factor: link:../about/12-factor.adoc
+:api-key: link:../microservices/ApplicationSecurity.adoc
+:cf-javascript: https://github.com/gameontext/gameon-room-nodejs#introduction
+:cf-java: https://github.com/gameontext/gameon-room-java#introduction
+:ics-go: https://github.com/gameontext/gameon-room-go#introduction
+:ics-java: https://github.com/gameontext/gameon-gitbook/tree/master/archive/getting-started
+:swagger: https://game-on.org/swagger/
+:sweep: link:../microservices/TheSweep.adoc
+:websocket: link:../microservices/WebSocketProtocol.adoc
+
+Creating a simple microservice that provides a room can take as little as 15
+minutes. The base requirements are pretty simple: A room is a service
+registered with the Map that minimally obeys the {websocket}[WebSocket protocol]
+for user interactions.
+
+== Room registration
+
+The {swagger}[Map API] provides a POST operation for registering a room. The
+registration request must be signed using your {api-key}[private API key].
+
+[NOTE]
+====
+Room registration is long-lived: the registration for your room
+will persist until you delete it.
+====
+
+== Create a room as a Cloud Foundry application
+
+A simple, initial version of a room can be stood up in minutes as
+a Cloud Foundry application.
+
+* {cf-javascript}[Create a Game On! Room in JavaScript]
+* {cf-java}[Create a Game On! Room in Java]
+
+Once your basic room service is running, you can navigate to it
+via the UI to make sure it is working.
+
+== Create a room using Docker
+
+Developing and testing your room locally in a production-like
+environment is an important aspect of {12-factor}[Twelve factor
+applications], as it reduces the likelihood that what you create
+locally will fail in new and unexpected ways when activated in
+production.
+
+We support local development and test using Docker Compose.
+
+* {ics-go}[Create a Game On! Room in Go]
+* {ics-java}[Create a Game On! Room in Java]
+
+== Visits from the Sweep
+
+Registered rooms are visited periodically by :sweep:[the Sweep].
+The Sweep will score rooms based on on availabilty, and adherance
+to the Room API (primarily the {websocket}[WebSocket protocol].
+
+Rooms in the map will move based on their score, with high-scoring
+rooms moving toward the center (closer to First Room), and low-scoring
+rooms moving toward the periphery.
+
+== What next?
+
+Let's say you want to make the most popular room ever (an admirable
+goal), which means your room will need to scale to more than one
+instance. How do you propagate chat and events across scaled room
+instances to make sure that it feels like one big room?
+
+You might also explore creating several rooms that relate to each other.
+Should each service be an individual room, or would quantum entanglement
+between the rooms make the bounded context be the suite, rather than any
+individual room? Would rooms need share state or communicate? Given that
+services should remain fiercely independent, where does that state go?

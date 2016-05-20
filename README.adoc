@@ -1,6 +1,5 @@
 = Exploring Microservices -- Game On!
 :icons: font
-:imagesdir: /images
 :microservices: link:microservices/README.adoc
 :extend: link:walkthroughs/README.adoc
 :chronicles: link:chronicles/README.adoc

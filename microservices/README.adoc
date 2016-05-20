@@ -3,13 +3,13 @@
 :toc: preamble
 :toc-title:
 :toclevels: 2
-:imagesdir: /images
 :chronicles: link:../chronicles/README.adoc
-:jwts: link:ApplicationSecurity.adoc
+:map: link:Map.adoc
 :goroom: https://github.com/gameontext/gameon-room-go
 :maproom: https://game-on.org/swagger/
 :nodejsroom: https://github.com/gameontext/gameon-room-nodejs
 :recroom: https://github.com/gameontext/gameon-room
+:security: link:ApplicationSecurty.adoc
 :simpleroom: https://github.com/gameontext/simple-java-room
 :swagger: https://game-on.org/swagger/
 :websocket: link:WebSocketProtocol.adoc
@@ -26,7 +26,7 @@ characteristics that made each into a standalone, autonomous microservice.
 
 == Core Services
 
-image:CoreServices.png["Core services",align="center"]
+image:../images/CoreServices.png["Core services",align="center"]
 
 === webapp
 
@@ -66,7 +66,7 @@ button press sends an async REST request to the Player to initiate the
 authentication process. The Player sends a REST request to the selected OAuth
 provider using the proper credentials. Many redirects later, we get a callback
 from the OAuth provider letting us know that you authenticated properly. We then
-{jwts}[sign a JWT], which is passed back to the client/webapp.
+{security}[sign a JWT], which is passed back to the client/webapp.
 
 === Mediator
 
@@ -112,18 +112,13 @@ preventing repeated access to those rooms until they have been restored.
 
 === Map
 
-The Map maintains a 2-dimensional grid containing all known (registered and
-empty) rooms. Rooms are initially assigned to a coordinate location in the map
-when they are registered, but their location in the map may change over time.
+{map}[The Map] maintains a 2-dimensional grid containing all known (registered
+and empty) rooms.
 
-The Map will make sure that registered rooms have neighbors to the North, South,
-East and West. The behavior of Up or Down (the other two possible room choices)
-are left to the creativity of the room developer to sort out.
-
-The Map service is implemented in Java using WebSphere Liberty. It stores data in
-either couchdb or Cloudant. The {swagger}[public API] was developed in a
-Swagger-first manner, using annotations on JAX-RS resources and POJOs that are
-shared between API requests and DB interactions.
+The Map service is a Java EE application running on WebSphere Liberty that
+provides a {swagger}[public REST API] using JAX-RS. It stores
+data in a NoSQL data store, either couchdb or Cloudant. Methods that modify the
+map require {security}[signed requests].
 
 === Sweep
 
@@ -139,7 +134,7 @@ the entire application.
 
 == Other Services
 
-image:SecondaryServices.png["Secondary services",align="center"]
+image:../images/SecondaryServices.png["Secondary services",align="center"]
 
 === etcd
 

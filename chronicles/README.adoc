@@ -3,7 +3,6 @@
 :toc: preamble
 :toc-title:
 :toclevels: 1
-:imagesdir: /images
 
 :signedHeaders: link:../microservices/ApplicationSecurity.adoc
 :websocketProtocol: link:../microservices/WebSocketProtocol.adoc
@@ -18,7 +17,7 @@ to this section.
 
 == The first pass
 
-image:Progression.001.jpeg[Progression, width=95%]
+image:../images/Progression.001.jpeg[Progression, width=95%]
 
 Our first attempt was typical stand-things-up-in-a hurry hacking. This was a bit
 of a hybrid: we did start this as separate runtime services, but they were built
@@ -40,7 +39,7 @@ player's device and the target room.
 
 == Automation and Cloud
 
-image:Progression.002.jpeg[Progression, width=90%]
+image:../images/Progression.002.jpeg[Progression, width=90%]
 
 Automated build pipelines arrived! and Docker containers out in the cloud!
 Thankfully for those of us doing most of the dev work, the creation, testing of
@@ -53,7 +52,7 @@ containers, and to give us a seamless domain space ({game-on}[game-on.org]).
 
 == Splitting out the web front-end
 
-image:Progression.003.jpeg[Progression, width=95%]
+image:../images/Progression.003.jpeg[Progression, width=95%]
 
 There is no good reason (and many not-good reasons) to have your web front end
 packed in with a Java application. Freeing your front-end developers to be able
@@ -71,7 +70,7 @@ We added CORS filters to the app for the time being and moved on.
 
 == Something other than Java!
 
-image:Progression.004.jpeg[Progression, width=95%]
+image:../images/Progression.004.jpeg[Progression, width=95%]
 
 Our team has nothing against JavaScript, but Java is what we know. When attempting
 something big and new, we felt it usually good idea to constrain the number of
@@ -82,7 +81,7 @@ The Node.js room brought JS to the backend. More will follow.
 
 == Explain it with panache
 
-image:Progression.005.jpeg[Progression, width=95%]
+image:../images/Progression.005.jpeg[Progression, width=95%]
 
 Swagger documentation!
 
@@ -96,7 +95,7 @@ result is documented {websocketProtocol}[here].
 
 == Splitting up the Player service
 
-image:Progression.006.jpeg[Progression, width=95%]
+image:../images/Progression.006.jpeg[Progression, width=95%]
 
 Over time, the Player service, which was filling multiple roles, felt more and
 more out of place. It was already cut down once, when we moved the webapp out,
@@ -118,7 +117,7 @@ this when we started...
 
 ==  Bringing in etcd
 
-image:Progression.007.jpeg[Progression, width=95%]
+image:../images/Progression.007.jpeg[Progression, width=95%]
 
 So, at this point, we had a good fistful of services going through deployment
 pipelines, and we were fresh from the effort of adding a new one (for mediator).
@@ -132,7 +131,7 @@ they were restarted (no dynamic reconfiguration yet).
 
 == Buh-bye to Concierge!
 
-image:Progression.008.jpeg[Progression, width=95%]
+image:../images/Progression.008.jpeg[Progression, width=95%]
 
 Concierge was such a cute service! It was supposed to help players find their
 way from room to room. But it's name was confusing (was it a map or a traffic
@@ -148,13 +147,13 @@ along until its last consumer was cleaned up.
 
 == Map Auth
 
-image:Progression.009.jpeg[Progression, width=95%]
+image:../images/Progression.009.jpeg[Progression, width=95%]
 
 We added {signedHeaders}[signed header-based security] to the Map service APIs.
 
 == More Rooms!
 
-image:Progression.010.jpeg[Progression, width=95%]
+image:../images/Progression.010.jpeg[Progression, width=95%]
 
 Rooms written in Go, another room in JavaScript, and two more in Java. We learned
 lots as other people were able to try adding their own rooms, especially as some
@@ -170,7 +169,7 @@ ____
 
 == Enter: The Sweep
 
-image:Progression.011.jpeg[Progression, width=95%]
+image:../images/Progression.011.jpeg[Progression, width=95%]
 
 Our first non-player character! The Sweep is in early days, so we don't know in
 what directions it will grow, but it will serve an important function: keeping
