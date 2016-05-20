@@ -7,8 +7,9 @@
 :api-key: link:../microservices/ApplicationSecurity.adoc
 :cf-javascript: https://github.com/gameontext/gameon-room-nodejs#introduction
 :cf-java: https://github.com/gameontext/gameon-room-java#introduction
-:ics-go: https://github.com/gameontext/gameon-room-go#introduction
-:ics-java: https://github.com/gameontext/gameon-gitbook/tree/master/archive/getting-started
+:docker-go: https://github.com/gameontext/gameon-room-go#introduction
+:docker-java: https://github.com/gameontext/gameon-room-java-docker#introduction
+:first-room: https://game-on.org/#/play
 :swagger: https://game-on.org/swagger/
 :sweep: link:../microservices/TheSweep.adoc
 :websocket: link:../microservices/WebSocketProtocol.adoc
@@ -18,15 +19,11 @@ minutes. The base requirements are pretty simple: A room is a service
 registered with the Map that minimally obeys the {websocket}[WebSocket protocol]
 for user interactions.
 
-== Room registration
-
-The {swagger}[Map API] provides a POST operation for registering a room. The
-registration request must be signed using your {api-key}[private API key].
-
 [NOTE]
 ====
 Room registration is long-lived: the registration for your room
-will persist until you delete it.
+will persist until you delete it. You can list and delete your registered
+rooms using commands in {first-room}[First Room].
 ====
 
 == Create a room as a Cloud Foundry application
@@ -37,10 +34,13 @@ a Cloud Foundry application.
 * {cf-javascript}[Create a Game On! Room in JavaScript]
 * {cf-java}[Create a Game On! Room in Java]
 
-Once your basic room service is running, you can navigate to it
-via the UI to make sure it is working.
+Once your basic room service is running, {first-room}[navigate or teleport] to
+it to make sure it is working, then consider <<what-next,what to try next>>.
 
 == Create a room using Docker
+
+* {docker-go}[Create a Game On! Room in Go using Docker containers]
+* {docker-java}[Create a Game On! Room in Java using Docker containers]
 
 Developing and testing your room locally in a production-like
 environment is an important aspect of {12-factor}[Twelve factor
@@ -48,14 +48,13 @@ applications], as it reduces the likelihood that what you create
 locally will fail in new and unexpected ways when activated in
 production.
 
-We support local development and test using Docker Compose.
-
-* {ics-go}[Create a Game On! Room in Go]
-* {ics-java}[Create a Game On! Room in Java]
+We support local development and test using Docker Compose. The walkthroughs
+above contain `docker-compose.yml` files, with example overlays for local
+development.
 
 == Visits from the Sweep
 
-Registered rooms are visited periodically by :sweep:[the Sweep].
+Registered rooms are visited periodically by {sweep}[the Sweep].
 The Sweep will score rooms based on on availabilty, and adherance
 to the Room API (primarily the {websocket}[WebSocket protocol].
 
@@ -63,6 +62,7 @@ Rooms in the map will move based on their score, with high-scoring
 rooms moving toward the center (closer to First Room), and low-scoring
 rooms moving toward the periphery.
 
+[[what-next]]
 == What next?
 
 Let's say you want to make the most popular room ever (an admirable

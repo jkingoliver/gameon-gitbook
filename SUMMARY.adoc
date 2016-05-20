@@ -1,12 +1,13 @@
 = Summary
 
 . link:README.adoc[Exploring Microservices — Game On!]
-. link:game_play.adoc[Game Play]
 . link:microservices/README.adoc[Application Architecture]
 .. link:microservices/WebSocketProtocol.adoc[WebSocket Protocol]
 .. link:microservices/ApplicationSecurity.adoc[Application Security]
+. link:game_play.adoc[Game Play]
 . link:walkthroughs/README.adoc[Extending the Game]
 .. link:walkthroughs/createRoom.adoc[Creating Rooms]
-. link:about/README.adoc[Appendix: Microservice Architectures]
+//.. link:walkthroughs/createNPC.adoc[Creating Non-Player Characters]
+//.. link:walkthroughs/createMore.adoc[Advanced Adventures]
+. link:about/README.adoc[Microservices: The Backstory]
 . link:chronicles/README.adoc[Appendix: The Chronicles]
-

@@ -1,2 +1,5 @@
-= Appendix: Microservice Architectures
-
+= Microservices: The Backstory
+:icons: font
+:toc: preamble
+:toc-title:
+:toclevels: 2

@@ -1,4 +1,4 @@
-= Game On! WebSocket Protocol
+= WebSocket Protocol
 :icons: font
 :toc: preamble
 :toc-title:

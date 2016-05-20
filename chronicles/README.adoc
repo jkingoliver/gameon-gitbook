@@ -3,7 +3,6 @@
 :toc: preamble
 :toc-title:
 :toclevels: 1
-
 :signedHeaders: link:../microservices/ApplicationSecurity.adoc
 :websocketProtocol: link:../microservices/WebSocketProtocol.adoc
 :game-on: https://game-on.org/

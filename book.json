@@ -1,5 +1,9 @@
 {
-    "gitbook": "2.x.x",
+    "title": "Exploring Microservices — Game On!",
+
+    "gitbook": ">=3.0.0-pre.0",
+
+
     "plugins": [
         "addcssjs",
         "github",
