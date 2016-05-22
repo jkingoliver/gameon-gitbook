@@ -4,6 +4,8 @@
 :toc-title:
 :toclevels: 2
 :services: link:microservices/README.adoc
+:swagger: https://game-on.org/swagger/
+:security: link:microservices/ApplicationSecurity.adoc
 :charm: https://en.wikibooks.org/wiki/Muggles%27_Guide_to_Harry_Potter/Magic/Permanent_Sticking_Charm
 
 Games are meant to be played! The only objective for a game player is to be
@@ -54,3 +56,24 @@ First room also provides some useful custom commands for room developers.
 | /teleport    | Teleport to the specified room, e.g. `/teleport room-id`
 | /deleteroom | Delete the specified room, e.g. `/deleteroom room-id`
 |==========================
+
+
+[[user-profile]]
+== User profile: User details, Secrets, and JWTs
+
+Once you've logged into the game, a link in the top right (either your user
+name or a person icon depending on screen size) will take you to your user
+profile page.
+
+The profile page allows you to edit your user name and favorite color, and
+will display the information needed to register your own rooms or to play with
+protected methods in {swagger}[Swagger].
+
+[[shared-secret]]
+=== Shared secret (Room registration)
+
+Room registration requires a request that is {security}[signed] using the shared
+secret shown in this section. Your user id, which is not shown in the game,
+is used as a public access token to identify rooms that you register.
+
+===
