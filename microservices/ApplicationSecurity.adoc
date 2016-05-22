@@ -240,12 +240,12 @@ gameon-signature: WXYXWRakMM6rymXc82MZdP3ToiNSFJs0b7pShi32T9I=
 Signed requests should be validated as followed. A response with a 404 return
 code should be returned if any of the following checks fail.
 
+. Compare the **gameon-signature** value to those from recently seen requests
+  to protect against replay attacks. Minimally, non-idempotent methods
+  (e.g. POST) should be checked, but others can as well.
+. Examine the value of **gameon-date** and ensure it is less than 5 minutes old
 . Examine the value of **gameon-id** and ensure that it is valid and has
   not been revoked.
-. Examine the value of **gameon-date** and ensure it is less than 5 minutes old
-.. For non-idempotent requests (i.e. POST requests) that are less than 5
-   minutes old, the **gameon-signature** value should be compared to recently
-   seen requests to prevent replays.
 . Examine the value of **gameon-sig-headers** (if present)
 .. Generate a
    <<multi-value-hash, new hash from the specified HTTP header values>>
