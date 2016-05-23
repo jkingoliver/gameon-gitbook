@@ -151,11 +151,14 @@ request message:
   hash of the request body as a value.
 . Add the **gameon-signature** header:
 .. Initialize a HMAC-SHA256 function using your shared secret.
-.. Update with the value of **gameon-id**
-.. Update with the value of **gameon-date**
-.. Update with the value of **gameon-sig-headers** (if present)
-.. Update with the value of **gameon-sig-parameters** (if present)
-.. Update with the value of **gameon-sig-body** (if present)
+... Update with the request method, e.g. GET, POST, etc.
+... Update with the requested URI, not including query parameters,
+   e.g. /map/v1/sites
+... Update with the value of **gameon-id**
+... Update with the value of **gameon-date**
+... Update with the value of **gameon-sig-headers** (if present)
+... Update with the value of **gameon-sig-parameters** (if present)
+... Update with the value of **gameon-sig-body** (if present)
 .. Generate the HMAC and convert it to lowercase hex, and use the result as the
    value.
 
@@ -188,9 +191,9 @@ signature in the following examples using the algorithm above.
 
 ----
 GET /map/v1/sites/aRoomId HTTP/1.1
-gameon-id: MyPublicRoomID
+gameon-id: MyUserId
 gameon-date: Sat, 21 May 2016 19:14:54 GMT
-gameon-signature: MLaM6RARWJAJ4rCPQlB4+r1MABPgZ4VueSsh6ANB7jU=
+gameon-signature: mYsWeiZm9oyUmJXo1uCwq1AHoHSm5eLrblU9q35EjOU=
 ----
 
 2)  A signed POST request which includes the JSON body content, but no other
@@ -198,25 +201,25 @@ headers.
 
 ----
 POST /map/v1/sites HTTP/1.1
+gameon-id: MyUserId
+gameon-date: Sat, 21 May 2016 19:14:54 GMT
+gameon-sig-body: AWRN0wv343B7k7Ucp1sipeM2U9hZLVlMzPNA6uUiyug=
+gameon-signature: jblpGaN8bjd4SmhsK341EP1x7e2w8sZ3L1T64YB+mrQ=
 Content-Type: application/json
-Content-Length:
-gameon-id: MyPublicRoomID
-gameon-date: 20160212T114600Z
-gameon-sig-body: fe272346cadd
-gameon-signature: 834534aaa314cd
+Content-Length: 12
 
-{id='test'}
+{id: 'test'}
 ----
 
 3) A signed POST request that includes JSON body content and headers
 
 ----
 POST /map/v1/sites HTTP/1.1
-gameon-id: MyPublicRoomID
+gameon-id: MyUserId
 gameon-date: Sat, 21 May 2016 19:14:54 GMT
 gameon-sig-headers: Content-Type;Content-Length;47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
 gameon-sig-body: AWRN0wv343B7k7Ucp1sipeM2U9hZLVlMzPNA6uUiyug=
-gameon-signature: Q1zKlkhe9R4tNtwCfA2y9cMtyVqxfGyzyy3GKDSYFAU=
+gameon-signature: 3E3+YFH6qd30WlujaOellykNWxH0AOMecFvuHyYV42k=
 Content-Type: application/json
 Content-Length: 12
 
@@ -226,11 +229,11 @@ Content-Length: 12
 4) A signed GET request with parameters
 
 ----
-GET /map?owner=MyPublicRoom HTTP/1.1
-gameon-id: MyPublicRoomID
+GET /map/v1/sites?owner=MyUserId HTTP/1.1
+gameon-id: MyUserId
 gameon-date: Sat, 21 May 2016 19:14:54 GMT
-gameon-sig-params: owner;z5tOtkGR+FilAT42R/P/AbTH3wLCXSBG6qH+q6fYLxE=
-gameon-signature: WXYXWRakMM6rymXc82MZdP3ToiNSFJs0b7pShi32T9I=
+gameon-sig-params: owner;HkP19XXoI90rtg6yWMTACQ20rWZQhbGmgFDMjHSU2qg=
+gameon-signature: bb0otJw4jDitSf7DXNWMjQEwsoaZqjXlSrE8Wkvkf6s=
 ----
 
 
@@ -260,11 +263,14 @@ code should be returned if any of the following checks fail.
 . Examine the value of the **gameon-signature** header:
 .. Initialize a HMAC-SHA256 function using the shared secret associated with
    the **gameon-id**. The shared secret confirms the identity of the sender.
-.. Update with the value of **gameon-id**
-.. Update with the value of **gameon-date**
-.. Update with the value of **gameon-sig-headers** (if present)
-.. Update with the value of **gameon-sig-parameters** (if present)
-.. Update with the value of **gameon-sig-body** (if present)
+... Update with the request method, e.g. GET, POST, etc.
+... Update with the requested URI, not including query parameters,
+   e.g. /map/v1/sites
+... Update with the value of **gameon-id**
+... Update with the value of **gameon-date**
+... Update with the value of **gameon-sig-headers** (if present)
+... Update with the value of **gameon-sig-parameters** (if present)
+... Update with the value of **gameon-sig-body** (if present)
 .. Generate the HMAC and convert it to lowercase hex, compare this value to
    the value of the **gameon-signature** header.
 
