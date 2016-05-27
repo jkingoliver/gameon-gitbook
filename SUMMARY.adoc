@@ -4,6 +4,7 @@
 . link:microservices/README.adoc[Application Architecture]
 .. link:microservices/WebSocketProtocol.adoc[WebSocket Protocol]
 .. link:microservices/ApplicationSecurity.adoc[Application Security]
+.. link:microservices/Map.adoc[Maintaining the Map]
 . link:game_play.adoc[Game Play]
 . link:walkthroughs/README.adoc[Extending the Game]
 .. link:walkthroughs/createRoom.adoc[Creating Rooms]
