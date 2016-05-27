@@ -42,12 +42,17 @@ explain the flow of messages.
 ready,{
     "mediatorId": "cached-id",
     "roomId": "cached-room-id",
-    "bookmark": id
+    "bookmark": "id",
+    "client-version": [1]
 }
 ----
 
 Note that the data in the ready message is what the client had cached. It is
 used to determine whether or not history replay applies.
+
+The client-version field is a list of number, and the only version supported by
+the mediator currently is '1'. If the version attribute is missing, it is assumed
+to be 1.
 
 === Client -> Mediator, sos message
 
@@ -60,7 +65,7 @@ sos,*,{
 ----
 
 Help! The SOS message is sent to the mediator by the client on behalf of a
-player who is either stuck or bored and just wants a fast-track back to
+player who is either stuck or bored and just wants a fast-path back to
 First Room.
 
 === Client -> Mediator -> Room, chat/command message
@@ -104,7 +109,8 @@ ack,{
     "commands": {
         "/help": "...",
         ...
-    }
+    },
+    "client-version": 1
   }
 ----
 
@@ -113,6 +119,7 @@ and again whenever the player's location changes, as an assist for cache-refresh
 
 The commands included in the `ack` are the common commands that are always supported.
 
+If the client-version attribute is missing, it is assumed to be 1.
 
 === Mediator -> Room, roomHello message
 

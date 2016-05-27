@@ -120,12 +120,12 @@ http://www.ietf.org/rfc/rfc2616[RFC 2616 formats]
 |See the API documentation for a list of headers to include in the signature.
 Do not include ** gameon-* ** headers.
 
-//|*gameon-sig-params*
-//|A semi-colon delimited list of query parameter names, followed by a
-//  hash of the values for the listed parameters.
-//|Varies per operation
-//|See the API documentation for the list of query parameters to include in the
-//signature. Do not include ** gameon-* ** parameters.
+|*gameon-sig-params*
+|A semi-colon delimited list of query parameter names, followed by a
+  hash of the values for the listed parameters.
+|Varies per operation
+|See the API documentation for the list of query parameters to include in the
+signature. Do not include ** gameon-* ** parameters.
 
 |*gameon-sig-body*
 |Hash of the contents of the request body.
@@ -157,7 +157,7 @@ request message:
 ... Update with the value of **gameon-id**
 ... Update with the value of **gameon-date**
 ... Update with the value of **gameon-sig-headers** (if present)
-... Update with the value of **gameon-sig-parameters** (if present)
+... Update with the value of **gameon-sig-params** (if present)
 ... Update with the value of **gameon-sig-body** (if present)
 .. Generate the HMAC and convert it to lowercase hex, and use the result as the
    value.
@@ -269,7 +269,7 @@ code should be returned if any of the following checks fail.
 ... Update with the value of **gameon-id**
 ... Update with the value of **gameon-date**
 ... Update with the value of **gameon-sig-headers** (if present)
-... Update with the value of **gameon-sig-parameters** (if present)
+... Update with the value of **gameon-sig-params** (if present)
 ... Update with the value of **gameon-sig-body** (if present)
 .. Generate the HMAC and convert it to lowercase hex, compare this value to
    the value of the **gameon-signature** header.

@@ -1,4 +1,4 @@
-= Exploring Microservices -- Game On!
+= Introduction
 :icons: font
 :microservices: link:microservices/README.adoc
 :extend: link:walkthroughs/README.adoc
