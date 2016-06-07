@@ -274,6 +274,44 @@ code should be returned if any of the following checks fail.
 .. Generate the HMAC and convert it to lowercase hex, compare this value to
    the value of the **gameon-signature** header.
 
+=== Signing WebSocket requests (Mediator to room)
+
+WebSockets are just upgraded HTTP connections, so we can use the same general mechanics
+as above to sign WebSocket requests.
+
+A unique aspect of this application is that the central services of the game are
+calling out to your rooms: it is likely that you would want to make sure it is
+the game calling your room, and not an unknown party.
+
+One of the things you can provide when registering your room is a token. If a
+token is present, we will create an hmac signature for the request using the
+following procedure:
+
+. Add the **gameon-date** header with the the current time and date in UTC
+  (RFC 1123 format) as its value.
+. Add the **gameon-signature** header:
+.. Initialize a HMAC-SHA256 function using the shared token.
+... Update with the requested URI, not including query parameters, e.g. /ws/room
+... Update with the value of **gameon-date**
+.. Generate the HMAC and convert it to lowercase hex, and use the result as the
+   value.
+
+When your room receives the signed request to initiate the WebSocket connection,
+verify the signature. Then create a new signature in the response
+built from the signature in the request and a new date:
+
+. Add the **gameon-date** header to the response with the the current time and
+  date in UTC (RFC 1123 format) as its value.
+. Add the **gameon-signature** header to the response:
+.. Initialize a HMAC-SHA256 function using the shared token.
+... Update with the value of **gameon-date**
+... Update with the value of **gameon-signature** from the request headers
+.. Generate the HMAC and convert it to lowercase hex, and use the result as the
+   value.
+
+The Mediator will verify that signature as part of the handshake to establish
+the connection.
+
 
 === References
 

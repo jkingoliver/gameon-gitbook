@@ -55,6 +55,11 @@ Site {
 There are two types of sites: `empty`, for unassigned sites, and `room`, for
 assigned sites.
 
+When returned from Map operations, a `Site` contains additional generated data
+describing exits.
+
+=== Room Registration
+
 The room registration API expects a JSON structure describing the room
 as a parameter. This includes connection details and descriptions of the room's
 doors.
@@ -80,9 +85,6 @@ doors.
   }
 }
 ----
-
-As a return parameter from Map operations, a `Site` contains an additional,
-generated data describing the sites exits.
 
 == The Nature of Doors
 

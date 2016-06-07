@@ -4,6 +4,7 @@
 :toc-title:
 :toclevels: 3
 :swagger: https://game-on.org/swagger/
+:security: link:ApplicationSecurty.adoc
 
 WebSockets are currently used for two-way asynchronous communication between the Client
 (the player's web browser) and the Mediator, and between the Mediator and a Room.
@@ -33,6 +34,9 @@ send required messages, but also how to receive and process messages of differen
 types that will be sent in their direction. A sequence diagram follows to help
 explain the flow of messages.
 
+WebSocket connections between the Mediator and the Room can also be
+(security)[signed].
+
 
 == Messages sent by the Client
 
@@ -40,19 +44,13 @@ explain the flow of messages.
 
 ----
 ready,{
-    "mediatorId": "cached-id",
     "roomId": "cached-room-id",
     "bookmark": "id",
-    "client-version": [1]
-}
+
 ----
 
 Note that the data in the ready message is what the client had cached. It is
 used to determine whether or not history replay applies.
-
-The client-version field is a list of number, and the only version supported by
-the mediator currently is '1'. If the version attribute is missing, it is assumed
-to be 1.
 
 === Client -> Mediator, sos message
 
@@ -89,6 +87,24 @@ chatter.
 
 == Messages sent by the Mediator
 
+=== Mediator -> Client, acknowledgement (ack) message
+
+----
+ack,{
+    "mediatorId": "assigned-id",
+    "roomId": "current-room-id",
+    "commands": {
+        "/help": "...",
+        ...
+    }
+  }
+----
+
+Sent when the connection between the client and the mediator is first established,
+and again whenever the player's location changes, as an assist for cache-refreshes.
+
+The commands included in the `ack` are the common commands that are always supported.
+
 === Mediator -> Client, progress messages
 
 ----
@@ -100,64 +116,77 @@ player,<playerId>,{
 
 These are short messages that the Mediator sends while managing room connections.
 
-=== Mediator -> Client, acknowledgement (ack) message
-
-----
-ack,{
-    "mediatorId": "assigned-id",
-    "roomId": "current-room-id",
-    "commands": {
-        "/help": "...",
-        ...
-    },
-    "client-version": 1
-  }
-----
-
-Sent when the connection between the client and the mediator is first established,
-and again whenever the player's location changes, as an assist for cache-refreshes.
-
-The commands included in the `ack` are the common commands that are always supported.
-
-If the client-version attribute is missing, it is assumed to be 1.
-
 === Mediator -> Room, roomHello message
 
 ----
 roomHello,<roomId>,{
     "username": "username",
     "userId": "<userId>",
-    "version": 1
+    "version": 1,
+    "recovery": true|false
 }
 ----
 
-Sent when a player joins or reconnects to a room.
-Version is the version of this WebSocket protocol selected by the mediator to
-use when communicating with the room.
-Currently the only supported version is '1'
+Sent when a player changes location to arrive in the room. The version field
+is the version of this WebSocket protocol selected by the mediator based on
+the ack sent by the room.
+
+The "recovery" attribute may not be present. If it is present, and `true`, then
+the roomHello is happening after recovering from a dropped or failed connection.
+Users may or may not be already known to the room.
+
+Supported versions: 1, 2
 
 === Mediator -> Room, roomGoodbye message
 
 ----
 roomGoodbye,<roomId>,{
     "username": "username",
-    "userId": "<userId>",
+    "userId": "<userId>"
 }
 ----
 
 Sent when a player leaves the room to go to another room, e.g. after a `/go *`
 or `/sos` command.
 
+=== Mediator -> Room, roomJoin message (version 2)
+
+----
+roomJoin,<roomId>,{
+    "username": "username",
+    "userId": "<userId>",
+    "version": 2
+}
+----
+
+Sent when a player joins or reconnects to a room, e.g. they log back into the
+game, as their location is persisted. Think if this as the player becoming
+active after being away.
+
+Used in version 2 of the protocol.
+
+=== Mediator -> Room, roomPart message (version 2)
+
+----
+roomPart,<roomId>,{
+    "username": "username",
+    "userId": "<userId>",
+}
+----
+
+Sent when a player leaves the room without moving to another room, e.g. they
+log out, close their browser, or otherwise drop their connection. Think of this
+as the player going `away`.
+
 <<<
 
 == Messages sent by the Room
 
-Rooms can always broadcast everything to everyone. These messages have a place
-for the player id in the routing information. A specific player id or `*` can
-be used. The Mediator will filter based on the supplied player id when relaying
-events to clients.
+Rooms can always broadcast everything to everyone. Use either a specific player
+id or `*`in the routing  information to allow downstream filters to direct
+traffic appropriately.
 
-=== Room -> Mediator, acknowledgement (ack) with version
+=== Room -> Mediator, acknowledgement (ack) with supported versions
 
 This packet should be sent when the WebSocket is opened, and indicates the
 possible versions of this WebSocket communication protocol supported by the
@@ -165,12 +194,11 @@ room (or rooms) behind this WebSocket endpoint.
 
 ----
 ack,{
-    "version": [1]
-  }
+    "version": [1,2]
+}
 ----
 
-The version field is a list of number, and the only version supported by the
-mediator currently is '1'.
+The version field is a list of number.
 
 === Room -> Mediator -> Client, location message
 
@@ -195,7 +223,7 @@ player,<playerId>,{
 ----
 
 Note: Some attributes, like "exits", "commands", and "roomInventory" can also be
-sent with other room events as a pseudo-push notification
+sent with other room events as a pseudo-push notification.
 
 === Room -> Mediator -> Client, chat messages
 
@@ -205,11 +233,14 @@ player,*,{...}
   "type": "chat",
   "username": "username",
   "content": "<message>",
-  "bookmark": <long room-specific message id>
+  "bookmark": "String representing last message seen"
 }
 ----
 
 Content is a simple string containing the chat message.
+
+The bookmark is used when a client re-joins, to allow missed messages to be
+returned to the client when requested. Mechanism for this TBD.
 
 === Room -> Mediator -> Client, Event message
 
@@ -220,7 +251,7 @@ player,<playerId>,{
         "*": "general text for everyone",
         "<playerId>": "specific to player"
         },
-    "bookmark": <long room-specific message id>
+    "bookmark": "String representing last message seen"
 }
 player,*,{
     "type": "event",
@@ -228,7 +259,7 @@ player,*,{
         "*": "general text for everyone",
         "<playerId>": "specific to player"
     },
-    "bookmark": <long room-specific message id>
+    "bookmark": "String representing last message seen"
 }
 ----
 
@@ -240,7 +271,7 @@ is the same to make it easier to deal with consistently. Typical patterns would 
 player,playerA,{
     "type":"event",
     "content": {"*": "You feel the earth move"},
-    "bookmark": 231
+    "bookmark": "roomName-235"
 }
 
 player,*,{
@@ -249,22 +280,24 @@ player,*,{
         "playerA": "You feel the earth move",
         "*": "playerA looks rather ill"
     },
-    "bookmark": 245
+    "bookmark": "backendTopic-identifier"
 }
 ----
+
+The bookmark is used when a client re-joins, to allow missed messages to be
+returned to the client when requested. Mechanism for this TBD.
 
 === Room -> Mediator -> Client, playerLocation message
 
 Indicates that a player can leave by the requested exit (`exitId`). The `exit`
 attribute, if present, should return the exit details as returned by the map API.
 The `exit` attribute is not required, but must be present if the details to be
-used are not present in the map.
+used are not present in the map (i.e. this is how you make up and down work).
 
 ----
 playerLocation,<playerId>,{
     "type": "exit",
     "content": "You exit through door xyz... ",
-    "bookmark": <room-specific message id>,
     "exitId": "N"
     "exit": { ... }
 }
