@@ -105,11 +105,11 @@ and again whenever the player's location changes, as an assist for cache-refresh
 
 The commands included in the `ack` are the common commands that are always supported.
 
-=== Mediator -> Client, progress messages
+=== Mediator -> Client, status messages
 
 ----
 player,<playerId>,{
-    "type": "joinpart",
+    "type": "status",
     "content": "text update"
 }
 ----
@@ -177,6 +177,8 @@ roomPart,<roomId>,{
 Sent when a player leaves the room without moving to another room, e.g. they
 log out, close their browser, or otherwise drop their connection. Think of this
 as the player going `away`.
+
+Used in version 2 of the protocol.
 
 <<<
 
