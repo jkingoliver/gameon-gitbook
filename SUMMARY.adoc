@@ -1,6 +1,6 @@
 = Summary
 
-. link:README.adoc[Exploring Microservices — Game On!]
+. link:README.adoc[Introduction]
 . link:microservices/README.adoc[Application Architecture]
 .. link:microservices/WebSocketProtocol.adoc[WebSocket Protocol]
 .. link:microservices/ApplicationSecurity.adoc[Application Security]
