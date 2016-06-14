@@ -45,8 +45,8 @@ WebSocket connections between the Mediator and the Room can also be
 ----
 ready,{
     "roomId": "cached-room-id",
-    "bookmark": "id",
-
+    "bookmark": "id"
+}
 ----
 
 Note that the data in the ready message is what the client had cached. It is
