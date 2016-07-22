@@ -10,6 +10,7 @@
 :jwt-struct: http://jwt.io/introduction/
 :jwt-rfc: https://tools.ietf.org/html/rfc7519
 :game: link:../game_play.adoc
+:signed-repo: https://github.com/gameontext/signed/releases
 
 Game On! has the following general security requirements
 
@@ -74,6 +75,10 @@ invocation. Trust is achieved through the use of a shared secret to create a
 signature that can be used to verify that request data did not change in
 transit, as decribed in {hmac-rfc}[RFC 2014 - Keyed-Hashing for Message
 Authentication].
+
+We've created a {signed-repo}[library] (currently only in Java), to
+help with managing signed requests. The https://github.com/gameontext/signed[README]
+explains how to make use of this library in your services.
 
 === HTTP Elements used to Sign a Request
 
