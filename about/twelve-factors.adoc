@@ -12,7 +12,7 @@
 
 == Overview
 
-Are there best practices for creating microservices? 
+Are there best practices for creating microservices?
 
 The twelve-factor application methodology is one frequently referenced approach. It defines twelve factors that services should follow to build portable, resilient applications for cloud environments (SaaS). To quote, twelve-factor applications:
 
@@ -22,7 +22,7 @@ ____
 * Have a *clean contract* with the underlying operating system, offering *maximum portability* between execution environments;
 * Are suitable for *deployment* on modern cloud platforms, obviating the need for servers and systems administration;
 * *Minimize divergence* between development and production, enabling *continuous deployment* for maximum agility;
-* And can *scale up*/me i without significant changes to tooling, architecture, or development practices.
+* And can *scale up* without significant changes to tooling, architecture, or development practices.
 ____
 
 
@@ -33,12 +33,12 @@ In the following sections, we'll discuss each of the twelve factors, relating th
 
 “One codebase tracked in revision control, many deploys”
 
-It should be obvious, right? The code for your applications needs to be in source control, especially if they are applications used by your business. 
+It should be obvious, right? The code for your applications needs to be in source control, especially if they are applications used by your business.
 All of the services that make up Game On! are stored in a git repository on GitHub, but we did dither about how our services should exist there. Does this factor mean each service should be in its own repository? Are shared repositories ok?
 
 When we started, we hedged. If you look in the {chronicles}[Chronicles], you'll see that our first pass had two services (the RecRoom and Concierge) in the same repository. These two services were, in fact, sharing code, which is a no-no according to this factor. As soon as we stopped changing our minds about how we wanted the two services to talk to each other, they were properly split into separate repositories, and the code sharing stopped.
 
-On the other hand, some people that advocate for a {monorepo}[Monolithic Repository]. This goes against the letter of the first factor, which argues that if two services need to share code, the shared code should be built as a versioned library that is retrieved as a dependency. 
+On the other hand, some people that advocate for a {monorepo}[Monolithic Repository]. This goes against the letter of the first factor, which argues that if two services need to share code, the shared code should be built as a versioned library that is retrieved as a dependency.
 
 We would summarize by saying: it is important that the automated build and deployment of each independent service be self-contained and independent. The rollout of changes should not need to be coordinated between services, and you shouldn't have to look across different repositories to understand why something works differently in test than it does in production.
 
@@ -49,7 +49,7 @@ If you set up your repository or repositories and build/deployment pipelines to 
 
 “Explicitly declare and isolate dependencies”
 
-All of the services that comprise Game On! have dependencies: 
+All of the services that comprise Game On! have dependencies:
 
 * The Java-based services use {wasliberty}[WebSphere Liberty], and several require a unique subset of additional features to perform their functions.
 * The front-end JavaScript application has its set of dependencies, from build-time things like npm and grunt, to runtime things like Angular.
@@ -57,7 +57,7 @@ All of the services that comprise Game On! have dependencies:
 For this factor, it is about making sure that these dependencies are explicit rather than implicit, right down to the Operating System.
 
 
-Rebelling from what often happened in traditional environments, where an app would be developed, and then run in another environment managed separately that wouldn't have the right version of perl, or the ,.. 
+Rebelling from what often happened in traditional environments, where an app would be developed, and then run in another environment managed separately that wouldn't have the right version of perl, or the ,..
 
 
 In our sample application we have dependencies on certain Liberty features, more specifically servlet-3.1, jsonp-1.0 and jaxrs-2.0. Our application must pull down all of the dependencies it requires during the build process. To build this sample we have provided two options: Maven and Gradle. In both cases you declare the dependencies in the build file (pom.xml for Maven or build.gradle for Gradle) and the required packages are downloaded from Maven Central Repository at build time to compile the code. The packaging step uses the Maven or Gradle Liberty plug-ins to pull down a Liberty runtime from the Liberty Repository and produces a packaged Liberty server containing the server configuration and a WAR file with the compiled application code. As a result the application does not have any dependencies that it assumes will already exist on the system.
