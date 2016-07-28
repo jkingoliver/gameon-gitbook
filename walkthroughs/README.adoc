@@ -63,6 +63,141 @@ agreement.
 * {ibmdownload}[Download] the JDK from IBM (AIX, Linux, z/OS, IBM i), or
 {liberty}[Download] a Liberty package that contains the IBM JDK (Windows, Linux)
 
-
 Our Java services are also built using gradle, though that requirement should take care of
 itself, thanks to gradle-wrapper.
+
+Once you have Java installed, check that java/javac & keytool are on the path of the shell
+you plan to use for development.
+
+=== Working with Game-On Locally.
+
+With the basic dependencies out of the way you will need to use git to download
+the source. If you only want to run Game-On locally, to let you develop rooms,
+then you can just download the Game-On root repository, and let it run using the
+docker images we provide of the core services.
+
+If you plan to modify or edit the core services of Game-On, you will need to download
+the root repository, and it's submodules.
+
+.Download Just the Root Repository. (For Game-On Room Development)
+====
+```
+git clone git@github.com:gameontext/gameon.git
+cd gameon
+```
+====
+.Download the Root Repository and its SubModules. (For Full Game-On Development)
+====
+
+```
+git clone --recursive git@github.com:gameontext/gameon.git
+cd gameon
+```
+TIP: SSH preferred, works better with submodules
+====
+
+==== A quick overview of the Game-On Root Project.
+
+Game-On uses docker compose to coordinate the containers that run each of the Game-On
+core services. In the root project there will be a `docker-compose.yml` that declares
+the various core services, and a `docker-compose.override.tml.example` that can be used
+when developing locally to help speed up round trip times.
+
+When Game-On runs in the cloud, it uses etcd to obtain its configuration, when running
+locally it expects all this to be fed to it via the environment, which `docker-compose.yml`
+will setup per service from the `gameon.env` file.
+
+==== Initial project setup.
+
+Because Game-On uses a Certificate for HTTPS and for JWT signing, we need to create this
+locally, and have each container be able to use it. Docker compose will handle the latter
+part by mapping our built certificate into each container. The actual certificate generation
+is handled by `build.sh` via the Java `keytool` command. (If you are running on windows,
+  this script should execute in `docker-bash`)
+
+.Build/initialize the projects (includes building wars and creating keystores required for local development).
+```
+./build.sh
+```
+
+The `build.sh` should generate the keystores and build any subprojects (if you downloaded the
+  submodules). If for any reason you need to regenerate the keystore you can just delete the `keystore`
+  directory created by the `build.sh` in the Game-On root project directory.
+
+TIP: If doing "Full Game-On Development" and you plan to edit the projects with Eclipse, run `eclipse.sh` after `build.sh` to generate the project files.
+
+==== Starting the platform services.
+
+When Game-On runs remotely, it uses services for logging/pubsub/service-discovery/service-proxying etc, that
+we still need to be present when we run locally. We consider these services to be part of the platform that
+Game-On runs on, rather than part of Game-On itself.
+
+To start these services locally, we provide a small script that can launch them.
+
+.Start the plaform services.
+```
+./run-platform-services.sh start
+```
+
+==== Building the Game-On docker containers.
+
+At this stage, we now have the keystores built, code compiled (if following the Full Game-On development path),
+and the platform services running. Before we can launch gamne-on, we have to create/download the containers for
+the Game-On services.
+
+We provide a small script that can be used for this. It takes a list of the Game-On projects to rebuild, and
+will
+
+* Stop any old running container for that project
+* Rebuild the code for the project (if present)
+* Remove any old container for the project
+* Build a new container for that project
+* Launch the container using docker compose
+* Update the service proxy controller to route the correct version of the service.
+
+.Rebuild All Game-On Services.
+====
+```
+./rebuild.sh all
+```
+====
+.Rebuild Selected Game-On Services.
+====
+```
+./rebuild.sh auth proxy
+```
+====
+
+After building all Game-On Services, Game On! will now running locally.
+* If you're running a \*nix variant, you can access it at http://127.0.0.1/
+* If you're running Mac or Windows, access it using the docker host IP address (see [below](#notes))
+
+TIP: To view console logs from the running containers, use ```docker ps```  to find the name for the container
+     that you wish to view the logs for, and then use ```docker logs _containername_``` eg. ```docker logs gameon_auth_1```
+
+If you are following the Full Game-On development path, then you may wish to take a look at how each service is available via
+local ports mapped by the `docker-compose.yml` configuration. Eg map will be available via https on port 9447 locally, as well
+as via it's mapped url via proxy on port 80.
+
+Advanced Tip: Many of the Game-On services also have a simple "LogView" console to assist with debug during local development, look for the the
+LogView class in each project to figure out the endpoint address.
+## Notes
+
+### Supporting 3rd party auth
+
+3rd party authentication (twitter, github, etc.) will not work locally, but the anonymous/dummy user will. If you want to test with one of the 3rd party authentication providers, you'll need to set up your own tokens to do so.
+
+### Use the right IP address
+
+If you run on an operating system that uses a host VM for docker images (e.g. Windows or Mac), then you need to update some values in `gameon.env` to match the IP address of your host. The host IP address is returned by `docker-machine ip <machine-name>`.
+
+`build.sh` will create a customized copy of `gameon.env` for the active DOCKER_MACHINE_NAME, that will perform the substitution to the associated IP address.
+
+### Top-down vs. incremental updates
+
+`docker-compose.override.yml.example` maps subrepository paths into the docker containers to support live development.
+
+If you wish to use this approach to development, rename `docker-compose.override.yml.example` to `docker-compose.override.yml` to skip mounting volumes. Re-run `build.sh` and the `rebuild.sh all` steps to publish the updates.
+
+### Iterative development of Java applications with WDT
+We highly recommend using WebSphere Developer Tools (WDT) to work with the Java services contained in the sample. Going along with the incremental publish support provided by the `docker-compose-override.yml` file, there is some (one time) [configuration required to make WDT happy with the docker-hosted applications](https://gameontext.gitbooks.io/gameon-gitbook/content/getting-started/eclipse_and_wdt.html).
