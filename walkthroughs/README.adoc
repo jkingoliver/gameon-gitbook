@@ -96,12 +96,22 @@ cd gameon
 TIP: SSH preferred, works better with submodules
 ====
 
+You can mix and match the two approaches, just download the root repository, and then 
+download the submodule you wish to edit. 
+
 ==== A quick overview of the Game-On Root Project.
 
 Game-On uses docker compose to coordinate the containers that run each of the Game-On
 core services. In the root project there will be a `docker-compose.yml` that declares
 the various core services, and a `docker-compose.override.tml.example` that can be used
 when developing locally to help speed up round trip times.
+
+NOTE: By default, the `docker-compose.yml` is configured to download and use docker images
+for each of the services, if you are planning on editing the core services, and have downloaded
+their submodules, you will need to edit `docker-compose.yml` and comment out the line starting `image:` 
+for each service you plan to edit, and uncomment the `build:` line underneath the line you just commented. Eg. 
+ `image: gameontest/gameon-auth` would become `#image: gameontest/gameon-auth` and
+ `#build: auth/auth-wlpcfg` would become `build: auth/auth-wlpcfg`
 
 When Game-On runs in the cloud, it uses etcd to obtain its configuration, when running
 locally it expects all this to be fed to it via the environment, which `docker-compose.yml`
