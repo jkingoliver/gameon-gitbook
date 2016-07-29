@@ -173,3 +173,63 @@ image:../images/Progression.011.jpeg[Progression, width=95%]
 Our first non-player character! The Sweep is in early days, so we don't know in
 what directions it will grow, but it will serve an important function: keeping
 the map alive and vital by pruning sick rooms.
+
+== None Shall Pass!
+
+image:../images/Progression.012.jpeg[Progression, width=95%]
+
+Until this point, our authentication was still part of the Player service, because
+intially much like we had considered Mediator to be part of Player, we thought the
+same about our interaction with Social Login services to issue the Player access
+token (JWT). As we grew to support additional Social Login services, the dependency
+management for Player become problematic, 3rd party libraries would require dependencies
+that would conflict with others required by our core Player entity store function.
+
+Plus, as we looked more to the way that systems such as KeyCloak, or Auth0 worked,
+it began to feel more natural to have a service dedicated just to handling the issuing
+of JWT's in response to Social Login.
+
+== Roll Up! Roll Up! See the Magical Events!
+
+image:../images/Progression.013.jpeg[Progression, width=95%]
+
+Within the core services, we began to realise there would be benefit to becomeing
+reactive, rather than proactive to changes within the system. For example, when a
+player changes their name via the Player service, it would be nice for the Mediator
+service to know this has happened, and in turn, then any Room the player is in can
+be told etc.
+
+We decided to try using Kafka, or, when we run in BlueMix, Message Hub (which has a
+Kafka interface, so essentially it's still Kafka to us). Then we wrapped our handling
+of receieved events into an RxJava based API. As we looked more into Kafka we realised
+we can only allow our core services to make use of it, although it would be nice to
+allow Rooms to access Kafka, it's really not built to be internet facing (It only started
+to add security at version 0.9).
+
+We're still in early days with our integration of Events, but the infrastructure is
+all there waiting for us to use it.
+
+== Marco! Polo!
+
+image:../images/Progression.014.jpeg[Progression, width=95%]
+
+An item long on our wishlist was to stop having hardcoded endpoint urls for our
+services, it's not nice, and it will make it much harder to demonstrate service
+instance scaling in future.
+
+So steps in "Amalgam8", which sounds a little like something a Dalek might utter
+if it were asked to interpret our architecture diagrams.
+
+We're using Amalgam8 (A8) for it's service discovery, and service proxying abilties.
+Each of our 'core services' registers as an A8 service, and has a sidecar added
+to its container, allowing access to other services via an in-container proxy.
+
+Thus now, when Mediator wishes to talk to Map to discover which room is behind an
+Exit, it no longer talks to a fixed remote endpoint configured via etcd, but instead
+talks to its in-container proxy, asking for the Map service via a known local url.
+
+A8 then handles connecting the request to the correct service instance running in
+another container. And as a bonus, it should then allow us to scale up and run additional
+instances of our services. Although that will start to require additional management
+of our overall running containers that's a little more advanced than we want to try
+to document in this pass!
