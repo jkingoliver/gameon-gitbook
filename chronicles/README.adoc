@@ -174,9 +174,25 @@ Our first non-player character! The Sweep is in early days, so we don't know in
 what directions it will grow, but it will serve an important function: keeping
 the map alive and vital by pruning sick rooms.
 
-== None Shall Pass!
+== Go on Now, Go, Walk out the Door.. (don't turn around now)
 
 image:../images/Progression.012.jpeg[Progression, width=95%]
+
+As we started to see user created rooms added to the Map, we started to think about treating
+our rooms like everybody elses, up until this point, our rooms have kinda cheated a little 
+as they've been able to directly talk to the core services. But no more! for we have kicked 
+the rooms out of the core services club, and told them they can no longer be members. 
+
+As with all recent 'exit' attempts, this one leaves the rooms still with the odd toe in the 
+core services pond, mumbling something about freedom of movement, and the fact we can't quite
+yet bring ourselves to require yet another batch file to handle the launching of rooms.. 
+
+Conceptually however, they are now very much split off. We hope they enjoy their banishment
+and that they do not decide to rise up against us.
+
+== None Shall Pass!
+
+image:../images/Progression.013.jpeg[Progression, width=95%]
 
 Until this point, our authentication was still part of the Player service, because
 intially much like we had considered Mediator to be part of Player, we thought the
@@ -191,7 +207,7 @@ of JWT's in response to Social Login.
 
 == Roll Up! Roll Up! See the Magical Events!
 
-image:../images/Progression.013.jpeg[Progression, width=95%]
+image:../images/Progression.014.jpeg[Progression, width=95%]
 
 Within the core services, we began to realise there would be benefit to becomeing
 reactive, rather than proactive to changes within the system. For example, when a
@@ -211,7 +227,7 @@ all there waiting for us to use it.
 
 == Marco! Polo!
 
-image:../images/Progression.014.jpeg[Progression, width=95%]
+image:../images/Progression.015.jpeg[Progression, width=95%]
 
 An item long on our wishlist was to stop having hardcoded endpoint urls for our
 services, it's not nice, and it will make it much harder to demonstrate service
