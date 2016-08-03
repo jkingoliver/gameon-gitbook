@@ -2,7 +2,7 @@
 :icons: font
 :toc:
 :toc-placement: preamble
-:toclevels: 1
+:toclevels: 2
 :wdt-eclipse: link:eclipse_and_wdt.adoc
 
 
@@ -26,7 +26,7 @@ or Mac that could use some explaining:
   for your containers. This means that (for URLs and other things) you need to
   use the xref:dockerhost[IP of the host].
 
-== The Game On Root Project.
+== The Game On Root Project (gameon)
 
 Game On uses Docker Compose to coordinate the containers that run each of the game's
 core services. In the root project there will be a `docker-compose.yml` that declares
@@ -36,6 +36,8 @@ when developing locally to help speed up round trip times.
 When Game On runs in the cloud, it uses etcd to obtain its configuration, when running
 locally it expects all this to be fed to it via the environment, which `docker-compose.yml`
 will setup per service from the `gameon.env` file.
+
+=== KeyStore generation
 
 Because Game On uses a Certificate for HTTPS and for JWT signing, we need to
 generate one for local use. The latter part is managed by Docker, with a special
@@ -109,18 +111,16 @@ Game On! is now running locally.
 * If you're running a *nix variant, you can access it at http://127.0.0.1/
 * If you're running Mac or Windows, access it using the xref:dockerhost[IP of the host]
 
-TIP: If doing "Full Game On Development" and you plan to edit the projects with
-Eclipse, run `eclipse.sh` after `build.sh` to generate the project files.
+TIP: If you plan to edit projects with Eclipse, run `eclipse.sh` to generate the project files.
 
+=== Building the Core service docker containers.
 
-==== Building the Game On docker containers.
+At this stage, we now have the keystores built, code compiled,
+and the platform services running. Before we can launch the game, we have to
+create/download the containers for the core services.
 
-At this stage, we now have the keystores built, code compiled (if following the Full Game On development path),
-and the platform services running. Before we can launch gamne-on, we have to create/download the containers for
-the Game On services.
-
-We provide a small script that can be used for this. It takes a list of the Game On projects to rebuild, and
-will
+We provide a small script that can be used for this. It takes a list of the
+Game On projects to rebuild, and will:
 
 * Stop any old running container for that project
 * Rebuild the code for the project (if present)
@@ -129,21 +129,21 @@ will
 * Launch the container using docker compose
 * Update the service proxy controller to route the correct version of the service.
 
-.Rebuild All Game On Services.
+.Rebuild All Game On Services
 ====
 ```
-./rebuild.sh all
+./go-rebuild.sh all
 ```
 ====
-.Rebuild Selected Game On Services.
+.Rebuild Selected Game On Services
 ====
 ```
-./rebuild.sh auth proxy
+./go-rebuild.sh auth proxy
 ```
 ====
 
 After building all Game On Services, Game On! will now running locally.
-* If you're running a \*nix variant, you can access it at http://127.0.0.1/
+* If you're running a *nix variant, you can access it at http://127.0.0.1/
 * If you're running Mac or Windows, access it using the docker host IP address (see [below](#notes))
 
 TIP: To view console logs from the running containers, use ```docker ps```  to find the name for the container
@@ -182,7 +182,6 @@ Get the IP address for your host using `docker-machine ip default`.
 `go-build.sh` and `go-setup.sh` will create a customized copy of `gameon.env`
 for the active DOCKER_MACHINE_NAME, that will perform the substitution to the
 associated IP address.
-
 
 === Top-down vs. incremental updates
 

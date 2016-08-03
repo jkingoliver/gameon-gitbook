@@ -20,13 +20,6 @@ minutes. The base requirements are pretty simple: A room is a service
 registered with the Map that minimally obeys the {websocket}[WebSocket protocol]
 for user interactions.
 
-[NOTE]
-====
-Room registration is long-lived: the registration for your room
-will persist until you delete it. You can list and delete your registered
-rooms using commands in {first-room}[First Room].
-====
-
 == Visits from the Sweep
 
 Registered rooms are visited periodically by {sweep}[the Sweep].
@@ -36,6 +29,13 @@ to the Room API (primarily the {websocket}[WebSocket protocol].
 Rooms will move in the map based on their score, with high-scoring
 rooms moving toward the center (closer to First Room), and low-scoring
 rooms moving toward the periphery.
+
+[NOTE]
+====
+Room registration is long-lived: the registration for your room
+will persist until you delete it. You can list and delete your registered
+rooms using commands in {first-room}[First Room].
+====
 
 == Create a room as a Cloud Foundry application
 
