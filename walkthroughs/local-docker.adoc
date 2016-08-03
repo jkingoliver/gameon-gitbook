@@ -1,8 +1,9 @@
-= Docker Requirements
+= Working with Game On! Locally
 :icons: font
 :toc:
 :toc-placement: preamble
 :toclevels: 1
+:wdt-eclipse: link:eclipse_and_wdt.adoc
 
 
 {empty}
@@ -25,92 +26,147 @@ or Mac that could use some explaining:
   for your containers. This means that (for URLs and other things) you need to
   use the xref:dockerhost[IP of the host].
 
-== Docker Toolbox (Mac and Windows)
+== The Game On Root Project.
 
-https://www.docker.com/docker-toolbox[Docker Toolbox] allows you to run a Docker
-host in a virtual machine that will run inside your laptop/desktop.
+Game On uses Docker Compose to coordinate the containers that run each of the game's
+core services. In the root project there will be a `docker-compose.yml` that declares
+the various core services, and a `docker-compose.override.tml.example` that can be used
+when developing locally to help speed up round trip times.
 
-Download Docker Toolbox for your operating system and run through the installer.
+When Game On runs in the cloud, it uses etcd to obtain its configuration, when running
+locally it expects all this to be fed to it via the environment, which `docker-compose.yml`
+will setup per service from the `gameon.env` file.
 
-When the installation completes, select `Docker QuickStart Terminal` in the
-window that pops up to get started using your local VM that  will function as
-your Docker host.
+Because Game On uses a Certificate for HTTPS and for JWT signing, we need to
+generate one for local use. The latter part is managed by Docker, with a special
+mapped volume providing a generated local keystore to containers. Both the
+`go-setup.sh` and `go-build.sh` scripts will generate the local keystore. If it
+ever needs to be replaced, delete the keystore directory, and run the appropriate
+script again.
 
-image:http://docs.docker.com/mac/images/mac-page-quickstart.png[install docker toolbox page]
+== Local Room Development
+
+1. Obtain the source for this repository:
+  * HTTPS: `git clone https://github.com/gameontext/gameon.git`
+  * SSH: `git clone git@github.com:gameontext/gameon.git`
+
+2. One time setup, this will ensure that required keystores are setup, and that you have an
+env file suitable for use with docker-compose (whether you're using docker-machine or not).
++
+  ./go-setup.sh
++
+This setup step also pulls the initial images required for running the system.
+
+3. Start Game ON platform services (amalgam8, couchdb, and an elk stack!).
+These services are configured in `platformservices.yml`.
++
+  ./go-platform-services.sh start
+
+4. Start the core Game ON services (Player, Mediator, Map)
++
+  ./go-run.sh start
++
+The `go-run.sh` script contains shorthand operations to help with starting,
+stopping, and cleaning up after Game ON core services (in `docker-compose.yml`).
+
+Game On! is now running locally.
+
+* If you're running a \*nix variant, you can access it at http://127.0.0.1/
+* If you're running Mac or Windows, access it using the xref:dockerhost[IP of the host]
+
+Carry on with building your rooms!
+
+If you change your mind, and decide you want to start hacking on a core game
+service, no worries! You can mix and match the two approaches, just clone the
+submodule(s) you wish to edit, and carry on with the steps below.
+
+== Core Game Development
+
+1. Obtain the source:
+  * HTTPS: `git clone https://github.com/gameontext/gameon.git`
+  * SSH: `git clone git@github.com:gameontext/gameon.git`
+
+2. Change to the gameon directory
++
+  cd gameon
+
+3. Build/initialize the projects (includes building wars and creating keystores
+required for local development).
++
+  ./go-build.sh
+
+4. Start Game ON platform services (amalgam8, couchdb, and an elk stack!).
+These services are configured in `platformservices.yml`.
++
+  ./go-platform-services.sh start
+
+5. Build core game docker containers with docker-compose (see <<notes,below>>)
++
+  ./go-rebuild.sh all
+
+Game On! is now running locally.
+
+* If you're running a *nix variant, you can access it at http://127.0.0.1/
+* If you're running Mac or Windows, access it using the xref:dockerhost[IP of the host]
+
+TIP: If doing "Full Game On Development" and you plan to edit the projects with
+Eclipse, run `eclipse.sh` after `build.sh` to generate the project files.
 
 
-You should see something like the following in the terminal that comes up:
+==== Building the Game On docker containers.
 
-----
-Creating Machine default...
-Creating CA: /Users/programsam/.docker/machine/certs/ca.pem
-Creating client certificate: /Users/programsam/.docker/machine/certs/cert.pem
-Creating VirtualBox VM...
-Creating SSH key...
-Starting VirtualBox VM...
-Starting VM...
-----
+At this stage, we now have the keystores built, code compiled (if following the Full Game On development path),
+and the platform services running. Before we can launch gamne-on, we have to create/download the containers for
+the Game On services.
 
-[CAUTION]
-The first time you run this process, it can take some time to start the VM.  Be patient.
+We provide a small script that can be used for this. It takes a list of the Game On projects to rebuild, and
+will
 
-When the installer is finished, you should see something like this:
+* Stop any old running container for that project
+* Rebuild the code for the project (if present)
+* Remove any old container for the project
+* Build a new container for that project
+* Launch the container using docker compose
+* Update the service proxy controller to route the correct version of the service.
 
-----
-                        ##         .
-                  ## ## ##        ==
-               ## ## ## ## ##    ===
-           /"""""""""""""""""\___/ ===
-      ~~~ {~~ ~~~~ ~~~ ~~~~ ~~~ ~ /  ===- ~~~
-           \______ o           __/
-             \    \         __/
-              \____\_______/
+.Rebuild All Game On Services.
+====
+```
+./rebuild.sh all
+```
+====
+.Rebuild Selected Game On Services.
+====
+```
+./rebuild.sh auth proxy
+```
+====
 
-  docker is configured to use the default machine with IP 192.168.99.100
-  For help getting started, check out the docs at https://docs.docker.com
-----
+After building all Game On Services, Game On! will now running locally.
+* If you're running a \*nix variant, you can access it at http://127.0.0.1/
+* If you're running Mac or Windows, access it using the docker host IP address (see [below](#notes))
 
-*Take special note of the IP address that is similar to my example of `192.168.99.100`.*
-This is your Docker host, and any containers you run on Docker will be accessible from
-this IP if you have mapped their ports.
+TIP: To view console logs from the running containers, use ```docker ps```  to find the name for the container
+     that you wish to view the logs for, and then use ```docker logs _containername_``` eg. ```docker logs gameon_auth_1```
 
-At the prompt, type
+If you are following the Full Game On development path, then you may wish to take a look at how each service is available via
+local ports mapped by the `docker-compose.yml` configuration. Eg map will be available via https on port 9447 locally, as well
+as via it's mapped url via proxy on port 80.
 
-  $ docker run hello-world
+Advanced Tip: Many of the Game On services also have a simple "LogView" console to assist with debug during local development, look for the the
+LogView class in each project to figure out the endpoint address.
 
-To test that Docker installed correctly.  You should see something like the following:
 
-----
-Unable to find image 'hello-world:latest' locally
-latest: Pulling from library/hello-world
+== Notes
 
-  b901d36b6f2f: Pull complete
-  0a6ba66e537a: Pull complete
-  Digest: sha256:517f03be3f8169d84711c9ffb2b3235a4d27c1eb4ad147f6248c8040adb93113
-  Status: Downloaded newer image for hello-world:latest
+=== Supporting 3rd party auth
 
-  Hello from Docker.
-  This message shows that your installation appears to be working correctly.
-  To generate this message, Docker took the following steps:
-   1. The Docker client contacted the Docker daemon.
-   2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
-   3. The Docker daemon created a new container from that image which runs the
-    executable that produces the output you are currently reading.
-   4. The Docker daemon streamed that output to the Docker client, which sent it to your terminal.
-
-  To try something more ambitious, you can run an Ubuntu container with:
-
-  $ docker run -it ubuntu bash
-
-  Share images, automate workflows, and more with a free Docker Hub account:
-  https://hub.docker.com
-
-  For more examples and ideas, visit:
-      https://docs.docker.com/userguide/
-----
+3rd party authentication (twitter, github, etc.) will not work locally, but the
+anonymous/dummy user will. If you want to test with one of the 3rd party
+authentication providers, you'll need to set up your own tokens to do so.
 
 [[dockerhost]]
-== Determining the host IP address
+=== Determining the host IP address (Docker Toolbox)
 
 After you have Docker Toolbox installed, verify the host machine name:
 `docker-machine ls`. The default name is `default`, but if you're a former
@@ -122,3 +178,26 @@ docker environment variables in your command shell using
 `eval "$(docker-machine env default)"`.
 
 Get the IP address for your host using `docker-machine ip default`.
+
+`go-build.sh` and `go-setup.sh` will create a customized copy of `gameon.env`
+for the active DOCKER_MACHINE_NAME, that will perform the substitution to the
+associated IP address.
+
+
+=== Top-down vs. incremental updates
+
+If you want to try using incremental publish, where your changes are live inside
+the container without requiring the container to be stopped, started, rebuilt
+or otherwise messed with, you'll need to add some lines to `docker-compose.override.yml`
+to create overlay volumes.
+
+`docker-compose.override.yml.example` maps expected github subrepository paths
+as volumes. Copy snippets from that file for the services you're interested in
+into `docker-compose.override.yml`.
+
+==== Iterative development of Java applications with WDT
+
+We highly recommend using WebSphere Developer Tools (WDT) to work with the Java
+services contained in the sample. Going along with the incremental publish support
+provided by the `docker-compose-override.yml` file, there is some (one time)
+{wdt-eclipse}[configuration required to make WDT happy with the docker-hosted applications].
