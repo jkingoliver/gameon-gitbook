@@ -3,3 +3,10 @@
 :toc:
 :toc-placement: preamble
 :toclevels: 2
+:elkStack: link:elkStack.adoc
+:local-docker: link:local-docker.adoc
+
+What else do you want to try?
+
+* {elkStack}[The ELK Stack: working with your logs]
+* {local-docker}[Local development using Docker]
