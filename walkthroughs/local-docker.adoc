@@ -30,7 +30,7 @@ or Mac that could use some explaining:
 
 Game On uses Docker Compose to coordinate the containers that run each of the game's
 core services. In the root project there will be a `docker-compose.yml` that declares
-the various core services, and a `docker-compose.override.tml.example` that can be used
+the various core services, and a `docker-compose.override.yml.example` that can be used
 when developing locally to help speed up round trip times.
 
 When Game On runs in the cloud, it uses etcd to obtain its configuration, when running
@@ -157,7 +157,7 @@ how each service is available via local ports mapped by the `docker-compose.yml`
 configuration. Eg map will be available via https on port 9447 locally, as well
 as via it's mapped url via proxy on port 80.
 
-TIP: Many of the Game On services also have a simple "LogView" console 
+TIP: Many of the Game On services also have a simple "LogView" console
 to assist with debug during local development, look for the the
 LogView class in each project to figure out the endpoint address.
 
