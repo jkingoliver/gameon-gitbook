@@ -97,7 +97,7 @@ required for local development).
 +
   ./go-build.sh
 
-4. Start Game ON platform services (amalgam8, couchdb, and an elk stack!).
+4. Start the game's platform services (amalgam8, couchdb, and an ELK stack!).
 These services are configured in `platformservices.yml`.
 +
   ./go-platform-services.sh start
@@ -142,18 +142,23 @@ Game On projects to rebuild, and will:
 ```
 ====
 
-After building all Game On Services, Game On! will now running locally.
+After building all Game On Services, the game will now be running locally.
 * If you're running a *nix variant, you can access it at http://127.0.0.1/
-* If you're running Mac or Windows, access it using the docker host IP address (see [below](#notes))
+* If you're running Mac or Windows, access it using the docker host IP address
+(see the <<notes,notes below>>)
 
-TIP: To view console logs from the running containers, use ```docker ps```  to find the name for the container
-     that you wish to view the logs for, and then use ```docker logs _containername_``` eg. ```docker logs gameon_auth_1```
+TIP: To view console logs from the running containers, use ```docker ps```
+to find the name for the container that you wish to view the logs for, and then
+use ```docker logs _containername_```, eg. ```docker logs gameon_auth_1```. Alternately,
+you can use ```docker-compose logs <service_name>```, e.g. ```docker-compose logs player```.
 
-If you are following the Full Game On development path, then you may wish to take a look at how each service is available via
-local ports mapped by the `docker-compose.yml` configuration. Eg map will be available via https on port 9447 locally, as well
+If you are editing the core game services, then you may wish to take a look at
+how each service is available via local ports mapped by the `docker-compose.yml`
+configuration. Eg map will be available via https on port 9447 locally, as well
 as via it's mapped url via proxy on port 80.
 
-Advanced Tip: Many of the Game On services also have a simple "LogView" console to assist with debug during local development, look for the the
+TIP: Many of the Game On services also have a simple "LogView" console 
+to assist with debug during local development, look for the the
 LogView class in each project to figure out the endpoint address.
 
 

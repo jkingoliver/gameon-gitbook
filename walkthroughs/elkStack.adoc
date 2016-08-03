@@ -1,4 +1,4 @@
-= Dealing with Logs using ELK
+= Logging using the ELK stack
 :icons: font
 :toc: preamble
 :toc-title:
@@ -23,7 +23,7 @@ make it easy to find problems without having to look at each room's files one at
 == The ELK Stack
 
 ELK is Elasticsearch, Logstash, and Kibana. It is a very common stack used
-to collect, aggregate, search, and view logs in the cloud. Logstash to used to
+to collect, aggregate, search, and view logs in the cloud. Logstash is to used to
 ingest events and forward them to an Elasticsearch instance. Elasticsearch stores
 and indexes events.  You use your browser to interact with Kibana, which provides
 customizable dashboards using events it queries from Elasticsearch.
