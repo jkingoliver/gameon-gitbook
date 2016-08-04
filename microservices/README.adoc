@@ -26,7 +26,7 @@ characteristics that made each into a standalone, autonomous microservice.
 
 == Core Services
 
-image:../images/CoreServices.png["Core services",align="center"]
+image:../images/CoreServices.jpeg["Core services",align="center"]
 
 === Auth
 
@@ -165,7 +165,7 @@ Proxying, allowing the instances of the servce being routed to to scale as requi
 
 == Other Services
 
-image:../images/SecondaryServices.png["Secondary services",align="center"]
+image:../images/SecondaryServices.jpeg["Secondary services",align="center"]
 
 === Amalgam8 services.
 
