@@ -163,7 +163,7 @@ made to an Amalgam8 registered service, the proxy will place that invocation via
 the Amalgam8 in-container proxy. This both provides Service Discovery, and Service
 Proxying, allowing the instances of the servce being routed to to scale as required.
 
-== Other Services
+== Platform Services
 
 image:../images/PlatformServices.jpeg["Platform services",align="center"]
 
@@ -188,6 +188,10 @@ The configuration attributes stored in etcd are environment-specific: different
 values are provided for different deployment stages using isolated etcd clusters.
 Etcd is not used when developing locally, we instead rely on local env files
 injected via Docker Compose.
+
+== Other Services
+
+image:../images/OtherServices.jpeg["Other services",align="center"]
 
 === Swagger
 
