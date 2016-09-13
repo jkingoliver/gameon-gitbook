@@ -165,7 +165,7 @@ Proxying, allowing the instances of the servce being routed to to scale as requi
 
 == Other Services
 
-image:../images/SecondaryServices.jpeg["Secondary services",align="center"]
+image:../images/PlatformServices.jpeg["Platform services",align="center"]
 
 === Amalgam8 services.
 
