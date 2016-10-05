@@ -90,7 +90,7 @@ doors.
 == The Nature of Doors
 
 A door is a description, as seen from the outside of the room. The east door
-(n) description should describe how a player traveling east will approach your
+(e) description should describe how a player traveling east will approach your
 room.
 
 .Describe the doors for your room (in green) from the point of view of the navigating player.
