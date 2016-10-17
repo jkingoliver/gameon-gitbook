@@ -16,7 +16,7 @@ toc::[]
 
 What's an SSO App? I thought this section was for Game On? 
 
-Game On allows players to identify themselves via third party services, such as Facebook, Twitter, etc. These are examples of 'Single Sign On' (SSO), 
+Game On allows players to identify themselves via third party services, such as Facebook, Twitter, etc. These are examples of 'Single Sign On' ( {sso}SSO ), 
 
 
 
