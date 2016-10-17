@@ -11,7 +11,7 @@
 .. link:walkthroughs/createMore.adoc[Advanced Adventures]
 ... link:walkthroughs/local-docker.adoc[Building locally with docker]
 .... link:walkthroughs/git.adoc[Git submodules (local core development)]
-.... Adding your own SSO apps for local testing
+.... link:walkthroughs/adding_your_own_sso_apps_for_local_testing.adoc[Adding your own SSO apps for local testing]
 ... link:walkthroughs/elkStack.adoc[Logging using the ELK stack]
 . link:about/README.adoc[Microservices: The Backstory]
 . link:chronicles/README.adoc[Appendix: The Chronicles]
