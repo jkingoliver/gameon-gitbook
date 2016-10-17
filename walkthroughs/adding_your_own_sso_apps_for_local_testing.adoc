@@ -42,7 +42,10 @@ Start by heading to the {facebookdevpage}[Facebook developer page]
 There.. select 'my apps' at the top right of the page, and then 'add an app' then select 'website' as the type of app, then give it a name eg 'My Local GameOn Testing App'.. then skip the rest of the wizard thing.. 
 
 From here the instructions will get a little sketchy, because really this needs a whole bunh of screengrabs, but I can't get those done at the mo.. so here's the rough info you need in the meantime 
-(please just imagine the screengrabs, being held attractively by suitably clad assistants, smiling at the camera, while remonstrating expressively with their hands toward said screengrabs, alternatively, send me the screengrabs via our slack channel, and I'll add them here.. )
+
+(please just imagine the screengrabs, being held attractively by suitably clad assistants, smiling at the camera, while remonstrating expressively with their hands toward said screengrabs, alternatively, send me the screengrabs via our slack channel, and I'll add them here.. 
+
+
 
 
 
