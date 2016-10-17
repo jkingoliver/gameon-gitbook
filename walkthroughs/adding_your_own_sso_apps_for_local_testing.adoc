@@ -33,6 +33,16 @@ Given that Game On already clearly has these apps configured when you use it tod
 
 As part of an app definition, you have to tell the app where to send the user after the user has authenticated. After all, Game On sent the user to the SSO, the SSO has to send them back. The apps we already have are configured to send the user back to the live running Game On servers. If you were to configure them locally, and connect to your local Game On, after authentication, you'd be connected to the live Game On.
 
+== Adding your own SSO app (Facebook).
+
+As a start we'll explain how to add just one SSO for local testing, Facebook. Adding the other SSO's is a similar process, that hopefully may make a bit more sense after you've seen how to configure the Facebook one.
+
+Start by heading to the {facebookdevpage}[Facebook developer page]
+
+There.. select 'my apps' at the top right of the page, and then 'add an app' then select 'website' as the type of app, then give it a name eg 'My Local GameOn Testing App'.. then skip the rest of the wizard thing.. 
+
+From here the instructions will get a little sketchy, because really this needs a whole bunh of screengrabs, but I can't get those done at the mo.. so here's the rough info you need in the meantime (please just imagine the screengrabs, being held attractively by suitably clad assistants, smiling at the camera, while remonstrating expressively with their hands toward said screengrabs, alternatively, send me the screengrabs via our slack channel, and I'll add them here.. )
+
 
 
 
