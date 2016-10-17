@@ -7,5 +7,7 @@
 :facebookdevpage: https://developers.facebook.com/
 :gameonenvfile: https://github.com/gameontext/gameon/blob/master/gameon.env
 
-Once you have game-on run
+How to create your own SSO app, and configure it to use with the game locally.
+
+:toc: []
 
