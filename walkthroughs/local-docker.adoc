@@ -169,7 +169,7 @@ LogView class in each project to figure out the endpoint address.
 
 3rd party authentication (twitter, github, etc.) will not work locally, but the
 anonymous/dummy user will. If you want to test with one of the 3rd party
-authentication providers, you'll need to set up your own tokens to do so.
+authentication providers, you'll need to {localsso}[set up your own tokens to do so.]
 
 [[dockerhost]]
 === Determining the host IP address (Docker Toolbox)
