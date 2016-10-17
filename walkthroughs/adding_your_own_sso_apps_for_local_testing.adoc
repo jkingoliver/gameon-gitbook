@@ -43,9 +43,22 @@ There.. select 'my apps' at the top right of the page, and then 'add an app' the
 
 From here the instructions will get a little sketchy, because really this needs a whole bunh of screengrabs, but I can't get those done at the mo.. so here's the rough info you need in the meantime 
 
-(please just imagine the screengrabs, being held attractively by suitably clad assistants, smiling at the camera, while remonstrating expressively with their hands toward said screengrabs, alternatively, send me the screengrabs via our slack channel, and I'll add them here.. 
+(please just imagine the screengrabs, being held attractively by suitably clad assistants, smiling at the camera, while remonstrating expressively with their hands toward said screengrabs, alternatively, send me the screengrabs via our slack channel, and I'll add them here.. )
 
+You'll need to grab your 'App ID' .. and the 'App Secret' those are the entries you'll need to put in your {gameonenvfile}[gameon.env] file. (In the FACEBOOK_APP_ID and FACEBOOK_APP_SECRET vars)
 
+But we're not done yet, we have to sort out a few other bits, and the easiest place to sort all this is from the 'Settings' panel on the left side (below 'Dashboard'). 
+
+From there you can also get that 'App ID', 'App Secret', and you need to configure.. 
+
+ - Display Name, thats the one that wil show up when people click 'Facebook' to tell them what they are signing into. 
+ 
+ - App Domains, here you need to put in 127.0.0.1, or 192.168.x.x, what ever address you access your local game on at. 
+
+ - PrivacyPolicy / TermsOfService URLs, (may be required for facebook, to access email.. ) just use "https://game-on.org/templates/tAndCs.html"
+
+ - Site URL, this also needs to be configured to have the domain of wherever your local Game On is running.. eg, http://127.0.0.1/ or http://192.168.x.x/
+ 
 
 
 
