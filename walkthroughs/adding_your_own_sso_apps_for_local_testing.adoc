@@ -1,2 +1,11 @@
 = Adding your own SSO apps for local testing
 
+:icons: font
+:toc:
+:toc-placement: manual
+:toclevels: 1
+:facebookdevpage: https://developers.facebook.com/
+:gameonenvfile: https://github.com/gameontext/gameon/blob/master/gameon.env
+
+Once you have game-on run
+
