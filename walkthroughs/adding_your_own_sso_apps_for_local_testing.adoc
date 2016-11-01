@@ -1,41 +1,41 @@
-= Adding your own SSO apps for local testing
+= Adding your own Social Login apps for local testing
 
 :icons: font
 :toc:
 :toc-placement: manual
 :toclevels: 1
 :facebookdevpage: https://developers.facebook.com/
-:sso: https://en.wikipedia.org/wiki/Single_sign-on
+:sociallogin: https://en.wikipedia.org/wiki/Social_login
 :oauth: https://oauth.net/2/
 :gameonenvfile: https://github.com/gameontext/gameon/blob/master/gameon.env
 
-How to create your own SSO app, and configure it to use with the game locally.
+How to create your own Social Login app, and configure it to use with the game locally.
 
 toc::[]
 
 == Overview
 
-What's an SSO App? I thought this section was for Game On? 
+What's a Social Login App? I thought this section was for Game On? 
 
-Game On allows players to identify themselves via third party services, such as Facebook, Twitter, etc. These are examples of 'Single Sign On' ({sso}[SSO]), where a user can use credentials they have with an existing service, to sign into a new application (Game On).
+Game On allows players to identify themselves via third party services, such as Facebook, Twitter, etc. These are examples of  {sociallogin}['Social Login'], where a user can use credentials they have with an existing service, to sign into a new application (Game On).
 
 == How does this work ?
 
-When a user accesses Game On, they are offered a choice of which SSO they wish to use, when they select an option, Game On has their browser head to the appropriate login page, where they sign in, the browser then returns to Game On after the authentication. 
+When a user accesses Game On, they are offered a choice of which Social Login they wish to use, when they select an option, Game On has their browser head to the appropriate service login page, where they sign in, the browser then returns to Game On after the authentication. 
 
-Behind the scenes, when Game On forwards to the SSO login page, Game On has to identify itself to that SSO, most use a variant of {oauth}[OAuth-2.0]. Just as Game On wants to trust that the user has authenticated themselves with the remote SSO, the remote SSO needs to know it's only performing that task for someone it trusts too. 
+Behind the scenes, when Game On forwards to the social login page, Game On has to identify itself to that service, most use a variant of {oauth}[OAuth-2.0]. Just as Game On wants to trust that the user has authenticated themselves with the remote social login service, the remote service needs to know it's only performing that task for someone it trusts too. 
 
-In each case, that reverse trust is managed by the creation of an application with the remote SSO, the application acting as Game On's authorization to use the remote SSO for login purposes. 
+In each case, that reverse trust is managed by the creation of an application with the remote service, the application acting as Game On's authorization to use the remote service for login purposes. 
 
-== Why do I need my own SSO apps ? 
+== Why do I need my own Social Login apps ? 
 
 Given that Game On already clearly has these apps configured when you use it today, why do you need your own apps when running Game On locally? 
 
-As part of an app definition, you have to tell the app where to send the user after the user has authenticated. After all, Game On sent the user to the SSO, the SSO has to send them back. The apps we already have are configured to send the user back to the live running Game On servers. If you were to configure them locally, and connect to your local Game On, after authentication, you'd be connected to the live Game On.
+As part of an app definition, you have to tell the app where to send the user after the user has authenticated. After all, Game On sent the user to the social login service, the service has to send them back. The apps we already have are configured to send the user back to the live running Game On servers. If you were to configure them locally, and connect to your local Game On, after authentication, you'd be connected to the live Game On.
 
-== Adding your own SSO app (Facebook).
+== Adding your own Social Login app (Facebook).
 
-As a start we'll explain how to add just one SSO for local testing, Facebook. Adding the other SSO's is a similar process, that hopefully may make a bit more sense after you've seen how to configure the Facebook one.
+As a start we'll explain how to add just one social login app for local testing, Facebook. Adding the other services follow a similar process, hopefully that may make a bit more sense after you've seen how to configure the Facebook one.
 
 Start by heading to the {facebookdevpage}[Facebook developer page]
 
