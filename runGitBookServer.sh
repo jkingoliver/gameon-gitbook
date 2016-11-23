@@ -4,4 +4,4 @@ cd /gitbook
 echo $PWD
 
 gitbook install
-gitbook serve 
+gitbook serve --log=debug --debug

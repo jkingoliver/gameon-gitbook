@@ -14,7 +14,7 @@ routing as possible to happen without requiring the Mediator to look at the JSON
 The protocol used by Game On! is text (rather than binary), and uses a simple
 comma-delimited header followed by a JSON payload, `just,like,{"this": "ok?"}`.
 
-* The first section, e.g. `just` in the example above, indicates the direction
+* The first section, e.g. `just` in the example above, indicates the target
   of the message.
 ** `player` is used for messages destined for the player/client.
 ** `playerLocation` is interpreted by the Mediator and also sent to the
@@ -122,7 +122,7 @@ These are short messages that the Mediator sends while managing room connections
 roomHello,<roomId>,{
     "username": "username",
     "userId": "<userId>",
-    "version": 1,
+    "version": 1|2,
     "recovery": true|false
 }
 ----

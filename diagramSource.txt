@@ -106,8 +106,7 @@ deactivate M
 ==================================
 Oauth2
 
-http://plantuml.com/plantuml/png/TP9HQy8m58NVyolktBCWZ1RcWr1ZAmp1iIfxZkcr1clYabJ7nlxxagZOw9Qda7FkkT-zhTaAkMUQxK0gYsF6jxLMhQoeQfI6no8SOY9NeQGzwtcM5adQqGr-j2WvmZS1TrwPjeABFPFsBdiIpfrDwGhrsVAK96aw3fQPMEDCIFnFpxHMn_FpeCW6D8_BRhkd2Iqcp-I74CQjU-Wj3UeUC0DBih_YG8ys0gKD2esLATiXpEL3qARpMCnQkr5QV34hb8GIzU4SdvM4KEYFNCKGtl9o0Thlp5Ym2XfL2-c9n85PzA7JEVJxen5GPyPAQEGMreutoYSLTcjE-LavZ5r0LOKk9NIxDd50oulVBo4KkP45TweXMNaFS1Hs0-ngy-7SXNSveZcxaHLmrZGhzq6YGSEa9uhyas-OhF4F_0ZxWXOwS8x6m49jKTvW-7yMbDj_C5AD_js8MZgKb_S5h9XnDzU0dJ9ioEWiNgDjjVJUUD6_
-
+http://plantuml.com/plantuml/uml/TL9DJm8n4BttLunu9Z4nRA87agMm9CO4uq8yb-wuDYmjJeiQZV_TQO58GUUqcNdpFgRhLyPk5AarM1TmfFIg9RUrZNIT8xYiKWcVeIfdmtu-AOjgK1pDFRvkqMg4Bm5S3ug2qMQZR3ZZ7gSwWpbgaFQGwy6WA4O9Sc-UyTvO_6zU4hdtVVkgAg_a95yxLIy6iXhVY6yXb0xSw2qyKW-KXuNO_Dg1dkmCsf0cCfzCrHfXPY-Wt8ONJavlHcC2JcSvCW8ScKyLZBDGCtAlLTP2IEWFUUCM7YVr72WUq0S83ZhN6XljcJSLC99EPz3l3uSW6OoD8TG1djbynYyQFDxPyPVrROu2wHfabgJsAyA65WTyl4XQuln6yzI3iWsqn9ayR93MnlieMDRdjjuDtqHbYfeLZyrbuG_ci06jkcx9xvL5JzbtlYOV-aNP5ly8b0Kvs4hqMgFtC7Shj2SUuYyDZbya0ILXx7lJMhPozpI7fVBynG9gnn4Inz5J48OjsOZDJ_y3
 @startuml
 skinparam noteBackgroundColor #FFFFFF
 skinparam noteFontColor #EA6F56
@@ -121,7 +120,7 @@ skinparam sequence {
 
 actor "User" as U
 participant "Client" as C
-participant "Game On!" as GO
+participant "Game On! Auth service" as GO
 participant "Authorization Server" as AS
 
 C -> GO: REST request to login
@@ -131,11 +130,11 @@ deactivate GO
 
 C -> AS: Authorization Code Request
 activate AS
-U -> AS: User Authenticates
-AS -->> C: Redirect with authentication code
+U -> AS: User Authenticates and grants permission
+AS -->> C: Redirect with authorization code
 deactivate AS
 
-C -> GO: Authenticated callback
+C -> GO: Authorized callback
 activate GO
 
 GO -> AS: Exchange Authorization Code
