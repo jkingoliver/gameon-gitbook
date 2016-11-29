@@ -1,11 +1,9 @@
 = Advanced Adventures
 :icons: font
-:toc:
-:toc-placement: preamble
-:toclevels: 2
 :elkStack: link:elkStack.adoc
 :local-docker: link:local-docker.adoc
 
+{empty}
 
 What else do you want to try? We have several walkthroughs, both long and short,
 to help you explore aspects of cloud native or microservice applications.
