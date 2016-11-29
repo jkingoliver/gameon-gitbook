@@ -12,7 +12,7 @@
 
 image::http://imgs.xkcd.com/comics/git.png[caption="", title="xkcd: Git",float="right",align="center",link="http://xkcd.com/1597/", width=250]
 
-We use submodules to facilitate grabbing all the core servies in one fell swoop. 
+We use submodules to facilitate grabbing all the core servies in one fell swoop.
 
 toc::[]
 
@@ -23,8 +23,6 @@ Yes, yes we know, Git Submodules {notanswer}[are not] a {yukmodules}[cake walk].
 * https://git-scm.com/doc[Git Reference, Book, Cheat sheets]
 * {submodules}[GitBook: Submodules]
 * {mastery}[Mastering Git Submodules]
-
-
 
 === Safety precautions for using git with submodules
 
@@ -54,4 +52,3 @@ Note global vs. project-specific, make up your own mind which to use.
 * Signed commits: +
 `git config alias.cs 'commit -s'` +
 If you're going to contribute code to Game On!, then you need to certify that you agree to the Developer's Certificate of Origin, as documented in our https://github.com/gameontext/gameon/blob/master/CONTRIBUTING.md#sign-your-work[Contribution guidelines]
-

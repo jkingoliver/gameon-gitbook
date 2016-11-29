@@ -1,0 +1,88 @@
+= Deploy to IBM Bluemix using a Docker Container
+:icons: font
+:toc: preamble
+:toc-title:
+:toclevels: 2
+
+
+{empty}
+
+== Prerequisites for Bluemix deployment
+
+- https://console.ng.bluemix.net[Bluemix account] / https://console.ng.bluemix.net/docs/admin/account.html[Signing up for Bluemix]
+- https://docs.cloudfoundry.org/cf-cli/[Cloud Foundry command line]
+- https://console.ng.bluemix.net/docs/containers/container_cli_cfic_install.html[Install the IBM Containers plugin]
+
+== Create Bluemix accounts
+
+If you already have a Bluemix account, you can skip right over this section.
+
+Sign up for Bluemix at https://console.ng.bluemix.net
+When you sign up, you'll create an IBM ID, create an alias, and
+register with Bluemix.
+
+* Make a note of your username and org, as you will need both later.
+  - By default, the space is `dev` and the org is the project creator's user name.
+    For example, if sara@example.com signs in to Bluemix for the first time,
+    the active space is `dev` and the org is `sara@example.com`.
+
+* Make a note of your region! (US South, United Kingdom, or Australia)
+  - When you log into Bluemix, your logged in username, organization, and
+    space are shown in the top right. If you click in the top right corner,
+    you'll see the region displayed in the panel displayed on the right side
+    of the screen.
+
+== Log in using the `cf` command
+
+1. Login to Bluemix via the command line: `cf login`
+  - Enter Bluemix API endpoint (for your region):
+    * US South: `https://api.ng.bluemix.net`
+    * London: `https://api.eu-gb.bluemix.net`
+  - Enter email and password for Bluemix login
+  - Enter the Bluemix organization
+  - Enter the Bluemix space
+
+2. Login with the IBM Container service: `cf ic login`. +
+   This will create the keys and certificates required to work with
+   the Bluemix docker image registry.
+
+== Add the docker image to the IBM Container service registry
+
+1. Use `cf ic` to build the docker container and push it into the Bluemix registry. Use the `-t <tagName>` option to tag the image.
+  - For the `sample-room-java` project, use `cf ic build -t gojava .` from the root directory.
+
+2. Run `cf ic images` and check your image is available.
+
+See the Bluemix documentation for more information about
+https://console.ng.bluemix.net/docs/containers/container_images_pulling.html{pushing local images to the Bluemix Registry}
+
+== Deploy a single container
+
+3. Start the container by running the command `cf ic run`. You can find the full path to the image from the output of `cf ic images`.
+  - For the `sample-room-java` project, as an example: `cf ic run -p 9080 --name gojava registry.ng.bluemix.net/pavittr/gojava`
+
+4. While you are waiting for the container to start, request a public IP address using the command `cf ic ip request`.
+   This will return you a public IP address you can bind to your container.
+
+5. With the returned IP address, bind it using the command `cf ic ip bind <ip address> <tagName>`.
+
+7. Issue `cf ic ps`, and wait for your container to go from "Networking" to "Running".
+
+8. Use the public IP address to visit your running container
+  - For the `sample-room-java` project, use `http://<ip address>:9080/room` to access the application.
+
+== Deploy as a container group
+
+Instead of deploying a container as a single instance, you can instead deploy a container group.
+A container group can be used to deploy multiple instances of the same container and load balance between them.
+
+3. Create the container group by running `cf ic group create -p 9080 -n <appName> --name <groupName> <registry>/<namespace>/<tagName>`.
+You can find the full path to the image from the output of `cf ic images`.
+  - For the `sample-room-java` project, an example would be:
+  `cf ic group create -p 9080 --name gojavagroup registry.ng.bluemix.net/pavittr/gojava`
+
+4. Run the command ` cf ic route map -n <appHost> -d mybluemix.net <groupName>`. This will make your containers available at <appHost>.mybluemix.net.
+
+5. Run the command `cf ic group instances <groupName>` to check the status of your instances. Once they are in "Running" state your group is ready to use.
+
+6. Now you can go to `http://<appHost>.mybluemix.net` to access your application.

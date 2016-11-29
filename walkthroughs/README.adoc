@@ -1,15 +1,7 @@
 = Extending the Game
 :icons: font
-:toc: manual
-:toc-title:
-:toclevels: 2
-:local-docker: link:local-docker.adoc
 :createRoom: link:createRoom.adoc
 :createNPC: link:createNPC.adoc
-:12-factor: link:../about/12-factor.adoc
-:oracledownload: http://www.oracle.com/technetwork/java/javase/downloads/index.html
-:ibmdownload: http://www.ibm.com/developerworks/java/jdk/
-:liberty: https://developer.ibm.com/assets/wasdev/#filter/assetTypeFilters=PRODUCT
 :whatNext: link:createMore.adoc
 
 As has been mentioned, this game was built to be extended.
@@ -33,38 +25,3 @@ microservices that add additional rooms to the game.
 {whatNext}[Choose your own adventure]::
 Choose from a list of follow-on activities to improve the scalability and
 resilience of your room, or to create new inter-service interaction patterns.
-
-
-== Pre-requisites for local development and test
-
-Developing and testing your room locally in a production-like
-environment is an important aspect of {12-factor}[Twelve factor
-applications], as it reduces the likelihood that what you create
-locally will fail in new and unexpected ways when activated in
-production.
-
-=== Docker
-
-We use Docker (and specifically Docker Compose) to set up a local environment
-that is as similar as possible to what will run in production. We provide some
-pre-built images to help you do that, too.
-
-There are more specific instructions alongside the container-based walkthroughs,
-but if you want to try working locally with Docker, you should
-{local-docker}[get that set up first].
-
-=== Java
-
-Java-based services require Java 1.8. Any compliant JVM should work.
-
-* {oracledownload}[Download] the JDK from Oracle. Be sure to accept the license
-agreement.
-
-* {ibmdownload}[Download] the JDK from IBM (AIX, Linux, z/OS, IBM i), or
-{liberty}[Download] a Liberty package that contains the IBM JDK (Windows, Linux)
-
-Our Java services are also built using gradle, though that requirement should take care of
-itself, thanks to gradle-wrapper.
-
-Once you have Java installed, check that java/javac & keytool are on the path of the shell
-you plan to use for development.

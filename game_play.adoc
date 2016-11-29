@@ -32,8 +32,8 @@ same.
 [cols=".<m,.<2",options="header"]
 |==========================
 |Command    | Description
-|/look      | Look at the room
-|/examine   | Examine an item, e.g. `/examine` or `/examine item`
+|/look      | Describe a room or an item. Implementations will vary
+|/examine   | Examine an item. Implementations will vary: this may be similar to look, or may not work at all
 |/go        | Exit the room using the specified door, e.g. `/go N`
 |/inventory | List your inventory
 |==========================
@@ -59,21 +59,23 @@ First room also provides some useful custom commands for room developers.
 
 
 [[user-profile]]
-== User profile: User details, Secrets, and JWTs
+== User profile: User details and JWTs
 
-Once you've logged into the game, a link in the top right (either your user
-name or a person icon depending on screen size) will take you to your user
-profile page.
+Once you've logged into the game, the person icon in the top-right of the
+application window will take you to your user profile page.
 
 The profile page allows you to edit your user name and favorite color, and
-will display the information needed to register your own rooms or to play with
-protected methods in {swagger}[Swagger].
+will display the JWT you need to play with protected methods using the
+{swagger}[Swagger] API documentation.
 
 [[shared-secret]]
-=== Shared secret (Room registration)
+== Room registration and shared secrets (Room registration)
 
-Room registration requires a request that is {security}[signed] using the shared
-secret shown in this section. Your user id, which is not shown in the game,
-is used as a public access token to identify rooms that you register.
+Once you've logged into the game, the building icon in the top right of the
+application window will take you to a Room Management page.
 
-===
+The small section at the top will show your user id and a shared secret.
+Requests to the Map service should be {security}[signed] using that shared
+secret. Any operation done via this room management page does that naturally,
+but if you wanted to invoke the Map API methods yourself, you would need to use
+that token to modify your registered rooms (or register new ones).
