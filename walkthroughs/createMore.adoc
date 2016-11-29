@@ -6,7 +6,41 @@
 :elkStack: link:elkStack.adoc
 :local-docker: link:local-docker.adoc
 
-What else do you want to try?
+
+What else do you want to try? We have several walkthroughs, both long and short,
+to help you explore aspects of cloud native or microservice applications.
 
 * {elkStack}[The ELK Stack: working with your logs]
 * {local-docker}[Local development using Docker]
+
+== Scale
+
+Let's say you want to make the most popular room ever (an admirable
+goal), which means your room will need to scale to more than one
+instance. How do you propagate chat and events across scaled room
+instances to make sure that it feels like one big room?
+
+You might also explore creating several rooms that relate to each other.
+Should each service be an individual room, or would quantum entanglement
+between the rooms make the bounded context be the suite, rather than any
+individual room? Would rooms need share state or communicate? Given that
+services should remain fiercely independent, where does that state go?
+
+== Fault tolerance
+
+Let's say your service calls another service. This could be a cloud data source
+or a Watson API. In cloud native environments, that backing store might disappear
+at any time. Or the network might be flaky. Or the API could be rate limited.
+
+What then?
+
+Fault tolerance is an essential part of writing a microservices application,
+and most languages have existing libraries to help you write fault tolerant code.
+You should focus on two questions: how long should you wait for something to fail?
+and what should you do when it fails?
+
+Circuit breakers are a follow-on action to improve fault tolerance by avoiding
+interacting with known-bad services. In some cases, underlying infrastructure
+will manage circuit breaking behavior, though in general, your application or
+service should have some notion of what to do if calls to the service repeatedly
+fail.

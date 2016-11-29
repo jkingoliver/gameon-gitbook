@@ -12,7 +12,7 @@
 :security: link:ApplicationSecurty.adoc
 :simpleroom: https://github.com/gameontext/simple-java-room
 :swagger: https://game-on.org/swagger/
-:websocket: link:WebSocketProtocol.adoc
+:WebSocket: link:WebSocketProtocol.adoc
 :walkthroughs: link:../walkthroughs/README.adoc
 
 Game On! is an application composed of several microservices. The set of services
@@ -68,7 +68,7 @@ Having this as a separate entity allows our front-end to be changed and updated
 independently from other services. Some suggest that UI components should be
 provided by each backend service, which can be true with a UI built from distinct
 sections. The game, however, uses a more integrated UI, with much of the rendered
-data coming from a long-lived {websocket}[WebSocket connection using a custom
+data coming from a long-lived {WebSocket}[WebSocket connection using a custom
 protocol].
 
 The webapp process has fairly simple scaling requirements, as it serves cachable
@@ -106,11 +106,11 @@ Room, Empty Room, and Sick Room) to provide a good user experience in the face
 of badly behaved or failing rooms.
 
 The Mediator service is implemented in Java using WebSphere Liberty, it does not
-use an external data store. As noted above, its API is a {websocket}[WebSocket
+use an external data store. As noted above, its API is a {WebSocket}[WebSocket
 endpoint with a custom protocol].
 
 Mediator also registers as an Amalgam8 service, enabling proxy to forward traffic
-to it (including the websocket from the end user). Requests to Player and Map made
+to it (including the WebSocket from the end user). Requests to Player and Map made
 by Mediator are routed via the local in-container Amalgam8 proxy, allowing those
 to scale as required.
 
@@ -150,7 +150,7 @@ find it and place invocations to it via their in-container proxies.
 
 The Sweep performs periodic rounds of all the registered rooms, checking to see
 if they are still reachable, and that they behave properly according to the
-documented {websocket}[WebSocket protocol].
+documented {WebSocket}[WebSocket protocol].
 
 === Proxy/Gateway
 

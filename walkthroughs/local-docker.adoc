@@ -5,42 +5,49 @@
 :toclevels: 2
 :sociallogin: link:adding_your_own_sso_apps_for_local_testing.adoc
 :wdt-eclipse: link:eclipse_and_wdt.adoc
+:docker: https://docs.docker.com/engine/installation/
+:git: link:git.adoc
 
 
-{empty}
+Developing and testing your room locally in a production-like environment is an
+important aspect of {12-factor}[Twelve factor applications], as it reduces the
+likelihood that what you create locally will fail in new and unexpected ways
+when activated in production.
+
+We use Docker (and specifically Docker Compose) to set up a local environment
+that is as similar as possible to what will run in production. We provide some
+pre-built images to help you do that, too.
 
 == Using Docker
 
 We require docker-compose version 1.5.0 or greater.
 
-https://docs.docker.com/engine/installation/[Installing Docker] varies by platform.
-For https://docs.docker.com/engine/installation/mac/[Mac] and
-https://docs.docker.com/engine/installation/windows/[Windows],
-Docker Toolbox (referenced below) has superseded Boot2Docker.
+{docker}[Installing Docker] varies by platform. On Windows and macOS, you can
+also choose between Docker native and Docker Toolbox. Both should work.
 
-There is a conceptual difference between what happens on linux vs. on Windows
-or Mac that could use some explaining:
+There is a conceptual difference between what happens on linux or Docker native
+vs. Docker Toobox on Windows or macOS that could use some explaining:
 
-* When you run on linux, the "host" for your containers is the OS itself, so
+* When you run natively, the "host" for your containers is the OS itself, so
   127.0.0.1 will work just fine.
-* When you run on Mac or Windows, there is a VirtualMachine acting as the host
+* When you run in Docker Toolbox, there is a VirtualMachine acting as the host
   for your containers. This means that (for URLs and other things) you need to
   use the xref:dockerhost[IP of the host].
 
-== The Game On Root Project (gameon)
+== The Game On! Root Project (gameon)
 
-Game On uses Docker Compose to coordinate the containers that run each of the game's
+Game On! uses Docker Compose to coordinate the containers that run each of the game's
 core services. In the root project there will be a `docker-compose.yml` that declares
 the various core services, and a `docker-compose.override.yml.example` that can be used
 when developing locally to help speed up round trip times.
 
-When Game On runs in the cloud, it uses etcd to obtain its configuration, when running
-locally it expects all this to be fed to it via the environment, which `docker-compose.yml`
-will setup per service from the `gameon.env` file.
+When Game On! runs in the cloud, it uses etcd to obtain its configuration.
+When running locally it expects all this to be fed to it via the environment,
+which `docker-compose.yml` will setup per service from the `gameon.env` file.
 
 === KeyStore generation
 
-Because Game On uses a Certificate for HTTPS and for JWT signing, we need to
+Because Game On! uses a Certificate for HTTPS and for JWT signing, we need to
 generate one for local use. The latter part is managed by Docker, with a special
 mapped volume providing a generated local keystore to containers. Both the
 `go-setup.sh` and `go-build.sh` scripts will generate the local keystore. If it
@@ -74,24 +81,26 @@ stopping, and cleaning up after Game ON core services (in `docker-compose.yml`).
 
 Game On! is now running locally.
 
-* If you're running a \*nix variant, you can access it at http://127.0.0.1/
-* If you're running Mac or Windows, access it using the xref:dockerhost[IP of the host]
+* If you're running Docker natively, you can access it at http://127.0.0.1/
+* If you're running Docker Toolbox, access it using the xref:dockerhost[IP of the host]
 
 Carry on with building your rooms!
+
+== Core Game Development
 
 If you change your mind, and decide you want to start hacking on a core game
 service, no worries! You can mix and match the two approaches, just clone the
 submodule(s) you wish to edit, and carry on with the steps below.
 
-== Core Game Development
-
-1. Obtain the source:
-  * HTTPS: `git clone https://github.com/gameontext/gameon.git`
-  * SSH: `git clone git@github.com:gameontext/gameon.git`
-
-2. Change to the gameon directory
+1. Change to the gameon directory
 +
   cd gameon
+
+2. Obtain the source for the project that you want to change. The easiest way is
+to take advantage of {git}[git submodules]. Using the `map` service as an example:
++
+  git submodule init map
+  git submodule update map
 
 3. Build/initialize the projects (includes building wars and creating keystores
 required for local development).

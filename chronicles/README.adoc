@@ -4,7 +4,7 @@
 :toc-title:
 :toclevels: 1
 :signedHeaders: link:../microservices/ApplicationSecurity.adoc
-:websocketProtocol: link:../microservices/WebSocketProtocol.adoc
+:WebSocketProtocol: link:../microservices/WebSocketProtocol.adoc
 :game-on: https://game-on.org/
 
 The following sections are more like a blog than a book. Creating a new
@@ -90,7 +90,7 @@ serves the document that presents both APIs together in one view.
 The bulk of the traffic flowing around in the game is over WebSockets, and that
 is difficult for Swagger to document. For those interested in the real low-level
 details, we wrote down and iterated on the WebSocket protocol in a Box note. The
-result is documented {websocketProtocol}[here].
+result is documented {WebSocketProtocol}[here].
 
 == Splitting up the Player service
 
