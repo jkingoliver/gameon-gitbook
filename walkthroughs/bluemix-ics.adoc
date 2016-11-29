@@ -53,6 +53,9 @@ register with Bluemix.
 
 2. Run `cf ic images` and check your image is available.
 
+See the Bluemix documentation for more information about
+https://console.ng.bluemix.net/docs/containers/container_images_pulling.html{pushing local images to the Bluemix Registry}
+
 == Deploy a single container
 
 3. Start the container by running the command `cf ic run`. You can find the full path to the image from the output of `cf ic images`.
