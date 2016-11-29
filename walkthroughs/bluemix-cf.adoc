@@ -44,7 +44,7 @@ Login to Bluemix via the command line: `cf login`
 
 1. `cf push <cf-app-name> -p <app archive>`
   - Choose a unique app name. This will be used as the first part of the URL, e.g. `cf-app-name` becomes `cf-app-name.mybluemix.net`
-  - For `sample-room-java`, the app archive is `gojava-wlpcfg/target/wlp/usr/servers/gojava-room/gojava-room.zip`
+  - For `sample-room-java`, the app archive is `target/gameon-room-java.zip`
   - https://console.ng.bluemix.net/docs/manageapps/depapps.html#dep_apps[Deploying applications by using the cf command]
 
 2. After your room has been pushed, you should be able to view it at:
