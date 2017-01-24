@@ -6,6 +6,8 @@
 .admonitionblock td.content div.title {
   font-weight: bold;
 }
+.user-profile:after,
+.room-edit:after,
 .admonitionblock td.icon div.title:before {
   font-family: "FontAwesome";
 }
@@ -49,8 +51,18 @@
 }
 .page-inner section h1 {
     background-image: url("https://game-on.org/images/go-logo.png");
-    background-size: 1.5em; 
+    background-size: 1.5em;
     background-repeat: no-repeat;
     background-position: center right;
     padding-right: 1.5em;
+}
+.user-profile:after {
+    content: " (\f007)";
+}
+.room-edit:after {
+    content: " (\f1ad)";
+}
+.sidebarblock {
+    background-color: silver;
+    padding: 5px;
 }

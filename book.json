@@ -1,14 +1,16 @@
 {
     "title": "Exploring Microservices — Game On!",
+    "description": "Game On! is a text-based adventure game designed to allow experimentation with microservices and supporting technologies.",
 
     "gitbook": ">=3.2.0",
-
 
     "plugins": [
         "addcssjs",
         "github",
         "heading-anchors",
         "include",
+        "meta",
+        "sitemap",
         "youtube",
         "-fontsettings",
         "-sharing"
@@ -24,6 +26,17 @@
         },
         "github": {
             "url": "https://github.com/gameontext"
+        },
+        "meta": {
+            "data": [
+                {
+                    "name": "keywords",
+                    "content": "cloud native applications, microservices, Java EE, microservice architecture"
+                }
+            ]
+        },
+        "sitemap": {
+            "hostname": "http://book.game-on.org/"
         }
     }
 }

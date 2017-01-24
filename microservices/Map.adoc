@@ -9,7 +9,9 @@
 :repo: https://github.com/gameontext/gameon-map
 
 The Map is one of the game's core services. It is implemented in Java using
-WebSphere Liberty. The source is {repo}[available on GitHub].
+WebSphere Liberty. The source is {repo}[available on GitHub]. The public REST API
+is {swagger}[browsable with Swagger]. What follows is a very
+description of how the internals of the map service work.
 
 == API, Language, and Runtime
 

@@ -5,12 +5,12 @@
 :toclevels: 2
 :chronicles: link:../chronicles/README.adoc
 :map: link:Map.adoc
-:goroom: https://github.com/gameontext/gameon-room-go
+:goroom: https://github.com/gameontext/sample-room-go
 :maproom: https://game-on.org/swagger/
-:nodejsroom: https://github.com/gameontext/gameon-room-nodejs
+:nodejsroom: https://github.com/gameontext/sample-room-nodejs
 :recroom: https://github.com/gameontext/gameon-room
 :security: link:ApplicationSecurty.adoc
-:simpleroom: https://github.com/gameontext/simple-java-room
+:simpleroom: https://github.com/gameontext/sample-java-room
 :swagger: https://game-on.org/swagger/
 :WebSocket: link:WebSocketProtocol.adoc
 :walkthroughs: link:../walkthroughs/README.adoc
