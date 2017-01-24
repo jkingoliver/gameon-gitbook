@@ -16,15 +16,15 @@ comma-delimited header followed by a JSON payload, `just,like,{"this": "ok?"}`.
 
 * The first section, e.g. `just` in the example above, indicates the target
   of the message.
-** `player` is used for messages destined for the player/client.
-** `playerLocation` is interpreted by the Mediator and also sent to the
+  - `player` is used for messages destined for the player/client.
+  - `playerLocation` is interpreted by the Mediator and also sent to the
     player/client.
-** `room*` is used for messages destined for the room.
+  - `room*` is used for messages destined for the room.
 * The middle section, e.g. `like` in the example above, indicates the recipient
   of the message. This element is not present in all messages.
-** For player-directed messages, it is either the specific player's ID, or `*`
+  - For player-directed messages, it is either the specific player's ID, or `*`
    for messages intended for all players.
-** For room-directed messages, it is the specific room's ID.
+  - For room-directed messages, it is the specific room's ID.
 * The last section is a JSON payload, e.g. `{"this": "ok?"}`. The contents
   vary by message type.
 
