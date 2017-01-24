@@ -3,7 +3,8 @@
 :toc: preamble
 :toc-title:
 :toclevels: 2
-
+:cficDoc: https://console.ng.bluemix.net/docs/containers/container_cli_cfic.html
+:roomRegistration: link:registerRoom.adoc
 
 {empty}
 
@@ -34,55 +35,99 @@ register with Bluemix.
 
 == Log in using the `cf` command
 
-1. Login to Bluemix via the command line: `cf login`
+See the {cficDoc}[IBM Bluemix Container Service plug-in] documentation
+for the latest instructions, what follows is the TL;DR version:
+
+1. Login to Bluemix via the command line:
++
+    cf login
++
   - Enter Bluemix API endpoint (for your region):
     * US South: `https://api.ng.bluemix.net`
     * London: `https://api.eu-gb.bluemix.net`
   - Enter email and password for Bluemix login
-  - Enter the Bluemix organization
-  - Enter the Bluemix space
+    * If logging in with a federated ID (if you don't know what this means,
+      you aren't), use the `-sso` option with a
+      https://login.ng.bluemix.net/UAALoginServerWAR/passcode[one-time use password]
+  - Choose a Bluemix organization by number
+  - Choose a Bluemix space by number
 
-2. Login with the IBM Container service: `cf ic login`. +
-   This will create the keys and certificates required to work with
+2. If this is your first time logging in to Bluemix, create a namespace.
+   This step happens only once, and can't be changed, so choose well:
++
+    cf ic namespace set <my_namespace>
++
+    - Use only letters, numbers, or underscores
+    - Use 4 to 30 characters
+
+2. Login with the IBM Container service:
++
+    cf ic init
++
+This will create the keys and certificates required to work with
    the Bluemix docker image registry.
 
 == Add the docker image to the IBM Container service registry
 
-1. Use `cf ic` to build the docker container and push it into the Bluemix registry. Use the `-t <tagName>` option to tag the image.
-  - For the `sample-room-java` project, use `cf ic build -t gojava .` from the root directory.
+1. Use `cf ic` commands to build the docker container and push it into the Bluemix registry.
+   Use the `-t <tagName>` option to tag the image.
+  - For the `sample-room-java` project, from the application root directory, use
 
-2. Run `cf ic images` and check your image is available.
+    cf ic build -t gojava .
+
+2. Run `cf ic images` and check that your image is in the list.
 
 See the Bluemix documentation for more information about
 https://console.ng.bluemix.net/docs/containers/container_images_pulling.html{pushing local images to the Bluemix Registry}
 
 == Deploy a single container
 
-3. Start the container by running the command `cf ic run`. You can find the full path to the image from the output of `cf ic images`.
-  - For the `sample-room-java` project, as an example: `cf ic run -p 9080 --name gojava registry.ng.bluemix.net/pavittr/gojava`
+1. Start the container by running the command `cf ic run`. You can find the full path to the image
+   from the output of `cf ic images`.
+  - For the `sample-room-java` project, as an example:
++
+    cf ic run -p 9080 --name gojava registry.ng.bluemix.net/<your-org>/gojava
 
-4. While you are waiting for the container to start, request a public IP address using the command `cf ic ip request`.
-   This will return you a public IP address you can bind to your container.
+2. Bind a public IP address to your container
+   - Get a public IP address
++
+    cf ic ip request
++
+   - Bind it to your running container:
++
+    cf ic ip bind <ip address> <tagName>
 
-5. With the returned IP address, bind it using the command `cf ic ip bind <ip address> <tagName>`.
-
-7. Issue `cf ic ps`, and wait for your container to go from "Networking" to "Running".
+7. Use `cf ic ps` to check the status of your container. Wait for it to switch from "Networking" to "Running"
 
 8. Use the public IP address to visit your running container
-  - For the `sample-room-java` project, use `http://<ip address>:9080/room` to access the application.
+  - For the `sample-room-java` project, use `http://<ip address>:9080/` to access the application.
+  - Copy the websocket endpoint address. Use this address in your {roomRegistration}[room registration].
 
 == Deploy as a container group
 
-Instead of deploying a container as a single instance, you can instead deploy a container group.
-A container group can be used to deploy multiple instances of the same container and load balance between them.
+Instead of deploying a container as a single instance, you can instead deploy a
+container group. A container group load balances between multiple instances of
+the same container.
 
-3. Create the container group by running `cf ic group create -p 9080 -n <appName> --name <groupName> <registry>/<namespace>/<tagName>`.
+3. Create the container group:
++
+    cf ic group create -p 9080 -n <appName> --name <groupName> <registry>/<namespace>/<tagName>
++
 You can find the full path to the image from the output of `cf ic images`.
+
   - For the `sample-room-java` project, an example would be:
-  `cf ic group create -p 9080 --name gojavagroup registry.ng.bluemix.net/pavittr/gojava`
++
+    cf ic group create -p 9080 --name gojavagroup registry.ng.bluemix.net/<org-name>/gojava
 
-4. Run the command ` cf ic route map -n <appHost> -d mybluemix.net <groupName>`. This will make your containers available at <appHost>.mybluemix.net.
+4. Make your containers publicly available at <appHost>.mybluemix.net:
++
+    cf ic route map -n <appHost> -d mybluemix.net <groupName>
 
-5. Run the command `cf ic group instances <groupName>` to check the status of your instances. Once they are in "Running" state your group is ready to use.
+5. Check the status of your instances
++
+   cf ic group instances <groupName>
++
+Once they are in "Running" state your group is ready to use.
 
 6. Now you can go to `http://<appHost>.mybluemix.net` to access your application.
+  - Copy the websocket endpoint address. Use this address in your {roomRegistration}[room registration].
