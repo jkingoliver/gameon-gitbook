@@ -1,4 +1,4 @@
-= Deploy to IBM Bluemix as Cloud Foundry application
+= Deploying to IBM Bluemix as Cloud Foundry application
 :icons: font
 :toc: preamble
 :toc-title:

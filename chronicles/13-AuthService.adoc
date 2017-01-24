@@ -1,0 +1,19 @@
+= None Shall Pass!
+:icons: font
+:signedHeaders: link:../microservices/ApplicationSecurity.adoc
+:WebSocketProtocol: link:../microservices/WebSocketProtocol.adoc
+:game-on: https://game-on.org/
+
+image:../images/Progression.013.jpeg[Progression, width=95%]
+
+Remember way back in the beginning when we had only 3 services total and
+the Player service did all the things that ever needed to be done regarding players?
+Well, "all the things" included interacting with Social Login services to
+authenticate the Player and issue an access token (JWT).
+
+As we grew to support additional Social Login services, the dependency
+management for Player become problematic. 3rd party libraries would require dependencies
+that would conflict with others required by our core Player entity store function.
+Can you believe it? We couldn't. As we looked more to the way that systems such as
+KeyCloak, or Auth0 worked, it began to feel more natural to have a service dedicated
+just to handling the issuing of JWTs in response to Social Login.

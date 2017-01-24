@@ -1,0 +1,21 @@
+= Splitting out the web front-end
+:icons: font
+:signedHeaders: link:../microservices/ApplicationSecurity.adoc
+:WebSocketProtocol: link:../microservices/WebSocketProtocol.adoc
+:game-on: https://game-on.org/
+
+image:../images/Progression.003.jpeg[Progression, width=95%]
+
+There is no good reason (and many not-good reasons) to have your web front end
+packed in with a Java application. Freeing your front-end developers to be able
+to develop and test without worrying about the Java gorp is a good thing.
+
+We therefore split the web stuff into its own (small, simple) container. This had
+the added 'bonus' of requiring CORS headers for local development, which was a
+pain. In production, the proxy alleviated these issues: all of the services
+belonged to the same domain.
+
+This could be countered using xip.io, but for that to work, you still need to be
+connected to the internet to allow the xio.io domain to resolve.
+
+We added CORS filters to the app for the time being and moved on.

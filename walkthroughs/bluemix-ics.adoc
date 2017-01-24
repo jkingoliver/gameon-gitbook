@@ -1,4 +1,4 @@
-= Deploy to IBM Bluemix using a Docker Container
+= Deploying to IBM Bluemix using a Docker Container
 :icons: font
 :toc: preamble
 :toc-title:
