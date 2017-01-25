@@ -1,4 +1,4 @@
-= Explain it with panache
+= Show the API
 :icons: font
 :signedHeaders: link:../microservices/ApplicationSecurity.adoc
 :WebSocketProtocol: link:../microservices/WebSocketProtocol.adoc

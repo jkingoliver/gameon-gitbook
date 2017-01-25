@@ -1,4 +1,4 @@
-= Automation and Cloud
+= Automation! Clouds!
 :icons: font
 :signedHeaders: link:../microservices/ApplicationSecurity.adoc
 :WebSocketProtocol: link:../microservices/WebSocketProtocol.adoc

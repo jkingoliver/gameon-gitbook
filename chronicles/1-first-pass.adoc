@@ -18,6 +18,6 @@ The API between Concierge and Room was changing all the time in the early days,
 so having those two services built in the same repository made things easier as
 we kept changing our minds about how we wanted these two services to interact.
 
-The Player service in this pass is also multifunction: it is serving the web
+The Player service in this pass was also multifunction, serving the web
 front end, acting as the authenticator, and acting as the mediator between the
 player's device and the target room.

@@ -1,4 +1,4 @@
-= Bringing in etcd
+= Config management #FTW
 :icons: font
 :signedHeaders: link:../microservices/ApplicationSecurity.adoc
 :WebSocketProtocol: link:../microservices/WebSocketProtocol.adoc

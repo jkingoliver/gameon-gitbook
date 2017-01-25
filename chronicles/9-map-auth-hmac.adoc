@@ -1,4 +1,4 @@
-= Map Auth
+= Authorized operations
 :icons: font
 :signedHeaders: link:../microservices/ApplicationSecurity.adoc
 :sharedLibrary: https://github.com/gameontext/signed
@@ -11,7 +11,7 @@ We added {signedHeaders}[signed header-based security] to the Map service APIs.
 
 Adding security after the fact is a bad idea. Just sayin'. We managed it, but it
 was messy, and required coordinated rollouts across our services to get the support
-for Signed JWTs and signed HMAs working the waywe wanted.
+for Signed JWTs and signed HMACs working the way we wanted.
 
 The {sharedLibrary}[shared library] we built for managing signature verification
 did make this easier for Java.
