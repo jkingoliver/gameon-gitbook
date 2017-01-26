@@ -81,8 +81,10 @@ You can find the full path to the image from the output of `cf ic images`.
   - For the `sample-room-java` project, an example would be:
   `cf ic group create -p 9080 --name gojavagroup registry.ng.bluemix.net/pavittr/gojava`
 
-4. Run the command ` cf ic route map -n <appHost> -d mybluemix.net <groupName>`. This will make your containers available at <appHost>.mybluemix.net.
+4. Run the command `cf ic group list` to check on the status of the creation of the group, a status of "CREATE_COMPLETE" means the group has been created.
 
-5. Run the command `cf ic group instances <groupName>` to check the status of your instances. Once they are in "Running" state your group is ready to use.
+5. Run the command `cf ic route map -n <appHost> -d mybluemix.net <groupName>`. This will make your containers available at <appHost>.mybluemix.net.
 
-6. Now you can go to `http://<appHost>.mybluemix.net` to access your application.
+6. Run the command `cf ic group instances <groupName>` to check the status of your instances. Once they are in "Running" state your group is ready to use.
+
+7. Now you can go to `http://<appHost>.mybluemix.net` to access your application.
