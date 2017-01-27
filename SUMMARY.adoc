@@ -20,6 +20,7 @@
 .. link:microservices/ApplicationSecurity.adoc[Application Security]
 .. link:microservices/Map.adoc[Map service details]
 . link:about/README.adoc[Microservices: The Backstory]
+.. link:about/twelve-factors.adoc[The Twelve Factors]
 . link:chronicles/README.adoc[Appendix: The Chronicles]
 .. link:chronicles/1-first-pass.adoc[The First Pass]
 .. link:chronicles/2-cloud-automation.adoc[Automation! Clouds!]

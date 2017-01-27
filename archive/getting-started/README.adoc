@@ -1,6 +1,8 @@
 = Getting Started: Build your own room
 :icons: font
-:toc: preamble
+:toc:
+:toc-title:
+:toc-placement: preamble
 :toclevels: 1
 :sectanchors:
 
@@ -8,7 +10,7 @@ We'll cheat a little bit here: to do this mad dash from nothing to everything, y
 
 == Get the source
 
-Recursively grab all the source for our core modules, and change to the new shiny cloned directory: 
+Recursively grab all the source for our core modules, and change to the new shiny cloned directory:
 
 ----
 git clone --recursive https://github.com:gameontext/gameon.git
@@ -57,9 +59,3 @@ cd webapp
 npm install
 ./node_modules/.bin/grunt build
 ----
-
-
-
-
-
-

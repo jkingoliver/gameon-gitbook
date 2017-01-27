@@ -1,6 +1,7 @@
 = Git
 :icons: font
 :toc:
+:toc-title:
 :toc-placement: manual
 :toclevels: 1
 :submodules: https://git-scm.com/book/en/v2/Git-Tools-Submodules
@@ -18,13 +19,13 @@ toc::[]
 
 Yes, yes we know, Git Submodules {notanswer}[are not] a {yukmodules}[cake walk]. But we believe the convenience of being able to grab the set of core services as a whole is worth it. If you plan to contribute back (as we hope you will), {submodules}[some reading] may be {mastery}[required].
 
-=== References for using Git
+== References for using Git
 
 * https://git-scm.com/doc[Git Reference, Book, Cheat sheets]
 * {submodules}[GitBook: Submodules]
 * {mastery}[Mastering Git Submodules]
 
-=== Safety precautions for using git with submodules
+== Safety precautions for using git with submodules
 
 If you end up using submodules in anger, consider the following:
 
@@ -41,7 +42,7 @@ If you end up using submodules in anger, consider the following:
 `git config alias.spush 'push --recurse-submodules=check'`
 
 
-=== Other useful aliases
+== Other useful aliases
 
 Note global vs. project-specific, make up your own mind which to use.
 

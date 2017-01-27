@@ -1,7 +1,8 @@
 = Register your Room
 :icons: font
-:toc: preamble
+:toc:
 :toc-title:
+:toc-placement: preamble
 :toclevels: 2
 :javascript: https://github.com/gameontext/sample-room-nodejs#introduction
 :java: https://github.com/gameontext/sample-room-java#introduction
@@ -29,7 +30,7 @@ rooms using commands in {first-room}[First Room] or the Room Management
 page.
 ====
 
-== Room Management: Create a new room
+== Room Management: Register a new room
 
 1.  Go to https://game-on.org[Game On!] and sign in.
 2.  Click on the [room-edit]#building icon# in the top right of the game screen
@@ -45,7 +46,12 @@ page.
       other lists or indexes of defined rooms. The description shown in the
       game can reuse this text, or can be defined separately.
     * Doors: <<doors,Describe each door as seen from the outside>>.
-8.  Click **Create** and the room will be created for you.
+8.  Click **Register** and the room will be registered (added to the Map).
+
+You can come back to this page to update your room registrations
+at any time. Choose the room you want to update from the drop-down,
+make any desired changes, and click either **Update** to save the changes,
+or **Delete** to delete the registration entirely.
 
 
 [[doors]]
@@ -57,11 +63,11 @@ Describe each door as it would appear from outside the room.
 .Your room is in green. Describe doors as seen by the navigating player.
 image:../images/roomRegistration.png[title="Describing doors from the outside", align="center", width="400"]
 
-For example, the doors of First Room all have friendly faces on them somewhere.
-If you pretend, in the diagram above, that the green room is First Room, the
-person walking East saw the following when listing `/exits`:
+For example, if the green room is a room pretending to be a bouncy castle,
+then the bouncy castle room could declare a description for their 'east'
+door so person walking east would see the following when listing `/exits`:
 
-    (E)ast  A polished wooden door with an inlaid friendly face
+    (E)ast   An inflated doorway, through which you can seemingly hear much laughter, and merriment
 
 If this doesn't make sense to you, don't worry about it; describe each door
 without referencing a direction, and things will be fine.

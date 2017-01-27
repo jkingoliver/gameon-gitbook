@@ -1,7 +1,8 @@
 = Application Security
 :icons: font
-:toc: preamble
+:toc:
 :toc-title:
+:toc-placement: preamble
 :toclevels: 3
 :swagger: https://game-on.org/swagger/
 :hmac-rfc: http://www.ietf.org/rfc/rfc2104

@@ -21,7 +21,8 @@
     "pluginsConfig": {
         "addcssjs": {
             "css": [
-                "styles/admonition.css"
+                "styles/asciidoctor-custom.css",
+                "styles/gameontext.css"
             ]
         },
         "github": {

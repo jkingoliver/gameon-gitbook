@@ -1,8 +1,9 @@
 = Deploying to Heroku
 :icons: font
-:toc: preamble
+:toc:
 :toc-title:
-:toclevels: 2
+:toc-placement: preamble
+:toclevels: 1
 
 {empty}
 

@@ -1,10 +1,12 @@
 = Working with Game On! Locally
 :icons: font
 :toc:
+:toc-title:
 :toc-placement: preamble
 :toclevels: 2
 :sociallogin: link:adding_your_own_sso_apps_for_local_testing.adoc
 :wdt-eclipse: link:eclipse_and_wdt.adoc
+:12-factor: link:../about/twelve-factors.adoc
 :docker: https://docs.docker.com/engine/installation/
 :git: link:git.adoc
 
@@ -45,14 +47,15 @@ When Game On! runs in the cloud, it uses etcd to obtain its configuration.
 When running locally it expects all this to be fed to it via the environment,
 which `docker-compose.yml` will setup per service from the `gameon.env` file.
 
-=== KeyStore generation
-
+.SSH Keys and KeyStores
+****
 Because Game On! uses a Certificate for HTTPS and for JWT signing, we need to
 generate one for local use. The latter part is managed by Docker, with a special
 mapped volume providing a generated local keystore to containers. Both the
 `go-setup.sh` and `go-build.sh` scripts will generate the local keystore. If it
 ever needs to be replaced, delete the keystore directory, and run the appropriate
 script again.
+****
 
 == Local Room Development
 

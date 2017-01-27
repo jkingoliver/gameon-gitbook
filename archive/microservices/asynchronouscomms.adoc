@@ -1,7 +1,9 @@
 = Asynchronous communication
 :icons: font
-:toc: preamble
-:toclevels: 3
+:toc:
+:toc-title:
+:toc-placement: preamble
+:toclevels: 2
 :imagesdir: /images
 
 Game play messages require an asychronous transport. Any given message can contain a command, chat, or event, and must be able to flow in either direction. Some interactions (like `/go N`) have a request/response feel, but will be interspersed with other room- or player-generated events.

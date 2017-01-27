@@ -1,7 +1,8 @@
 = The Map
 :icons: font
-:toc: preamble
+:toc:
 :toc-title:
+:toc-placement: preamble
 :toclevels: 2
 :12-factor: link:../about/12-factor.adoc
 :security: link:ApplicationSecurty.adoc

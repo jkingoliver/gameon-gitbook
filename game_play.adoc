@@ -1,12 +1,13 @@
 = Game Play
 :icons: font
-:toc: preamble
+:toc:
 :toc-title:
+:toc-placement: preamble
 :toclevels: 2
 :services: link:microservices/README.adoc
 :swagger: https://game-on.org/swagger/
 :security: link:microservices/ApplicationSecurity.adoc
-:createRoom: link:walkthroughs/createRoom.adoc
+:registerRoom: link:walkthroughs/registerRoom.adoc
 :mapService: link:microservices/Map.adoc
 :mapClient: https://github.com/gameontext/regutil
 :charm: https://en.wikibooks.org/wiki/Muggles%27_Guide_to_Harry_Potter/Magic/Permanent_Sticking_Charm
@@ -31,7 +32,7 @@ same.
 |/sos     |Emergency rescue: will return you to First Room
 |==========================
 
-.Common commands implemented by rooms: implementations will vary
+.Common commands provided by rooms: implementations will vary
 [cols=".<m,.<2",options="header"]
 |==========================
 |Command    | Description
@@ -47,7 +48,7 @@ same.
 First Room is a special room: it is located (and fixed with a
 {charm}[permanent sticking charm]) at the origin of the map. It is the starting
 place for every player joining the game, and is also where players return when
-things go terribly wrong, or when they call for a rescue (`/sos`).
+things go terribly wrong or call for a rescue (`/sos`).
 
 First room also provides some useful custom commands for room developers.
 
@@ -93,4 +94,4 @@ room registrations, but if you wanted to try talking to the {swagger}[Map API] o
 own, or on the command line using the {mapClient}[map client],
 you would need to copy this token.
 
-2. The rest of the page is concerned with {createRoom}[room registration attributes].
+2. The rest of the page is concerned with {registerRoom}[room registration attributes].

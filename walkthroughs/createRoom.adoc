@@ -1,7 +1,8 @@
 = Create a Room service
 :icons: font
-:toc: preamble
+:toc:
 :toc-title:
+:toc-placement: manual
 :toclevels: 2
 :WebSocket: link:../microservices/WebSocketProtocol.adoc
 :sweep: link:../microservices/TheSweep.adoc
@@ -20,7 +21,9 @@ minutes. A simple service must provide a publicly reachable WebSocket endpoint
 that satisfies the {WebSocket}[WebSocket protocol], and that's it for a basic,
 functional room.
 
-*Why are there WebSockets again? I thought microservices were about REST!*
+== Why are there WebSockets again?
+
+_I thought microservices were about REST!_
 
 Asynchronous interaction patterns are an important part of microservice
 architectures. In our case, WebSockets are a stand-in for messaging protocols

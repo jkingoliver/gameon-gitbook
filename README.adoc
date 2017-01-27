@@ -4,13 +4,13 @@
 :extend: link:walkthroughs/README.adoc
 :chronicles: link:chronicles/README.adoc
 
-Microservices: the buzz is everywhere. Given the breadth of technologies related
-to the term, it can be difficult to get a full picture of what a microservices
-application should look like, or to understand why it is said that
-microservices architectures both remove and introduce complexity at the same time.
-
 https://game-on.org/[Game On!] is a throwback text-based adventure built to
-help you explore microservices architectures and related concepts.
+help you explore microservice architectures and related concepts.
+
+It can be difficult to get a full picture of what a microservices
+application should look like, or to understand why it is said that
+microservice architectures both remove and introduce complexity
+at the same time.
 
 {% youtube %}https://youtu.be/RvK5GqyK8Ow{% endyoutube %}
 
@@ -30,9 +30,9 @@ It is infinitely extensible in a creative and fun way.::
 We know, this doesn't feel very business-y. But we've found that people are less
 likely to take risks in trying new technologies when they have their serious
 business hats on. That, and firm associations with existing applications can
-anchor thinking to the traditional, monolithic approach. Anchored thinking causes
-problems when trying to understand how you might design a microservice around
-a business function or domain instead of around a data model.
+anchor thinking to traditional approaches. Anchored thinking causes problems when trying 
+to understand how you might design a microservice around a business function or
+domain instead of around a data model.
 
 == Learn more
 

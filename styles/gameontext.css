@@ -1,0 +1,47 @@
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.content div.title {
+  font-weight: bold;
+}
+.admonitionblock td.icon div.title:before {
+  font-family: "FontAwesome";
+}
+.note      td.icon div.title:before { content: "\f05a\00a0\00a0 "; color:#19407c} }
+.tip       td.icon div.title:before { content: "\f08d\00a0\00a0 "; text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.important td.icon div.title:before { content: "\f06a\00a0\00a0 "; color:#bf0000}
+.warning   td.icon div.title:before { content: "\f071\00a0\00a0 "; color:#bf6900}
+.caution   td.icon div.title:before { content: "\f06d\00a0\00a0 "; color:#bf3400}
+
+.imageblock {
+  padding: 0 10px 10px 10px;
+}
+.imageblock .title {
+  font-size: 0.8em !important;
+  padding-bottom: 10px;
+}
+.page-inner section h1 {
+    background-image: url("https://game-on.org/images/go-logo.png");
+    background-size: 1.5em;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 1.5em;
+}
+.user-profile:after {
+    font-family: "FontAwesome";
+    content: " \f007";
+}
+.room-edit:after {
+    font-family: "FontAwesome";
+    content: " \f1ad";
+}
+.book-summary {
+    color: #eeeeee;
+    background: #35566b;
+}
+.book-summary ul.summary li a {
+    color: #eeeeee;
+    padding: 5px 15px;
+    text-decoration: none;
+}
+.book-summary ul.summary li.active>a {
+    color: #65cfd9;
+}

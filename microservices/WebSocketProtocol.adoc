@@ -1,7 +1,8 @@
 = WebSocket Protocol
 :icons: font
-:toc: preamble
+:toc:
 :toc-title:
+:toc-placement: preamble
 :toclevels: 3
 :swagger: https://game-on.org/swagger/
 :security: link:ApplicationSecurty.adoc

@@ -1,6 +1,7 @@
 = Eclipse and WDT
 :icons: font
 :toc:
+:toc-title:
 :toc-placement: preamble
 :toclevels: 1
 :imagesdir: /images
@@ -15,7 +16,7 @@ This approach requires the mounted volumes provided by `docker-compose.override.
 
 == Getting Eclipse and WDT
 
-The easiest way to get both Eclipse and WDT is via  https://developer.ibm.com/wasdev/downloads/liberty-profile-using-eclipse[wasdev.net]. 
+The easiest way to get both Eclipse and WDT is via  https://developer.ibm.com/wasdev/downloads/liberty-profile-using-eclipse[wasdev.net].
 
 * Step 1 contains the link for the latest Eclipse for Java EE developers
 * Step 2 contains a drag-and-drop link to install the latest copy of WDT.
@@ -50,7 +51,7 @@ Full integration with WDT does bring some additional benefits, but there is curr
 So, until we get that sorted, we'll do the following:
 
 1. https://developer.ibm.com/wasdev/downloads/liberty-profile-using-non-eclipse-environments/[Download Liberty from wasdev.net], and extract it to a well-known but nearby location. This copy will be used for compilation, rather than for running the application.
-2. Use the `installUtility` command to update the installation to include the features our servers need. The `liberty-features.sh` script will take care of this for you, iterating through each project with a `*-wlpcfg` directory to make sure we have all of the referenced feautures for defined servers. 
+2. Use the `installUtility` command to update the installation to include the features our servers need. The `liberty-features.sh` script will take care of this for you, iterating through each project with a `*-wlpcfg` directory to make sure we have all of the referenced feautures for defined servers.
 
 You now have WDT installed and ready (per earlier steps), and a runtime installed that has all of the features our servers need. We now need to tell them about each other.
 
@@ -62,7 +63,7 @@ You now have WDT installed and ready (per earlier steps), and a runtime installe
 2. Right-click in the view, and select *New -> Runtime Environment*
 3. Give the Runtime environment a name, e.g. `wlp-2015.11.0.0` if you're using the November 2015 beta.
 4. Select the existing Liberty installation
-5. Add project-specific user directories: 
+5. Add project-specific user directories:
    .. Click the `Advanced Options...` link
    .. For each `*-wlpcfg` project (e.g. `player-wlpcfg`): Click *New*, and select it
    .. Click *OK* when all `*-wlpcfg` projects are shown in the list of user directories
@@ -75,7 +76,7 @@ image::runtimeExplorer.png[Runtime Explorer for Liberty in WDT, width=600]
 
 === Create WDT Servers
 
-WDT has its own representation of the server, which show up in the Servers view: 
+WDT has its own representation of the server, which show up in the Servers view:
     * *Window -> Show View -> Other*
     * type `server` in the filter box to find the view (it's under the Server heading).
 
@@ -95,16 +96,16 @@ image::renamedServers.png[Renamed Liberty Servers in WDT, width=600]
 
 WDT defines a very handy stand-in for the packaged war: a loose configuration file. We're going to deploy our applications to the liberty servers, and WDT will replace our built wars with xml files that act like wars, but that serve the contents directly from our eclipse project.
 
-*For each server*: 
+*For each server*:
 
 1. *Right-click* on the server in the Servers view, and select *Add and Remove...*
-2. In the dialog that opens, you will see an application with the same name in both the left and right-hand side of the dialog. Select the application in the left-hand panel as shown in <<img-appWarning>>, and click *Add >* to add it to the application as shown in <<img-appReplace>>. 
+2. In the dialog that opens, you will see an application with the same name in both the left and right-hand side of the dialog. Select the application in the left-hand panel as shown in <<img-appWarning>>, and click *Add >* to add it to the application as shown in <<img-appReplace>>.
 3. Click *Finish*.
-4. *Right-click* on the server again, and select *Publish*. 
+4. *Right-click* on the server again, and select *Publish*.
     * You may see warnings that the publish failed. These can be ignored.
-5. Open the corresponding `*-wlpcfg` project. Verify that the `servers/gameon-*/apps` folder now contains a `*-app.war.xml` file as shown in <<img-looseConfig>>. 
+5. Open the corresponding `*-wlpcfg` project. Verify that the `servers/gameon-*/apps` folder now contains a `*-app.war.xml` file as shown in <<img-looseConfig>>.
     * You may need to refresh the view to see the updated application
-    * If the `*.war` file created by the `build.sh` step is still present, you may remove it to avoid problems later. 
+    * If the `*.war` file created by the `build.sh` step is still present, you may remove it to avoid problems later.
 6. Discard any `server.xml` changes made by WDT for the project.
 
 [[img-appWarning,Figure 5]]
@@ -121,13 +122,10 @@ image::looseConfig.png[The mediator's loose config file, width=300]
 
 == All done!
 
-Congratulations! 
+Congratulations!
 
 * The Docker Compose configuration mapped your local filesystem into the Docker container
 * You now have Eclipse projects that reference the same source and Liberty configuration
-* WDT has created a loose configuration file to replace the built/packaged war 
+* WDT has created a loose configuration file to replace the built/packaged war
 
 You can now make application updates within your Eclipse projects, and see the results running live in your local development server without having to build/package/redeploy/etc.
-
-
-

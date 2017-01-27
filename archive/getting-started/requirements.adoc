@@ -1,8 +1,9 @@
 = Pre-requisites (Java, JavaScript)
 :icons: font
 :toc:
+:toc-title:
 :toc-placement: preamble
-:toclevels: 1
+:toclevels: 2
 :oracledownload: http://www.oracle.com/technetwork/java/javase/downloads/index.html
 :ibmdownload: http://www.ibm.com/developerworks/java/jdk/
 :liberty: https://developer.ibm.com/assets/wasdev/#filter/assetTypeFilters=PRODUCT
@@ -18,8 +19,6 @@ The java-based services require Java 1.8, and are built on the Liberty runtime. 
 
 * {ibmdownload}[Download] the JDK from IBM (AIX, Linux, z/OS, IBM i), or {liberty}[Download] a Liberty package that contains the IBM JDK (Windows, Linux)
 
-== JavaScript 
+== JavaScript
 
 Both front and backend services that use JavaScript will {nodejsdownload}[require node.js]. Use the latest from the long term service (LTS) stream.
-
-

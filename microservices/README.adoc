@@ -1,7 +1,8 @@
 = Application Architecture
 :icons: font
-:toc: preamble
+:toc:
 :toc-title:
+:toc-placement: preamble
 :toclevels: 2
 :chronicles: link:../chronicles/README.adoc
 :map: link:Map.adoc
