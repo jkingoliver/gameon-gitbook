@@ -23,7 +23,7 @@ However, when you tried to do something with arr, it was null, even if the json 
 
 And also, I learned that an API like Watson Alchemy Data is very complex. Many of my coding errors related to an inadequate grasp of the queries that are accepted by this API, even though, yes, I had this to help me out: http://querybuilder.alchemyapi.com/builder
 
-And finally, there were these things called a "transaction" that my free account gave me, and the alotted number of "transactions" I was permitted to have was 0. So as soon as I had a transaction, the account would no longer work for me. The problem was I did not know and still do not know what triggers these "transactions". I cheated and asked someone in Bluemix to increase my alotment. That worked. He said there was not a 1 on 1 correspondence between API calls and transactions. That's all I know just now. I know nothing more.
+And finally, there were these things called a "transaction" that my free account gave me, and the alotted number of "transactions" I was permitted to have was 0. So as soon as I had a transaction, the account would no longer work for me. The problem was I did not know and still do not know what triggers these "transactions". I cheated and asked someone in Bluemix to increase my alotment. That worked. He said there was not a 1-to-1 correspondence between API calls and transactions. That's all I know just now. I know nothing more.
 
 
 
