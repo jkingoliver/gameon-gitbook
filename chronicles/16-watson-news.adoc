@@ -1,0 +1,26 @@
+= Foibles while making a Watson Alchemy Data News Room
+:icons: font
+:signedHeaders: link:../microservices/ApplicationSecurity.adoc
+:WebSocketProtocol: link:../microservices/WebSocketProtocol.adoc
+:game-on: https://game-on.org/
+:amalgam8: http://amalgam8.io
+
+This entry in the Chronicles will seem more like out-takes from a movie, than what has been chronicled so far. Not everyone wants people to see their worst moments placed into public view and I'm no different. So here are some <i>selected</i> screw-ups that might help others who want to stand up a room, by no means am I divulging every unflattering way that I botched the code!
+
+First mistake I'll mention was not quite getting when and where to use "ws://169.46.00.00:9080/room". Guess what, it's important to have "room" postpended on it, even though hitting your room in the browser wouldn't work having it that way, even when you swap out "ws" and put in "http". I was unfortunate to interpret the test page as only relevant for people who had already registered their room. Nuff said about that.
+
+Another thing I was reminded of was that not all Java EE implementations are the same. You will find many tutorials showing you that JSONObject can be used this way:
+
+	JSONObject resultsOb = jsonob.getJsonObject("result");
+	JSONArray arr = resultsOb.getJsonObject("docs");
+
+However, when you tried to do something with arr, it was null, even if the json data has an array under "docs". The thing that worked was not allowing myself to assign to more than one explicitly declared JSONObject:
+
+	JsonArray arr = (JsonArray)jsonob.getJsonObject("result").get("docs");	
+
+And also, I learned that an API like Watson Alchemy Data is very complex. Many of my coding errors related to an inadequate grasp of the queries that are accepted by this API, even though, yes, I had this to help me out: http://querybuilder.alchemyapi.com/builder
+
+And finally, there were these things called a "transaction" that my free account gave me, and the alotted number of "transactions" I was permitted to have was 0. So as soon as I had a transaction, the account would no longer work for me. The problem was I did not knwo and still do not know what triggers these "transactions". I cheated and asked someone in Bluemix to increase my alotment. That worked. He said there was not a 1 on 1 correspondence between API calls and transactions. That's all I know just know. I know nothing more.
+
+
+
