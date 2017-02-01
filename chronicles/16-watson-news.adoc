@@ -7,6 +7,9 @@
 
 This entry in the Chronicles will seem more like out-takes from a movie, than what has been chronicled so far. Not everyone wants people to see their worst moments placed into public view and I'm no different. So here are some <i>selected</i> screw-ups that might help others who want to stand up a room, by no means am I divulging every unflattering way that I botched the code!
 
+The room I wanted to create was a Watson Alchemy Data API News Room. The details about that, and the code can be found here:
+	http://github.com/bradleyap/Watson-news-sample-room-java
+
 First mistake I'll mention was not quite getting when and where to use "ws://169.46.00.00:9080/room". Guess what, it's important to have "room" postpended on it, even though hitting your room in the browser wouldn't work having it that way, even when you swap out "ws" and put in "http". I was unfortunate to interpret the test page as only relevant for people who had already registered their room. Nuff said about that.
 
 Another thing I was reminded of was that not all Java EE implementations are the same. You will find many tutorials showing you that JSONObject can be used this way:
