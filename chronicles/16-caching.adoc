@@ -87,7 +87,7 @@ JSON from that environment variable, into a Redisson Config file.. There had to 
 I had a nice {redisson-chat}[chat with the Redisson developers]
 ), and yes, there is a way to programattically configure a JSR107 Cache instance to use
 Redisson, just they hadn't really considered why people would need it, with a little help from them, I had a viable way to make this
-work. (~Update, {redisson-3-2-4}[Redisson 3.2.4] has released with proper support for using Redisson config during JCache cache creation~) I made a few tweaks to the forked CDI annotation layer, so that {bdcache}[when it obtained its default cache manager], it would do so via
+work. (_Update, {redisson-3-2-4}[Redisson 3.2.4] has released with proper support for using Redisson config during JCache cache creation_) I made a few tweaks to the forked CDI annotation layer, so that {bdcache}[when it obtained its default cache manager], it would do so via
 my own VCAP_SERVICES configured Redisson.. and bam.. {ppap}[Pen Pineapple Apple Pen.]
 
 ## Using all the toys
