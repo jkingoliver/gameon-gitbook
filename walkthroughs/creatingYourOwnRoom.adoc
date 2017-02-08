@@ -75,7 +75,7 @@ Each packet is formatted as follows..
 [source,text]
 ----
   target,recipient,jsonPayload
----
+----
 
 The _target_ can be `player`, `playerLocation`, or `room`
 The _recipient_ varies if the target is player, or room. 
