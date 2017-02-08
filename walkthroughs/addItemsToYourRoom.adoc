@@ -29,7 +29,7 @@ If you've visited RecRoom in Game On (`/sos`, `/teleport RecRoom`) you'll have s
 keeps users entertained in the room for a while. Items in rooms can be used in many ways, you could have them represent remote
 services, or just be a signpost with instructions for how to interact with your room.
 
-In this adventure, we'll add a 'Mystical Fortune Telling Ball' to the room, and have it respond when the user shakes it.
+In this adventure, we'll add a 'Button' to the room, and have it respond when the user pushes it.
 
 ## Prerequisites
 
@@ -236,6 +236,7 @@ say what they want to push.
                 
 ## Suggested extensions
 
+* Add a novelty 'mystical fortune telling ball' that gives random fortunes when shaken.
 * The parsing approach here is crude, consider how you could design a framework to support multiple items, each offering their 
 own commands, and help text, and having an effect.
 * Could you add/remove an item to the room dynamically at runtime? (remember the caching in RoomDescription) 
