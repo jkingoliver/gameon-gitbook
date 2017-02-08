@@ -29,7 +29,7 @@ If you've visited RecRoom in Game On (`/sos`, `/teleport RecRoom`) you'll have s
 keeps users entertained in the room for a while. Items in rooms can be used in many ways, you could have them represent remote
 services, or just be a signpost with instructions for how to interact with your room.
 
-In this adventure, we'll add a 'Button' to the room, and have it respond when the user pushes it.
+In this adventure, we'll add a `Button` to the room, and have it respond when the user pushes it.
 
 ## Prerequisites
 
@@ -39,7 +39,7 @@ This adventure doesn't require any prerequisites, it can be applied directly to 
 
 #### Protocol
 
-Some basic information. Game On supports the concepts of 'items' via it's protocol. This means there is a difference between 
+Game On Rooms can support the concepts of 'items' via the websocket protocol. This means there is a difference between 
 sending a Room Description that has the items embedded in the description text..
 
 [This is an odd room, the walls are covered in shelves, most of which are empty, except one. There is a pair of shoes here]
@@ -53,7 +53,7 @@ To understand how to do this, we need to look at the {protocol}[Game On Websocke
 The particular message we are interested in is the {location}['location'] message, which carries the Room Description, and other information back 
 to Game On. It's this "other information" that we can use to tell Game On about items in the room.
 
-The location method is documented like this.. 
+The location message is documented like this.. 
 
 [source,json]
 player,<playerId>,{
