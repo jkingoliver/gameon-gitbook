@@ -214,7 +214,7 @@ roomDescription.addCommand("/push","Pushes an item, like, a button?");
 That will cause the room description to add our custom command to the `location` response, so any user doing `/help` in the room will
 see `/push` described as a command.
 
-Now, back in the switch statement within the `processCommand` method, add a new switch block, that looks 
+Now, back in the switch statement within the `processCommand` method, add a new switch block, that looks like...
 
 [source,java]
 ----
