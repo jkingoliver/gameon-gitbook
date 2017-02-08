@@ -60,7 +60,7 @@ player,<playerId>,{
     "type": "location",
     "name": "Room name",
     "fullName": "Room's descriptive full name",
-    "description", "Lots of text about what the room looks like",
+    "description": "Lots of text about what the room looks like",
     "exits": {
         "shortDirection" : "currentDescription for Player",
         "N" :  "a dark entranceway"
@@ -216,17 +216,17 @@ Now, back in the switch statement within the `processCommand` method, add a new 
 
 [source,java]
 ----
-            case "/push":            
-                // Treat look and examine the same (though you could make them do different things)
-                if ( remainder.contains("button") ) {
-                        endpoint.sendMessage(session,
-                            Message.createBroadcastEvent(username+" pushes the button. Nothing Happens. Surprising.", 
-                                                          userId, "You push the big red button."));
+case "/push":            
+    // Treat look and examine the same (though you could make them do different things)
+    if ( remainder.contains("button") ) {
+            endpoint.sendMessage(session,
+                Message.createBroadcastEvent(username+" pushes the button. Nothing Happens. Surprising.", 
+                                              userId, "You push the big red button."));
 
-                } else {
-                    endpoint.sendMessage(session, Message.createSpecificEvent(userId, "What do you want to push?));
-                }
-                break;
+    } else {
+        endpoint.sendMessage(session, Message.createSpecificEvent(userId, "What do you want to push?));
+    }
+    break;
 ----
                 
 That bit will be invoked when the first word of the input is `/push` with remainder set to whatever the rest of the command was.
