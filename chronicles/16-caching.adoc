@@ -67,7 +67,7 @@ Redisson's JSR107 support goes as far as implementing the interface side of stuf
 the rest". Except it doesn't. Yet. 
 
 Thankfully, the Reference Implementation (RI), realised that encouraging adoption of a spec when there's no implementation available
-is a tough cookie to break, and it comes with a {}[set of modules]() that enable the annotations in various containers, one of which is CDI.
+is a tough cookie to break, and it comes with a {jsr107annotationRI}[set of modules] that enable the annotations in various containers, one of which is CDI.
 
 ## Hackery
 
