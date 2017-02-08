@@ -85,17 +85,17 @@ o itemA
 o itemB
 ----
 
-The itemA, and itemB have been called out by the Game On user interface, because they were present in the roomInventory part 
+The `itemA`, and `itemB` have been called out by the Game On user interface, because they were present in the `roomInventory` part 
 of the location message from the Room.
 
 TIP: keep the items in your room named so that you can uniquely tell them apart, remember you will be writing code to do this!
 
 #### Java Sample Room
 
-Within the sample room, the 'location' message is built from details in the {roomDescription}[RoomDescription] object, by the 
+Within the sample room, the `location` message is built from details in the {roomDescription}[RoomDescription] object, by the 
 {roomImplementation}[RoomImplementation] object, using the {message}[Message] object's utility method `createLocationMessage`.
 
-Here we see the MEssage 'createLocationMessage' building up the response to send.. 
+Here we see the Message 'createLocationMessage' building up the response to send.. 
 [source,java]
 ----
 public static Message createLocationMessage(String userId, RoomDescription roomDescription) {
@@ -137,7 +137,7 @@ The {roomDescription}[RoomDescription] object offers the methods
    
 Which would allow a Room implementation to add/remove items from the room, and thus from the description returned to the user. 
 
-TIP: the room item response as JSON is cached by the RoomDescription object, notice how in the getInventory method, the `arr` array is only built if `itemObj' is null.
+TIP: The room item response as JSON is cached by the RoomDescription object, notice how in the getInventory method, the `arr` array is only built if `itemObj' is null.
 
 Over in the {roomImplementation}[RoomImplementation] we see the simple `processCommand` method, that parses the input from the user, 
 and carries out the appropriate action. In this case, we're interested in the `/look` command, which should trigger a `location` response.
@@ -175,8 +175,9 @@ Firstly, find the `postConstruct` method in the {roomImplementation}[roomImpleme
 [source,java]
 roomDescription.addItem("button");
 
-Then locate the switch statement within the `processCommand` method. Add a little code so that the 'else' block that used to look like
+Then locate the switch statement within the `processCommand` method. Add a little code so that the 'else' block in the `/look` and `/examine` case, that used to look like...
 
+.Existing Sample Code
 [source,java]
 ----
   } else {
@@ -187,6 +188,7 @@ Then locate the switch statement within the `processCommand` method. Add a littl
 
 is updated to look like.. 
 
+.Replaced Sample Code
 [source,java]
 ----
   } else {
