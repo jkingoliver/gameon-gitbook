@@ -58,7 +58,7 @@ used to determine whether or not history replay applies.
 ----
 sos,*,{
     "username": "username",
-    "userId": "<userId>"
+    "userId": "<userId>",
     "content": "<message>"
 }
 ----
@@ -72,7 +72,7 @@ First Room.
 ----
 room,<roomId>,{
     "username": "username",
-    "userId": "<userId>"
+    "userId": "<userId>",
     "content": "<message>"
 }
 ----
@@ -171,7 +171,7 @@ Used in version 2 of the protocol.
 ----
 roomPart,<roomId>,{
     "username": "username",
-    "userId": "<userId>",
+    "userId": "<userId>"
 }
 ----
 
@@ -213,7 +213,7 @@ player,<playerId>,{
     "type": "location",
     "name": "Room name",
     "fullName": "Room's descriptive full name",
-    "description", "Lots of text about what the room looks like",
+    "description": "Lots of text about what the room looks like",
     "exits": {
         "shortDirection" : "currentDescription for Player",
         "N" :  "a dark entranceway"
@@ -278,7 +278,7 @@ player,playerA,{
 }
 
 player,*,{
-    "type":"event".
+    "type":"event",
     "content": {
         "playerA": "You feel the earth move",
         "*": "playerA looks rather ill"
@@ -301,7 +301,7 @@ used are not present in the map (i.e. this is how you make up and down work).
 playerLocation,<playerId>,{
     "type": "exit",
     "content": "You exit through door xyz... ",
-    "exitId": "N"
+    "exitId": "N",
     "exit": { ... }
 }
 ----
