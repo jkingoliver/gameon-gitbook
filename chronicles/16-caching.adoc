@@ -23,6 +23,8 @@
 :jsr107secret: https://github.com/BarDweller/gameon-jsr107-room/tree/master/src/main/java/org/gameontext/sample/jsr107secretCache
 :jsr107toggle: https://github.com/BarDweller/gameon-jsr107-room/tree/master/src/main/java/org/gameontext/sample/jsr107toggle
 
+image:../images/Progression.016.jpeg[Progression, width=95%]
+
 Time passed, the grue failed to eat us, but we decided to look into Caching. 
 There are places in the Game On code where we request data service to service, and we don't expect that data to change very often. 
 Additionally, some of the places we request data from, have limits imposed (no more than x requests within y time period).
