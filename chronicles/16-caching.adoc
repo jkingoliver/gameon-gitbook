@@ -77,7 +77,7 @@ A brief moment of therapy, and sanity returned, and I {bdjsr107}[created a fork]
 as a dependency. After some faffing with beans.xml, and CDI service extension files, I eventually got the whole thing to fire up, then
 die, with a little message saying I'd failed to provide the required configuration file for Redisson's JSR107 implementation.
 
-Redisson needs a {reddison-jcache-config}[config file], to tell it how to connect to Redis (amongst other things), and because JSR107 is implementation agnostic, 
+Redisson needs a {redisson-jcache-config}[config file], to tell it how to connect to Redis (amongst other things), and because JSR107 is implementation agnostic, 
 JSR107 doesn't really provide a handy way to say 'I want JSR107, but I want it to talk to Redis'.. the hook point between the two is 
 unfortunately just a URI. I say unfortunately, because the examples talk of a fixed name config file, or a config file to be pointed to
 by the URI, and that file would have info like the Redis server, port, and password. But, I'm going to run in Bluemix, where the Redis
