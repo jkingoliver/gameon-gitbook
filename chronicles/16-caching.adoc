@@ -25,7 +25,10 @@
 
 image:../images/Progression.016.jpeg[Progression, width=95%]
 
-Time passed, the grue failed to eat us, but we decided to look into Caching. 
+Time passed... the grue failed to eat us, but we decided to look into Caching. 
+
+## Overview.
+
 There are places in the Game On code where we request data service to service, and we don't expect that data to change very often. 
 Additionally, some of the places we request data from, have limits imposed (no more than x requests within y time period).
 To combat this, we'd already added some of our own little Caches into the code, to store the replies, so we didn't need to make too 
@@ -36,12 +39,16 @@ we end up with multiple caches, each storing their own views of what they have s
 
 So we knew we needed to look at something like.. Redis! 
 
+## Redis
+
 {redis}[Redis] bills itself as "an in-memory data structure store, used as a database, cache, and message broker". Which sounds pretty shiny,
 especially as our favorite Cloud hosting provider Bluemix has not {redis-compose}[one] but {redis-cloud}[two] Redis based offerings to play with. 
 
 The general idea is that instead of having your caches each individually within your service instances, that you hold them within a
 remote service, then the cache is shared, and will populate faster, and take less memory per service, and you gain interesting new
 abilities from a service perspective. 
+
+## Interfaces
 
 We originally planned to look at talking to Redis via {jedis}[Jedis] (which I'm totally torn about if I should pronouce 'jed-diss' to rhyme 
 with 'Red-diss', or 'Jed-eyes' because, lightsabers.) But then we thought we should take a glance at if Java had any sort of Caching 
@@ -62,6 +69,8 @@ the rest". Except it doesn't. Yet.
 Thankfully, the Reference Implementation (RI), realised that encouraging adoption of a spec when there's no implementation available
 is a tough cookie to break, and it comes with a {}[set of modules]() that enable the annotations in various containers, one of which is CDI.
 
+## Hackery
+
 So I figure...  I have a RI CDI Annotation Implementation, I have a JSR107 compliant implementation...  uh..  {ppap}[Pineapple Pen]! 
 
 A brief moment of therapy, and sanity returned, and I {bdjsr107}[created a fork] of the RI that had just the CDI annotation logic, and Redisson
@@ -80,6 +89,8 @@ I had a nice {redisson-chat}[chat with the Redisson developers]
 Redisson, just they hadn't really considered why people would need it, with a little help from them, I had a viable way to make this
 work. (Update, {redisson-3-2-4}[Redisson 3.2.4] has released with proper support for using Redisson config during JCache cache creation) I made a few tweaks to the forked CDI annotation layer, so that {bdcache}[when it obtained its default cache manager], it would do so via
 my own VCAP_SERVICES configured Redisson.. and bam.. {ppap}[Pen Pineapple Apple Pen.]
+
+## Using all the toys
 
 From that point, I had a working JSR107 implementation to use, and via the magic of [jitpack], I could use it directly as a dependency in 
 a sample room.. Why not add it directly to the Game On core services? because it's a lot easier to test JSR107 outside of the core, and to have a play to get a feel how it all worked. 
