@@ -1,0 +1,294 @@
+= Advanced Adventure for room creation from scratch
+:icons: font
+:toc:
+:toc-title:
+:toc-placement: preamble
+:toclevels: 2
+:protocol: https://book.gameontext.org/microservices/WebSocketProtocol.html
+:swagger: https://gameontext.org/swagger/
+:interactivemap: https://gameontext.org/interactivemap
+:regutil: https://github.com/gameontext/regutil
+:registerroom: https://book.gameontext.org/walkthroughs/registerRoom.html
+:sequencediagram: https://book.gameontext.org/microservices/WebSocketProtocol.html#_sequence_diagram
+
+TIP: draft text.. more to follow.
+
+Where we learn about the things a room must be, to be a room.
+
+## Overview
+
+This adventure will teach you about the responsibilities a room has from a protocol perspective within Game On. 
+This information will be handy if you are looking to understand what makes a room a room, or if you ae planning
+on creating your own room from scratch in a language we haven't provided a sample for. _(If you do create one, 
+why not send us a github repo link =) we'd love to see the types of languages/frameworks used for creating rooms!)_
+
+You will gain a basic understanding of the Game On Websocket Protocol, and how a Room needs to interact with it.
+
+## Why totally from scratch?
+
+We already provide examples in Java (via JEE), in Arduino style-C, and in Javascript.. but if you are not familiar with the 
+various libraries used to implement the Rooms in each of those, you may struggle to quickly grok the bare essentials
+required to throw together a basic room in your favorite language. 
+
+## Prerequisites
+
+Although this adventure will not be giving code snippets, you will probably want to check your target language
+offers some support for.. 
+
+* WebSockets (acting as a WebSocket endpoint/server)
+* JSON Processing (encode/decode of json)
+* A way to host an internet reachable endpoint.
+
+It would be vaguely possible to avoid the 2nd requirement with some careful string processing, but if you do not have
+WebSocket support, you'll likely be better off picking a different language, or setting up some kind of relay between something
+hosting a WebSocket, and a normal tcp/ip listen socket, that would be an extremely advanced adventure ;)
+
+## Walkthrough
+
+### Basic Elements.
+
+A room in Game On is basically a WebSocket endpoint, hosted in a way where Game On is able to reach the endpoint.
+Either the endpoint needs to be directly accessible from the internet (eg, if it's running within a cloud container with a public
+bound ip address, or route).. or indirectly (eg, via a port forward on your own router).
+
+The room is registered to the Game On Map Service, either directly via the Map service {swagger}[REST API], or using the in game
+room management page, or the CLI {regutil}[regutil] or even via the {interactivemap}[Interactive Map]. If you are new to Game On, 
+we'd strongly recommend using the in game room management page. Look {registerroom}[here] for more info. 
+
+You only need to register the room once, and doing so isn't linked to the hosting of your Room. (Except for that the registration will
+need the endpoint address in it for it all to work!!). Think of the registration more like an entry in a telephone directory, 
+just because there's an entry in the directory, does not mean there's actually a phone connected to the line, or that anyone will 
+answer it.
+
+### The WebSocket
+
+So once you have a registration, and you've given it your websocket endpoint, then when players (or you!) go to your room, Game On
+will establish a websocket connection to your endpoint. Game On will be the client, you will be the server. 
+
+Once connected.. Game On will follow the {protocol}[Game On WebSocket Protocol] .. basically packets of JSON with a little header
+associated to it are thrown from Game On to the Room, and from the Room to Game On. It's worth having a quick glance through that
+document, it's the one that should be trusted for how the packets need to be formatted, and what's legal etc. In this walkthrough
+we'll be covering the basics, and the JSON used here should be valid.. but in case of discrepancy, trust the {protocol}[Protocol Documentation].
+
+Each packet is formatted as follows.. 
+
+[source,text]
+----
+  target,recipient,jsonPayload
+---
+
+The _target_ can be `player`, `playerLocation`, or `room`
+The _recipient_ varies if the target is player, or room. 
+If the _target_ is `player`, the recipient can be a specific player id, or `*` 
+If the _target_ is `room`, the recipient must be the specific room's ID.
+
+From here, we'll describe the normal packets we expect to see.. referencing the protocol documentations's {sequencediagram}[Sequence Diagram]
+
+#### Getting Started.
+
+As soon as Game On connects to the room, it expects to recieve an `ack` packet from the room. 
+The ack packet says which version(s) of the Game On protocol the Room supports. 
+The ack packet is a little unusual, in that it has no _`recipient`_ section.. and it has a special target of `ack`
+
+Since you are creating this room from scratch, we'd recommend saying you support versions 1 & 2 of the protocol, like this.. 
+Version 2 allows Game On to call you with information about when a Player leaves your room due to Logout, Timeout, or Browser Close. 
+Version 1 doesn't have this, which can make reasoning over who is 'in' your room a little trickier.
+
+The version attribute is an array of supported values, it is *not* a range. 
+
+[source,json]
+----
+ack,{
+    "version": [1,2]
+}
+----
+
+#### Messages Recieved...
+
+##### Hello, Hello
+
+Pretty soon after you've sent the ack there should follow a `roomHello`. This is because Game On will normally only connect to 
+your Room if someone tries to join it. Thus, you see the ack, followed by the roomHello. The protocol doesn't require this however, 
+so try not to be dependent upon it. The only requirement here is that when Game On opens the websocket to you, that you respond with
+the ack. Game On could decide at that point to close the connection, or any other valid packet. 
+
+[source,json]
+----
+roomHello,<roomId>,{
+    "username": "username",
+    "userId": "<userId>",
+    "version": 1|2,
+    "recovery": true|false
+}
+----
+
+The roomHello packet will arrive with your `roomId` as the recipient, and with the username & userId of the connecting user, along with the version 
+Game On has selected to talk with you, this will be a version from the array you supplied in the ack. 
+
+TIP: You can host multiple rooms via the same websocket endpoint, IF you use the <roomId> in the messages to tell which of your rooms a packet is intended for.
+
+The recovery field is optional, if it is there, then Game On is using it to tell you if this roomHello is following on from a player
+session being resumed. The player involved may already be known to your room from a prior roomHello. 
+
+TIP: Do not make assumptions related to the relationship between users and websocket connections for Game On. Today Game On makes a websocket connection per user, but this may not always be the case.
+
+You don't have to send any response to a roomHello packet, it is information to tell you a user has joined your room, 
+however, it is considered normal practice to reply to a roomHello with a `location` response. We'll cover that in a mo.
+
+TIP: userId's are unique within GameOn, and uniquely represent a user. Be aware the same user can sign in multiple times via different browsers/devices though!
+
+##### Goodbye, Goodbye
+
+As you might expect, if you get a `roomHello` when a player enters you room, you'll also get a `roomGoodbye` when they leave. 
+The goodbye packet is somewhat simpler, because it doesn't have to do dual duty carrying information relating to the version Game On 
+is using to talk to the room. 
+
+[source, json]
+----
+roomGoodbye,<roomId>,{
+    "username": "username",
+    "userId": "<userId>"
+}
+----
+
+`roomGoodbye` is only sent when a player actively leaves the room via a /go command that switches the player location. 
+
+You don't have to send any response to a roomGoodbye packet, it is information to tell you a user has joined your room.
+
+##### Wakey Wakey!!
+
+What if a player falls asleep while in your room, or gets distracted by a YouTube video of Cats?
+
+Arguably they have never left your room, but Game On knows they are no longer active, and may have suspended their session. 
+
+If you have claimed to support protocol version 2 (as suggested) in your `ack`, then there are 2 additional messages you 
+can recieve, which will give you status updates on players that are 'in' your room.
+
+roomPart and roomJoin.
+
+[source,json]
+----
+roomPart,<roomId>,{
+    "username": "username",
+    "userId": "<userId>",
+}
+roomJoin,<roomId>,{
+    "username": "username",
+    "userId": "<userId>",
+    "version": 2
+}
+
+----
+
+You don't have to send any response to a roomJoin/roomPart packet, it is information to tell you a user in your room is now considered
+inactive / active. You will only recieve these for players that you have receieved a `roomHello` for, until you recieve a `roomGoodbye`
+for them. The default state of a player after a `roomHello` is considered to be active.
+
+##### Everything else.
+
+The rest of the packets you'll receive are chat/commands destined for your room. Both use the same type of packet.. 
+
+[source,json]
+----
+room,<roomId>,{
+    "username": "username",
+    "userId": "<userId>"
+    "content": "<message>"
+}
+----
+
+The content attribute is basically the line of text entered by the user. The convention is that if the content begins with a `/`
+that the content should be treated as a command, else it should be dealt with as 'chat'.
+
+#### Messages to send
+
+Now you understand what Game On will send to your room, it's time to cover what you can send back to Game On. 
+(you already know one 'Room->GameOn' message.. `ack`). 
+
+The replies from the Room tend to be for the player, and will have a _target_ of player, and a _recipient_ of either 
+a specific player ID, or * for broadcast. There are ways to customize particular responses for specific players too.. 
+
+##### Location, Location, Location
+
+After you receive a `roomHello`, you should reply with a `location` response. In Game On terms, this is you sending back the room
+description for the client to render for the user. The protocol documents the location response like this.. 
+
+[source,text]
+----
+player,<playerId>,{
+    "type": "location",
+    "name": "Room name",
+    "fullName": "Room's descriptive full name",
+    "description", "Lots of text about what the room looks like",
+    "exits": {
+        "shortDirection" : "currentDescription for Player",
+        "N" :  "a dark entranceway"
+    },
+    "commands": {
+        "/custom" : "Description of what command does"
+    },
+    "roomInventory": ["itemA","itemB"]
+}
+----
+
+Here we see all the information a room can send back to greet a newly joining player. Most of this is self-explanatory, but here's a brief 
+overview of how the data connects to the user experience. 
+
+* name - The Room Name, used infrequently by the UI, should be the same short name used when registering the room.
+* fullName - The Room Name to be displayed in the white title bar, and before the horizontal rule in the `/look` UI response.
+* description - The text used after the horizontal rule in the `/look` UI response.
+* exits - Related in a mystical manner to the result of the `/exits` command. This may need clarification ;p
+* commands -The commands that this room needs to add to the `/help` response for the room.
+* roomInventory - Items the room should list in the `You notice:` list. 
+
+TIP: exits, commands, and roomInventory can also be tagged onto `event` type messages, it's an easy way to update the clients view of those data at anytime.
+
+##### Chat!
+
+[source,text]
+----
+player,*,{...}
+{
+  "type": "chat",
+  "username": "username",
+  "content": "<message>",
+  "bookmark": "String representing last message seen"
+}
+----
+
+##### Replies to user / room.
+
+[source,text]
+----
+player,<playerId>,{
+    "type": "event",
+    "content": {
+        "*": "general text for everyone",
+        "<playerId>": "specific to player"
+        },
+    "bookmark": "String representing last message seen"
+}
+----
+
+[source,text]
+----
+player,*,{
+    "type": "event",
+    "content": {
+        "*": "general text for everyone",
+        "<playerId>": "specific to player"
+    },
+    "bookmark": "String representing last message seen"
+}
+----
+
+
+
+## Suggested extensions
+
+
+## Conclusion
+
+
+## Suggested further adventures.
+
