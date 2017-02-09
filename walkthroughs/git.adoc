@@ -13,7 +13,7 @@
 
 image::http://imgs.xkcd.com/comics/git.png[caption="", title="xkcd: Git",float="right",align="center",link="http://xkcd.com/1597/", width=250]
 
-We use submodules to facilitate grabbing all the core servies in one fell swoop.
+We use submodules to facilitate grabbing all the core servies in one fell swoop.  =)
 
 toc::[]
 

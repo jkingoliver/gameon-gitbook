@@ -1,5 +1,6 @@
 = Advanced Adventures
 :icons: font
+:creatingYourOwnRoom: link:creatingYourOwnRoom.adoc
 :elkStack: link:elkStack.adoc
 :local-docker: link:local-docker.adoc
 
@@ -10,6 +11,7 @@ to help you explore aspects of cloud native or microservice applications.
 
 * {elkStack}[The ELK Stack: working with your logs]
 * {local-docker}[Local development using Docker]
+* {creatingYourOwnRoom}[Creating your own room from scratch]
 
 == Scale
 
