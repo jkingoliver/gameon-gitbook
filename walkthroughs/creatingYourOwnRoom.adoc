@@ -24,7 +24,7 @@ Where we learn about the things a room must be, to be a room.
 This adventure will teach you about the responsibilities a room has from a protocol perspective within Game On. 
 This information will be handy if you are looking to understand what makes a room a room, or if you ae planning
 on creating your own room from scratch in a language we haven't provided a sample for. _(If you do create one, 
-why not send us a github repo link =) we'd love to see the types of languages/frameworks used for creating rooms!)_
+we'd be happy to fork from your repo and offer it as the official sample for a Game On room in that language)_
 
 You will gain a basic understanding of the Game On Websocket Protocol, and how a Room needs to interact with it.
 
