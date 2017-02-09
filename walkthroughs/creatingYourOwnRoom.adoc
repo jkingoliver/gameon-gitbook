@@ -202,7 +202,7 @@ The rest of the packets you'll receive are chat/commands destined for your room.
 ----
 room,<roomId>,{
     "username": "username",
-    "userId": "<userId>"
+    "userId": "<userId>",
     "content": "<message>"
 }
 ----
