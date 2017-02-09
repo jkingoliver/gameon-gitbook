@@ -8,6 +8,24 @@
 
 Where we learn about X,Y,X
 
+++++
+<script>
+function walkthroughLang(evt, language) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(language).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>
+++++
+
 ## Overview
 
 This adventure will teach you about X,Y,Z by walking you through the process of adding A,B,C to a Game On room.
@@ -27,7 +45,17 @@ Assume the user has a Game-On player id, and has followed the basic 'Get a Room 
 Any other accounts, services, etc should be explained at this point, with links and ideally screenshots guiding the user through creation.
 
 ## Walkthrough
+++++
+<ul class="tab">
+  <li><a href="javascript:void(0)" class="tablinks" onclick="walkthroughLang(event, 'java')">Java</a></li>
+  <li><a href="javascript:void(0)" class="tablinks" onclick="walkthroughLang(event, 'javascript')">JS</a></li>
+  <li><a href="javascript:void(0)" class="tablinks" onclick="walkthroughLang(event, 'go')">Go</a></li>
+</ul>
+++++
 
+++++
+<div id="java" class="tabcontent">
+++++
 Guide the user through, step by step, suggested order of .. 
 
 * adding dependencies to the pom.xml
@@ -40,6 +68,19 @@ Guide the user through, step by step, suggested order of ..
 * link to a repo/branch where all the above has been done, and the user has the minimum to do to test the X,Y,Z
 
 TIP: Use tips to call out interesting things. 
+++++
+</div>
+++++
+
+++++
+<div id="javascript" class="tabcontent">
+++++
+
+Javascripty stuff.. 
+
+++++
+</div>
+++++
 
 ## Suggested extensions
 
