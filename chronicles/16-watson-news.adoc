@@ -20,7 +20,7 @@ Here are some lessons learned...
 
 1) understand that for Alchemy Data API calls, "transactions" are a calcluated number based on the number of "enriched" items returned, and their volume and the timeframe specified by your query. This is documented in the [Service Description for Alchemy API for Bluemix](http://www-03.ibm.com/software/sla/sladb.nsf/pdf/0012-04/$file/i128-0012-04_06-2016_en_US.pdf).   
 
-More than this, it has been rumored that for each call to the API there is a constant cost of 2 transactions. So the calculation is stated in a more specific way (by Bluemix level 1 help):
+More than this, it has been rumored that for each call to the API there is a constant cost component of 2 transactions. So the calculation is stated in a more specific way (by Bluemix level 1 help):
 
        `transactions = (number_of_returns * count) + 2`
 
@@ -30,7 +30,9 @@ More than this, it has been rumored that for each call to the API there is a con
 
 4) lower the count to 1 in your query when you need to experiment see possible data items that *can* be returned, or better yet, use the Demo app above. I've been able to confirm that the "enriched.url" data has the following sub-elements: "author, cleanedTitle, concepts, docSentiment, entities, relations, feeds, image, keywords, imageKeywords, language, publicationDate, relations, taxonomy, text, title, url. Most of these will use up your daily limit quickly even with a count of 1, except for author,cleanedTitle,docSentiment,title and url. For example, using "count=1", I burned 784 transactions by fetching each of these with "return=enriched.url". ("enriched.url" is the site and it's contents, "enriched.url.url" is the site address"). 
 
-5) reduce the count to less than 10 for more specific queries. So basically, **a paid plan might be needed if you wanted to make the Watson News service availble to all visitors to a GameOn! room**.
+5) reduce the count to less than 10 for more specific queries. 
 
-6) you can see the number of transactions used for the current day by visiting here:
+6) Basically, **a paid plan might be needed if you wanted to make the Watson News service availble to all visitors to a GameOn! room**.
+
+7) you can see the number of transactions used for the current day by visiting here:
 http://access.alchemyapi.com/calls/info/GetAPIKeyInfo?apikey=<api_key>
