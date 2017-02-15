@@ -34,18 +34,20 @@ More than this, it has been rumored that for each call to the API there is a con
 
 6) Basically, a paid plan might be needed if you wanted to make the Watson News service available to all visitors to a GameOn! room. But that depends on what information you want Watson to provide.... For each API call that restricts the number of results shown to 10, the number of returns to only 2 abbreviated items (url and title), the cost is not 22 transactions. To give you an idea of how much things cost, I'll gradually change parts of the Demo URL. But remember, the more you remove, the more like a plain keyword search your query becomes and the less you exploit the Alchemy API's human like intelligence....
 
-The following queries show a gradual reduction in transaction cost and it also shows reduced exploitation of service capabilities:
+The following query costs 814 transactions. That's more than half of the daily limit, and no text is returned. 
+and changes will show a gradual reduction in transaction cost and it also shows reduced exploitation of service capabilities:
 
 https://gateway-a.watsonplatform.net/calls/data/GetNews?apikey=1aa8d3a512615040a135b384096d50aedb6e5c43&return=enriched.url.title,enriched.url.url&start=1484611200&end=1485298800&q.enriched.url.enrichedTitle.entities.entity=|text=IBM,type=company|&q.enriched.url.enrichedTitle.docSentiment.type=positive&q.enriched.url.enrichedTitle.taxonomy.taxonomy_.label=technology%20and%20computing&count=25&outputMode=json		
 
-Change | Transaction Cost
---- | ---
-no changes | 814
-count=10 | 784
-count=1 and remvoed q.enriched.url.enrichedTitle.taxonomy.taxonomy_.label=technology%20and%20computing | 575
-removed: q.enriched.url.enrichedTitle.docSentiment.type=positive | 384
-changed to acces.alchemyapi URL | 384
-changed to start now end now | 50
+Here I will show how the cost changes, you will see a gradual reduction in transaction cost and also you'll notice reduced exploitation of service capabilities when parts of the query is removed:
+
+(change : transactions used)
+(no changes: 814)
+(count=10: 784)
+(count=1 and remvoed q.enriched.url.enrichedTitle.taxonomy.taxonomy_.label=technology%20and%20computing: 575)
+(removed: q.enriched.url.enrichedTitle.docSentiment.type=positive: 384)
+(changed to acces.alchemyapi URL: 384)
+(changed to start now end now: 50)
 
 7) you can see the number of transactions used for the current day by visiting here:
 http://access.alchemyapi.com/calls/info/GetAPIKeyInfo?apikey=<api_key>
