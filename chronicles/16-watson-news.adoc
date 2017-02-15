@@ -32,7 +32,7 @@ More than this, it has been rumored that for each call to the API there is a con
 
 5) reduce the count to less than 10 for more specific queries. 
 
-6) Basically, **a paid plan might be needed if you wanted to make the Watson News service availble to all visitors to a GameOn! room**.
+6) Basically, **a paid plan might be needed if you wanted to make the Watson News service available to all visitors to a GameOn! room**.
 
 7) you can see the number of transactions used for the current day by visiting here:
 http://access.alchemyapi.com/calls/info/GetAPIKeyInfo?apikey=<api_key>
