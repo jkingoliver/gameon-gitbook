@@ -1,0 +1,9 @@
+#gitbook hosting..
+
+gitbook:
+  build: .
+  volumes:
+    - '.:/gitbook'
+  ports:
+    - "4000:4000"
+    - "35729:35729"
