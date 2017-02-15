@@ -14,17 +14,23 @@ Among other things, what slowed me down a tad bit was trying to look at why a si
 
 I learned that an API like Watson Alchemy Data is very complex. Many of my coding errors related to an inadequate grasp of the queries that are accepted by this API, even though, yes, I had this tool to help me out: http://querybuilder.alchemyapi.com/builder When you go to this site, it allows you to check boxes for what type of query you want, and displays the query that is built. Then it also shows the JSON data you have retrieved. Quite nice! The JSON you get back is straight-forward, but it's very easy to make mistakes when you transcribe and/or embed the pattern into code that accesses it.
 
-One other observation, I was given an allowed number of "transactions" with my free Watson Alchemy API service account, 1000 transactions per day for the 'Free Plan', with other limitations described in the [Bluemix catalog](http://console.ng.bluemix.net/catalog). So as soon as I exceeded this daily number of transactions the service quit working. After a little digging, I got a better picture of what this 'Free Plan' allows me to do....  
+A couple final observations, I was given an allowed number of "transactions" with my free Watson Alchemy API service account, 1000 transactions per day for the 'Free Plan', with other limitations described in the [Bluemix catalog](http://console.ng.bluemix.net/catalog). So as soon as I exceeded this daily number of transactions the service quit working. After a little digging, I got a better picture of what this 'Free Plan' allows me to do. 
 
-1) understand that for Alchemy Data API calls, "transactions" are a calcluated number based on the number of "enriched" items returned, and their volume and the time it takes to query them. This is documented in the [Service Description for Alchemy API for Bluemix](http://www-03.ibm.com/software/sla/sladb.nsf/pdf/0012-04/$file/i128-0012-04_06-2016_en_US.pdf).   
+Here are some lessons learned...  
+
+1) understand that for Alchemy Data API calls, "transactions" are a calcluated number based on the number of "enriched" items returned, and their volume and the timeframe specified by your query. This is documented in the [Service Description for Alchemy API for Bluemix](http://www-03.ibm.com/software/sla/sladb.nsf/pdf/0012-04/$file/i128-0012-04_06-2016_en_US.pdf).   
+
+More than this, it has been rumored that for each call to the API there is a constant cost of 2 transactions. So the calculation is stated in a more specific way (by Bluemix level 1 help):
+
+       `transactions = (number_of_returns * count) + 2`
 
 2) request specific information. Instead of having a "return=enriched.url" argument in the query, get at the more specific data with "return=enriched.url.title" or with "return=enriched.url.title,enriched.url.url"
 
 3) look at sample queries that the [Alchemy API demo](http://querybuilder.alchemyapi.com/builder) to learn how to formulate different kinds of queries without using your own apiKey.   
 
-4) lower the count to 1 in your query when you need to see possible data items that *can* be returned. Perhaps do that a day ahead of time. For conference goers, know that the "enriched.url" data has the following sub-elements: "author, cleanedTitle, concepts, docSentiment, entities, relations, feeds, image, keywords, imageKeywords, language, publicationDate, relations, taxonomy, text, title, url. Most of these will use up your daily limit quickly even with a count of 1, except for author,cleanedTitle,docSentiment,title and url. For example, using "count=1", I burned 784 transactions by fetching each of these with "return=enriched.url". ("enriched.url" is the site and it's contents, "enriched.url.url" is the site address"). 
+4) lower the count to 1 in your query when you need to experiment see possible data items that *can* be returned, or better yet, use the Demo app above. I've been able to confirm that the "enriched.url" data has the following sub-elements: "author, cleanedTitle, concepts, docSentiment, entities, relations, feeds, image, keywords, imageKeywords, language, publicationDate, relations, taxonomy, text, title, url. Most of these will use up your daily limit quickly even with a count of 1, except for author,cleanedTitle,docSentiment,title and url. For example, using "count=1", I burned 784 transactions by fetching each of these with "return=enriched.url". ("enriched.url" is the site and it's contents, "enriched.url.url" is the site address"). 
 
-5) reduce the count to less than 10 for more specific queries. So basically, a paid plan might be needed if you wanted to make the Watson News service availble to all visitors to a GameOn! room.
+5) reduce the count to less than 10 for more specific queries. So basically, **a paid plan might be needed if you wanted to make the Watson News service availble to all visitors to a GameOn! room**.
 
 6) you can see the number of transactions used for the current day by visiting here:
 http://access.alchemyapi.com/calls/info/GetAPIKeyInfo?apikey=<api_key>
