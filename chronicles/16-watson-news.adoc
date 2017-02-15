@@ -43,17 +43,12 @@ Here I will show how the cost changes, you will see a gradual reduction in trans
 
 &nbsp;&nbsp;&nbsp;&nbsp;(change : transactions used)
 
-&nbsp;&nbsp;&nbsp;&nbsp;(no changes: 814)
-
-&nbsp;&nbsp;&nbsp;&nbsp;(count=10: 784)
-
-&nbsp;&nbsp;&nbsp;&nbsp;(count=1 and remvoed q.enriched.url.enrichedTitle.taxonomy.taxonomy_.label=technology%20and%20computing: 575)
-
-&nbsp;&nbsp;&nbsp;&nbsp;(removed: q.enriched.url.enrichedTitle.docSentiment.type=positive: 384)
-
-&nbsp;&nbsp;&nbsp;&nbsp;(changed to acces.alchemyapi URL: 384)
-
-&nbsp;&nbsp;&nbsp;&nbsp;(changed to start now end now: 50)
+&nbsp;&nbsp;&nbsp;&nbsp;no changes: 814
+&nbsp;&nbsp;&nbsp;&nbsp;count=10: 784
+&nbsp;&nbsp;&nbsp;&nbsp;count=1 and remvoed q.enriched.url.enrichedTitle.taxonomy.taxonomy_.label=technology%20and%20computing: 575
+&nbsp;&nbsp;&nbsp;&nbsp;removed: q.enriched.url.enrichedTitle.docSentiment.type=positive: 384
+&nbsp;&nbsp;&nbsp;&nbsp;changed to acces.alchemyapi URL: 384
+&nbsp;&nbsp;&nbsp;&nbsp;changed to start now end now: 50
 
 7) you can see the number of transactions used for the current day by visiting here:
 http://access.alchemyapi.com/calls/info/GetAPIKeyInfo?apikey=<api_key>
