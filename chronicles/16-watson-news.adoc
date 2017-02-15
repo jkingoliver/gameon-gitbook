@@ -42,11 +42,17 @@ https://gateway-a.watsonplatform.net/calls/data/GetNews?apikey=1aa8d3a512615040a
 Here I will show how the cost changes, you will see a gradual reduction in transaction cost and also you'll notice reduced exploitation of service capabilities when parts of the query is removed:
 
 (change : transactions used)
+
 (no changes: 814)
+
 (count=10: 784)
+
 (count=1 and remvoed q.enriched.url.enrichedTitle.taxonomy.taxonomy_.label=technology%20and%20computing: 575)
+
 (removed: q.enriched.url.enrichedTitle.docSentiment.type=positive: 384)
+
 (changed to acces.alchemyapi URL: 384)
+
 (changed to start now end now: 50)
 
 7) you can see the number of transactions used for the current day by visiting here:
