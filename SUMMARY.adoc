@@ -16,6 +16,7 @@
 .... link:walkthroughs/git.adoc[Git submodules (local core development)]
 .... link:walkthroughs/adding_your_own_sso_apps_for_local_testing.adoc[Adding your own Social Login apps for local testing]
 ... link:walkthroughs/creatingYourOwnRoom.adoc[Creating your own Room from scratch]
+... link:walkthroughs/addItemsToYourRoom.adoc[Adding items to your room]
 . link:microservices/README.adoc[Application Architecture]
 .. link:microservices/WebSocketProtocol.adoc[WebSocket Protocol]
 .. link:microservices/ApplicationSecurity.adoc[Application Security]
@@ -38,3 +39,4 @@
 .. link:chronicles/13-auth-service.adoc[Auth Goes Its Own Way]
 .. link:chronicles/14-events.adoc[Pandemonium! Events!]
 .. link:chronicles/15-service-discovery.adoc[Marco! Polo! (Service registration and discovery)]
+.. link:chronicles/16-caching.adoc[Investigating Caching]
