@@ -5,9 +5,9 @@
 :game-on: https://game-on.org/
 :amalgam8: http://amalgam8.io
 
-This entry in the Chronicles will seem more like deleted scenes from a movie, compared to what has been chronicled so far. 
+This entry in the Chronicles will seem more like deleted scenes from a movie when compared to what has been chronicled so far. 
 
-The room I wanted to create was a Watson Alchemy Data API News Room. The details about that, and the code can be found here:
+The room I wanted to create was a Watson Alchemy Data API News Room. The details and the code can be found here:
 	http://github.com/bradleyap/Watson-news-sample-room-java
 
 Among other things, what slowed me down a tad bit was trying to look at why a simple string edit to initial values of the room description would cause the tests to fail. Tests are sometimes written in a preliminary fashion and in projects like GameOn!, oriented toward learning. Perhaps they are written just to demo having them, not so much demoing how to write them? Here was my quick fix: `mvn install -DskipTests` Yep, I took the path of least resistance.
@@ -18,7 +18,7 @@ Some final observations, I was given an allowed number of "transactions" with my
 
 Lessons learned...  
 
-1) Understand that for Alchemy Data API calls, "transactions" are a calcluated number based on the number of "enriched" items returned, and their volume and the timeframe specified by your query. This is documented in the [Service Description for Alchemy API for Bluemix](http://www-03.ibm.com/software/sla/sladb.nsf/pdf/0012-04/$file/i128-0012-04_06-2016_en_US.pdf).   
+1) Understand that for Alchemy Data API calls, "transactions" are a calculuated number based on the number of "enriched" items returned, and their volume and the timeframe specified by your query. This is documented in the [Service Description for Alchemy API for Bluemix](http://www-03.ibm.com/software/sla/sladb.nsf/pdf/0012-04/$file/i128-0012-04_06-2016_en_US.pdf).   
 
 Additionally, it is rumored that for each call to the API there is a constant cost component of 2 transactions. So the calculation is stated in a more specific way (by Bluemix level 1 help):
 
