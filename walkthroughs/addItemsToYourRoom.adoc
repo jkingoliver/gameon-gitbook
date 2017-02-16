@@ -51,9 +51,9 @@ And a description that leaves them out, and declares them to the room via the pr
 To understand how to do this, we need to look at the {protocol}[Game On Websocket Protocol]..
 
 The particular message we are interested in is the {location}['location'] message, which carries the Room Description, and other information back
-to Game On. It's this "other information" that we can use to tell Game On about items in the room.
+to Game On. It's this "other information" that we can use to tell the game about items in the room.
 
-The location message is documented like this..
+The location message is documented like this:
 
 [source,json]
 player,<playerId>,{
@@ -71,8 +71,8 @@ player,<playerId>,{
     "roomInventory": ["itemA","itemB"]
 }
 
-Right there at the end is the "roomInventory" field. That can be used to pass an Array of Strings, that represent the items in the room.
-This room would end up having a description in game on like..
+Right there at the end is the "roomInventory" field. That can be used to pass an Array of Strings that represent the items in the room.
+When the game renders the list in the web interface, it will look something like:
 
 [source,text]
 ----
@@ -85,10 +85,10 @@ o itemA
 o itemB
 ----
 
-The `itemA`, and `itemB` have been called out by the Game On user interface, because they were present in the `roomInventory` part
+The `itemA`, and `itemB` have been called out by the the game's web interface, because they were present in the `roomInventory` part
 of the location message from the Room.
 
-TIP: keep the items in your room named so that you can uniquely tell them apart, remember you will be writing code to do this!
+TIP: Use unique names for the items in your room so you can tell them apart. In real code, `itemA` and `itemB` might get a little confusing, and consider the challenges of having to tell the difference between `coffee` and `coffee machine`.
 
 #### Java Sample Room
 
@@ -125,7 +125,7 @@ public static Message createLocationMessage(String userId, RoomDescription roomD
 We can see that the `location` message is being built as JSON, and the items are being read from the {roomDescription}[RoomDescription]
 object passed as an argument.
 
-TIP: The `roomInventory` field is only added when there are actually items to send. By default the sample room has none.
+NOTE: The `roomInventory` field is only added when there are actually items to send. By default the sample room has none.
 
 The {roomDescription}[RoomDescription] object offers the methods
 [source,java]
@@ -195,7 +195,7 @@ is updated to look like..
       if(remainder.contains("button"){
           endpoint.sendMessage(session,
               Message.createBroadcastEvent(username+" examines the button",
-                              userId, "It's a big red button, you are very tempted to "));
+                              userId, "It's a big red button, you are very tempted to..."));
       }else{
           endpoint.sendMessage(session,
               Message.createSpecificEvent(userId, LOOK_UNKNOWN));
@@ -203,8 +203,8 @@ is updated to look like..
   }
 ----
 
-Finally.. lets add a little code to handle the `/push` command for our button.
-Go back to that `postConstruct` method, and below your `addItem("button")` line.. add..
+Finally, lets add a little code to handle the `/push` command for our button.
+Go back to that `postConstruct` method, and below your `addItem("button")` line add:
 
 [source,java]
 ----
@@ -219,7 +219,7 @@ Now, back in the switch statement within the `processCommand` method, add a new 
 [source,java]
 ----
 case "/push":
-    // Treat look and examine the same (though you could make them do different things)
+    // Handle the push command, response depends if user pushes button, or anything else.
     if ( remainder.contains("button") ) {
             endpoint.sendMessage(session,
                 Message.createBroadcastEvent(username+" pushes the button. Nothing Happens. Surprising.",
