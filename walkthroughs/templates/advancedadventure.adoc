@@ -11,7 +11,7 @@ Where we learn about X,Y,X
 ## Overview
 
 This adventure will teach you about X,Y,Z by walking you through the process of adding A,B,C to a Game On room.
-You will come away having learnt a little about X,Y,Z and there will be suggestions for how you can use this further
+You will come away having learned a little about X,Y,Z and there will be suggestions for how you can use this further
 within a room.
 
 ## Why X,Y,Z ?
@@ -22,29 +22,29 @@ Give a 1-2 sentence overview of what you will guide the user through in your wal
 
 ## Prerequisites
 
-Does this walkthrough build on any other? does it require a Bluemix service instance? External sign ups for accounts?
+Does this walkthrough build on any other? Does it require a Bluemix service instance? External sign-ups for accounts?
 Assume the user has a Game-On player id, and has followed the basic 'Get a Room Running in Game On' tutorial.
 Any other accounts, services, etc should be explained at this point, with links and ideally screenshots guiding the user through creation.
 
 ## Walkthrough
 
-Guide the user through, step by step, suggested order of .. 
+Guide the user through, step by step, using these suggested order of tasks:
 
-* adding dependencies to the pom.xml
-* adding basic code snippets
-** explain each change to each file, why are you making this change, what does it give the user.
-* adding a simple test case & verifying execution
-** because tests are important.
-* provide a way for the user to invoke X,Y,Z while running in game on.
-** guide the user through /sos,/teleport roomid,invoking the function, and seeing the result.
-* link to a repo/branch where all the above has been done, and the user has the minimum to do to test the X,Y,Z
+* Adding dependencies to the pom.xml
+* Adding basic code snippets
+** Explain each change to each file. Why are you making this change? What does it give the user?
+* Adding a simple test case & verifying execution
+** Tests are important
+* Provide a way for the user to invoke X,Y,Z while running in game on.
+** Guide the user through /sos,/teleport roomid,invoking the function, and seeing the result.
+* Link to a repo/branch where all the above has been done and the user has the minimum to do to test the X,Y,Z.
 
 TIP: Use tips to call out interesting things. 
 
 ## Suggested extensions
 
-Talk about extra things the user could do with X,Y,Z that were not covered here
-Note, we're not talking here about other technologies or stuff covered by other adventures
+Talk about extra things the user could do with X,Y,Z that were not covered here.
+Be aware that we're not talking about other technologies covered by other adventures.
 Keep this limited to additional ways to use X,Y,Z that were omitted due to time/space, etc
 Especially include any common way to use X,Y,Z that is not demonstrated in the walkthrough.
 
@@ -54,5 +54,5 @@ Explain what the user has learnt by following this tutorial.
 
 ## Suggested further adventures.
 
-Link to adventures that can build from this one 
-(try to revisit your advanced adventure periodically to add additional ones)
+Link to adventures that can build from this one. 
+(Try to revisit your advanced adventure periodically to add additional ones)
