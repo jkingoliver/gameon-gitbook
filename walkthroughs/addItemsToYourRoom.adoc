@@ -15,43 +15,42 @@ Where we learn about how to add items to your room.
 
 ## Overview
 
-This adventure will teach you about adding virtual items to your room in Game On, taking you through understanding the required
-parts of the protocol, and some ideas on how to handle commands.
-You will learn how to have items show up in your Room Description, and how to support simple commands involving them.
+This adventure teaches you about adding virtual items to your room in Game On, taking you through understanding the required
+parts of the protocol and some ideas on how to handle commands.
+You learn how to have items show up in your Room Description and how to support simple commands that interact with them.
 
 ## Why Virtual Items?
 
-Game On presents itself to users as a text adventure, within text adventures, the concepts of items, and inventory are common.
+Game On presents itself to users as a text-based adventure game. Within text adventures, the concepts of items and inventory are common.
 The classic `/take sword` and `/kill dragon with sword` are great examples of how to make a room feel more like an interactive
-experience, and less like a technology demonstration.
+experience and less like a technology demonstration.
 
-If you've visited RecRoom in Game On (`/sos`, `/teleport RecRoom`) you'll have seen how it uses items to construct a puzzle that
-keeps users entertained in the room for a while. Items in rooms can be used in many ways, you could have them represent remote
+For example, when you visit RecRoom in Game On (`/sos`, `/teleport RecRoom`), you see how it uses items to construct a puzzle that
+keep users in the room entertained. Items in rooms are used in many ways, you could have them represent remote
 services, or just be a signpost with instructions for how to interact with your room.
 
-In this adventure, we'll add a `Button` to the room, and have it respond when the user pushes it.
+In this adventure, we add a `Button` to the room and have it respond when the user pushes it.
 
 ## Prerequisites
 
-This adventure doesn't require any prerequisites, it can be applied directly to the {sampleroom}[Sample Room]
+This adventure doesn't require any prerequisites and may be applied directly to the {sampleroom}[Sample Room].
 
 ## Walkthrough
 
 #### Protocol
 
-Game On Rooms can support the concepts of 'items' via the websocket protocol. This means there is a difference between
+Game On Rooms support the concepts of 'items' via the websocket protocol. This means there is a difference between
 sending a Room Description that has the items embedded in the description text..
 
 [This is an odd room, the walls are covered in shelves, most of which are empty, except one. There is a pair of shoes here]
 
-And a description that leaves them out, and declares them to the room via the protocol..
+And a description that leaves them out and declares them to the room via the protocol..
 
 [This is an odd room, the walls are covered in shelves, most of which are empty, except one.]
 
 To understand how to do this, we need to look at the {protocol}[Game On Websocket Protocol]..
 
-The particular message we are interested in is the {location}['location'] message, which carries the Room Description, and other information back
-to Game On. It's this "other information" that we can use to tell the game about items in the room.
+The particular message we are interested in is the {location}['location'] message, which carries the Room Description and other information back to Game On. It is this "other information" that we use to tell the game about items in the room.
 
 The location message is documented like this:
 
@@ -71,8 +70,8 @@ player,<playerId>,{
     "roomInventory": ["itemA","itemB"]
 }
 
-Right there at the end is the "roomInventory" field. That can be used to pass an Array of Strings that represent the items in the room.
-When the game renders the list in the web interface, it will look something like:
+At the end is the "roomInventory" field which is used to pass an Array of Strings that represent the items in the room.
+When the game renders the list in the web interface, it looks similar to this:
 
 [source,text]
 ----
@@ -88,7 +87,7 @@ o itemB
 The `itemA`, and `itemB` have been called out by the the game's web interface, because they were present in the `roomInventory` part
 of the location message from the Room.
 
-TIP: Use unique names for the items in your room so you can tell them apart. In real code, `itemA` and `itemB` might get a little confusing, and consider the challenges of having to tell the difference between `coffee` and `coffee machine`.
+TIP: Use unique names for the items in your room to more easily identify them. In real code, `itemA` and `itemB` might get a little confusing, thus consider the challenges of having to tell the difference between `coffee` and `coffee machine`.
 
 #### Java Sample Room
 
@@ -122,7 +121,7 @@ public static Message createLocationMessage(String userId, RoomDescription roomD
 }
 ----
 
-We can see that the `location` message is being built as JSON, and the items are being read from the {roomDescription}[RoomDescription]
+We see that the `location` message is built as JSON and the items are being read from the {roomDescription}[RoomDescription]
 object passed as an argument.
 
 NOTE: The `roomInventory` field is only added when there are actually items to send. By default the sample room has none.
@@ -139,7 +138,7 @@ Which would allow a Room implementation to add/remove items from the room, and t
 
 TIP: The room item response as JSON is cached by the RoomDescription object, notice how in the getInventory method, the `arr` array is only built if `itemObj' is null.
 
-Over in the {roomImplementation}[RoomImplementation] we see the simple `processCommand` method, that parses the input from the user,
+Over in the {roomImplementation}[RoomImplementation] we see the simple `processCommand` method, that parses the input from the user
 and carries out the appropriate action. In this case, we're interested in the `/look` command, which should trigger a `location` response.
 
 Sure enough, there within the switch statement, we see a location message being built & returned to the user.
@@ -162,9 +161,9 @@ Sure enough, there within the switch statement, we see a location message being 
       break;
 ----
 
-If we wanted to add additional behavior, perhaps to support `/examine itemName` this is where we could add it. Either as an extension
-to the switch block handling `/examine` and `/look` .. or via an entirely new command. If the item were a button, we might like to add
-`/push button` as a command, and send an appropriate response.
+If we wanted to add additional behavior, perhaps to support `/examine itemName`, this is where we could add it. Either as an extension
+to the switch block handling `/examine` and `/look`, or via an entirely new command. If the item were a button, we might like to add
+`/push button` as a command and send an appropriate response.
 
 Let's look at adding that button now.
 
@@ -175,7 +174,7 @@ Firstly, find the `postConstruct` method in the {roomImplementation}[roomImpleme
 [source,java]
 roomDescription.addItem("button");
 
-Then locate the switch statement within the `processCommand` method. Add a little code so that the 'else' block in the `/look` and `/examine` case, that used to look like...
+Then locate the switch statement within the `processCommand` method. Add a little code so that the 'else' block in the `/look` and `/examine` case, that used to look like:
 
 .Existing Sample Code
 [source,java]
@@ -186,7 +185,7 @@ Then locate the switch statement within the `processCommand` method. Add a littl
   }
 ----
 
-is updated to look like..
+is updated to look like:
 
 .Replaced Sample Code
 [source,java]
@@ -211,10 +210,10 @@ Go back to that `postConstruct` method, and below your `addItem("button")` line 
 roomDescription.addCommand("/push","Pushes an item, like, a button?");
 ----
 
-That will cause the room description to add our custom command to the `location` response, so any user doing `/help` in the room will
+That causes the room description to add our custom command to the `location` response, so any user doing `/help` in the room will
 see `/push` described as a command.
 
-Now, back in the switch statement within the `processCommand` method, add a new switch block, that looks like...
+Now, back in the switch statement within the `processCommand` method, add a new switch block that looks like...
 
 [source,java]
 ----
@@ -231,9 +230,9 @@ case "/push":
     break;
 ----
 
-That bit will be invoked when the first word of the input is `/push` with remainder set to whatever the rest of the command was.
-If the user did `/push button` or `/push the button` etc, we'll send them a message saying they pushed the button, and send
-everyone else a message saying Nothing Happened. If the user just does `/push` by itself, we prompt them they should probably
+That bit is invoked when the first word of the input is `/push` with the remainder set to whatever the rest of the command was.
+If the user did `/push button` or `/push the button` etc, we'll send them a message saying they pushed the button and send
+everyone else a message saying Nothing Happened. If the user only does `/push` by itself, we prompt them they should probably
 say what they want to push.
 
 ## Suggested extensions
@@ -247,10 +246,9 @@ own commands, and help text, and having an effect.
 
 ## Conclusion
 
-Items (and commands) are important parts of the Game On protocol, designed to improve the end user experience with your room.
-You should now have a general understanding of the steps required to add items, and handle them with commands.
+Items and commands are important parts of the Game On protocol and are designed to improve the end user experience with your room.
+You should now have a general understanding of the steps required to add items and handle them with commands.
 
-## Suggested further adventures.
-
-You might want to consider the Caching adventure, where you can learn about stateful items.
-Or the Item Framework adventure, where you'll learn about further ways to extend your room.
+## Other adventures
+* Caching adventure - Learn about stateful items.
+* Item Framework adventure - Learn about new ways to extend your room.
