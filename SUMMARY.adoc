@@ -1,5 +1,4 @@
 = Summary
-
 . link:README.adoc[Introduction]
 . link:game_play.adoc[Game Play]
 . link:walkthroughs/README.adoc[Extending the Game]
@@ -16,6 +15,8 @@
 .... link:walkthroughs/git.adoc[Git submodules (local core development)]
 .... link:walkthroughs/adding_your_own_sso_apps_for_local_testing.adoc[Adding your own Social Login apps for local testing]
 ... link:walkthroughs/creatingYourOwnRoom.adoc[Creating your own Room from scratch]
+... link:walkthroughs/jsr107caching.adoc[Caching with JSR107/JCache]
+... link:walkthroughs/jsr107caching2.adoc[Caching with JSR107/JCache (part 2)]
 . link:microservices/README.adoc[Application Architecture]
 .. link:microservices/WebSocketProtocol.adoc[WebSocket Protocol]
 .. link:microservices/ApplicationSecurity.adoc[Application Security]

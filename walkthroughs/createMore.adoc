@@ -3,6 +3,8 @@
 :creatingYourOwnRoom: link:creatingYourOwnRoom.adoc
 :elkStack: link:elkStack.adoc
 :local-docker: link:local-docker.adoc
+:jsr107a: link:jsr107caching.adoc
+:jsr107b: link:jsr107caching2.adoc
 
 {empty}
 
@@ -12,6 +14,8 @@ to help you explore aspects of cloud native or microservice applications.
 * {elkStack}[The ELK Stack: working with your logs]
 * {local-docker}[Local development using Docker]
 * {creatingYourOwnRoom}[Creating your own room from scratch]
+* {jsr107a}[Caching with JSR107 Annotations and Redis]
+* {jsr107b}[Caching with JSR107 API and Redis]
 
 == Scale
 
