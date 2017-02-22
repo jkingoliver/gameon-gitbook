@@ -44,7 +44,7 @@ TIP: Use tips to call out interesting things.
 ## Suggested extensions
 
 Talk about extra things the user could do with X,Y,Z that were not covered here.
-Be aware that we're not talking about other technologies covered by other adventures.
+Be aware that we're not talking about other technologies or techniques / information covered by other adventures.
 Keep this limited to additional ways to use X,Y,Z that were omitted due to time/space, etc
 Especially include any common way to use X,Y,Z that is not demonstrated in the walkthrough.
 
