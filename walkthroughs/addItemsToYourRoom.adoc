@@ -17,7 +17,7 @@ Where we learn about how to add items to your room.
 
 This adventure teaches you about adding virtual items to your room in Game On, taking you through understanding the required
 parts of the protocol and some ideas on how to handle commands.
-You learn how to have items show up in your Room Description and how to support simple commands that interact with them.
+You'll learn how to have items show up in your Room Description and how to support simple commands that interact with them.
 
 ## Why Virtual Items?
 
@@ -50,7 +50,7 @@ And a description that leaves them out and declares them to the room via the pro
 
 To understand how to do this, we need to look at the {protocol}[Game On Websocket Protocol]..
 
-The particular message we are interested in is the {location}['location'] message, which carries the Room Description and other information back to Game On. It is this "other information" that we use to tell the game about items in the room.
+The particular message we are interested in is the {location}['location'] message, which carries the Room Description and other information back to Game On. It is this "other information" that we may use to tell the game about items in the room.
 
 The location message is documented like this:
 
@@ -70,7 +70,7 @@ player,<playerId>,{
     "roomInventory": ["itemA","itemB"]
 }
 
-At the end is the "roomInventory" field which is used to pass an Array of Strings that represent the items in the room.
+At the end is the "roomInventory" field which may be used to pass an Array of Strings that represent the items in the room.
 When the game renders the list in the web interface, it looks similar to this:
 
 [source,text]
@@ -87,7 +87,7 @@ o itemB
 The `itemA`, and `itemB` have been called out by the the game's web interface, because they were present in the `roomInventory` part
 of the location message from the Room.
 
-TIP: Use unique names for the items in your room to more easily identify them. In real code, `itemA` and `itemB` might get a little confusing, thus consider the challenges of having to tell the difference between `coffee` and `coffee machine`.
+TIP: Use unique names for the items in your room to more easily identify them. Consider the challenges of coding a parser to tell the difference between `coffee` and `coffee machine`, when you could avoid the issue by renaming the `coffee machine` `vending machine`
 
 #### Java Sample Room
 
@@ -230,7 +230,7 @@ case "/push":
     break;
 ----
 
-That bit is invoked when the first word of the input is `/push` with the remainder set to whatever the rest of the command was.
+That bit is invoked when the first word of the input is `/push` with `remainder` set to whatever the rest of the command was.
 If the user did `/push button` or `/push the button` etc, we'll send them a message saying they pushed the button and send
 everyone else a message saying Nothing Happened. If the user only does `/push` by itself, we prompt them they should probably
 say what they want to push.
@@ -249,6 +249,6 @@ own commands, and help text, and having an effect.
 Items and commands are important parts of the Game On protocol and are designed to improve the end user experience with your room.
 You should now have a general understanding of the steps required to add items and handle them with commands.
 
-## Other adventures
+## Suggested further adventures
 * Caching adventure - Learn about stateful items.
 * Item Framework adventure - Learn about new ways to extend your room.
