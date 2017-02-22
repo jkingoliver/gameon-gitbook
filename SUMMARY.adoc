@@ -38,3 +38,5 @@
 .. link:chronicles/13-auth-service.adoc[Auth Goes Its Own Way]
 .. link:chronicles/14-events.adoc[Pandemonium! Events!]
 .. link:chronicles/15-service-discovery.adoc[Marco! Polo! (Service registration and discovery)]
+.. link:chronicles/16-caching.adoc[Marco? Polo, Polo, Polo, Polo. (Caching)]
+.. link:chronicles/17-watson-news.adoc[Watson Alchemy News]
