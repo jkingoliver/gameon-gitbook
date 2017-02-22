@@ -58,17 +58,17 @@ A little more research and soon you're deep into the world of standards, open so
 that you come away with for JSR107 is, that it is not all that simple. It comes in two parts, firstly the Java interfaces and classes,
 and secondly the annotations. The magic that makes the annotations work is {jsr107annotations}[supposed to be supplied by the container the spec isimplemented by], eg, CDI. But because JSR107 is not part of a released JEE spec yet, CDI containers have yet to implement that magic.
 
-Redisson's JSR107 support goes as far as implementing the interface side of stuff and then states, "Your container will do
-the rest". Except it doesn't. Yet.
+Redisson's JSR107 support goes as far as implementing the interface side of stuff and then goes on to suggest, 
+"Your container will do the rest". Except it doesn't. Yet.
 
 Thankfully, the Reference Implementation (RI) realized that encouraging adoption of a spec when there's no implementation available,
 is a tough cookie to break, and it comes with a {jsr107annotationRI}[set of modules] that enable the annotations in various containers, one of which is CDI.
 
 ## Hackery
 
-So I figure...  I have an RI CDI Annotation Implementation and a JSR107 compliant implementation...  uh..  {ppap}[Pineapple Pen]!
+So I figure...  I have a RI CDI Annotation Implementation, I have a JSR107 compliant implementation...  uh..  {ppap}[Pineapple Pen]!
 
-After a brief moment of therapy and sanity returned, I {bdjsr107}[created a fork] of the RI that had just the CDI annotation logic and Redisson as a dependency. After some faffing with beans.xml and CDI service extension files, I eventually got the whole thing to fire up, then die. With a little message saying I'd failed to provide the required configuration file for Redisson's JSR107 implementation.
+After a brief moment of therapy and sanity returned, I {bdjsr107}[created a fork] of the RI that had just the CDI annotation logic and Redisson as a dependency. After some faffing with beans.xml and CDI service extension files, I eventually got the whole thing to fire up, only to die with a little message saying I'd failed to provide the required configuration file for Redisson's JSR107 implementation.
 
 Redisson needs a {redisson-jcache-config}[config file] to tell it how to connect to Redis (amongst other things), and because JSR107 is implementation agnostic, JSR107 doesn't really provide a handy way to say 'I want JSR107, but I want it to talk to Redis'.. the hook point between the two is unfortunately just a URI. I say unfortunately, because the examples talk of a fixed name config file, or a config file to be pointed to by the URI and that file would have info like the Redis server, port, and password. But I'm going to run in Bluemix where the Redis information is supplied to the container {rediscloud-vcap}[via the VCAP_SERVICES environment variable] and I didn't look forward to try to parse the JSON from that environment variable and into a Redisson Config file.. There had to be a better way..
 
