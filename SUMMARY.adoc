@@ -18,6 +18,7 @@
 ... link:walkthroughs/jsr107caching.adoc[Caching with JSR107/JCache]
 ... link:walkthroughs/jsr107caching2.adoc[Caching with JSR107/JCache (part 2)]
 ... link:walkthroughs/mapviarest.adoc[Map Service via REST (JAX RS)]
+... link:walkthroughs/addItemsToYourRoom.adoc[Adding items to your room]
 . link:microservices/README.adoc[Application Architecture]
 .. link:microservices/WebSocketProtocol.adoc[WebSocket Protocol]
 .. link:microservices/ApplicationSecurity.adoc[Application Security]
@@ -40,3 +41,5 @@
 .. link:chronicles/13-auth-service.adoc[Auth Goes Its Own Way]
 .. link:chronicles/14-events.adoc[Pandemonium! Events!]
 .. link:chronicles/15-service-discovery.adoc[Marco! Polo! (Service registration and discovery)]
+.. link:chronicles/16-caching.adoc[Investigating Caching]
+.. link:chronicles/17-watson-news.adoc[Watson Alchemy News]
