@@ -6,38 +6,49 @@
 :toclevels: 2
 :linkref: http://www.google.com
 :rest: https://en.wikipedia.org/wiki/Representational_state_transfer
+:jaxrs: https://en.wikipedia.org/wiki/Java_API_for_RESTful_Web_Services
+:jaxrsclient: https://docs.oracle.com/javaee/7/api/javax/ws/rs/client/package-summary.html
+:mapservice: link:../microservices/Map.adoc
 :sample-room-with-mapclient: https://github.com/gameontext/sample-room-java/tree/c888aad87b5ebac2a2fe740b1b39d3194d95b60b/src/main/java/org/gameontext/sample/map/client
-
+:sample-room: https://github.com/gameontext/sample-room-java
+:sample-room-walkthrough: link:createRoom.adoc
+:liberty-jaxrs-config: https://www.ibm.com/support/knowledgecenter/SS7K4U_8.5.5/com.ibm.websphere.wlp.zseries.doc/ae/twlp_jaxrs2.0_clientconfig.html
+:map-swagger-get-room: https://gameontext.org/swagger/#!/map/getRoom
+:circuit-breaker: http://www.javaworld.com/article/2824163/application-performance/stability-patterns-applied-in-a-restful-architecture.html?page=2
 
 Where we learn how to talk to Map via REST & JAX-RS
 
 ## Overview
 
-This adventure will teach you about REST by walking you through the process of adding a simple JAX-RS Client to a Game On room.
-You will come away having learned a little about JAX-RS & REST with practical examples of usage within a Room.
+This adventure will teach you about REST by walking you through the process
+of adding a simple JAX-RS Client to a Game On room. You will come away having
+learned a little about JAX-RS & REST with practical examples of usage within a Room.
 
 ## Why REST ?
 
-REST has become pervasive as a way to communicate between services, defining an easy and simple way
+{rest}[REST] has become pervasive as a way to communicate between services, defining an easy and simple way
 to invoke an action against a remote endpoint.
 
 From a microservice perspective REST is one the most important basic tools you will need, to expose your
 own services for others to invoke, and to call on other services yourself.
 
-Within this tutorial we'll look at how you can use JAX-RS, a Java API for Rest, to create a client to
-talk to the Game On Map service, to have a room query it's own information.
+Within this tutorial we'll look at how you can use {jaxrs}[JAX-RS], a Java API for Rest,
+to create a client to talk to the {mapservice}[Game On Map Service], to have your room query it's own information.
 
 ## Prerequisites
 
-This walkthrough starts from the Java Sample Room project.
-It requires no additional accounts or services.
+This walkthrough starts after you have completed the {sample-room-walkthrough}[Create a Room]
+adventure, and expanding on the {sample-room}[Java Sample Room] project.
+
+No additional accounts or services are required.
 
 ## Walkthrough
 
 ### Server Configuration
 
-We're going to create a JAX RS client to talk to the Map service. To use JAX-RS we need
-to check that Liberty has the feature enabled within the `server.xml`, check by looking
+We're going to create a {jaxrsclient}[JAX RS Client] to talk to the Map service. To use
+{liberty-jaxrs-config}[JAX-RS within Liberty] we need
+to check the server has the feature enabled within the `server.xml`, check by looking
 in the server configuration in your room project at;
 
 `sample-room-java/src/main/liberty/config/server.xml`
@@ -52,8 +63,9 @@ jaxrs-2.0 feature like this;
 
 ### Creating the client
 
-We'll create our MapClient as a bean we can inject via CDI. Lets start with a simple
-skeleton from which we'll build the client capability.
+We'll create our MapClient as a bean we can inject via CDI.
+
+Lets start with a simple skeleton from which we'll build the client capability.
 
 [source,java]
 ----
@@ -123,13 +135,13 @@ With the WebTarget initialised, lets have a look at the code for `getMapData`
     }
 ----
 
-First impressions is that's an awful lot of exception handlers for such a simple request.
+First impressions are that's an awful lot of exception handlers for such a simple request.
 
-We want to issue a HTTP GET to the Map service using the url..
+We want to issue a {map-swagger-get-room}[`GET` to the Map service] using the url..
 
 `https://gameontext.org/map/v1/sites/<siteId>`
 
-The first line of the method has `this.queryroot.path(siteId)` which adds our `siteId` argument
+The first line of the method, `this.queryroot.path(siteId)` adds our `siteId` argument
 to our URL. Then we issue the request;
 
 `target.request(MediaType.APPLICATION_JSON).get()`
@@ -231,8 +243,8 @@ public class MapData {
 }
 ----
 
-Now, lets update the MapClient `getMapData` method to parse the JSON and populate the POJO.
-Change the return type of the method to be the new `MapData` POJO, and then remove the
+Lets update the MapClient `getMapData` method to parse the JSON and populate the POJO.
+Change the return type of the method to be the new `MapData` class, and then remove the
 line `return data;` and substitute this block of code to process the returned data.
 
 [source,java]
@@ -266,8 +278,9 @@ supplied as defaults within RoomDescription.
 
 Our first challenge is discovering our room id, we could cut & paste it
 into the code manually from the room registration. Or we could inject it
-via an environment variable (then via jndi, and @Resource or @Inject). But
-there's a third option, we can use the id as sent to us in each Game On
+via an environment variable (then via jndi, and ``@Resource` or `@Inject`).
+
+There's a third, simpler option. We can use the id as sent to us in each Game On
 message sent to our room.
 
 Every time Game On sends a message to a room, it includes the id of the room
@@ -306,7 +319,7 @@ case roomHello:
 ----
 
 If we look a little above the block, we can see the switch statement, using `message.getTarget`
-to obtain the message type for evaluation. The `message` object offers another method;
+to obtain the message type for evaluation. The `message` object offers another method,
 `getTargetId` which will return us the roomId for the recieved message.
 
 Lets start by injecting the MapClient to the `RoomImplementation`. Add a field declaration
@@ -338,17 +351,21 @@ message, add this code;
   }
 ----
 
-Now, when you enter the room, the room will use the description from the data registered
+Now,
+
+You can verify this now if you deploy the room, edit the room description using
+the room registration user interface, and then visit your room. When you enter the room
+will use the description from the data registered
 in map, rather than the hardcoded defaults in the `RoomDescription` class.
 
 ### Improving the usage
 
 Great, except now we're making a request to update that info every time anyone enters
-the room, and maybe we should cache that information, as its unlikely it changes frequently.
+the room, and we really should consider caching that information, as its unlikely it changes frequently.
 
 TIP: consider using a JSR107 type cache to store the description information, then you
 can configure expiry conditions, and share the cache between scaled instances of your room!
-Check the JSR107 Advanced Adventure for more information.
+Check the JSR107 Advanced Adventure for details.
 
 Lets add a field to store the MapData within the `RoomImplementation` class. Near where
 you added the `MapClient` injection, add..
@@ -391,8 +408,8 @@ cache, consider what happens when the mapClient returns null. If there's an erro
 talking to the Map service, resulting in a null return, the current approach would
 retry the request every time a player entered the room. That may not be ideal if
 your room is high traffic, or if the response is an error 500. Consider looking
-at circuit breaker patterns to minimise the number of outbound calls placed during
-error situations.
+at {circuitbreaker}[circuit breaker] patterns to minimise the number of outbound
+calls placed during error situations.
 
 Now when you connect to the room, you can issue `/clearcache` and exit & re-enter
 the room to have it pick up changes made via the room registration interface.
