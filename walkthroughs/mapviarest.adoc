@@ -15,14 +15,15 @@
 :liberty-jaxrs-config: https://www.ibm.com/support/knowledgecenter/SS7K4U_8.5.5/com.ibm.websphere.wlp.zseries.doc/ae/twlp_jaxrs2.0_clientconfig.html
 :map-swagger-get-room: https://gameontext.org/swagger/#!/map/getRoom
 :circuit-breaker: http://www.javaworld.com/article/2824163/application-performance/stability-patterns-applied-in-a-restful-architecture.html?page=2
+:failsafe: https://github.com/jhalterman/failsafe
 
 Where we learn how to talk to Map via REST & JAX-RS
 
 ## Overview
 
-This adventure will teach you about REST by walking you through the process
-of adding a simple JAX-RS Client to a Game On room. You will come away having
-learned a little about JAX-RS & REST with practical examples of usage within a Room.
+In this adventure, we'll learn about the {rest}[Representational State Transfer (REST)] approach
+for defining services. We'll explore how the {jaxrs}[JAX-RS] specification simplifies working with
+REST endpoints by adding simple client capabilities to a Game On room.
 
 ## Why REST ?
 
@@ -48,18 +49,18 @@ No additional accounts or services are required.
 
 We're going to create a {jaxrsclient}[JAX RS Client] to talk to the Map service. To use
 {liberty-jaxrs-config}[JAX-RS within Liberty] we need
-to check the server has the feature enabled within the `server.xml`, check by looking
-in the server configuration in your room project at;
+to cmake sure the server is configured to use both the jaxrs-2.0 and the
+cdi-1.2 features.
 
-`sample-room-java/src/main/liberty/config/server.xml`
-
-Verify that jaxrs-2.0 is enabled, by checking the `featureManager` block has an entry for the
-jaxrs-2.0 feature like this;
+To do that, opensample-room-java/src/main/liberty/config/server.xml, and look for:
 
 [source,xml]
 ----
 <feature>jaxrs-2.0</feature>
+<feature>cdi-1.2</feature>
 ----
+
+The order of these two elements is not important, they just have to be there.
 
 ### Creating the client
 
@@ -137,12 +138,12 @@ With the WebTarget initialised, lets have a look at the code for `getMapData`
 
 First impressions are that's an awful lot of exception handlers for such a simple request.
 
-We want to issue a {map-swagger-get-room}[`GET` to the Map service] using the url..
+We want to issue a {map-swagger-get-room}[`GET` to the Map service] using the url:
 
-`https://gameontext.org/map/v1/sites/<siteId>`
+`https://gameontext.org/map/v1/sites/{siteId}`
 
 The first line of the method, `this.queryroot.path(siteId)` adds our `siteId` argument
-to our URL. Then we issue the request;
+to our URL. Then we issue the request:
 
 `target.request(MediaType.APPLICATION_JSON).get()`
 
@@ -337,7 +338,7 @@ which we'll use to lookup our room details.
 TIP: Remember you cannot use Injected resources within the objects constructor, they haven't
 been injected yet!! Use a `@PostConstruct` method instead.
 
-Now head to the `roomHello` block we identified earlier, and before sending the `location`
+Revisit the `roomHello` block we identified earlier, and before sending the `location`
 message, add this code;
 
 [source,java]
@@ -351,8 +352,6 @@ message, add this code;
   }
 ----
 
-Now,
-
 You can verify this now if you deploy the room, edit the room description using
 the room registration user interface, and then visit your room. When you enter the room
 will use the description from the data registered
@@ -363,7 +362,7 @@ in map, rather than the hardcoded defaults in the `RoomDescription` class.
 Great, except now we're making a request to update that info every time anyone enters
 the room, and we really should consider caching that information, as its unlikely it changes frequently.
 
-TIP: consider using a JSR107 type cache to store the description information, then you
+TIP: Consider using a JSR107 type cache to store the description information, then you
 can configure expiry conditions, and share the cache between scaled instances of your room!
 Check the JSR107 Advanced Adventure for details.
 
@@ -402,17 +401,22 @@ block that could wipe the cached data so it can be refreshed;
     break;
 ----
 
+Now when you connect to the room, you can issue `/clearcache` and exit & re-enter
+the room to have it pick up changes made via the room registration interface.
 
-TIP: Although it may now feel as if we've covered all the bases with our simple
+[TIP]
+=====
+Although it may now feel as if we've covered all the bases with our simple
 cache, consider what happens when the mapClient returns null. If there's an error
 talking to the Map service, resulting in a null return, the current approach would
 retry the request every time a player entered the room. That may not be ideal if
-your room is high traffic, or if the response is an error 500. Consider looking
-at {circuitbreaker}[circuit breaker] patterns to minimise the number of outbound
-calls placed during error situations.
+your room is high traffic, or if the response is an error 500.
 
-Now when you connect to the room, you can issue `/clearcache` and exit & re-enter
-the room to have it pick up changes made via the room registration interface.
+Define fallback behaviors for these conditions (for example, use default hard-coded values in this case),
+and consider {circuitbreaker}[circuit breaker] or bulkhead patterns to minimize the number of outbound
+calls placed when errors occur. {failsafe}[Failsafe] is a lightweight Java library with few dependencies
+that can help with this, but that feels like a different adventure.
+=====
 
 #### Example in github.
 
@@ -423,8 +427,9 @@ we've got a git repo you may want to {sample-room-with-mapclient}[check out].
 
 ## Suggested extensions
 
-This has been a simple look at a single REST operation 'GET', the Map API
-supports many others, and the Player service has a REST API also.
+This has been a simple look at REST, using a single 'GET' operation.
+The {map-swagger-get-room}[Map API] supports many others, and the Player service
+has a REST API also.
 
 You could try using the Player REST API to track the location of players
 who were in your room recently.
@@ -445,5 +450,3 @@ rooms details.
 You may want to consider the JSR107 Caching example to see how you
 could create a cache for the MapData that would automatically expire
 after a defined period of time.
-Link to adventures that can build from this one.
-(Try to revisit your advanced adventure periodically to add additional ones)
