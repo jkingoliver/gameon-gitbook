@@ -278,7 +278,7 @@ a message to everyone.
 #### Creating our listener.
 
 Before we create our listener, we should understand what type of cache event we
-want to listen to, as each type has it's {listener}[own listener interface] to implement.
+want to listen to, as each type has its {listener}[own listener interface] to implement.
 
 For our toggle cache, we're really only interested in Create and Update events,
 so we'll implement `CacheEntryCreatedListener` and `CacheEntryUpdatedListener`
