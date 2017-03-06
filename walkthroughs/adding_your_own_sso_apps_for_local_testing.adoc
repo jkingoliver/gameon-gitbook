@@ -90,7 +90,7 @@ From there you can also get that 'App ID', 'App Secret', and you need to configu
    address you access your local game on at.
 
  - PrivacyPolicy / TermsOfService URLs, (may be required for facebook, to access
-   email.. ) just use "https://gameontext.org/templates/default.html"
+   email.. ) just use "https://gameontext.org/#/terms"
 
  - Site URL, this also needs to be configured to have the domain of wherever
    your local Game On is running.. eg, http://127.0.0.1/ or http://192.168.x.x/
