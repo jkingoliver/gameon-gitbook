@@ -219,7 +219,7 @@ With the retrieved server details, you can create a
 Config redissonConfig = new Config();
 redissonConfig.useSingleServer().setAddress(host+":"+port).setPassword(pwd);
 RedissonClient redisson = Redisson.create(redissonConfig);
----
+----
 +
 . *Create the CacheManager*
 +
