@@ -2,7 +2,7 @@
 :icons: font
 :signedHeaders: link:../microservices/ApplicationSecurity.adoc
 :WebSocketProtocol: link:../microservices/WebSocketProtocol.adoc
-:game-on: https://game-on.org/
+:game-on: https://gameontext.org/
 
 image:../images/Progression.012.jpeg[Progression, width=95%]
 

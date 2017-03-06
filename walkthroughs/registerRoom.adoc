@@ -11,8 +11,8 @@
 :cf: link:bluemix-cf.adoc
 :docker: link:bluemix-ics.adoc
 :more: link:createMore.adoc
-:first-room: https://game-on.org/#/play
-:swagger: https://game-on.org/swagger/
+:first-room: https://gameontext.org/#/play
+:swagger: https://gameontext.org/swagger/
 :sweep: link:../microservices/TheSweep.adoc
 :WebSocket: link:../microservices/WebSocketProtocol.adoc
 
@@ -32,7 +32,7 @@ page.
 
 == Room Management: Register a new room
 
-1.  Go to https://game-on.org[Game On!] and sign in.
+1.  Go to https://gameontext.org[Game On!] and sign in.
 2.  Click on the [room-edit]#building icon# in the top right of the game screen
     to go to the Room Management page.
 3.  Make sure **Create a new room** is selected from the **Select a room** drop-down.

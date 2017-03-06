@@ -2,7 +2,7 @@
 :icons: font
 :signedHeaders: link:../microservices/ApplicationSecurity.adoc
 :WebSocketProtocol: link:../microservices/WebSocketProtocol.adoc
-:game-on: https://game-on.org/
+:game-on: https://gameontext.org/
 
 image:../images/Progression.014.jpeg[Progression, width=95%]
 
@@ -25,4 +25,3 @@ API, just by the way. That's worth a look or three.
 
 We're still in early days with our integration of Events, but the
 infrastructure is all there waiting for us to use it.
-

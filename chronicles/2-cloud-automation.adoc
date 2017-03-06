@@ -2,7 +2,7 @@
 :icons: font
 :signedHeaders: link:../microservices/ApplicationSecurity.adoc
 :WebSocketProtocol: link:../microservices/WebSocketProtocol.adoc
-:game-on: https://game-on.org/
+:game-on: https://gameontext.org/
 
 image:../images/Progression.002.jpeg[Progression, width=90%]
 
@@ -13,4 +13,4 @@ a commit to the master branches of our repositories, which means no change to ou
 usual workflow.
 
 A proxy was added to help route requests between the services and docker
-containers, and to give us a seamless domain space ({game-on}[game-on.org]).
+containers, and to give us a seamless domain space ({game-on}[gameontext.org]).

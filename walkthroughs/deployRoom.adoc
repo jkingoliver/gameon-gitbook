@@ -4,7 +4,7 @@
 :docker: link:bluemix-ics.adoc
 :heroku: link:heroku.adoc
 :more: link:createMore.adoc
-:first-room: https://game-on.org/#/play
+:first-room: https://gameontext.org/#/play
 :register: link:registerRoom.adoc
 :WebSocket: link:../microservices/WebSocketProtocol.adoc
 

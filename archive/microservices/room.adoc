@@ -9,7 +9,7 @@ Code
 
 The Room service is both an implementation of two Game On! rooms in Java, and a template/starting point for implementing
 your own room in Java.  The Room service provides an example of how to register with the concierge and how to provide the
-WebSocket implementation that the web application expects. 
+WebSocket implementation that the web application expects.
 
 This is a service to manage the various rooms available in a game. The primary entry point for a player will be the concierge, who manages connecting you between rooms. After that each room has a room service (heh) and players connect to each service and disconnect from the previous one to move between rooms.
 
@@ -22,8 +22,8 @@ The typical method of controlling runtime configuration of Docker-based services
 The concierge service utilizes the following environment variables:
 
 * *LICENSE*: Required by the https://hub.docker.com/_/websphere-liberty/[IBM WebSphere Liberty Docker Image], set this environment variable to `accept` to demonstrate that you accept the Liberty and IBM JDK licenses.
-* *service_concierge*: The full URL at which the room service can register its rooms (e.g. `https://game-on.org/concierge/registerRoom`). See the https://game-on.org/swagger/[Swagger APIs] for more information about how to register rooms.
-* *service_room*: The full URL to register this suite of rooms with concierge (e.g. `wss://game-on.org/rooms`) such that concierge can relay this information to mediator or player service as a player desires.
+* *service_concierge*: The full URL at which the room service can register its rooms (e.g. `https://gameontext.org/concierge/registerRoom`). See the https://gameontext.org/swagger/[Swagger APIs] for more information about how to register rooms.
+* *service_room*: The full URL to register this suite of rooms with concierge (e.g. `wss://gameontext.org/rooms`) such that concierge can relay this information to mediator or player service as a player desires.
 * *REGISTRATION_SECRET*:  A secret key shared between link:./concierge.adoc[Concierge] and services who are allowed to register rooms (such as Room Service, and link:./room-nodejs.adoc[Room Node.js Service]). Set this value in concierge and then use it in other services.
 * *ETCDCTL_ENDPOINT* (optional): The http-accessible endpoint for an etcd member with configuration for Game On! services. See link:./using_etcd.adoc[using etcd] for more information.
 
@@ -47,7 +47,7 @@ Or, if you don't have gradle, then:
 docker run -it -p 9080:9080 --env-file=dockerrc gameon-room bash
 ```
 
-Then, you can start the server with 
+Then, you can start the server with
 ```
 /opt/ibm/wlp/bin/server run defaultServer
 ```
@@ -67,5 +67,5 @@ docker stop gameon-room ; docker rm gameon-room
 ### Restart Daemon
 
 ```
-docker stop gameon-room ; docker rm gameon-room ; docker run -d -p 9080:9080 --env-file=dockerrc --name gameon-room gameon-room 
+docker stop gameon-room ; docker rm gameon-room ; docker run -d -p 9080:9080 --env-file=dockerrc --name gameon-room gameon-room
 ```

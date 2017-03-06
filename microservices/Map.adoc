@@ -6,7 +6,7 @@
 :toclevels: 2
 :12-factor: link:../about/12-factor.adoc
 :security: link:ApplicationSecurty.adoc
-:swagger: https://game-on.org/swagger/
+:swagger: https://gameontext.org/swagger/
 :repo: https://github.com/gameontext/gameon-map
 
 The Map is one of the game's core services. It is implemented in Java using

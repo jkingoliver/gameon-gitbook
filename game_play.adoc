@@ -5,7 +5,7 @@
 :toc-placement: preamble
 :toclevels: 2
 :services: link:microservices/README.adoc
-:swagger: https://game-on.org/swagger/
+:swagger: https://gameontext.org/swagger/
 :security: link:microservices/ApplicationSecurity.adoc
 :registerRoom: link:walkthroughs/registerRoom.adoc
 :mapService: link:microservices/Map.adoc

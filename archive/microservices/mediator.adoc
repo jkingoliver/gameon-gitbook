@@ -16,9 +16,9 @@ The typical method of controlling runtime configuration of Docker-based services
 The mediator service utilizes the following environment variables:
 
 * *LICENSE*: Required by the https://hub.docker.com/_/websphere-liberty/[IBM WebSphere Liberty Docker Image], set this environment variable to `accept` to demonstrate that you accept the Liberty and IBM JDK licenses.
-* *CONCIERGE_URL*: The full URL to the concierge microservice (e.g. `https://game-on.org/concierge`).
+* *CONCIERGE_URL*: The full URL to the concierge microservice (e.g. `https://gameontext.org/concierge`).
 * *CONCIERGE_KEY*: A secret key, shared between player service and concierge that authenticates player to query concierge about room information.
-* *PLAYER_URL*: The full URL to the player microservice (e.g. `https://game-on.org/play/players`).
+* *PLAYER_URL*: The full URL to the player microservice (e.g. `https://gameontext.org/play/players`).
 
 * *ETCDCTL_ENDPOINT* (optional): The http-accessible endpoint for an etcd member with configuration for Game On! services. See link:./using_etcd.adoc[using etcd] for more information.
 
@@ -56,7 +56,7 @@ Or, if you don't have gradle, then:
 docker run -it -p 9443:9443 --env-file=./dockerrc --name gameon-mediator gameon-mediator bash
 ```
 
-Then, you can start the server with 
+Then, you can start the server with
 ```
 /opt/ibm/wlp/bin/server run defaultServer
 ```
@@ -78,4 +78,3 @@ docker stop gameon-mediator ; docker rm gameon-mediator
 ```
 docker stop gameon-mediator ; docker rm gameon-mediator; docker run -d -p 9443:9443 --env-file=./dockerrc --name gameon-mediator gameon-mediator
 ```
-

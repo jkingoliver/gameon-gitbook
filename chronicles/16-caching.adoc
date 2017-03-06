@@ -1,6 +1,6 @@
 = Marco? Polo, Polo, Polo, Polo. (Caching).
 :icons: font
-:game-on: https://game-on.org/
+:game-on: https://gameontext.org/
 :redis: https://redis.io/
 :redis-compose: https://console.ng.bluemix.net/catalog/services/compose-for-redis/
 :redis-cloud: https://console.ng.bluemix.net/catalog/services/redis-cloud
@@ -58,7 +58,7 @@ A little more research and soon you're deep into the world of standards, open so
 that you come away with for JSR107 is, that it is not all that simple. It comes in two parts, firstly the Java interfaces and classes,
 and secondly the annotations. The magic that makes the annotations work is {jsr107annotations}[supposed to be supplied by the container the spec isimplemented by], eg, CDI. But because JSR107 is not part of a released JEE spec yet, CDI containers have yet to implement that magic.
 
-Redisson's JSR107 support goes as far as implementing the interface side of stuff and then goes on to suggest, 
+Redisson's JSR107 support goes as far as implementing the interface side of stuff and then goes on to suggest,
 "Your container will do the rest". Except it doesn't. Yet.
 
 Thankfully, the Reference Implementation (RI) realized that encouraging adoption of a spec when there's no implementation available,

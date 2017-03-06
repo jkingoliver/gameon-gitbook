@@ -16,11 +16,11 @@ The typical method of controlling runtime configuration of Docker-based services
 
 The player service utilizes the following environment variables:
 
-* *LICENSE*: Required by the https://hub.docker.com/_/websphere-liberty/[IBM WebSphere Liberty Docker Image], set this environment variable to `accept` to demonstrate that you accept the Liberty and IBM JDK licenses. 
+* *LICENSE*: Required by the https://hub.docker.com/_/websphere-liberty/[IBM WebSphere Liberty Docker Image], set this environment variable to `accept` to demonstrate that you accept the Liberty and IBM JDK licenses.
 
- * *CONCIERGE_URL*: The full URL to the concierge microservice (e.g. `https://game-on.org/concierge`). 
- * *SUCCESS_CALLBACK*: The full URL to redirect users to after successful OAuth2 authentication with one of the social networking sites (e.g. `https://game-on.org/#/login/callback/`).
- * *PLAYER_URL*: The full URL to the player microservice (e.g. `https://game-on.org/play/players`).
+ * *CONCIERGE_URL*: The full URL to the concierge microservice (e.g. `https://gameontext.org/concierge`).
+ * *SUCCESS_CALLBACK*: The full URL to redirect users to after successful OAuth2 authentication with one of the social networking sites (e.g. `https://gameontext.org/#/login/callback/`).
+ * *PLAYER_URL*: The full URL to the player microservice (e.g. `https://gameontext.org/play/players`).
  * *CONCIERGE_KEY*: A secret key, shared between player service and concierge that authenticates player to query concierge about room information.
  * *MONGO_HOST*: IP Address or Hostname of a mongoDB host that player service can use to persist its information about players who have logged in to Game On!
  * *MONGO_PORT*: Same as above, only this is the port number that mongoDB listens on.
@@ -30,8 +30,8 @@ The player service utilizes the following environment variables:
  * *FACEBOOK_APPP_SECRET*: Secret from Facebook for utilizing the above ID to authenticate users in Game On!
  * *GOOGLE_APP_ID*: Application ID/key for consuming OAuth2 authentication for Google.  See link:https://developers.google.com/identity/protocols/OAuth2UserAgent[Google's Developer Pages] for more information.
  * *GOOGLE_APP_SECRET*: Secret from Google for utilizing the above ID to authenticate users in Game On!
- 
- 
+
+
  * *ETCDCTL_ENDPOINT* (optional): The http-accessible endpoint for an etcd member with configuration for Game On! services. See link:./using_etcd.adoc[using etcd] for more information.
 
 ## Prereq
@@ -67,7 +67,7 @@ Or, if you don't have gradle, then:
 docker run -it -p 9443:9443 --env-file=./dockerrc --name gameon-player gameon-player bash
 ```
 
-Then, you can start the server with 
+Then, you can start the server with
 ```
 /opt/ibm/wlp/bin/server run defaultServer
 ```

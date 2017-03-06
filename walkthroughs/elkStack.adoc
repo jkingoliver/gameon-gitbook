@@ -10,8 +10,8 @@
 :cf-java: https://github.com/gameontext/gameon-room-java#introduction
 :docker-go: https://github.com/gameontext/gameon-room-go#introduction
 :docker-java: https://github.com/gameontext/gameon-room-java#deploy-using-docker
-:first-room: https://game-on.org/#/play
-:swagger: https://game-on.org/swagger/
+:first-room: https://gameontext.org/#/play
+:swagger: https://gameontext.org/swagger/
 :sweep: link:../microservices/TheSweep.adoc
 :WebSocket: link:../microservices/WebSocketProtocol.adoc
 
