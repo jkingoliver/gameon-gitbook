@@ -4,11 +4,11 @@
 :toc-title:
 :toc-placement: preamble
 :toclevels: 2
-:partOne: link:JSR-107caching.html
-:prereqs: link:JSR-107caching.html#_prerequisites
-:deps: link:JSR-107caching.html#_adding_the_dependencies
-:mgr: link:JSR-107caching.html#_creating_the_default_cache_manager_provider
-:bdJSR-107room: https://github.com/BarDweller/gameon-JSR-107-room
+:partOne: link:jsr107caching.html
+:prereqs: link:jsr107caching.html#_prerequisites
+:deps: link:jsr107caching.html#_adding_the_dependencies
+:mgr: link:jsr107caching.html#_creating_the_default_cache_manager_provider
+:bdJSR-107room: https://github.com/BarDweller/gameon-jsr107-room
 :api: http://static.javadoc.io/javax.cache/cache-api/1.0.0/javax/cache/package-summary.html
 :listener: http://static.javadoc.io/javax.cache/cache-api/1.0.0/javax/cache/event/package-summary.html
 :loader: http://static.javadoc.io/javax.cache/cache-api/1.0.0/javax/cache/integration/CacheLoader.html

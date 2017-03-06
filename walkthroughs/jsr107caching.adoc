@@ -4,7 +4,7 @@
 :toc-title:
 :toc-placement: preamble
 :toclevels: 2
-:JSR-107impls: https://jcp.org/aboutJava/communityprocess/implementations/JSR-107/index.html
+:JSR-107impls: https://jcp.org/aboutJava/communityprocess/implementations/jsr107/index.html
 :redisson: https://redisson.org/
 :redis: https://redis.io/
 :sample-room-java: https://github.com/gameontext/sample-room-java
@@ -12,15 +12,15 @@
 :rediscloud: https://console.ng.bluemix.net/catalog/services/redis-cloud/
 :libertycdi: http://www.ibm.com/support/knowledgecenter/SS7K4U_liberty/com.ibm.websphere.wlp.zseries.doc/ae/twlp_cdi_config.html
 :JSR-107redisson: https://dzone.com/articles/jcache-api-jsr-107-implementation-for-redis
-:JSR-107annotations: http://gregluck.com/blog/archives/2014/04/how-to-use-JSR-107-caching-annotations/
-:JSR-107annotationRI: https://github.com/JSR-107/RI/tree/master/cache-annotations-ri
+:JSR-107annotations: http://gregluck.com/blog/archives/2014/04/how-to-use-jsr107-caching-annotations/
+:JSR-107annotationRI: https://github.com/jsr107/RI/tree/master/cache-annotations-ri
 :redissonconfig: https://github.com/redisson/redisson/wiki/14.-Integration-with-frameworks#143-jcache-api-jsr-107-implementation
-:bdJSR-107cdi: https://github.com/BarDweller/JSR-107-RI-CDI-Custom-CacheManager
-:bdJSR-107room: https://github.com/BarDweller/gameon-JSR-107-room
+:bdJSR-107cdi: https://github.com/BarDweller/JSR107-RI-CDI-Custom-CacheManager
+:bdJSR-107room: https://github.com/BarDweller/gameon-jsr107-room
 :javaservices: https://docs.oracle.com/javase/tutorial/ext/basics/spi.html
 :redisson-3-2-4: https://github.com/redisson/redisson/blob/master/CHANGELOG.md
-:bddefaultcacheprovider: https://github.com/gameontext/sample-room-java/blob/JSR-107Redis/src/main/java/org/gameontext/sample/JSR-107defaultprovider/RedissonCacheManagerProvider.java
-:metainfservices: https://github.com/gameontext/sample-room-java/blob/JSR-107Redis/src/main/webapp/META-INF/services/org.JSR-107.ri.annotations.DefaultCacheResolverFactory%24DefaultCacheManagerProvider
+:bddefaultcacheprovider: https://github.com/gameontext/sample-room-java/blob/JSR107Redis/src/main/java/org/gameontext/sample/jsr107defaultprovider/RedissonCacheManagerProvider.java
+:metainfservices: https://github.com/gameontext/sample-room-java/blob/JSR107Redis/src/main/webapp/META-INF/services/org.jsr107.ri.annotations.DefaultCacheResolverFactory%24DefaultCacheManagerProvider
 :javacaches: https://java-source.net/open-source/cache-solutions
 :cachedefaults: http://static.javadoc.io/javax.cache/cache-api/1.0.0/javax/cache/annotation/CacheDefaults.html
 :cacheresult: http://static.javadoc.io/javax.cache/cache-api/1.0.0/javax/cache/annotation/CacheResult.html
@@ -144,7 +144,7 @@ tag.
 </dependency>
 <dependency>
     <groupId>com.github.BarDweller</groupId>
-    <artifactId>JSR-107-RI-CDI-Custom-CacheManager</artifactId>
+    <artifactId>JSR107-RI-CDI-Custom-CacheManager</artifactId>
     <version>v1.0.9-STILETTO</version>
 </dependency>
 ----
@@ -219,7 +219,7 @@ With the retrieved server details, you can create a
 Config redissonConfig = new Config();
 redissonConfig.useSingleServer().setAddress(host+":"+port).setPassword(pwd);
 RedissonClient redisson = Redisson.create(redissonConfig);
-----
+---
 +
 . *Create the CacheManager*
 +
