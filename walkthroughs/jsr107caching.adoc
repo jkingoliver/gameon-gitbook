@@ -13,7 +13,7 @@
 :libertycdi: http://www.ibm.com/support/knowledgecenter/SS7K4U_liberty/com.ibm.websphere.wlp.zseries.doc/ae/twlp_cdi_config.html
 :JSR-107redisson: https://dzone.com/articles/jcache-api-jsr-107-implementation-for-redis
 :JSR-107annotations: http://gregluck.com/blog/archives/2014/04/how-to-use-jsr107-caching-annotations/
-:JSR-107annotationRI: https://github.com/JSR107/RI/tree/master/cache-annotations-ri
+:JSR-107annotationRI: https://github.com/jsr107/RI/tree/master/cache-annotations-ri
 :redissonconfig: https://github.com/redisson/redisson/wiki/14.-Integration-with-frameworks#143-jcache-api-jsr-107-implementation
 :bdJSR-107cdi: https://github.com/BarDweller/JSR107-RI-CDI-Custom-CacheManager
 :bdJSR-107room: https://github.com/BarDweller/gameon-jsr107-room
