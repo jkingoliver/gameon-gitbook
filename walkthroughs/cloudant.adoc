@@ -14,6 +14,8 @@
 :cloudantfields: https://wiki.apache.org/couchdb/HTTP_Document_API#Special_Fields
 :jsr107aa: link:jsr107caching.adoc
 :map: link:../microservices/Map.adoc
+:addingItems: link:addItemsToYourRoom.adoc
+:playerloc: https://gameontext.org/swagger/#!/players/getPlayerLocation
 
 Where we learn about Persistence via Cloudant.
 
@@ -89,7 +91,7 @@ This will allow us to use the Cloudant client library within our Room code.
 
 ### Parsing VCAP_SERVICES to obtain the service details.
 
-When our Room is running as a CF App in bluemix, we'll be supplied the details for our Cloudant instance
+When our Room is running as a CF App in Bluemix, we'll be supplied the details for our Cloudant instance
 as part of the environment variable `VCAP_SERVICES`. This happens because we attached the service to our
 Java Room app in step 6 in the Prerequisites section.
 
@@ -115,7 +117,7 @@ As documented over on the {cloudantstarter}['Getting started with Cloudant'] pag
 }
 ----
 
-Lets start by processing that using `javax.json` package. In the `RoomImplementation`
+Lets start by processing that using the `javax.json` package. In the `RoomImplementation`
 class, add the following code to the `postConstruct` method.
 
 [source,java]
@@ -139,7 +141,7 @@ and url we need.
 
 ### Connecting to the database
 
-Now we have the credentials, and URL, we need to create a `CloudantClient` that will let us
+Once we have the credentials, and URL, we need to create a `CloudantClient` that will let us
 talk to the service.
 
 [source,java]
@@ -150,10 +152,10 @@ CloudantClient client = ClientBuilder.url(url)
             .build();
 ----
 
-Now lets obtain an object that lets us talk to our database inside our Cloudant Service.
-First declare the `db` object as a class variable so we can refer to it later.
+From the `CloudantClient` we can obtain a `Database` object that lets us talk to our database
+managed by our Cloudant Service. First declare the `db` object as a class variable so we can refer to it later.
 
-Add this to `RoomImplementation` up near where `roomDescription` is defined.
+Add this to `RoomImplementation` near where `roomDescription` is defined.
 
 [source,java]
 ----
@@ -182,7 +184,7 @@ We take a quick twisty road away from persistence for a moment, because we need 
 
 Lets create ourselves an imaginary machine that the player can use to pick a pair of shoes. To keep
 this walkthrough brief, we'll limit the machine to existing via custom commands, but if you follow
-the 'Adding items to your room' tutorial, you can easily make it into a real Game On room item.
+the {addingItems}['Adding items to your room'] tutorial, you could easily make it into a real Game On room item.
 
 First we'll add some shoes for our machine to stock.. in the `RoomImplementation` class, add
 a class variable declaration like this:
@@ -225,7 +227,7 @@ case "/listshoes" :
     break;
 ----
 
-Thats enough to allow our users to discover our shoes, now lets allow them to equip a pair.
+Thats enough to allow our users to discover our shoes, And we also want to allow them to equip a pair:
 
 [source,java]
 ----
@@ -251,7 +253,7 @@ case "/equip" :
   break;
 ----
 
-And thats enough to allow a player do do `/equip red stilettos` and have an appropriate
+Thats enough to allow a player do do `/equip red stilettos` and have an appropriate
 response go back. Of course, we know this, but the room user doesn't yet, we could
 update our RoomDescription to include information on our new command. Take a look at
 the {addingitems}[Adding items to your room] adventure to find out more.
@@ -270,7 +272,7 @@ decide on what 'things' are. Cloudant will store JSON objects, and the Cloudant
 client API we are using will automatically map these to & from Java bean type
 objects.
 
-So first we should create a class representing the data we plan to store and
+First we must create a class representing the data we plan to store and
 retrieve from the database. We could just store the players userId and an
 index into the shoes array, but that would be fragile if the array changed
 and could lead to someone wearing the wrong shoes! Instead, we will store the
@@ -313,7 +315,7 @@ public class PlayerData {
 }
 ----
 
-Here we see pretty much what we'd expect, a class with getters/setters for the
+The code is pretty much what you'd expect, a class with getters/setters for the
 Shoe Name & Shoe Description. Notice also the 2 extra fields `_id` and `_rev`
 which {cloudantfields}[form part of how Cloudant remembers the data]. We'll
 use the `_id` field with the userId we have for the player.
@@ -362,7 +364,7 @@ that we will will return the message `<playername> is wearing <shoedesc>`. If we
 have no database entry for the player, we'll just return a fixed message.
 
 Our first minor problem to solve is that our `PlayerData` is indexed by player
-id, but the players in the room will be using username to refer to each other.
+id, but the players in the room will be using usernames to refer to each other.
 So we need a way to track the username to player id mappings active in our room.
 
 Head up to where `roomDescription` is declared in `RoomImplementation` and add
@@ -404,6 +406,11 @@ players leave by adding this to the `roomPart` and `roomGoodbye` blocks:
 nameToId.remove(username.toLowerCase());
 ----
 
+This is almost right, but if a player signs into your room more than once (say
+from a mobile device and a laptop) then when they leave via any device, you'll
+think they left from every device. If you fancy a challenge, solving this isn't
+too hard. As a hint, the Player service offers a way to {playerloc}[query player location].
+
 TIP: Consider using a JSR-107 Cache, rather than a Map, to store the id->name relationship.
 That way if your room is scaled up to multiple instances under load, they will all
 share a consistent view of the players "in the room". Find out more in the
@@ -442,7 +449,7 @@ case "/examine":
     break;
 ----
 
-Great, now when a player does `/examine fred` we'll check if we know the player
+Now when a player does `/examine fred` we'll check if we know the player
 id for fred (which we should do, if fred is in our room), and then we'll look
 in the database to see if fred has `/equip` 'd a pair of shoes.
 
