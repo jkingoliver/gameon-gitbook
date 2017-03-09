@@ -13,6 +13,7 @@
 :sample-room-java: https://github.com/gameontext/sample-room-java
 :cloudantfields: https://wiki.apache.org/couchdb/HTTP_Document_API#Special_Fields
 :jsr107aa: link:jsr107caching.adoc
+:map: link:../microservices/Map.adoc
 
 Where we learn about Persistence via Cloudant.
 
@@ -459,7 +460,8 @@ in the database to see if fred has `/equip` 'd a pair of shoes.
 You have now learned a little about how to talk to Cloudant, and use it to persist
 data from your Microservice. Although here the example is just for fun, you can
 hopefully see how you could apply the same approach for more serious data within
-a service.
+a service. For a discussion of how the Game On Map service uses Cloudant, have a look
+{map}[here].
 
 ## Suggested further adventures.
 
