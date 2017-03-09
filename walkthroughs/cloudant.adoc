@@ -40,8 +40,7 @@ service, and the Map service both use Cloudant to persist their data.
 
 We'll extend the Java Sample Room, to add a way for users in the room to select items from a vending
 machine, and have the room modify `/examine` to show the item the user has equipped. We'll store the
-items for a player in Cloudant, and query the stored data to handle the `/examine` and `/inventory`
-commands for a player.
+selection for a player in Cloudant, and query the stored data to handle the `/examine` command for a player.
 
 ## Prerequisites
 
@@ -443,7 +442,7 @@ case "/examine":
 ----
 
 Great, now when a player does `/examine fred` we'll check if we know the player
-id for fred (which we should do, if fred is in our room), and then we'll look 
+id for fred (which we should do, if fred is in our room), and then we'll look
 in the database to see if fred has `/equip` 'd a pair of shoes.
 
 ## Suggested extensions
