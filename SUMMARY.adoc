@@ -18,6 +18,7 @@
 ... link:walkthroughs/jsr107caching.adoc[Caching with JSR107/JCache]
 ... link:walkthroughs/jsr107caching2.adoc[Caching with JSR107/JCache (part 2)]
 ... link:walkthroughs/mapviarest.adoc[Map Service via REST (JAX RS)]
+... link:walkthroughs/cloudant.adoc[Cloudant]
 ... link:walkthroughs/addItemsToYourRoom.adoc[Adding items to your room]
 . link:microservices/README.adoc[Application Architecture]
 .. link:microservices/WebSocketProtocol.adoc[WebSocket Protocol]
