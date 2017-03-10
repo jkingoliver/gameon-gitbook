@@ -13,11 +13,11 @@ This could mean running your room as a traditional server on any old hosting
 service. But as we're playing with cloud native applications and microservices,
 we should try deploying our service to a Cloud provider.
 
-.IBM Bluemix
+### IBM Bluemix
 * {cf}[Deploy your room as a Cloud Foundry application]
 * {docker}[Deploy your room as a Docker Container]
 
-.Heroku
+### Heroku
 * {heroku}[Deploy your room as a Heroku application]
 
 == Find your public endpoint
@@ -29,12 +29,12 @@ primitive WebSocket protocol tester on the application's index page.
 Your service URL will vary depending on where you have deployed your service, but
 it should look something like:
 
-.IBM Bluemix
+### IBM Bluemix
 * Cloud Foundry application or Container group in IBM Container Service:
   - US South: `http://<cf-app-name>.mybluemix.net/`
   - United Kingdom: `http://<cf-app-name>.eu-gb.mybluemix.net/`
 * Single container instance in IBM Container Service
   - `http://<ip address>:9080/`
 
-.Heroku
+### Heroku
 * `http://<noun-noun-number>.herokuapp.com/`
