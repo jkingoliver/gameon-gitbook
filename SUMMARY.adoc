@@ -52,3 +52,4 @@
 .. link:chronicles/15-service-discovery.adoc[Marco! Polo!]
 .. link:chronicles/16-caching.adoc[Investigating Caching]
 .. link:chronicles/17-watson-news.adoc[Watson Alchemy News]
+.. link:chronicles/17-weather-room.adoc[Weather Room]
