@@ -8,6 +8,7 @@
 :sweep: link:../microservices/TheSweep.adoc
 :javascript: https://github.com/gameontext/sample-room-nodejs#introduction
 :java: https://github.com/gameontext/sample-room-java#introduction
+:swift: https://github.com/gameontext/sample-room-swift#introduction
 :go: https://github.com/gameontext/sample-room-go#introduction
 :samples: https://github.com/gameontext?utf8=✓&q=sample-room
 :deployRoom: link:deployRoom.adoc
@@ -51,6 +52,7 @@ Your deployment options may vary depending on the language you choose.
 * {javascript}[Create a Game On! Room in JavaScript]
 * {java}[Create a Game On! Room in Java]
 * {go}[Create a Game On! Room in Go]
+* {swift}[Create a Game On! Room in Swift]
 * {samples}[... browse for sample rooms in other languages]
 
 Once you have a sample room created and {deployRoom}[deployed], you'll
