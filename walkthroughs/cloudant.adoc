@@ -16,6 +16,7 @@
 :map: link:../microservices/Map.adoc
 :addingItems: link:addItemsToYourRoom.adoc
 :playerloc: https://gameontext.org/swagger/#!/players/getPlayerLocation
+:samplerepo: https://github.com/gameontext/sample-room-java/tree/cloudant-advanced-adventure-sample
 
 Where we learn about Persistence via Cloudant.
 
@@ -452,6 +453,9 @@ case "/examine":
 Now when a player does `/examine fred` we'll check if we know the player
 id for fred (which we should do, if fred is in our room), and then we'll look
 in the database to see if fred has `/equip` 'd a pair of shoes.
+
+### Working example repo
+For complete versions of the code discussed so far, check out my {samplerepo}[Sample Cloudant Room]. It does everything described here, showing usage of the Cloudant client API to store and retrieve information.
 
 ## Suggested extensions
 
