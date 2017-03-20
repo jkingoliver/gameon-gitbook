@@ -146,7 +146,7 @@ talk to the service.
 
 [source,java]
 ----
-CloudantClient client = ClientBuilder.url(url)
+CloudantClient client = ClientBuilder.url(new URL(url))
             .username(username)
             .password(password)
             .build();
@@ -212,9 +212,9 @@ Add a block to that switch statement that looks like the following:
 [source,java]
 ----
 case "/listshoes" :
-    StringBuilder resp = new StringBuilder();
+    StringBuilder sb = new StringBuilder();
     sb.append("There are the following shoes available;\n");
-    for(String[] shoe in shoes){
+    for(String[] shoe : shoes){
       sb.append("* \"");
       sb.append(shoe[0]);
       sb.append("\" - \"");
@@ -223,7 +223,7 @@ case "/listshoes" :
     }
     endpoint.sendMessage(session,
                        Message.createSpecificEvent(userId,
-                       resp.toString()));
+                       sb.toString()));
     break;
 ----
 
@@ -237,7 +237,7 @@ case "/equip" :
                        Message.createSpecificEvent(userId,
                        "Equip what? maybe try /listshoes, and pick a pair"));
   }
-    for(String[] shoe in shoes){
+    for(String[] shoe : shoes){
       if(shoe[0].toLowerCase().equals(remainder)){
         endpoint.sendMessage(session,
                              Message.createSpecificEvent(userId,
@@ -249,7 +249,7 @@ case "/equip" :
   endpoint.sendMessage(session,
                        Message.createSpecificEvent(userId,
                        "I couldn't find "+remainder+" to equip."+
-                       " Maybe try /listshoes, and pick a pair")););
+                       " Maybe try /listshoes, and pick a pair"));
   break;
 ----
 
@@ -295,7 +295,7 @@ public class PlayerData {
   private String shoeName = null;
   private String shoeDesc = null;
 
-  public Player() {
+  public PlayerData() {
     shoeName = "";
     shoeDesc = "";
   }
@@ -429,7 +429,7 @@ case "/examine":
     if ( remainder == null || remainder.contains("room") ) {
         endpoint.sendMessage(session, Message.createLocationMessage(userId, roomDescription));
     } else {
-        String targetId = namesToId.get(remainder);
+        String targetId = nameToId.get(remainder);
         if(targetId!=null){
           PlayerData pd = db.find(PlayerData.class,targetId);
           if(pd!=null){
