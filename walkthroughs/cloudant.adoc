@@ -431,18 +431,18 @@ case "/examine":
     } else {
         String targetId = nameToId.get(remainder);
         if(targetId!=null){
-          PlayerData pd = db.find(PlayerData.class,targetId);
-          if(pd!=null){
+            try {
+                PlayerData pd = db.find(PlayerData.class,targetId);
+                endpoint.sendMessage(session,
+                      Message.createSpecificEvent(userId, remainder
+                         +" is wearing "+pd.getShoeDesc()));
+            } catch (NoDocumentException e) {
+                endpoint.sendMessage(session,
+                       Message.createSpecificEvent(userId, remainder
+                         +" does not seem to be wearing any shoes at the moment."));
+            }
+        } else {
             endpoint.sendMessage(session,
-                  Message.createSpecificEvent(userId, remainder
-                     +" is wearing "+pd.getShoeDesc()));
-          }else{
-            endpoint.sendMessage(session,
-                  Message.createSpecificEvent(userId, remainder
-                     +" does not seem to be wearing any shoes at the moment."));
-          }
-        }else{
-          endpoint.sendMessage(session,
                 Message.createSpecificEvent(userId, LOOK_UNKNOWN));
         }
     }
