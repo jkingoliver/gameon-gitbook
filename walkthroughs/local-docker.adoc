@@ -9,6 +9,7 @@
 :12-factor: link:../about/twelve-factors.adoc
 :docker: https://docs.docker.com/engine/installation/
 :git: link:git.adoc
+:vagrant: https://github.com/gameontext/gameon-vagrant
 
 
 Developing and testing your room locally in a production-like environment is an
@@ -16,13 +17,24 @@ important aspect of {12-factor}[Twelve factor applications], as it reduces the
 likelihood that what you create locally will fail in new and unexpected ways
 when activated in production.
 
+[TIP]
+====
+Don't fancy following all this, and installing everything over your most 
+favorite dev box? Want something to just go do it all for you?
+
+Have a look at our {vagrant}[Vagrant] project, that can take care of this for 
+you, and leave you with a virtual machine ready for local development. The rest
+of the information on this page will still be useful for understanding what has
+been done inside the VM for you.
+====
+
+== Using Docker
+
 We use Docker (and specifically Docker Compose) to set up a local environment
 that is as similar as possible to what will run in production. We provide some
 pre-built images to help you do that, too.
 
-== Using Docker
-
-We require docker-compose version 1.5.0 or greater.
+We require docker-compose version 1.6.0 or greater.
 
 {docker}[Installing Docker] varies by platform. On Windows and macOS, you can
 also choose between Docker native and Docker Toolbox. Both should work.
