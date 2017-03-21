@@ -1,0 +1,70 @@
+= Advanced Adventure for Watson Conversation
+:icons: font
+:toc:
+:toc-title:
+:toc-placement: preamble
+:toclevels: 2
+:linkref: http://www.google.com
+:imagesdir: /images
+
+Where we learn about how to integrate Watson Conversation service with a Swift chat room.
+
+## Overview
+
+This adventure will teach you about integrating a Watson Conversation service into your Swift room by walking you through the process of creating your Watson service in Bluemix and adding integration points to a Game On room.
+You will come away having learned a little about using Watson services and there will be suggestions for how you can use this further
+within a room.
+
+## Why Watson?
+
+More and more developers are demanding the use of cognitive features in their applications. That’s why IBM Watson is targeting the need by providing many services through Bluemix that can be easily integrated into applications through a REST API. There are many services available on Watson, and they can be divided into major categories such as “language”, “speech”, “vision”, and “data insights”. Some very popular services include Natural Language Understanding for recognizing the meaning behind natural language and Visual Recognition for classifying contents in images. This adventure focuses on Natural Language Understanding using Watson’s Conversation service.
+
+Because interfacing with REST endpoint using low-level networking calls quickly becomes inefficient, there are many Watson Developer Cloud SDK’s that have been created to simplify making requests, exposing natural functions and data structures for the language. What would have taken over 500 lines of code, takes now 10. The Watson Swift SDK, previously named the iOS SDK, is now the second most used Watson SDK (after the NodeJS SDK). It had its origins, obviously, for the iOS mobile use case, but since the Swift programming language now can be used for running Linux, it has opened the SDK for usage for server-side programming as well. Now you can use the same SDK you have bundled in your client application, and easily move that functionality out to the server, giving you more control over the frequency at which calls to Watson are made, have a single point for credentials for making the calls, and also can create applications where the result of the request to Watson can be shared with multiple users.
+
+In this adventure, we take an existing GameOn Swift room and integrate with a Watson Conversation service, so that the Watson bot can respond to chat messages from participants.
+
+## Prerequisites
+
+First, you’ll need to create and configure a new Watson Conversation service.
+
+1. Create a new Watson Conversation service in Bluemix
+
+You will need to sign up for a Bluemix account if you don’t have one already.
+
+2. Get the credentials from the service and record it somewhere
+
+After your conversation service has been created, you will be able to get the username and password for the service. Record these now, you will need it later when we start coding your application.
+
+image::watson-get_creds.png
+
+
+## Walkthrough
+
+Guide the user through, step by step, using these suggested order of tasks:
+
+* Adding dependencies to the pom.xml
+* Adding basic code snippets
+** Explain each change to each file. Why are you making this change? What does it give the user?
+* Adding a simple test case & verifying execution
+** Tests are important
+* Provide a way for the user to invoke X,Y,Z while running in game on.
+** Guide the user through /sos,/teleport roomid,invoking the function, and seeing the result.
+* Link to a repo/branch where all the above has been done and the user has the minimum to do to test the X,Y,Z.
+
+TIP: Use tips to call out interesting things. 
+
+## Suggested extensions
+
+Talk about extra things the user could do with X,Y,Z that were not covered here.
+Be aware that we're not talking about other technologies or techniques / information covered by other adventures.
+Keep this limited to additional ways to use X,Y,Z that were omitted due to time/space, etc
+Especially include any common way to use X,Y,Z that is not demonstrated in the walkthrough.
+
+## Conclusion
+
+Explain what the user has learnt by following this tutorial.
+
+## Suggested further adventures.
+
+Link to adventures that can build from this one. 
+(Try to revisit your advanced adventure periodically to add additional ones)
