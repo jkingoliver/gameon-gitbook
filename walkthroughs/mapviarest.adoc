@@ -16,6 +16,7 @@
 :map-swagger-get-room: https://gameontext.org/swagger/#!/map/getRoom
 :circuit-breaker: http://www.javaworld.com/article/2824163/application-performance/stability-patterns-applied-in-a-restful-architecture.html?page=2
 :failsafe: https://github.com/jhalterman/failsafe
+:jsr107: link:jsr107caching.html
 
 Where we learn how to talk to Map via REST & JAX-RS
 
@@ -447,6 +448,6 @@ rooms details.
 
 ## Suggested further adventures.
 
-You may want to consider the JSR107 Caching example to see how you
+You may want to consider the {jsr107}[JSR107 Caching example] to see how you
 could create a cache for the MapData that would automatically expire
 after a defined period of time.

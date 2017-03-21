@@ -476,10 +476,10 @@ a service. For a discussion of how the Game On Map service uses Cloudant, have a
 
 ## Suggested further adventures.
 
-Consider taking a look at the JSR-107 adventure, it would be interesting to store
+Consider taking a look at the {jsr107aa}[JSR-107 adventure], it would be interesting to store
 active items in a Cache, and prepopulate the cache from the db. You could also investigate
 the JSR-107 Write-through behavior to keep the db up to date with cache changes.
 
-Or maybe take a look at the Adding items to your room adventure, and learn how you
+Or maybe take a look at the {addingItems}[Adding items to your room adventure], and learn how you
 could turn the vending machine, and the items the player obtains from it, into proper
 Game On entities.

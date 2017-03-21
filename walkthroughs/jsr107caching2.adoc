@@ -13,6 +13,7 @@
 :listener: http://static.javadoc.io/javax.cache/cache-api/1.0.0/javax/cache/event/package-summary.html
 :loader: http://static.javadoc.io/javax.cache/cache-api/1.0.0/javax/cache/integration/CacheLoader.html
 :writer: http://static.javadoc.io/javax.cache/cache-api/1.0.0/javax/cache/integration/CacheWriter.html
+:roomitems: link:addItemsToYourRoom.html
 
 
 Where we learn that JSR-107 isn't just about annotations.
@@ -369,6 +370,6 @@ and understood some of the pitfalls you may meet when using the API.
 
 ## Suggested further adventures.
 
-Why not take a look at the 'Adding Items to a Room', or 'Item Framework'
-walkthroughs next. They'll teach you ways you can expose your cache understanding
+Why not take a look at the {roomitems}['Adding Items to a Room']
+walkthrough next. It'll teach you ways you can expose your cache understanding
 within a Room in Game On.

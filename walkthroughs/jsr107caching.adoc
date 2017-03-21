@@ -29,6 +29,8 @@
 :cacheresolverfactory: http://static.javadoc.io/javax.cache/cache-api/1.0.0/javax/cache/annotation/CacheResolverFactory.html
 :cachevalue: http://static.javadoc.io/javax.cache/cache-api/1.0.0/javax/cache/annotation/CacheValue.html
 :cache: http://static.javadoc.io/javax.cache/cache-api/1.0.0/javax/cache/Cache.html
+:jsr107part2: link:jsr107caching2.html
+:roomitems: link:addItemsToYourRoom.html
 
 
 Where we learn about Caching, the standards-based way.
@@ -633,8 +635,8 @@ session storage.
 
 ## Suggested further adventures.
 
-You may want to take a look at the follow-on adventure "JSR-107 via API" which covers
-how to use JSR-107 without the annotations. Or possibly "Redis via Redisson" which has
-a different spin on using Redis, or maybe the "Item framework", or "Adding Items to a Room."
-adventures, that will give you additional ways to expose your Cache understanding
+You may want to take a look at the follow-on adventure {jsr107part2}["JSR-107 via API"] which covers
+how to use JSR-107 without the annotations. (Keep an eye out for the "Redis via Redisson" adventure which will
+show a different spin on using Redis), or maybe the {roomitems}["Adding Items to a Room"]
+adventure, that will give you additional ways to expose your Cache understanding
 within a Room.
