@@ -25,31 +25,29 @@ In this adventure, we take an existing GameOn Swift room and integrate with a Wa
 
 ## Prerequisites
 
-First, you’ll need to create and configure a new Watson Conversation service.
+First, you’ll need to create and configure a new Watson Conversation service. Building out a new Conversation service should only take a few minutes once you have a Bluemix account (you can get a free test account too).
 
 . Create a new Watson Conversation service in Bluemix.
 + 
 You will need to sign up for a Bluemix account if you don’t have one already.
-
-. Get the credentials from the service and record it somewhere. 
 +
-After your conversation service has been created, you will be able to get the username and password for the service. Record these now, you will need it later when we start coding your application.
+Navigate to “Catalog” and search for “Conversation”, select it from the results and create a free plan.
+
+. Get the credentials from your service. 
++
+After your conversation service has been created, you will be able to get the username and password for the service from the “Service credentials” tab -> “View credentials” dropdown. Record these now, you will need it later when we start coding your application.
+
 image::watson-get_creds.png[]
 
 . Create a new Workspace for your application. 
 +
 A workspace is the way you can express a dialog. Your Watson Conversation service may contain many workspaces for all of your user flows.
++
+Under the manage tab, select “Launch tool”. Create a workspace and name it “Sandwich shop.”
 
 image::watson-workspaces.png[]
 
 [start=4]
-. Get the workspace ID. 
-+
-You can select the “drawer” icon next to the workspace card and choose “edit” in order to see your workspace ID. You will need this ID later when you connect your code to this workspace.
-
-image::watson-workspace-id.png[]
-
-[start=5]
 . Create intents. 
 +
 Intents are the ways Watson understands your users’ intent. In other words, you can train the Watson Natural Language classifier with a bunch of examples of ways of expressing an intent like “ordering a sandwich”, and in the future, even though your users won’t necessarily write their requests exactly how you specified it, through training the language model Watson will select the intent if that request matched it within a certain threshold level.
@@ -58,7 +56,8 @@ So for our example, you can add a new intent called “#order” and the values 
 
 image::watson-intents.png[]
 
-[start=6]
+
+[start=5]
 . Create entities. 
 +
 Entities are the specifics of information that can come in through the intents. Entities are most likely nouns that help you better service the request. For our example, we will be creating some entity types like, @toppings and @meats.
@@ -67,7 +66,7 @@ Try adding some @toppings now:
 
 image::watson-entities.png[]
 
-[start=7]
+[start=6]
 . Design the dialog. 
 +
 You can now design your dialog with the intents and entities you created earlier. Your must create triggers that based on whether it is matched or not, will yield a response from Watson.
@@ -75,12 +74,19 @@ You can now design your dialog with the intents and entities you created earlier
 image::watson-dialog1.png[]
 image::watson-dialog2.png[]
 
-[start=8]
+[start=7]
 . Test your conversation. 
 +
 It’s probably a good idea at this point to test your conversation and make sure it’s working properly. You can press the dialog bubble icon on the top right to start a simulation of your conversation.
 
 image::watson-test-conversation.png[]
+
+[start=8]
+. Get the workspace ID. 
++
+Before we start making modifications to your GameOn room, copy your workspace ID. Follow the menu option to workspace, select the “drawer” icon next to the workspace card and choose “view details” in order to see your workspace ID. You will need this ID later when you connect your code to this workspace.
+
+image::watson-workspace-id.png[]
 
 ## Walkthrough
 
@@ -216,7 +222,7 @@ Add the Watson code in the else block:
             }
 
 ----
-+
+
 That should be it!
 
 [start=10]
@@ -234,7 +240,7 @@ $gulp
 ----
 $.build/debug/GameOn
 ----
-+
+
 Then access http://localhost:8080/ in your browser. Visiting this page provides a small chat window you can use to test Watson in your service directly.
 
 
