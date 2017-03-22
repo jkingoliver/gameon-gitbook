@@ -86,15 +86,169 @@ image::watson-test-conversation.png[]
 
 . Fork and clone the sample-swift-room
 
-
+[start=2]
 . Add the Watson SDK as a dependency in your project
 +
 In your Package.swift file, add to the bottom of the list of dependencies the following library:
 
 [source,swift]
-——
+----
 .Package(url: "https://github.com/watson-developer-cloud/swift-sdk", majorVersion: 0)
-——
+----
+
+[start=3]
+.In Source/SwiftRoom/RoomImplementation.swift, import the Conversation service modules:
+
+[source,swift]
+----
+import ConversationV1
+----
+
+[start=4]
+.Set some of the settings for your service:
+[source,swift]
+----
+let username = "username-goes-here"
+let password = "password-goes-here"
+let version = "2017-03-22”
+let workspaceID = "workspace-id-goes-here"
+----
+
+[start=5]
+.Add a Conversation service object to your ChatService class:
+[source,swift]
+----
+let conversation = Conversation(username: username, 
+                                password: password,
+                                version: version)
+----
+
+[start=6]
+.Add a Context for the conversation
++
+A context allows the conversation to hold state. For instance, when you are finished selecting the meat on your sandwich, Watson continues the conversation with asking about toppings. Since REST calls are stateless by nature, we can hold state by keeping a state ID that is updated whenever you get a new response back.
+[source,swift]
+----
+var context: Context?
+----
+
+[start=7]
+.Set the context of the conversation on application start.
+[source,swift]
+----
+public init() {
+ 
+       conversation.message(withWorkspace: workspaceID,
+                            failure: failure) { 
+              response in
+
+              self.context = response.context
+       }
+ 
+}
+----
+
+[start=8]
+.RoomImplementation.swift will now begin like this:
+[source,swift]
+----
+import LoggerAPI
+import Foundation
+import KituraWebSocket
+import SwiftyJSON
+
+import ConversationV1
+
+let username = "f4a41bb7-55de-4cf0-8f62-241fcc9437e9"
+let password = "4KVOiGQKmpLa"
+let version = "2017-03-05" // use today's date for the most recent version
+let conversation = Conversation(username: username, password: password, version: version)
+let workspaceID = "6371a8bb-c167-4ff7-9ec1-c61e4d1be863"
+
+let failure = { (error: Error) in print(error) }
+
+public class RoomImplementation {
+        
+    var context: Context? // save context to continue conversation
+    let roomDescription = RoomDescription()
+
+    public init() {
+
+         conversation.message(withWorkspace: workspaceID, failure: failure) { response in
+                print(response.output.text)
+                self.context = response.context
+            }
+
+    }
+----
+
+
+
+[start=9]
+.In the handleMessage method in RoomImplementation.swift, there is a switch block on the message target.  In the case of target == “room”, the message is either a command or a chat. We want to send the chat messages to the Conversation service. 
++
+Add the Watson code in the else block:
+[source,swift]
+----
+         if messageIsCommand(content: content) {
+                try processCommand(message: message, content: content, endpoint: endpoint, connection: connection)
+            }
+            else {
+
+                let request = MessageRequest(text: content, context: context)
+                conversation.message(withWorkspace: workspaceID, request: request, failure: failure) {
+                    response in
+                    print(response.output.text)
+
+                    if response.output.text.count > 0 {
+
+                        let text = response.output.text[0]
+                        try! endpoint.sendMessage(connection: connection,
+                                         message: Message.createChatMessage(username: "Watson", message: text ))
+
+                    }
+                    
+                    self.context = response.context
+                }
+
+                try endpoint.sendMessage(connection: connection,
+                                         message: Message.createChatMessage(username: username, message: content))
+            }
+
+----
+
++That should be it!
+
+[start=10]
+.Compile your project with
+
+[source,swift]
+----
+$npm install
+$gulp
+----
+
+[start=11]
+.Run your server
+[source,swift]
+----
+$.build/debug/GameOn
+----
+
++
+Then access http://localhost:8080/ in your browser. Visiting this page provides a small chat window you can use to test Watson in your service directly.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Guide the user through, step by step, using these suggested order of tasks:
