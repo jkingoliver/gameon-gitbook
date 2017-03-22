@@ -124,7 +124,7 @@ let conversation = Conversation(username: username,
 ----
 
 [start=6]
-.Add a Context for the conversation
+. Add a Context for the conversation
 +
 A context allows the conversation to hold state. For instance, when you are finished selecting the meat on your sandwich, Watson continues the conversation with asking about toppings. Since REST calls are stateless by nature, we can hold state by keeping a state ID that is updated whenever you get a new response back.
 [source,swift]
@@ -149,7 +149,7 @@ public init() {
 ----
 
 [start=8]
-.RoomImplementation.swift will now begin like this:
+. RoomImplementation.swift will now begin like this:
 [source,swift]
 ----
 import LoggerAPI
@@ -159,11 +159,11 @@ import SwiftyJSON
 
 import ConversationV1
 
-let username = "f4a41bb7-55de-4cf0-8f62-241fcc9437e9"
-let password = "4KVOiGQKmpLa"
-let version = "2017-03-05" // use today's date for the most recent version
+let username = "username-goes-here"
+let password = "password-goes-here"
+let version = "2017-03-22”
+let workspaceID = "workspace-id-goes-here"
 let conversation = Conversation(username: username, password: password, version: version)
-let workspaceID = "6371a8bb-c167-4ff7-9ec1-c61e4d1be863"
 
 let failure = { (error: Error) in print(error) }
 
@@ -185,7 +185,7 @@ public class RoomImplementation {
 
 
 [start=9]
-.In the handleMessage method in RoomImplementation.swift, there is a switch block on the message target.  In the case of target == “room”, the message is either a command or a chat. We want to send the chat messages to the Conversation service. 
+. In the handleMessage method in RoomImplementation.swift, there is a switch block on the message target.  In the case of target == “room”, the message is either a command or a chat. We want to send the chat messages to the Conversation service. 
 +
 Add the Watson code in the else block:
 [source,swift]
@@ -216,11 +216,11 @@ Add the Watson code in the else block:
             }
 
 ----
-
-+That should be it!
++
+That should be it!
 
 [start=10]
-.Compile your project with
+. Compile your project with
 
 [source,swift]
 ----
@@ -229,12 +229,11 @@ $gulp
 ----
 
 [start=11]
-.Run your server
+. Run your server
 [source,swift]
 ----
 $.build/debug/GameOn
 ----
-
 +
 Then access http://localhost:8080/ in your browser. Visiting this page provides a small chat window you can use to test Watson in your service directly.
 
