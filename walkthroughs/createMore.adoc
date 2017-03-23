@@ -82,6 +82,10 @@ Let's say your service calls another service. This could be a cloud data source
 or a Watson API. In cloud native environments, that backing store might disappear
 at any time. Or the network might be flaky. Or the API could be rate limited.
 
+=== Watson
+
+Want to add a Watson bot to your chatroom? Integrate Watson’s Conversation service into your GameOn Swift room.
+
 What then?
 
 Fault tolerance is an essential part of writing a microservices application,

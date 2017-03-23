@@ -28,6 +28,8 @@
 ..... link:walkthroughs/adding_your_own_sso_apps_for_local_testing.adoc[Social Login]
 ... link:walkthroughs/createMore.adoc#_scale[Scale]
 ... link:walkthroughs/createMore.adoc#_fault_tolerance[Fault Tolerance]
+... link:walkthroughs/createMore.adoc#_watson[Watson]
+.... link:walkthroughs/addWatsonConversation.adoc[Add Conversation Service]
 . link:microservices/README.adoc[Application Architecture]
 .. link:microservices/WebSocketProtocol.adoc[WebSocket Protocol]
 .. link:microservices/ApplicationSecurity.adoc[Application Security]
