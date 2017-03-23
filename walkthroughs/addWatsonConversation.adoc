@@ -128,7 +128,7 @@ let workspaceID = "workspace-id-goes-here"
 ----
 
 [start=5]
-.Add a Conversation service object to your RoomImplementation class:
+. Add a Conversation service object to your RoomImplementation class:
 +
 [source,swift]
 ----
