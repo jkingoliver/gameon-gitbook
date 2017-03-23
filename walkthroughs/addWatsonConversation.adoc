@@ -92,8 +92,8 @@ image::watson-workspace-id.png[]
 ## Walkthrough
 
 . Fork and clone the sample-swift-room
-
-[source, swift]
++
+[source]
 ----
 git clone https://github.com/<your-forked-repo>/sample-room-swift.git
 ----
@@ -102,7 +102,7 @@ git clone https://github.com/<your-forked-repo>/sample-room-swift.git
 . Add the Watson SDK as a dependency in your project
 +
 In your Package.swift file, add to the bottom of the list of dependencies the following library:
-
++
 [source,swift]
 ----
 .Package(url: "https://github.com/watson-developer-cloud/swift-sdk", majorVersion: 0)
@@ -110,7 +110,7 @@ In your Package.swift file, add to the bottom of the list of dependencies the fo
 
 [start=3]
 . In Source/SwiftRoom/RoomImplementation.swift, import the Conversation service modules:
-
++
 [source,swift]
 ----
 import ConversationV1
@@ -118,6 +118,7 @@ import ConversationV1
 
 [start=4]
 . Set some of the settings for your service:
++
 [source,swift]
 ----
 let username = "username-goes-here"
@@ -128,6 +129,7 @@ let workspaceID = "workspace-id-goes-here"
 
 [start=5]
 .Add a Conversation service object to your RoomImplementation class:
++
 [source,swift]
 ----
 let conversation = Conversation(username: username, 
@@ -139,6 +141,7 @@ let conversation = Conversation(username: username,
 . Add a Context for the conversation
 +
 A context allows the conversation to hold state. For instance, when you are finished selecting the meat on your sandwich, Watson continues the conversation with asking about toppings. Since REST calls are stateless by nature, we can hold state by keeping a state ID that is updated whenever you get a new response back.
++
 [source,swift]
 ----
 var context: Context?
@@ -146,6 +149,7 @@ var context: Context?
 
 [start=7]
 . Set the context of the conversation on application start.
++
 [source,swift]
 ----
 public init() {
@@ -245,6 +249,7 @@ $ gulp
 
 [start=11]
 . Run your server
++
 [source]
 ----
 $ .build/debug/GameOn
