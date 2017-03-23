@@ -11,7 +11,7 @@ Where we learn about how to integrate Watson Conversation service with a Swift c
 
 ## Overview
 
-This adventure will teach you about integrating a Watson Conversation service into your Swift room by walking you through the process of creating your Watson service in Bluemix and adding integration points to a Game On room.
+This adventure will teach you about integrating a Watson Conversation service into your Swift room by walking you through the process of creating your own Watson service in Bluemix and adding integration points to a GameOn room.
 You will come away having learned a little about using Watson services and there will be suggestions for how you can use this further
 within a room.
 
@@ -19,15 +19,15 @@ within a room.
 
 More and more developers are demanding the use of cognitive features in their applications. That’s why IBM Watson is targeting the need by providing many services through Bluemix that can be easily integrated into applications through a REST API. There are many services available on Watson, and they can be divided into major categories such as “language”, “speech”, “vision”, and “data insights”. Some very popular services include Natural Language Understanding for recognizing the meaning behind natural language and Visual Recognition for classifying contents in images. This adventure focuses on Natural Language Understanding using Watson’s Conversation service.
 
-Because interfacing with REST endpoint using low-level networking calls quickly becomes inefficient, there are many Watson Developer Cloud SDK’s that have been created to simplify making requests, exposing natural functions and data structures for the language. What would have taken over 500 lines of code, takes now 10. The Watson Swift SDK, previously named the iOS SDK, is now the second most used Watson SDK (after the NodeJS SDK). It had its origins, obviously, for the iOS mobile use case, but since the Swift programming language now can be used for running Linux, it has opened the SDK for usage for server-side programming as well. Now you can use the same SDK you have bundled in your client application, and easily move that functionality out to the server, giving you more control over the frequency at which calls to Watson are made, have a single point for credentials for making the calls, and also can create applications where the result of the request to Watson can be shared with multiple users.
+Because interfacing with a REST endpoint using low-level networking calls quickly becomes inefficient, there are many Watson Developer Cloud SDK’s that have been created to simplify making requests, exposing natural functions and data structures for the language. What would have taken over 500 lines of code, takes now 10. The Watson Swift SDK, previously named the iOS SDK, is now the second most used Watson SDK (after the NodeJS SDK). It had its origins, obviously, for the iOS mobile use case, but since the Swift programming language now can be used for running Linux, it has opened the SDK for usage for server-side programming as well. Now you can use the same SDK you have bundled in your client application, and easily move that functionality out to the server, giving you more control over the frequency at which calls to Watson are made, have a single point for credentials for making the calls, and also can create applications where the result of the request to Watson can be shared with multiple users.
 
-In this adventure, we take an existing GameOn Swift room and integrate with a Watson Conversation service, so that the Watson bot can respond to chat messages from participants.
+In this adventure, we take an existing GameOn Swift room and integrate with a Watson Conversation service, so that the Watson bot can respond to chat messages from GameOn participants.
 
 ## Prerequisites
 
 First, you’ll need to create and configure a new Watson Conversation service. Building out a new Conversation service should only take a few minutes once you have a Bluemix account (you can get a free test account too).
 
-. Create a new Watson Conversation service in Bluemix.
+. Create a new Watson Conversation service in link:https://console.ng.bluemix.net[Bluemix].
 + 
 You will need to sign up for a Bluemix account if you don’t have one already.
 +
@@ -39,6 +39,7 @@ After your conversation service has been created, you will be able to get the us
 
 image::watson-get_creds.png[]
 
+[start=3]
 . Create a new Workspace for your application. 
 +
 A workspace is the way you can express a dialog. Your Watson Conversation service may contain many workspaces for all of your user flows.
@@ -50,7 +51,7 @@ image::watson-workspaces.png[]
 [start=4]
 . Create intents. 
 +
-Intents are the ways Watson understands your users’ intent. In other words, you can train the Watson Natural Language classifier with a bunch of examples of ways of expressing an intent like “ordering a sandwich”, and in the future, even though your users won’t necessarily write their requests exactly how you specified it, through training the language model Watson will select the intent if that request matched it within a certain threshold level.
+Intents are the ways Watson understands the user’s intent. In other words, you can train the Watson Natural Language classifier with a bunch of examples of ways of expressing an intent like “ordering a sandwich”, and in the future, even though your users won’t necessarily write their requests exactly how you specified it, through training the language model Watson will select the intent if that request matched it within a certain threshold level.
 +
 So for our example, you can add a new intent called “#order” and the values can be:
 
@@ -126,7 +127,7 @@ let workspaceID = "workspace-id-goes-here"
 ----
 
 [start=5]
-.Add a Conversation service object to your ChatService class:
+.Add a Conversation service object to your RoomImplementation class:
 [source,swift]
 ----
 let conversation = Conversation(username: username, 
@@ -161,6 +162,7 @@ public init() {
 
 [start=8]
 . RoomImplementation.swift will now look like this:
++
 [source,swift]
 ----
 import LoggerAPI
@@ -257,5 +259,5 @@ The more the Conversation service is developed, the more interesting this advent
 
 ## Conclusion
 
-We hope you enjoyed this adventure and feel inspired to explore your GameOn Swift room with Watson! 
+We hope you enjoyed this adventure and feel inspired to explore your GameOn Swift room with Watson.
 
