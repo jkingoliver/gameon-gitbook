@@ -92,6 +92,11 @@ image::watson-workspace-id.png[]
 
 . Fork and clone the sample-swift-room
 
+[source, swift]
+----
+git clone https://github.com/<your-forked-repo>/sample-room-swift.git
+----
+
 [start=2]
 . Add the Watson SDK as a dependency in your project
 +
@@ -103,7 +108,7 @@ In your Package.swift file, add to the bottom of the list of dependencies the fo
 ----
 
 [start=3]
-.In Source/SwiftRoom/RoomImplementation.swift, import the Conversation service modules:
+. In Source/SwiftRoom/RoomImplementation.swift, import the Conversation service modules:
 
 [source,swift]
 ----
@@ -111,7 +116,7 @@ import ConversationV1
 ----
 
 [start=4]
-.Set some of the settings for your service:
+. Set some of the settings for your service:
 [source,swift]
 ----
 let username = "username-goes-here"
@@ -139,7 +144,7 @@ var context: Context?
 ----
 
 [start=7]
-.Set the context of the conversation on application start.
+. Set the context of the conversation on application start.
 [source,swift]
 ----
 public init() {
@@ -155,7 +160,7 @@ public init() {
 ----
 
 [start=8]
-. RoomImplementation.swift will now begin like this:
+. RoomImplementation.swift will now look like this:
 [source,swift]
 ----
 import LoggerAPI
@@ -186,20 +191,22 @@ public class RoomImplementation {
             }
 
     }
+    …
 ----
 
 
 
 [start=9]
-. In the handleMessage method in RoomImplementation.swift, there is a switch block on the message target.  In the case of target == “room”, the message is either a command or a chat. We want to send the chat messages to the Conversation service. 
+. In the handleMessage method in RoomImplementation.swift, there is a switch block on the message target.  In the case of target == “room”, the message is either a command or a chat. We want to send the chat messages to the Conversation service and then send Watson’s response back to the client. 
 +
-Add the Watson code in the else block:
+Add the Watson code in the “else” block:
++
 [source,swift]
 ----
          if messageIsCommand(content: content) {
                 try processCommand(message: message, content: content, endpoint: endpoint, connection: connection)
-            }
-            else {
+         }
+         else {
 
                 let request = MessageRequest(text: content, context: context)
                 conversation.message(withWorkspace: workspaceID, request: request, failure: failure) {
@@ -222,65 +229,33 @@ Add the Watson code in the else block:
             }
 
 ----
-
++
 That should be it!
 
 [start=10]
 . Compile your project with
-
-[source,swift]
++
+[source]
 ----
-$npm install
-$gulp
+$ npm install
+$ gulp
 ----
 
 [start=11]
 . Run your server
-[source,swift]
+[source]
 ----
-$.build/debug/GameOn
+$ .build/debug/GameOn
 ----
 
 Then access http://localhost:8080/ in your browser. Visiting this page provides a small chat window you can use to test Watson in your service directly.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-Guide the user through, step by step, using these suggested order of tasks:
-
-* Adding dependencies to the pom.xml
-* Adding basic code snippets
-** Explain each change to each file. Why are you making this change? What does it give the user?
-* Adding a simple test case & verifying execution
-** Tests are important
-* Provide a way for the user to invoke X,Y,Z while running in game on.
-** Guide the user through /sos,/teleport roomid,invoking the function, and seeing the result.
-* Link to a repo/branch where all the above has been done and the user has the minimum to do to test the X,Y,Z.
-
-TIP: Use tips to call out interesting things. 
-
 ## Suggested extensions
 
-Talk about extra things the user could do with X,Y,Z that were not covered here.
-Be aware that we're not talking about other technologies or techniques / information covered by other adventures.
-Keep this limited to additional ways to use X,Y,Z that were omitted due to time/space, etc
-Especially include any common way to use X,Y,Z that is not demonstrated in the walkthrough.
+The more the Conversation service is developed, the more interesting this adventure will be. Use your imagination!
 
 ## Conclusion
 
-Explain what the user has learnt by following this tutorial.
+We hope you enjoyed this adventure and feel inspired to explore your GameOn Swift room with Watson! 
 
-## Suggested further adventures.
-
-Link to adventures that can build from this one. 
-(Try to revisit your advanced adventure periodically to add additional ones)
