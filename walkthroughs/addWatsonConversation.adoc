@@ -18,6 +18,7 @@
 :speechtotext: https://github.com/watson-developer-cloud/swift-sdk#speech-to-text
 :cloudant: link:cloudant.html
 :todolistcouchdb: https://github.com/IBM-Swift/TodoList-CouchDB
+:jkingoliver-github: https://github.com/jkingoliver/sample-room-swift/tree/watson-bot
 
 Where we learn how to integrate Watson Conversation service with a Swift chat room.
 
@@ -278,7 +279,7 @@ Add the Watson code in the “else” block.
 
 ----
 +
-That should be it!
+That should be it! You can see a working sample [jkingoliver-github}[here].
 
 [start=10]
 . `cd` into your working directory and compile your project.
