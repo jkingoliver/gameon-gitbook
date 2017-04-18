@@ -274,8 +274,6 @@ Add the Watson code in the “else” block.
                     self.context = response.context
                 }
 
-                try endpoint.sendMessage(connection: connection,
-                                         message: Message.createChatMessage(username: username, message: content))
             }
 
 ----
