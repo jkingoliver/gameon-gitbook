@@ -13,7 +13,7 @@
 :addingItems: link:addItemsToYourRoom.adoc
 :cloudant: link:cloudant.adoc
 :slack: http://gameontext.slack.com/
-
+:watson: link:addWatsonConversation.adoc
 
 Beyond the cave of grues, fantastic adventures await.
 
@@ -43,6 +43,12 @@ Need to talk to another service using REST? We've got you covered.
 Having trouble remembering things? wish there was a a way to store them somewhere?
 
 * [languagename]#JAVA#{cloudant}[Persistence via Cloudant]
+
+=== Cognitive and Analytics
+
+Want to add a Watson bot to your chatroom? Integrate Watson’s Conversation service into your GameOn Swift room.
+
+* [languagename]#SWIFT#{watson}[Add Watson Conversation Service]
 
 === Room Improvements
 
