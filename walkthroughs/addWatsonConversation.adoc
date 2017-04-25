@@ -12,7 +12,7 @@
 :watsonsdk: https://github.com/watson-developer-cloud/swift-sdk
 :prerequisites: https://github.com/gameontext/gameon-gitbook/blob/master/walkthroughs/addWatsonConversation.adoc#prerequisites
 :appledocs: https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/OptionalChaining.html
-:deployroom: link:deployRoom.html
+:deployroom: link:bluemix-cf.html
 :registerroom: link:registerRoom.html
 :toneanalyzer: https://github.com/watson-developer-cloud/swift-sdk#tone-analyzer
 :speechtotext: https://github.com/watson-developer-cloud/swift-sdk#speech-to-text
@@ -307,8 +307,8 @@ service directly.
 +
 For Game On! to include your room, you need to tell it where the publicly reachable WebSocket endpoint is. This requires two steps:
 
-* {deployroom}[hosting your service somewhere with a publicly reachable endpoint], and then
-* {registerroom}[registering your room with the game].
+* {deployroom}[deploy your room to Bluemix as a Cloud Foundry application], and then
+* {registerroom}[register your room with the game].
 
 ## Suggested extensions
 
