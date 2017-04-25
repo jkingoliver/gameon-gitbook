@@ -326,6 +326,6 @@ Swift room. We hope you enjoyed this adventure and feel inspired to explore with
 ## Suggested further adventures
 * {cloudant}[Persistence] - Learn about persistence via a Cloudant database. This particular adventure is based on a GameOn Java room, however 
 you can start here to pick up the basics of persistence from a Microservice perspective and how you might use a Cloudant service instance within 
-a room. Checkout {todolistcouchdb} IBM Swift’s [TodoList-CouchDB] sample application to see how to connect your room to a Cloudant service 
+a room. Checkout {todolistcouchdb}[IBM Swift’s TodoList-CouchDB] sample application to see how to connect your room to a Cloudant service 
 instance in the Swift programming language. 
 
