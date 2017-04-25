@@ -131,7 +131,7 @@ image::watson-workspace-id.png[]
 +
 [source]
 ----
-git clone https://github.com/<your-forked-repo>/sample-room-swift.git
+$ git clone https://github.com/<your-forked-repo>/sample-room-swift.git
 ----
 
 [start=2]
@@ -160,7 +160,7 @@ Conversation service, you saved your credentials and workspace ID. You will need
 ----
 let username = "username-goes-here"
 let password = "password-goes-here"
-let version = "2017-04-19”  // use today's date for the most recent version
+let version = "2017-04-19"  // use today's date for the most recent version
 let workspaceID = "workspace-id-goes-here"
 ----
 
@@ -221,7 +221,7 @@ import ConversationV1
 
 let username = "username-goes-here"
 let password = "password-goes-here"
-let version = "2017-03-22”
+let version = "2017-03-22"
 let workspaceID = "workspace-id-goes-here"
 let conversation = Conversation(username: username, password: password, version: version)
 
@@ -326,6 +326,6 @@ Swift room. We hope you enjoyed this adventure and feel inspired to explore with
 ## Suggested further adventures
 * {cloudant}[Persistence] - Learn about persistence via a Cloudant database. This particular adventure is based on a GameOn Java room, however 
 you can start here to pick up the basics of persistence from a Microservice perspective and how you might use a Cloudant service instance within 
-a room. Checkout {todolistcouchdb}IBM Swift’s [TodoList-CouchDB] sample application to see how to connect your room to a Cloudant service 
+a room. Checkout {todolistcouchdb} IBM Swift’s [TodoList-CouchDB] sample application to see how to connect your room to a Cloudant service 
 instance in the Swift programming language. 
 
